@@ -33,7 +33,7 @@ async function loadMessages(locale: string): Promise<Messages> {
   return JSON.parse(raw) as Messages;
 }
 
-function LanguageSwitcher({current}: {current: string}) {
+function LanguageSwitcherDesktop({current}: {current: string}) {
   const FLAGS: Record<string, string> = {
     en: '🇺🇸',
     sk: '🇸🇰',
@@ -44,7 +44,7 @@ function LanguageSwitcher({current}: {current: string}) {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="hidden items-center gap-2 sm:flex">
       {LOCALES.map((l) => (
         <Link
           key={l}
@@ -61,6 +61,47 @@ function LanguageSwitcher({current}: {current: string}) {
         </Link>
       ))}
     </div>
+  );
+}
+
+function LanguageSwitcherMobile({current}: {current: string}) {
+  const FLAGS: Record<string, string> = {
+    en: '🇺🇸',
+    sk: '🇸🇰',
+    de: '🇩🇪',
+    es: '🇪🇸',
+    fr: '🇫🇷',
+    'zh-Hans': '🇨🇳'
+  };
+
+  const currentFlag = FLAGS[current] ?? '🌐';
+
+  return (
+    <details className="relative sm:hidden">
+      <summary className="list-none cursor-pointer select-none">
+        <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80 hover:bg-white/10">
+          <span className="text-lg">{currentFlag}</span>
+          <span className="text-xs text-white/60">{current}</span>
+          <span className="ml-1 text-white/50">▾</span>
+        </div>
+      </summary>
+
+      <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B0B0D] shadow-2xl">
+        {LOCALES.map((l) => (
+          <Link
+            key={l}
+            href={`/${l}`}
+            className={
+              'flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:bg-white/10 ' +
+              (l === current ? 'bg-white/5' : '')
+            }
+          >
+            <span className="text-lg">{FLAGS[l]}</span>
+            <span className="text-xs text-white/70">{l}</span>
+          </Link>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -89,7 +130,10 @@ export default async function Page({
             />
             <span>{t.brand}</span>
           </div>
-          <LanguageSwitcher current={locale} />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcherMobile current={locale} />
+            <LanguageSwitcherDesktop current={locale} />
+          </div>
         </div>
 
         <section className="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -121,18 +165,27 @@ export default async function Page({
 
           <div className="relative">
             <div className="absolute -inset-10 rounded-full bg-[#7C3AED]/25 blur-3xl" />
+
             <div className="relative mx-auto w-full max-w-sm rounded-[2.2rem] border border-white/10 bg-white/5 p-4 shadow-2xl">
-              <div className="min-h-[540px] rounded-[1.8rem] border border-white/10 bg-black/40 p-6">
-                <div className="text-xs text-white/55">Fitliner preview</div>
-                <div className="mt-3 h-12 rounded-2xl border border-white/10 bg-white/5" />
-                <div className="mt-4 grid gap-3">
-                  <div className="h-16 rounded-2xl border border-white/10 bg-white/5" />
-                  <div className="h-16 rounded-2xl border border-white/10 bg-white/5" />
-                  <div className="h-16 rounded-2xl border border-white/10 bg-white/5" />
+              {/* Phone frame */}
+              <div className="overflow-hidden rounded-[1.8rem] border border-white/10 bg-black/40">
+                {/* Top notch bar */}
+                <div className="flex items-center justify-between px-5 py-3">
+                  <div className="h-2 w-24 rounded-full bg-white/10" />
+                  <div className="h-2 w-10 rounded-full bg-white/10" />
                 </div>
-                <div className="mt-6 h-44 rounded-2xl border border-[#7C3AED]/30 bg-[#7C3AED]/15" />
-                <div className="mt-5 text-xs text-white/45">
-                  (Neskôr sem dáme reálne screenshoty)
+
+                {/* Screenshot */}
+                <div className="px-4 pb-4">
+                  <div className="overflow-hidden rounded-[1.4rem] border border-white/10 bg-black">
+                    <img
+                      src="/app_screen.png"
+                      alt="Fitliner app screenshot"
+                      className="h-[560px] w-full object-cover object-top"
+                    />
+                  </div>
+
+                  
                 </div>
               </div>
             </div>
