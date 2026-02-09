@@ -1,0 +1,22 @@
+{
+  "brand": "BeFitliner",
+  "h1": "BeFitliner. Konečne bezplatná fitness aplikácia.",
+  "sub": "Strava, tréning a poradenstvo presne na mieru. Otváraj dvere vo svojom fitku, zbieraj diamanty a meň ich za odmeny.",
+  "cta_ios": "Stiahnuť aplikáciu • iOS",
+  "cta_android": "Stiahnuť aplikáciu • Android",
+  "note": "iOS & Android • Zadarmo na začiatok • Personalizované",
+
+  "footer": {
+    "claim": "Tvoja kondícia. Tvoj progres. Tvoje odmeny.",
+    "links_title": "Odkazy",
+    "privacy": "Ochrana súkromia",
+    "terms": "Podmienky používania",
+    "contact": "Kontakt",
+    "support": "Podpora",
+    "for_gyms": "Pre fitness centrá",
+    "app_title": "Získaj aplikáciu",
+    "download_ios": "Stiahnuť pre iOS",
+    "download_android": "Stiahnuť pre Android",
+    "rights": "Všetky práva vyhradené."
+  }
+}

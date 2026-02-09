@@ -1,0 +1,22 @@
+{
+  "brand": "BeFitliner",
+  "h1": "BeFitliner。终于，一款免费的健身应用。",
+  "sub": "为你量身定制的营养、训练和指导。打开你的健身房，赚取钻石并兑换奖励。",
+  "cta_ios": "下载应用 • iOS",
+  "cta_android": "下载应用 • Android",
+  "note": "支持 iOS 和 Android • 免费开始 • 个性化",
+
+  "footer": {
+    "claim": "你的健身。你的进步。你的奖励。",
+    "links_title": "链接",
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "contact": "联系",
+    "support": "支持",
+    "for_gyms": "健身房方案",
+    "app_title": "获取应用",
+    "download_ios": "下载 iOS 版本",
+    "download_android": "下载 Android 版本",
+    "rights": "保留所有权利。"
+  }
+}

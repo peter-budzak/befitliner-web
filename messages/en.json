@@ -1,0 +1,22 @@
+{
+  "brand": "BeFitliner",
+  "h1": "BeFitliner. Finally, a free fitness app.",
+  "sub": "Nutrition, training and guidance tailored to you. Open your gym, earn diamonds and exchange them for rewards.",
+  "cta_ios": "Download the app • iOS",
+  "cta_android": "Download the app • Android",
+  "note": "iOS & Android • Free to start • Personalized",
+
+  "footer": {
+    "claim": "Your fitness. Your progress. Your rewards.",
+    "links_title": "Links",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "contact": "Contact",
+    "support": "Support",
+    "for_gyms": "For Gyms",
+    "app_title": "Get the app",
+    "download_ios": "Download for iOS",
+    "download_android": "Get it on Android",
+    "rights": "All rights reserved."
+  }
+}
