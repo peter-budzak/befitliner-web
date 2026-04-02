@@ -33,6 +33,19 @@ async function loadMessages(locale: string): Promise<Messages> {
   return JSON.parse(raw) as Messages;
 }
 
+function getSupportLabel(locale: string): string {
+  const labels: Record<string, string> = {
+    en: 'Support',
+    sk: 'Podpora',
+    de: 'Support',
+    es: 'Soporte',
+    fr: 'Support',
+    'zh-Hans': '支持',
+  };
+
+  return labels[locale] ?? 'Support';
+}
+
 function LanguageSwitcherDesktop({current}: {current: string}) {
   const FLAGS: Record<string, string> = {
     en: '🇺🇸',
@@ -113,6 +126,7 @@ export default async function Page({
   const resolved = params instanceof Promise ? await params : params;
   const locale = resolved.locale;
   const t = await loadMessages(locale);
+  const supportLabel = getSupportLabel(locale);
 
   // TODO: keď budeš mať linky, dáme ich sem alebo do env:
   const iosUrl = process.env.NEXT_PUBLIC_APPSTORE_URL || '#';
@@ -212,6 +226,9 @@ export default async function Page({
                 </Link>
                 <Link className="hover:text-white" href={`/${locale}/gyms`}>
                   🏋️ {t.footer.for_gyms}
+                </Link>
+                <Link className="hover:text-white" href={`/${locale}/support`}>
+                  💬 {supportLabel}
                 </Link>
               </div>
             </div>
