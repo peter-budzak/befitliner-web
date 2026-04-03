@@ -1,4 +1,4 @@
-const SUPPORT_EMAIL = 'peter@peterbudzak.com';
+const SUPPORT_EMAIL = 'support@fitliner.eu';
 
 type Locale = 'en' | 'sk' | 'de' | 'fr' | 'es' | 'zh-hans';
 
