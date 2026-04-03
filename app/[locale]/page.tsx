@@ -53,9 +53,9 @@ function getHeroCopy(locale: string): HeroCopy {
   const copy: Record<string, HeroCopy> = {
     en: {
       eyebrow: 'One app for access, training and rewards',
-      title: 'Open gym doors. Train smarter. Get rewarded.',
+      title: 'Your gym key, coach and progress tracker — in one app.',
       subtitle:
-        'Fitliner combines gym access, food tracking, training guidance, gym activity and built-in coaching in one clean mobile experience.',
+        'Fitliner connects real gym access, training, food tracking and rewards into one seamless mobile experience.',
       bullets: [
         'Open your gym with one tap',
         'Track food, progress and workouts',
@@ -66,9 +66,9 @@ function getHeroCopy(locale: string): HeroCopy {
     },
     sk: {
       eyebrow: 'Jedna appka pre vstup, tréning a odmeny',
-      title: 'Otvor dvere do fitka. Trénuj múdrejšie. Získavaj odmeny.',
+      title: 'Tvoj kľúč do fitka, kouč a tracker progresu — v jednej appke.',
       subtitle:
-        'Fitliner spája vstup do fitka, sledovanie jedla, tréningový plán, aktivitu vo fitku a zabudovaného kouča do jednej čistej mobilnej aplikácie.',
+        'Fitliner spája reálny vstup do fitka, tréning, sledovanie jedla a odmeny do jedného plynulého mobilného zážitku.',
       bullets: [
         'Otvor svoje fitko jedným klikom',
         'Sleduj jedlo, progres a tréningy',
@@ -79,9 +79,9 @@ function getHeroCopy(locale: string): HeroCopy {
     },
     de: {
       eyebrow: 'Eine App für Zugang, Training und Belohnungen',
-      title: 'Öffne dein Gym. Trainiere smarter. Sammle Belohnungen.',
+      title: 'Dein Gym-Schlüssel, Coach und Fortschrittstracker — in einer App.',
       subtitle:
-        'Fitliner verbindet Gym-Zugang, Ernährungstracking, Trainingsführung, Gym-Aktivität und integriertes Coaching in einer klaren mobilen Erfahrung.',
+        'Fitliner verbindet echten Gym-Zugang, Training, Ernährungstracking und Belohnungen in einer nahtlosen mobilen Erfahrung.',
       bullets: [
         'Öffne dein Gym mit einem Tipp',
         'Verfolge Essen, Fortschritt und Workouts',
@@ -92,9 +92,9 @@ function getHeroCopy(locale: string): HeroCopy {
     },
     es: {
       eyebrow: 'Una app para acceso, entrenamiento y recompensas',
-      title: 'Abre tu gimnasio. Entrena mejor. Gana recompensas.',
+      title: 'Tu llave del gimnasio, coach y seguimiento de progreso — en una sola app.',
       subtitle:
-        'Fitliner combina acceso al gimnasio, seguimiento de comida, guía de entrenamiento, actividad del gimnasio y coaching integrado en una sola experiencia móvil.',
+        'Fitliner conecta acceso real al gimnasio, entrenamiento, seguimiento de comida y recompensas en una experiencia móvil fluida.',
       bullets: [
         'Abre tu gimnasio con un toque',
         'Sigue comida, progreso y entrenamientos',
@@ -105,9 +105,9 @@ function getHeroCopy(locale: string): HeroCopy {
     },
     fr: {
       eyebrow: 'Une seule app pour accès, entraînement et récompenses',
-      title: 'Ouvrez votre salle. Entraînez-vous mieux. Gagnez des récompenses.',
+      title: 'Votre clé de salle, coach et suivi de progression — dans une seule app.',
       subtitle:
-        'Fitliner réunit l’accès à la salle, le suivi alimentaire, le plan d’entraînement, l’activité du gym et un coach intégré dans une seule expérience mobile.',
+        'Fitliner réunit le vrai accès à la salle, l’entraînement, le suivi alimentaire et les récompenses dans une expérience mobile fluide.',
       bullets: [
         'Ouvrez votre salle en un geste',
         'Suivez vos repas, progrès et séances',
@@ -118,9 +118,9 @@ function getHeroCopy(locale: string): HeroCopy {
     },
     'zh-Hans': {
       eyebrow: '一个应用，搞定门禁、训练和奖励',
-      title: '一键开门，更聪明训练，还能获得奖励。',
+      title: '你的健身房钥匙、教练和进度追踪器，都在一个应用里。',
       subtitle:
-        'Fitliner 将健身房门禁、饮食记录、训练指导、健身房活跃度和内置教练整合到一个简洁的移动体验中。',
+        'Fitliner 将真实的健身房门禁、训练、饮食记录和奖励整合为一个流畅的移动体验。',
       bullets: [
         '一键打开健身房大门',
         '记录饮食、进度和训练',
@@ -530,14 +530,14 @@ export default async function Page({
                 href={iosUrl}
                 className="rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(124,58,237,0.35)] transition hover:scale-[1.01] hover:opacity-95"
               >
-                {t.cta_ios}
+                Get started on iOS
               </a>
 
               <a
                 href={androidUrl}
                 className="rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
               >
-                {t.cta_android}
+                Get started on Android
               </a>
             </div>
 
@@ -558,8 +558,8 @@ export default async function Page({
                 <div className="px-4 pb-4">
                   <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
                     <img
-                      src="/home.png"
-                      alt="Fitliner home screen"
+                      src="/gym.png"
+                      alt="Fitliner gym access screen"
                       className="h-[620px] w-full object-cover object-top"
                     />
                   </div>
@@ -569,6 +569,75 @@ export default async function Page({
           </div>
         </section>
 
+        <section className="mt-16 rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center">
+          <div className="text-sm uppercase tracking-[0.2em] text-[#A78BFA]">
+            {locale === 'sk'
+              ? 'Prečo Fitliner'
+              : locale === 'de'
+                ? 'Warum Fitliner'
+                : locale === 'es'
+                  ? 'Por qué Fitliner'
+                  : locale === 'fr'
+                    ? 'Pourquoi Fitliner'
+                    : locale === 'zh-Hans'
+                      ? '为什么选择 Fitliner'
+                      : 'Why Fitliner'}
+          </div>
+          <h2 className="mt-4 text-3xl font-semibold text-white">
+            {locale === 'sk'
+              ? 'Väčšina fitness appiek iba trackuje. Fitliner všetko reálne prepája.'
+              : locale === 'de'
+                ? 'Die meisten Fitness-Apps tracken nur. Fitliner verbindet wirklich alles.'
+                : locale === 'es'
+                  ? 'La mayoría de apps fitness solo registran. Fitliner lo conecta todo de verdad.'
+                  : locale === 'fr'
+                    ? 'La plupart des apps fitness se contentent de suivre. Fitliner relie vraiment tout.'
+                    : locale === 'zh-Hans'
+                      ? '大多数健身应用只会记录。Fitliner 真正把一切连接起来。'
+                      : 'Most fitness apps track. Fitliner actually connects everything.'}
+          </h2>
+          <div className="mt-6 space-y-2 text-sm text-white/70">
+            <div>
+              {locale === 'sk'
+                ? '→ Žiadne karty. Žiadne trenie.'
+                : locale === 'de'
+                  ? '→ Keine Karten. Keine Reibung.'
+                  : locale === 'es'
+                    ? '→ Sin tarjetas. Sin fricción.'
+                    : locale === 'fr'
+                      ? '→ Pas de cartes. Pas de friction.'
+                      : locale === 'zh-Hans'
+                        ? '→ 不用卡片。没有阻力。'
+                        : '→ No cards. No friction.'}
+            </div>
+            <div>
+              {locale === 'sk'
+                ? '→ Reálny vstup do fitka + reálny progres'
+                : locale === 'de'
+                  ? '→ Echter Gym-Zugang + echter Fortschritt'
+                  : locale === 'es'
+                    ? '→ Acceso real al gimnasio + progreso real'
+                    : locale === 'fr'
+                      ? '→ Vrai accès à la salle + vraie progression'
+                      : locale === 'zh-Hans'
+                        ? '→ 真实门禁 + 真实进步'
+                        : '→ Real gym access + real progress'}
+            </div>
+            <div>
+              {locale === 'sk'
+                ? '→ Odmeny, ktoré ťa držia v konzistencii'
+                : locale === 'de'
+                  ? '→ Belohnungen, die dich konstant halten'
+                  : locale === 'es'
+                    ? '→ Recompensas que te ayudan a ser constante'
+                    : locale === 'fr'
+                      ? '→ Des récompenses qui vous gardent régulier'
+                      : locale === 'zh-Hans'
+                        ? '→ 奖励机制帮你保持稳定'
+                        : '→ Rewards that keep you consistent'}
+            </div>
+          </div>
+        </section>
         <section className="mt-16 grid gap-4 md:grid-cols-3">
           {features.map((item) => (
             <div
@@ -585,7 +654,7 @@ export default async function Page({
           {showcase.map((item, index) => (
             <div
               key={item.title}
-              className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5"
+              className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 transition hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(124,58,237,0.25)]"
             >
               <div className="border-b border-white/10 px-6 py-5">
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#A78BFA]">
@@ -611,7 +680,7 @@ export default async function Page({
           ))}
         </section>
         <section className="mt-16 grid gap-5 lg:grid-cols-3">
-          <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 lg:col-span-2">
+          <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 transition hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(124,58,237,0.25)] lg:col-span-2">
             <div className="border-b border-white/10 px-6 py-5">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#A78BFA]">
                 {locale === 'sk'
@@ -666,7 +735,7 @@ export default async function Page({
           </div>
 
           <div className="grid gap-5">
-            <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5">
+            <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 transition hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(124,58,237,0.25)]">
               <div className="border-b border-white/10 px-6 py-5">
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#A78BFA]">
                   Messenger
@@ -696,7 +765,7 @@ export default async function Page({
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5">
+            <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 transition hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(124,58,237,0.25)]">
               <div className="border-b border-white/10 px-6 py-5">
                 <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#A78BFA]">
                   Guidance
