@@ -474,10 +474,27 @@ export default async function Page({
   const hero = getHeroCopy(locale);
   const features = getFeatureItems(locale);
   const showcase = getShowcaseItems(locale);
+  const androidComingSoon = true;
+  const androidSoonLabel =
+    locale === 'sk'
+      ? 'Google Play už čoskoro'
+      : locale === 'de'
+        ? 'Google Play bald verfügbar'
+        : locale === 'es'
+          ? 'Google Play muy pronto'
+          : locale === 'fr'
+            ? 'Google Play bientôt'
+            : locale === 'zh-Hans'
+              ? 'Google Play 即将推出'
+              : 'Google Play coming soon';
 
   // TODO: keď budeš mať linky, dáme ich sem alebo do env:
-  const iosUrl = process.env.NEXT_PUBLIC_APPSTORE_URL || '#';
-  const androidUrl = process.env.NEXT_PUBLIC_PLAYSTORE_URL || '#';
+  const iosUrl =
+    process.env.NEXT_PUBLIC_APPSTORE_URL ||
+    'https://apps.apple.com/app/id6760855966';
+  const androidUrl =
+    process.env.NEXT_PUBLIC_PLAYSTORE_URL ||
+    'https://play.google.com/store/apps/details?id=com.fitliner.app';
 
   return (
     <main className="min-h-screen bg-[#0B0B0D] text-white">
@@ -525,21 +542,87 @@ export default async function Page({
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={iosUrl}
-                className="rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(124,58,237,0.35)] transition hover:scale-[1.01] hover:opacity-95"
-              >
-                Get started on iOS
-              </a>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={iosUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex min-h-[60px] items-center gap-3 rounded-2xl border border-white/12 bg-white px-5 py-3 text-left text-black shadow-[0_18px_40px_rgba(255,255,255,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_56px_rgba(255,255,255,0.14)]"
+                  aria-label="Download Fitliner on the App Store"
+                >
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black text-white shadow-[0_12px_24px_rgba(0,0,0,0.22)]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M15.684 12.497c.013 2.575 2.26 3.434 2.285 3.445-.019.06-.359 1.229-1.179 2.437-.709 1.045-1.445 2.087-2.604 2.109-1.139.021-1.504-.675-2.807-.675-1.303 0-1.71.653-2.785.696-1.12.042-1.973-1.123-2.688-2.164-1.461-2.129-2.577-6.017-1.079-8.621.744-1.293 2.073-2.112 3.514-2.133 1.097-.021 2.134.739 2.807.739.673 0 1.935-.914 3.261-.78.555.023 2.115.224 3.118 1.692-.081.051-1.862 1.087-1.843 3.255ZM13.993 5.418c.595-.721.996-1.724.886-2.726-.857.035-1.894.57-2.508 1.291-.551.639-1.033 1.661-.903 2.64.956.074 1.929-.486 2.525-1.205Z" />
+                    </svg>
+                  </span>
+                  <span className="flex flex-col leading-tight">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-black/55">
+                      Download on the
+                    </span>
+                    <span className="text-base font-semibold text-black">
+                      App Store
+                    </span>
+                  </span>
+                </a>
 
-              <a
-                href={androidUrl}
-                className="rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Get started on Android
-              </a>
-            </div>
+                {androidComingSoon ? (
+                  <div
+                    className="inline-flex min-h-[60px] items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.045] px-5 py-3 text-left text-white/70 backdrop-blur-sm"
+                    aria-label={androidSoonLabel}
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white/80 shadow-[0_12px_24px_rgba(0,0,0,0.14)]">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-5 w-5"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M3.609 2.258 13.977 12 3.61 21.742A2.36 2.36 0 0 1 3 20.126V3.874c0-.618.236-1.181.609-1.616ZM15.152 13.104l2.428 2.281-9.75 5.532 7.322-7.813ZM7.83 3.083l9.75 5.532-2.428 2.281L7.83 3.083Zm10.43 6.482 2.914 1.652c1.103.626 1.103 1.94 0 2.566l-2.914 1.652L15.9 12l2.36-2.435Z" />
+                      </svg>
+                    </span>
+                    <span className="flex flex-col leading-tight">
+                      <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/45">
+                        Android
+                      </span>
+                      <span className="text-base font-semibold text-white/78">
+                        {androidSoonLabel}
+                      </span>
+                    </span>
+                  </div>
+                ) : (
+                  <a
+                    href={androidUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex min-h-[60px] items-center gap-3 rounded-2xl border border-white/12 bg-white/6 px-5 py-3 text-left text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[0_22px_50px_rgba(124,58,237,0.16)]"
+                    aria-label="Get Fitliner on Google Play"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#A78BFA] text-white shadow-[0_12px_24px_rgba(124,58,237,0.32)]">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-5 w-5"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M3.609 2.258 13.977 12 3.61 21.742A2.36 2.36 0 0 1 3 20.126V3.874c0-.618.236-1.181.609-1.616ZM15.152 13.104l2.428 2.281-9.75 5.532 7.322-7.813ZM7.83 3.083l9.75 5.532-2.428 2.281L7.83 3.083Zm10.43 6.482 2.914 1.652c1.103.626 1.103 1.94 0 2.566l-2.914 1.652L15.9 12l2.36-2.435Z" />
+                      </svg>
+                    </span>
+                    <span className="flex flex-col leading-tight">
+                      <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/55">
+                        Get it on
+                      </span>
+                      <span className="text-base font-semibold text-white">
+                        Google Play
+                      </span>
+                    </span>
+                  </a>
+                )}
+              </div>
 
             <div className="mt-4 text-sm text-white/45">{hero.secondaryNote}</div>
             <div className="mt-2 text-sm text-white/60">{hero.socialProof}</div>
@@ -828,12 +911,26 @@ export default async function Page({
             <div className="text-sm">
               <div className="text-white/70">{t.footer.app_title}</div>
               <div className="mt-3 flex flex-col gap-2 text-white/60">
-                <a className="hover:text-white" href={iosUrl}>
+                <a
+                  className="hover:text-white"
+                  href={iosUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                    {t.footer.download_ios}
                 </a>
-                <a className="hover:text-white" href={androidUrl}>
-                  ▶︎ {t.footer.download_android}
-                </a>
+                {androidComingSoon ? (
+                  <span className="text-white/35">▶︎ {androidSoonLabel}</span>
+                ) : (
+                  <a
+                    className="hover:text-white"
+                    href={androidUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    ▶︎ {t.footer.download_android}
+                  </a>
+                )}
               </div>
             </div>
           </div>
