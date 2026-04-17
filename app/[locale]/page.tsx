@@ -499,14 +499,18 @@ export default async function Page({
   return (
     <main className="min-h-screen bg-[#0B0B0D] text-white">
       <div className="mx-auto max-w-6xl px-6 py-8">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 font-semibold tracking-[0.35em] text-white">
-            <span className="text-lg">
-              FITLINER
-              <span className="ml-1 align-super text-[10px] tracking-normal text-white/70">TM</span>
-            </span>
+        <div className="flex items-start justify-between gap-4">
+          <div className="pt-1">
+            <div className="inline-flex items-start text-white">
+              <span className="text-[1.55rem] font-semibold tracking-[0.52em] text-white sm:text-[1.7rem]">
+                FITLINER
+              </span>
+              <span className="ml-1 pt-[0.08rem] text-[0.58rem] font-semibold tracking-[0.12em] text-white/60">
+                TM
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pt-1">
             <LanguageSwitcherMobile current={locale} />
             <LanguageSwitcherDesktop current={locale} />
           </div>
