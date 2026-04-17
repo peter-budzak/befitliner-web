@@ -500,13 +500,11 @@ export default async function Page({
     <main className="min-h-screen bg-[#0B0B0D] text-white">
       <div className="mx-auto max-w-6xl px-6 py-8">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 font-semibold tracking-wide">
-            <img
-              src="/icon.png"
-              alt="BeFitliner logo"
-              className="h-9 w-9 rounded-xl"
-            />
-            <span>{t.brand}</span>
+          <div className="flex items-center gap-3 font-semibold tracking-[0.35em] text-white">
+            <span className="text-lg">
+              FITLINER
+              <span className="ml-1 align-super text-[10px] tracking-normal text-white/70">TM</span>
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <LanguageSwitcherMobile current={locale} />
