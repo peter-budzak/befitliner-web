@@ -13,8 +13,8 @@ By using the App, you agree to the collection and use of information in accordan
 The App is operated by:
 
 **Globalio LLC**  
-4 Peddlers Row  
-Newark, DE, 19702  
+16192 Coastal Hwy  
+Lewes, DE 19958-3608  
 United States  
 Website: https://www.globaliollc.com  
 
@@ -168,8 +168,8 @@ By downloading, accessing, or using the App, you agree to be bound by these Term
 The App is operated by:
 
 **Globalio LLC**  
-4 Peddlers Row  
-Newark, DE, 19702  
+16192 Coastal Hwy  
+Lewes, DE 19958-3608  
 United States  
 Website: https://www.globaliollc.com
 
