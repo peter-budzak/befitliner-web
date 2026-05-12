@@ -268,14 +268,18 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <a
-              href="#"
+              href="https://apps.apple.com/sk/app/fitliner/id6760855966"
+              target="_blank"
+              rel="noreferrer"
               className="flex items-center justify-center rounded-2xl bg-[#7C4DFF] px-5 py-4 text-center text-sm font-bold text-white transition hover:bg-[#6B3DFF]"
             >
               {copy.ios}
             </a>
 
             <a
-              href="#"
+              href="https://play.google.com/store/apps/details?id=com.fitliner.app"
+              target="_blank"
+              rel="noreferrer"
               className="flex items-center justify-center rounded-2xl bg-white px-5 py-4 text-center text-sm font-bold text-[#111]"
             >
               {copy.android}
