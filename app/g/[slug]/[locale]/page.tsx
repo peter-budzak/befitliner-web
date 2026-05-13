@@ -25,6 +25,12 @@ type PublicGym = {
   rules_text: string | null;
 };
 
+type PublicGymStats = {
+  current_users_count: number;
+  reviews_count: number;
+  reviews_avg: number;
+};
+
 type Copy = {
   badge: string;
   titleBody: string;
@@ -32,6 +38,11 @@ type Copy = {
   android: string;
   note: string;
   publicPage: string;
+  liveStatus: string;
+  currentInGym: string;
+  currentInGymDescription: string;
+  reviews: string;
+  reviewsSummary: string;
   address: string;
   addressMissing: string;
   navigate: string;
@@ -56,6 +67,11 @@ const COPY: Record<Locale, Copy> = {
     android: 'Download for Android',
     note: 'iOS & Android · Free to start',
     publicPage: 'Public gym page',
+    liveStatus: 'Live gym status',
+    currentInGym: 'Currently in the gym',
+    currentInGymDescription: 'People in the gym right now',
+    reviews: 'Reviews',
+    reviewsSummary: '{count} reviews · {avg} / 5',
     address: 'Address',
     addressMissing: 'Address is not available yet.',
     navigate: 'Navigate',
@@ -78,6 +94,11 @@ const COPY: Record<Locale, Copy> = {
     android: 'Stiahnuť pre Android',
     note: 'iOS & Android · Začni zadarmo',
     publicPage: 'Verejná stránka fitka',
+    liveStatus: 'Aktuálne vo fitku',
+    currentInGym: 'Aktuálne v gyme',
+    currentInGymDescription: 'Ľudia vo fitku práve teraz',
+    reviews: 'Recenzie',
+    reviewsSummary: '{count} hodnotení · {avg} / 5',
     address: 'Adresa',
     addressMissing: 'Adresa zatiaľ nie je dostupná.',
     navigate: 'Navigovať',
@@ -100,6 +121,11 @@ const COPY: Record<Locale, Copy> = {
     android: 'Für Android laden',
     note: 'iOS & Android · Kostenlos starten',
     publicPage: 'Öffentliche Gym-Seite',
+    liveStatus: 'Live-Status des Gyms',
+    currentInGym: 'Aktuell im Fitnessstudio',
+    currentInGymDescription: 'Personen, die gerade im Gym sind',
+    reviews: 'Bewertungen',
+    reviewsSummary: '{count} Bewertungen · {avg} / 5',
     address: 'Adresse',
     addressMissing: 'Adresse ist noch nicht verfügbar.',
     navigate: 'Navigieren',
@@ -122,6 +148,11 @@ const COPY: Record<Locale, Copy> = {
     android: 'Descargar para Android',
     note: 'iOS y Android · Empieza gratis',
     publicPage: 'Página pública del gimnasio',
+    liveStatus: 'Estado actual del gimnasio',
+    currentInGym: 'Actualmente en el gimnasio',
+    currentInGymDescription: 'Personas en el gimnasio ahora mismo',
+    reviews: 'Reseñas',
+    reviewsSummary: '{count} reseñas · {avg} / 5',
     address: 'Dirección',
     addressMissing: 'La dirección aún no está disponible.',
     navigate: 'Navegar',
@@ -144,6 +175,11 @@ const COPY: Record<Locale, Copy> = {
     android: 'Télécharger pour Android',
     note: 'iOS & Android · Commencer gratuitement',
     publicPage: 'Page publique de la salle',
+    liveStatus: 'Statut actuel de la salle',
+    currentInGym: 'Actuellement dans la salle',
+    currentInGymDescription: 'Personnes actuellement dans la salle',
+    reviews: 'Avis',
+    reviewsSummary: '{count} avis · {avg} / 5',
     address: 'Adresse',
     addressMissing: 'L’adresse n’est pas encore disponible.',
     navigate: 'Itinéraire',
@@ -166,6 +202,11 @@ const COPY: Record<Locale, Copy> = {
     android: '下载 Android 版',
     note: 'iOS 与 Android · 免费开始',
     publicPage: '健身房公开页面',
+    liveStatus: '健身房实时状态',
+    currentInGym: '当前在健身房内',
+    currentInGymDescription: '当前在健身房的人数',
+    reviews: '评价',
+    reviewsSummary: '{count} 条评价 · {avg} / 5',
     address: '地址',
     addressMissing: '地址暂不可用。',
     navigate: '导航',
@@ -185,6 +226,12 @@ const COPY: Record<Locale, Copy> = {
 
 function getCopy(locale: string) {
   return COPY[LOCALES.includes(locale as Locale) ? (locale as Locale) : 'en'];
+}
+
+function formatReviewsSummary(template: string, count: number, avg: number) {
+  return template
+    .replace('{count}', String(count))
+    .replace('{avg}', avg.toFixed(1));
 }
 
 function cleanUrl(value: string | null) {
@@ -214,13 +261,22 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
 
   const copy = getCopy(locale);
 
-  const { data, error } = await supabase
-    .rpc('get_public_gym_by_slug', { input_slug: slug })
-    .maybeSingle<PublicGym>();
+  const [{ data, error }, { data: statsData, error: statsError }] = await Promise.all([
+    supabase
+      .rpc('get_public_gym_by_slug', { input_slug: slug })
+      .maybeSingle<PublicGym>(),
+    supabase
+      .rpc('get_public_gym_stats_by_slug', { input_slug: slug })
+      .maybeSingle<PublicGymStats>(),
+  ]);
 
   if (error) {
     console.error('Failed to load localized public gym page:', error);
     notFound();
+  }
+
+  if (statsError) {
+    console.error('Failed to load localized public gym stats:', statsError);
   }
 
   if (!data) {
@@ -228,6 +284,12 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
   }
 
   const gym = data;
+  const stats = statsData ?? {
+    current_users_count: 0,
+    reviews_count: 0,
+    reviews_avg: 0,
+  };
+
   const addressMapUrl = mapUrl(gym.address);
   const websiteUrl = cleanUrl(gym.website);
   const facebookUrl = cleanUrl(gym.facebook);
@@ -289,6 +351,43 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
           <p className="mt-4 text-center text-xs text-white/45">
             {copy.note}
           </p>
+        </div>
+
+        <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold">{copy.liveStatus}</h2>
+            <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/55">
+              Live
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
+              <p className="text-sm font-semibold text-white/55">{copy.currentInGym}</p>
+              <p className="mt-3 text-4xl font-black tracking-tight">
+                {stats.current_users_count}
+              </p>
+              <p className="mt-2 text-sm leading-5 text-white/55">
+                {copy.currentInGymDescription}
+              </p>
+            </div>
+
+            <Link
+              href={`/g/${slug}/${locale}/reviews`}
+              className="block cursor-pointer select-none rounded-2xl border border-white/10 bg-white/[0.05] p-5 transition hover:border-white/20 hover:bg-white/[0.08]"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm font-semibold text-white/55">{copy.reviews}</p>
+                <span className="text-sm font-bold text-white/40">→</span>
+              </div>
+              <p className="mt-3 text-4xl font-black tracking-tight">
+                {stats.reviews_avg.toFixed(1)}
+              </p>
+              <p className="mt-2 text-sm leading-5 text-white/55">
+                {formatReviewsSummary(copy.reviewsSummary, stats.reviews_count, stats.reviews_avg)}
+              </p>
+            </Link>
+          </div>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
