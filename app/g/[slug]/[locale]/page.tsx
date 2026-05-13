@@ -400,7 +400,7 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
             </span>
           </Link>
 
-          <nav aria-label="Language switcher" className="flex flex-wrap justify-end gap-1.5">
+          <nav aria-label="Language switcher" className="hidden flex-wrap justify-end gap-1.5 sm:flex">
             {LOCALES.map((targetLocale) => {
               const isActive = targetLocale === locale;
 
@@ -421,6 +421,33 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
               );
             })}
           </nav>
+
+          <details className="relative sm:hidden">
+            <summary className="list-none rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-white/70 marker:hidden">
+              {LOCALE_LABELS[locale as Locale]}
+            </summary>
+            <div className="absolute right-0 z-20 mt-2 min-w-32 overflow-hidden rounded-2xl border border-white/10 bg-[#12121A] p-1 shadow-2xl shadow-black/50">
+              {LOCALES.map((targetLocale) => {
+                const isActive = targetLocale === locale;
+
+                return (
+                  <Link
+                    key={targetLocale}
+                    href={`/g/${slug}/${targetLocale}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={[
+                      'block rounded-xl px-3 py-2 text-sm font-bold transition',
+                      isActive
+                        ? 'bg-white text-[#0B0B12]'
+                        : 'text-white/65 hover:bg-white/10 hover:text-white',
+                    ].join(' ')}
+                  >
+                    {LOCALE_LABELS[targetLocale]}
+                  </Link>
+                );
+              })}
+            </div>
+          </details>
         </header>
 
         <div className="rounded-[32px] border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/30 sm:p-8">
