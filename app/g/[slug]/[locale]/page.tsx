@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
@@ -334,6 +335,81 @@ function youtubeEmbedUrl(value: string | null) {
   }
 
   return null;
+}
+
+function gymPageMetaTitle(gymName: string, locale: string) {
+  if (locale === 'sk') {
+    return `${gymName} – otvor fitko cez Fitliner`;
+  }
+
+  if (locale === 'de') {
+    return `${gymName} – Fitnessstudio mit Fitliner öffnen`;
+  }
+
+  if (locale === 'es') {
+    return `${gymName} – abre el gimnasio con Fitliner`;
+  }
+
+  if (locale === 'fr') {
+    return `${gymName} – ouvrez la salle avec Fitliner`;
+  }
+
+  if (locale === 'zh-Hans') {
+    return `${gymName} – 使用 Fitliner 开门`;
+  }
+
+  return `${gymName} – open the gym with Fitliner`;
+}
+
+function gymPageMetaDescription(copy: Copy) {
+  return `${copy.titleBody} ${copy.benefits}`;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = params instanceof Promise ? await params : params;
+  const slug = resolvedParams.slug;
+  const locale = resolvedParams.locale;
+
+  if (!LOCALES.includes(locale as Locale)) {
+    return {};
+  }
+
+  const copy = getCopy(locale);
+
+  const { data: gym } = await supabase
+    .rpc('get_public_gym_by_slug', { input_slug: slug })
+    .maybeSingle<PublicGym>();
+
+  if (!gym) {
+    return {
+      title: 'Fitliner',
+      description: copy.titleBody,
+    };
+  }
+
+  const title = gymPageMetaTitle(gym.name, locale);
+  const description = gymPageMetaDescription(copy);
+  const url = `https://${gym.slug}.befitliner.com/${locale}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'Fitliner',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+  };
 }
 
 export default async function PublicGymLocalePage({ params }: PageProps) {
