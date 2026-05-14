@@ -390,6 +390,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = gymPageMetaTitle(gym.name, locale);
   const description = gymPageMetaDescription(copy);
   const url = `https://${gym.slug}.befitliner.com/${locale}`;
+  const imageUrl = 'https://befitliner.com/og/gym-default.png';
 
   return {
     title,
@@ -403,11 +404,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: 'Fitliner',
       type: 'website',
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${gym.name} – Fitliner`,
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title,
       description,
+      images: [imageUrl],
     },
   };
 }
