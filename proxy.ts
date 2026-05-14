@@ -62,7 +62,7 @@ export function proxy(request: NextRequest) {
   const path = url.pathname;
 
   if (path === '/') {
-    url.pathname = `/g/${slug}`;
+    url.pathname = `/g/${slug}/sk`;
     return NextResponse.rewrite(url);
   }
 
