@@ -429,12 +429,12 @@ export default function GymsFunnel({ locale }: { locale: string }) {
               </video>
             </div>
 
-            <button
-              type="button"
+            <a
+              href="https://checkout.globaliollc.com/fitliner-door-system/"
               className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-95 md:text-base"
             >
               Objednať prístupový systém
-            </button>
+            </a>
           </div>
         )}
       </div>
