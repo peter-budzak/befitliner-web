@@ -111,7 +111,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 controls
                 preload="none"
                 playsInline
-                className="aspect-[9/16] w-full bg-black object-cover md:aspect-video"
+                className="aspect-video w-full bg-black object-contain"
                 poster={step1PosterSrc}
               >
                 <source src={step1VideoSrc} type="video/mp4" />
@@ -422,7 +422,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 controls
                 preload="none"
                 playsInline
-                className="aspect-[9/16] w-full bg-black object-cover md:aspect-video"
+                className="aspect-video w-full bg-black object-contain"
                 poster={step6PosterSrc}
               >
                 <source src={step6VideoSrc} type="video/mp4" />
