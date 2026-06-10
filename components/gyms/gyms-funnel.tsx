@@ -430,7 +430,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
             </div>
 
             <a
-              href={locale === 'sk' ? 'https://checkout.globaliollc.com/fitliner-system-sk/' : 'https://checkout.globaliollc.com/fitliner-door-system/'}
+              href="https://checkout.globaliollc.com/fitliner-system-sk/?coupon=SK10VIP"
               className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-95 md:text-base"
             >
               Objednať prístupový systém
