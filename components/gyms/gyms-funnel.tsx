@@ -97,12 +97,12 @@ export default function GymsFunnel({ locale }: { locale: string }) {
         {step === 1 && (
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-              Zistite, či je Fitliner vhodný aj pre vaše fitnesscentrum
+              Zistite za 60 sekúnd, či môže Fitliner automatizovať vaše fitnesscentrum
             </h2>
 
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70 md:text-base">
-              Pozrite si krátke video a za pár klikov zistíte, či vám Fitliner vie
-              priniesť viac klientov, jednoduchšiu prevádzku a vyšší zisk.
+              Pozrite si krátke video a zistite, ako môže Fitliner prepojiť online platby,
+              automatické členstvá a vstup do fitka bez ručného schvaľovania.
             </p>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black">
@@ -248,7 +248,8 @@ export default function GymsFunnel({ locale }: { locale: string }) {
             </h2>
 
             <p className="mt-3 text-sm text-white/70">
-              Stačí pár kliknutí – prispôsobíme vám riešenie na mieru.
+              Už len 2 kroky do rezervácie pilotného programu. Stačí pár kliknutí –
+              prispôsobíme vám riešenie na mieru.
             </p>
 
             <div className="mt-6 text-sm text-white/60 mb-2">Máte recepciu?</div>
@@ -364,11 +365,11 @@ export default function GymsFunnel({ locale }: { locale: string }) {
         {step === 5 && (
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-              Kam vám máme poslať ďalšie informácie?
+              Kam vám máme poslať výsledok analýzy vášho fitnesscentra?
             </h2>
 
             <p className="mt-3 text-sm text-white/70">
-              Zadajte kontakt na majiteľa alebo zodpovednú osobu fitnesscentra.
+              Na tento kontakt vám pošleme vyhodnotenie a ďalšie kroky k rezervácii pilotného programu.
             </p>
 
             <div className="mt-6 space-y-3">
@@ -409,11 +410,11 @@ export default function GymsFunnel({ locale }: { locale: string }) {
         {step === 6 && (
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-              Získajte Fitliner pre vaše fitnesscentrum
+              Gratulujeme. Vaše fitnesscentrum je vhodným kandidátom pre Fitliner.
             </h2>
 
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70 md:text-base">
-              Pozrite si posledné krátke video a pokračujte na finálne odoslanie.
+              Pozrite si posledné krátke video a rezervujte si miesto medzi prvými 10 fitnesscentrami.
             </p>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-black">
@@ -433,7 +434,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
               href="https://checkout.globaliollc.com/fitliner-system-sk/?coupon=SK10VIP"
               className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-95 md:text-base"
             >
-              Objednať prístupový systém
+              Rezervovať Fitliner za 0 €
             </a>
           </div>
         )}
