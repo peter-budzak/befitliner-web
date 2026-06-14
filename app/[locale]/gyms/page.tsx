@@ -6,14 +6,14 @@ const metadataByLocale = {
     title: 'Fitliner pre fitnesscentrá – automatický vstup, platby a viac členov',
     description:
       'Zistite, ako môže Fitliner pomôcť vášmu fitnesscentru automatizovať vstup, prijímať platby online a získať viac členov bez zložitej prevádzky.',
-    image: '/images/gyms/sk-poster.jpg',
+    image: 'https://befitliner.com/images/gyms/sk-poster.jpg?v=2',
     url: 'https://befitliner.com/sk/gyms'
   },
   en: {
     title: 'Fitliner for Gyms – automated access, payments and member growth',
     description:
       'Discover how Fitliner helps gyms automate door access, accept online payments and grow memberships with one simple system.',
-    image: '/images/gyms/sk-poster.jpg',
+    image: 'https://befitliner.com/images/gyms/sk-poster.jpg?v=2',
     url: 'https://befitliner.com/en/gyms'
   }
 } as const;
