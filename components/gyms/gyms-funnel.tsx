@@ -27,6 +27,8 @@ export default function GymsFunnel({ locale }: { locale: string }) {
   const [email, setEmail] = useState('');
   const step1VideoSrc = `/videos/gyms/${locale}.mp4`;
   const step6VideoSrc = `/videos/gyms/${locale}-final.mp4`;
+  const step1PosterSrc = `/images/gyms/${locale}-poster.jpg`;
+  const step6PosterSrc = `/images/gyms/${locale}-final-poster.jpg`;
 
   useEffect(() => {
     if (step !== 3) return;
@@ -109,6 +111,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 controls
                 preload="none"
                 playsInline
+                poster={step1PosterSrc}
                 className="aspect-video w-full bg-black object-contain"
               >
                 <source src={step1VideoSrc} type="video/mp4" />
@@ -420,6 +423,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 controls
                 preload="none"
                 playsInline
+                poster={step6PosterSrc}
                 className="aspect-video w-full bg-black object-contain"
               >
                 <source src={step6VideoSrc} type="video/mp4" />
