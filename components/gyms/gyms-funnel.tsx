@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -25,10 +25,104 @@ export default function GymsFunnel({ locale }: { locale: string }) {
   const [accessTypeOther, setAccessTypeOther] = useState('');
   const [contactName, setContactName] = useState('');
   const [email, setEmail] = useState('');
+  const [submissionId, setSubmissionId] = useState('');
+  const [isSavingSubmission, setIsSavingSubmission] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
   const step1VideoSrc = `/videos/gyms/${locale}.mp4`;
   const step6VideoSrc = `/videos/gyms/${locale}-final.mp4`;
   const step1PosterSrc = `/images/gyms/${locale}-poster.jpg`;
   const step6PosterSrc = `/images/gyms/${locale}-final-poster.jpg`;
+
+  useEffect(() => {
+    const storageKey = 'fitliner_gym_funnel_submission_id';
+    const existingId = window.localStorage.getItem(storageKey);
+
+    if (existingId) {
+      setSubmissionId(existingId);
+      return;
+    }
+
+    const newId = crypto.randomUUID();
+    window.localStorage.setItem(storageKey, newId);
+    setSubmissionId(newId);
+  }, []);
+
+  const saveLeadProgress = useCallback(
+    async (completedStep: Step) => {
+      if (!submissionId) return false;
+
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+      if (!supabaseUrl || !supabaseAnonKey) {
+        setSubmissionError('Supabase konfigurácia nie je dostupná.');
+        return false;
+      }
+
+      try {
+        setIsSavingSubmission(true);
+        setSubmissionError('');
+
+        const accessTypeFinal = accessType === 'Iné' ? accessTypeOther.trim() : accessType;
+
+        const response = await fetch(`${supabaseUrl}/rest/v1/gym_funnel_submissions`, {
+          method: 'POST',
+          headers: {
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+            Prefer: 'resolution=merge-duplicates',
+          },
+          body: JSON.stringify({
+            id: submissionId,
+            locale,
+            completed_step: completedStep,
+            current_step: Math.min(completedStep + 1, 6),
+            gym_name: gymName.trim() || null,
+            address: address || addressQuery.trim() || null,
+            address_query: addressQuery.trim() || null,
+            google_place_id: selectedPlaceId || null,
+            has_reception: hasReception || null,
+            access_type: accessTypeFinal || null,
+            access_type_other: accessTypeOther.trim() || null,
+            has_system: hasSystem || null,
+            contact_name: contactName.trim() || null,
+            email: email.trim().toLowerCase() || null,
+            reached_final_step: completedStep >= 5,
+            checkout_clicked: completedStep >= 6,
+            source_path: typeof window !== 'undefined' ? window.location.pathname : null,
+            source_url: typeof window !== 'undefined' ? window.location.href : null,
+            updated_at: new Date().toISOString(),
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Nepodarilo sa uložiť údaje.');
+        }
+
+        return true;
+      } catch {
+        setSubmissionError('Údaje sa nepodarilo uložiť. Skúste pokračovať ešte raz.');
+        return false;
+      } finally {
+        setIsSavingSubmission(false);
+      }
+    },
+    [
+      accessType,
+      accessTypeOther,
+      address,
+      addressQuery,
+      contactName,
+      email,
+      gymName,
+      hasReception,
+      hasSystem,
+      locale,
+      selectedPlaceId,
+      submissionId,
+    ]
+  );
 
   useEffect(() => {
     if (step !== 3) return;
@@ -139,10 +233,14 @@ export default function GymsFunnel({ locale }: { locale: string }) {
 
     <div className="mt-6 grid grid-cols-1 gap-3">
       <button
-        onClick={() => setStep(3)}
-        className="w-full rounded-2xl bg-[#7C3AED] py-3 font-semibold"
+        onClick={async () => {
+          const saved = await saveLeadProgress(2);
+          if (saved) setStep(3);
+        }}
+        disabled={isSavingSubmission || !submissionId}
+        className="w-full rounded-2xl bg-[#7C3AED] py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Áno
+        {isSavingSubmission ? 'Ukladám…' : 'Áno'}
       </button>
 
       <button
@@ -225,18 +323,19 @@ export default function GymsFunnel({ locale }: { locale: string }) {
             </div>
 
             <button
-              onClick={() => {
+              onClick={async () => {
                 if (!gymName.trim() || !selectedPlaceId) return;
-                setStep(4);
+                const saved = await saveLeadProgress(3);
+                if (saved) setStep(4);
               }}
-              disabled={!gymName.trim() || !selectedPlaceId}
+              disabled={!gymName.trim() || !selectedPlaceId || isSavingSubmission}
               className={`mt-6 w-full rounded-2xl py-3 font-semibold transition-opacity ${
-                !gymName.trim() || !selectedPlaceId
+                !gymName.trim() || !selectedPlaceId || isSavingSubmission
                   ? 'bg-[#7C3AED]/40 cursor-not-allowed'
                   : 'bg-[#7C3AED] hover:opacity-95'
               }`}
             >
-              Pokračovať
+              {isSavingSubmission ? 'Ukladám…' : 'Pokračovať'}
             </button>
           </div>
         )}
@@ -330,7 +429,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 </div>
 
                 <button
-                  onClick={() => {
+                  onClick={async () => {
                     if (
                       !hasReception ||
                       !accessType ||
@@ -339,24 +438,27 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                     ) {
                       return;
                     }
-                    setStep(5);
+                    const saved = await saveLeadProgress(4);
+                    if (saved) setStep(5);
                   }}
                   disabled={
                     !hasReception ||
                     !accessType ||
                     !hasSystem ||
-                    (accessType === 'Iné' && !accessTypeOther.trim())
+                    (accessType === 'Iné' && !accessTypeOther.trim()) ||
+                    isSavingSubmission
                   }
                   className={`mt-6 w-full rounded-2xl py-3 font-semibold transition-opacity ${
                     !hasReception ||
                     !accessType ||
                     !hasSystem ||
-                    (accessType === 'Iné' && !accessTypeOther.trim())
+                    (accessType === 'Iné' && !accessTypeOther.trim()) ||
+                    isSavingSubmission
                       ? 'bg-[#7C3AED]/40 cursor-not-allowed'
                       : 'bg-[#7C3AED] hover:opacity-95'
                   }`}
                 >
-                  Pokračovať
+                  {isSavingSubmission ? 'Ukladám…' : 'Pokračovať'}
                 </button>
               </>
             )}
@@ -391,19 +493,26 @@ export default function GymsFunnel({ locale }: { locale: string }) {
             </div>
 
             <button
-              onClick={() => {
+              onClick={async () => {
                 const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
                 if (!contactName.trim() || !emailOk) return;
-                setStep(6);
+                const saved = await saveLeadProgress(5);
+                if (saved) setStep(6);
               }}
-              disabled={!contactName.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())}
+              disabled={
+                !contactName.trim() ||
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) ||
+                isSavingSubmission
+              }
               className={`mt-6 w-full rounded-2xl py-3 font-semibold transition-opacity ${
-                !contactName.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+                !contactName.trim() ||
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) ||
+                isSavingSubmission
                   ? 'bg-[#7C3AED]/40 cursor-not-allowed'
                   : 'bg-[#7C3AED] hover:opacity-95'
               }`}
             >
-              Pokračovať
+              {isSavingSubmission ? 'Ukladám…' : 'Pokračovať'}
             </button>
           </div>
         )}
@@ -432,11 +541,19 @@ export default function GymsFunnel({ locale }: { locale: string }) {
 
             <a
               href="https://checkout.globaliollc.com/fitliner-system-sk/?coupon=SK10VIP"
+              onClick={() => {
+                void saveLeadProgress(6);
+              }}
               className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-95 md:text-base"
             >
               Rezervovať Fitliner za 0 €
             </a>
           </div>
+        )}
+        {submissionError && (
+          <p className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            {submissionError}
+          </p>
         )}
       </div>
     </section>
