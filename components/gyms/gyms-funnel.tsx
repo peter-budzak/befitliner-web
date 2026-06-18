@@ -25,6 +25,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
   const [accessTypeOther, setAccessTypeOther] = useState('');
   const [contactName, setContactName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [submissionId, setSubmissionId] = useState('');
   const [isSavingSubmission, setIsSavingSubmission] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
@@ -90,8 +91,10 @@ export default function GymsFunnel({ locale }: { locale: string }) {
               has_system: hasSystem || null,
               contact_name: contactName.trim() || null,
               email: email.trim().toLowerCase() || null,
+              phone: phone.trim() || null,
               reached_final_step: completedStep >= 5,
               checkout_clicked: completedStep >= 6,
+              checkout_clicked_at: completedStep >= 6 ? new Date().toISOString() : null,
               source_path: typeof window !== 'undefined' ? window.location.pathname : null,
               source_url: typeof window !== 'undefined' ? window.location.href : null,
               updated_at: new Date().toISOString(),
@@ -128,6 +131,7 @@ export default function GymsFunnel({ locale }: { locale: string }) {
       hasReception,
       hasSystem,
       locale,
+      phone,
       selectedPlaceId,
       submissionId,
     ]
@@ -485,7 +489,8 @@ export default function GymsFunnel({ locale }: { locale: string }) {
             </h2>
 
             <p className="mt-3 text-sm text-white/70">
-              Na tento kontakt vám pošleme vyhodnotenie a ďalšie kroky k rezervácii pilotného programu.
+              Na email vám pošleme vyhodnotenie a ďalšie kroky k rezervácii pilotného programu.
+              Telefón je nepovinný — ak ho doplníte, náš technik vám môže zavolať a zodpovedať technické otázky.
             </p>
 
             <div className="mt-6 space-y-3">
@@ -504,6 +509,20 @@ export default function GymsFunnel({ locale }: { locale: string }) {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/40"
               />
+
+              <div>
+                <input
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="Telefónne číslo (nepovinné)"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/40"
+                />
+                <p className="mt-2 text-xs leading-5 text-white/50">
+                  Ak chcete, technik Fitliner vám zavolá na toto číslo a prejde s vami možnosti automatizácie vstupu.
+                </p>
+              </div>
             </div>
 
             <button
@@ -555,8 +574,10 @@ export default function GymsFunnel({ locale }: { locale: string }) {
 
             <a
               href="https://checkout.globaliollc.com/fitliner-system-sk/?coupon=SK10VIP"
-              onClick={() => {
-                void saveLeadProgress(6);
+              onClick={async (event) => {
+                event.preventDefault();
+                await saveLeadProgress(6);
+                window.location.href = 'https://checkout.globaliollc.com/fitliner-system-sk/?coupon=SK10VIP';
               }}
               className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[#7C3AED] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-95 md:text-base"
             >
