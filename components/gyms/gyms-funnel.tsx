@@ -65,43 +65,52 @@ export default function GymsFunnel({ locale }: { locale: string }) {
 
         const accessTypeFinal = accessType === 'Iné' ? accessTypeOther.trim() : accessType;
 
-        const response = await fetch(`${supabaseUrl}/rest/v1/gym_funnel_submissions`, {
-          method: 'POST',
-          headers: {
-            apikey: supabaseAnonKey,
-            Authorization: `Bearer ${supabaseAnonKey}`,
-            'Content-Type': 'application/json',
-            Prefer: 'resolution=merge-duplicates',
-          },
-          body: JSON.stringify({
-            id: submissionId,
-            locale,
-            completed_step: completedStep,
-            current_step: Math.min(completedStep + 1, 6),
-            gym_name: gymName.trim() || null,
-            address: address || addressQuery.trim() || null,
-            address_query: addressQuery.trim() || null,
-            google_place_id: selectedPlaceId || null,
-            has_reception: hasReception || null,
-            access_type: accessTypeFinal || null,
-            access_type_other: accessTypeOther.trim() || null,
-            has_system: hasSystem || null,
-            contact_name: contactName.trim() || null,
-            email: email.trim().toLowerCase() || null,
-            reached_final_step: completedStep >= 5,
-            checkout_clicked: completedStep >= 6,
-            source_path: typeof window !== 'undefined' ? window.location.pathname : null,
-            source_url: typeof window !== 'undefined' ? window.location.href : null,
-            updated_at: new Date().toISOString(),
-          }),
-        });
+        const response = await fetch(
+          `${supabaseUrl}/rest/v1/gym_funnel_submissions?on_conflict=id`,
+          {
+            method: 'POST',
+            headers: {
+              apikey: supabaseAnonKey,
+              Authorization: `Bearer ${supabaseAnonKey}`,
+              'Content-Type': 'application/json',
+              Prefer: 'resolution=merge-duplicates,return=minimal',
+            },
+            body: JSON.stringify({
+              id: submissionId,
+              locale,
+              completed_step: completedStep,
+              current_step: Math.min(completedStep + 1, 6),
+              gym_name: gymName.trim() || null,
+              address: address || addressQuery.trim() || null,
+              address_query: addressQuery.trim() || null,
+              google_place_id: selectedPlaceId || null,
+              has_reception: hasReception || null,
+              access_type: accessTypeFinal || null,
+              access_type_other: accessTypeOther.trim() || null,
+              has_system: hasSystem || null,
+              contact_name: contactName.trim() || null,
+              email: email.trim().toLowerCase() || null,
+              reached_final_step: completedStep >= 5,
+              checkout_clicked: completedStep >= 6,
+              source_path: typeof window !== 'undefined' ? window.location.pathname : null,
+              source_url: typeof window !== 'undefined' ? window.location.href : null,
+              updated_at: new Date().toISOString(),
+            }),
+          }
+        );
 
         if (!response.ok) {
+          const errorBody = await response.text();
+          console.error('Gym funnel submission save failed', {
+            status: response.status,
+            errorBody,
+          });
           throw new Error('Nepodarilo sa uložiť údaje.');
         }
 
         return true;
-      } catch {
+      } catch (error) {
+        console.error('Gym funnel submission save error', error);
         setSubmissionError('Údaje sa nepodarilo uložiť. Skúste pokračovať ešte raz.');
         return false;
       } finally {
@@ -351,7 +360,12 @@ export default function GymsFunnel({ locale }: { locale: string }) {
               prispôsobíme vám riešenie na mieru.
             </p>
 
-            <div className="mt-6 text-sm text-white/60 mb-2">Máte recepciu?</div>
+            <div className="mt-6 mb-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+              <div className="text-base font-semibold text-white md:text-lg">Máte recepciu?</div>
+              <div className="mt-1 text-xs text-white/50">
+                Toto nám pomôže odhadnúť, či je vhodnejší plne automatický alebo hybridný vstup.
+              </div>
+            </div>
             <div className="grid grid-cols-2 gap-3">
               {['Áno', 'Nie'].map((option) => (
                 <button
