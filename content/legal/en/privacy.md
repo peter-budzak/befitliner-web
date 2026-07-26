@@ -329,7 +329,15 @@ Changes are effective when published.
 
 ---
 
-## 14. Contact
+## 14. Fitliner Health, payments and marketing measurement
+
+When you use the Health Card, we process health results, biomarkers, reference ranges, documents and onboarding questionnaire answers that you provide. These are sensitive health data. We process them with your explicit consent and to provide the features you request. You can review extracted values before they are saved.
+
+Standalone Fitliner Health subscriptions are sold by Globalio LLC. Stripe securely processes the payment; we do not store your full payment card number. We may retain subscription status, billing identifiers and transaction confirmation to manage access, provide support, keep accounting records and comply with legal obligations.
+
+On the Health web offer, we use Meta Pixel and Meta Conversions API only after you consent to marketing measurement. With consent, we may send Meta Platforms visit, campaign and purchase data and a hashed email address to measure advertising. You can decline or later change consent through the **Cookies** button; declining does not restrict core website use. Marketing measurement is not used to provide a medical diagnosis.
+
+## 15. Contact
 
 If you have questions or requests regarding your personal data, contact us at:
 

@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {hasMarketingTrackingConsent, trackMetaCustomEvent, trackMetaEvent} from '@/components/marketing/meta-pixel-consent';
 
 type AnswerValue = string | string[];
 type Answers = Record<string, AnswerValue>;
+type Attribution = Record<string, string>;
 type Question = {
   id: string;
   title: string;
@@ -313,6 +315,8 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [attribution, setAttribution] = useState<Attribution>({});
+  const trackedScreens = useRef(new Set<string>());
 
   const educationScreen = 3;
   const questionIndex = screen === 1 ? 0 : screen === 2 ? 1 : screen >= 4 && screen <= 7 ? screen - 2 : -1;
@@ -331,6 +335,32 @@ export default function HealthFunnel({locale}: {locale: string}) {
       window.localStorage.removeItem('fitliner_health_funnel_v1');
     }
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const next: Attribution = {};
+    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+      const value = params.get(key)?.trim();
+      if (value) next[key] = value.slice(0, 200);
+    }
+    if (hasMarketingTrackingConsent()) {
+      const fbclid = params.get('fbclid')?.trim();
+      if (fbclid) next.fbclid = fbclid.slice(0, 250);
+    }
+    setAttribution(next);
+    trackMetaEvent('ViewContent', {
+      content_name: 'Fitliner Health Card',
+      content_category: 'Health subscription',
+      currency: 'EUR',
+      value: 34.8,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (screen !== 11 || trackedScreens.current.has('offer')) return;
+    trackedScreens.current.add('offer');
+    trackMetaCustomEvent('HealthOfferView', {currency: 'EUR', value: 34.8});
+  }, [screen]);
 
   useEffect(() => {
     window.localStorage.setItem('fitliner_health_funnel_v1', JSON.stringify({answers, email}));
@@ -357,6 +387,16 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
   const hasAnswer = question ? (Array.isArray(answers[question.id]) ? (answers[question.id] as string[]).length > 0 : Boolean(answers[question.id])) : false;
 
+  const startQuiz = () => {
+    trackMetaCustomEvent('HealthQuizStart', {funnel: 'health_card'});
+    setScreen(1);
+  };
+
+  const showOffer = () => {
+    trackMetaEvent('Lead', {content_name: 'Fitliner Health plan'});
+    setScreen(11);
+  };
+
   const startCheckout = async () => {
     if (!emailOk || !healthConsent || !termsAccepted || isSubmitting) return;
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -369,6 +409,12 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setError('');
     try {
       const requestId = crypto.randomUUID();
+      const trackingConsent = hasMarketingTrackingConsent();
+      trackMetaEvent('InitiateCheckout', {
+        content_name: 'Fitliner Health annual',
+        currency: 'EUR',
+        value: 34.8,
+      }, requestId);
       const response = await fetch(`${supabaseUrl}/functions/v1/stripe-create-health-web-checkout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
@@ -377,11 +423,13 @@ export default function HealthFunnel({locale}: {locale: string}) {
           email: email.trim().toLowerCase(),
           locale,
           answers,
-          source_url: window.location.href,
+          attribution,
+          source_url: `${window.location.origin}${window.location.pathname}`,
           health_data_consent: healthConsent,
           privacy_consent: healthConsent,
           terms_accepted: termsAccepted,
           marketing_consent: marketingConsent,
+          marketing_tracking_consent: trackingConsent,
         }),
       });
       const payload = await response.json().catch(() => ({}));
@@ -417,7 +465,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.introEyebrow}</p>
             <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-bold leading-[1.04] tracking-[-0.04em] sm:text-6xl">{t.introTitle}</h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-white/66 sm:text-lg">{t.introBody}</p>
-            <button onClick={() => setScreen(1)} className="mt-8 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.32)] transition hover:brightness-110">{t.introCta} <span aria-hidden>→</span></button>
+            <button onClick={startQuiz} className="mt-8 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.32)] transition hover:brightness-110">{t.introCta} <span aria-hidden>→</span></button>
             <div className="mt-6 grid gap-2 text-left sm:grid-cols-3">{t.introTrust.map((item) => <div key={item} className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-3 text-xs text-white/58"><span className="mr-2 text-emerald-400">✓</span>{item}</div>)}</div>
           </div>}
 
@@ -464,7 +512,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <input id="health-email" type="email" inputMode="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={t.emailPlaceholder} className="mt-2 min-h-14 w-full rounded-2xl border border-white/12 bg-white/[0.055] px-4 text-base text-white outline-none placeholder:text-white/28 focus:border-[#9B73FF]" />
             <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={healthConsent} onChange={(event) => setHealthConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.healthConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/privacy`}>Privacy</Link></span></label>
             <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/55"><input type="checkbox" checked={marketingConsent} onChange={(event) => setMarketingConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.marketingConsent}</span></label>
-            <button disabled={!emailOk || !healthConsent} onClick={() => setScreen(11)} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-35">{t.emailCta}</button>
+            <button disabled={!emailOk || !healthConsent} onClick={showOffer} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-35">{t.emailCta}</button>
           </div>}
 
           {screen === 11 && <div>
