@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import MetaPixelConsent from "@/components/marketing/meta-pixel-consent";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,7 +56,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <MetaPixelConsent />
       </body>
     </html>
   );

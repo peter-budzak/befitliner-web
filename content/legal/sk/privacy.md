@@ -334,7 +334,7 @@ Ak používate Zdravotnú kartu, spracúvame vami nahrané zdravotné výsledky,
 
 Samostatné predplatné Fitliner Health predáva Globalio LLC. Platbu bezpečne spracúva Stripe; neukladáme celé číslo platobnej karty. Môžeme uchovať stav predplatného, fakturačné identifikátory a potvrdenie transakcie na správu prístupu, podporu, účtovníctvo a plnenie právnych povinností.
 
-Na webovej ponuke Health používame Meta Pixel a Meta Conversions API iba po vašom súhlase s marketingovým meraním. Pri udelenom súhlase môžeme spoločnosti Meta Platforms odoslať údaje o návšteve, kampani a nákupe a zahashovanú emailovú adresu na meranie reklamy. Súhlas môžete odmietnuť alebo neskôr zmeniť cez tlačidlo **Cookies**; odmietnutie neobmedzí základné používanie webu. Marketingové meranie nepoužívame na poskytovanie lekárskej diagnózy.
+Na vyhodnotenie reklamy môžeme vo vlastnom systéme uložiť neidentifikujúce názvy kampane z odkazu (napríklad parametre UTM). Na stránkach Zdravotnej karty neposielame spoločnosti Meta vaše zdravotné výsledky, odpovede z dotazníka, email ani informáciu o kúpe prostredníctvom Meta Pixelu alebo Conversions API.
 
 ## 15. Kontakt
 

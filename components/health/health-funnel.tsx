@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {useEffect, useMemo, useRef, useState} from 'react';
-import {hasMarketingTrackingConsent, trackMetaCustomEvent, trackMetaEvent} from '@/components/marketing/meta-pixel-consent';
+import {useEffect, useMemo, useState} from 'react';
 
 type AnswerValue = string | string[];
 type Answers = Record<string, AnswerValue>;
@@ -316,7 +315,6 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [attribution, setAttribution] = useState<Attribution>({});
-  const trackedScreens = useRef(new Set<string>());
 
   const educationScreen = 3;
   const questionIndex = screen === 1 ? 0 : screen === 2 ? 1 : screen >= 4 && screen <= 7 ? screen - 2 : -1;
@@ -343,24 +341,8 @@ export default function HealthFunnel({locale}: {locale: string}) {
       const value = params.get(key)?.trim();
       if (value) next[key] = value.slice(0, 200);
     }
-    if (hasMarketingTrackingConsent()) {
-      const fbclid = params.get('fbclid')?.trim();
-      if (fbclid) next.fbclid = fbclid.slice(0, 250);
-    }
     setAttribution(next);
-    trackMetaEvent('ViewContent', {
-      content_name: 'Fitliner Health Card',
-      content_category: 'Health subscription',
-      currency: 'EUR',
-      value: 34.8,
-    });
   }, []);
-
-  useEffect(() => {
-    if (screen !== 11 || trackedScreens.current.has('offer')) return;
-    trackedScreens.current.add('offer');
-    trackMetaCustomEvent('HealthOfferView', {currency: 'EUR', value: 34.8});
-  }, [screen]);
 
   useEffect(() => {
     window.localStorage.setItem('fitliner_health_funnel_v1', JSON.stringify({answers, email}));
@@ -388,12 +370,10 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const hasAnswer = question ? (Array.isArray(answers[question.id]) ? (answers[question.id] as string[]).length > 0 : Boolean(answers[question.id])) : false;
 
   const startQuiz = () => {
-    trackMetaCustomEvent('HealthQuizStart', {funnel: 'health_card'});
     setScreen(1);
   };
 
   const showOffer = () => {
-    trackMetaEvent('Lead', {content_name: 'Fitliner Health plan'});
     setScreen(11);
   };
 
@@ -409,12 +389,6 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setError('');
     try {
       const requestId = crypto.randomUUID();
-      const trackingConsent = hasMarketingTrackingConsent();
-      trackMetaEvent('InitiateCheckout', {
-        content_name: 'Fitliner Health annual',
-        currency: 'EUR',
-        value: 34.8,
-      }, requestId);
       const response = await fetch(`${supabaseUrl}/functions/v1/stripe-create-health-web-checkout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
@@ -429,7 +403,6 @@ export default function HealthFunnel({locale}: {locale: string}) {
           privacy_consent: healthConsent,
           terms_accepted: termsAccepted,
           marketing_consent: marketingConsent,
-          marketing_tracking_consent: trackingConsent,
         }),
       });
       const payload = await response.json().catch(() => ({}));
