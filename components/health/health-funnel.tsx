@@ -43,10 +43,16 @@ type FunnelCopy = {
   marketingConsent: string;
   emailCta: string;
   offerEyebrow: string;
+  offerBadge: string;
   offerTitle: string;
   offerBody: string;
   perMonth: string;
+  dailyPrice: string;
   billedYearly: string;
+  renewalNote: string;
+  priceGuarantee: string;
+  merchantDisclosure: string;
+  accessLabel: string;
   included: string[];
   termsConsent: string;
   subscribe: string;
@@ -215,10 +221,14 @@ const copy: Record<string, FunnelCopy> = {
     healthConsent: 'Súhlasím so spracovaním odpovedí z dotazníka na prípravu a správu mojej Zdravotnej karty.',
     marketingConsent: 'Chcem dostávať užitočné tipy a novinky Fitliner e-mailom. (nepovinné)',
     emailCta: 'Zobraziť môj plán a cenu',
-    offerEyebrow: 'Fitliner Health · ročný plán', offerTitle: 'Začni sledovať zdravie v súvislostiach.',
-    offerBody: 'Jedna platba na rok. Predplatné sa obnovuje raz ročne a môžeš ho zrušiť pred ďalším obdobím.',
-    perMonth: '2,90 € / mesiac', billedYearly: 'Účtované 34,80 € raz ročne',
-    included: ['Neobmedzená história zdravotných metrík', 'Import PDF a fotografií v rôznych jazykoch', 'Grafy, referenčné rozpätia a pripomienky', 'Kontext pre personalizované tipy AI trénera'],
+    offerEyebrow: 'Fitliner Health · ročný plán', offerBadge: 'Zakladateľská cena',
+    offerTitle: 'Celý rok zdravia pod kontrolou za menej než 0,10 € denne.',
+    offerBody: 'Aktivuj si kompletnú Zdravotnú kartu za uvádzaciu cenu pre prvých používateľov Fitliner Health.',
+    perMonth: '2,90 € / mesiac', dailyPrice: '≈ 0,10 € denne', billedYearly: 'Dnes zaplatíš 34,80 € za 12 mesiacov',
+    renewalNote: 'Potom 34,80 € každých 12 mesiacov. Zrušiť môžeš pred ďalšou platbou.',
+    priceGuarantee: 'Zakladateľskú cenu 34,80 € ročne si zachováš, kým zostane predplatné nepretržite aktívne.',
+    merchantDisclosure: 'Bezpečnú platbu spracuje Stripe pre Globalio LLC.', accessLabel: '12 mesiacov prístupu',
+    included: ['Výsledky z váhy a laboratórií na jednom bezpečnom mieste', 'Neobmedzený import PDF a fotografií v rôznych jazykoch', 'Jasné grafy a referenčné rozpätia pre každú metriku', 'Mesačné pripomienky váhy a polročné pripomienky krvných testov', 'Kontext pre personalizované tipy AI trénera'],
     termsConsent: 'Súhlasím s Podmienkami používania a s opakovanou ročnou platbou 34,80 €, kým predplatné nezruším.',
     subscribe: 'Aktivovať Fitliner Health', alreadyMember: 'Máš aktívne členstvo v partnerskom gyme?',
     alreadyMemberCta: 'Zdravotnú kartu už máš v cene. Otvor Fitliner aplikáciu a nepriplácaj.',
@@ -248,10 +258,14 @@ const copy: Record<string, FunnelCopy> = {
     emailBody: 'Use the same email you will use in the Fitliner app. After payment, Health is activated for that exact account.',
     emailPlaceholder: 'you@example.com', healthConsent: 'I agree to the processing of my questionnaire answers to prepare and manage my Health Card.',
     marketingConsent: 'Send me useful Fitliner tips and product news by email. (optional)', emailCta: 'Show my plan and price',
-    offerEyebrow: 'Fitliner Health · annual plan', offerTitle: 'Start seeing your health in context.',
-    offerBody: 'One payment for a full year. The subscription renews yearly and can be cancelled before the next period.',
-    perMonth: '€2.90 / month', billedYearly: 'Billed as €34.80 once a year',
-    included: ['Unlimited history of health metrics', 'PDF and photo import in multiple languages', 'Charts, reference ranges and reminders', 'Context for personalized AI Trainer tips'],
+    offerEyebrow: 'Fitliner Health · annual plan', offerBadge: 'Founding price',
+    offerTitle: 'A full year of health context for less than €0.10 a day.',
+    offerBody: 'Unlock the complete Health Card at the introductory price for early Fitliner Health members.',
+    perMonth: '€2.90 / month', dailyPrice: '≈ €0.10 a day', billedYearly: 'Pay €34.80 today for 12 months',
+    renewalNote: 'Then €34.80 every 12 months. Cancel before your next charge.',
+    priceGuarantee: 'Keep the €34.80 annual founding price while your subscription remains continuously active.',
+    merchantDisclosure: 'Secure payment processed by Stripe for Globalio LLC.', accessLabel: '12 months of access',
+    included: ['Scale and laboratory results in one secure place', 'Unlimited PDF and photo imports in multiple languages', 'Clear charts and reference ranges for every metric', 'Monthly scale and six-month blood-test reminders', 'Context for personalized AI Trainer tips'],
     termsConsent: 'I accept the Terms of Use and the recurring annual charge of €34.80 until I cancel.',
     subscribe: 'Activate Fitliner Health', alreadyMember: 'Do you have an active membership at a partner gym?',
     alreadyMemberCta: 'Your Health Card is already included. Open the Fitliner app and do not pay twice.',
@@ -271,14 +285,17 @@ function localizedCopy(locale: string): FunnelCopy {
     stepLabel: 'Schritt', continue: 'Weiter', back: 'Zurück',
     emailTitle: 'Welchem Konto sollen wir deine Gesundheitskarte zuordnen?', emailBody: 'Nutze dieselbe E-Mail-Adresse wie in der Fitliner App. Nach der Zahlung wird Health genau für dieses Konto aktiviert.',
     emailPlaceholder: 'du@beispiel.de', emailCta: 'Plan und Preis anzeigen',
-    offerEyebrow: 'Fitliner Health · Jahresplan', offerTitle: 'Verstehe deine Gesundheit im Zusammenhang.',
-    offerBody: 'Eine Zahlung für ein volles Jahr. Das Abo verlängert sich jährlich und kann vor der nächsten Periode gekündigt werden.',
-    perMonth: '2,90 € / Monat', billedYearly: '34,80 € einmal jährlich', subscribe: 'Fitliner Health aktivieren',
+    offerEyebrow: 'Fitliner Health · Jahresplan', offerBadge: 'Gründerpreis', offerTitle: 'Ein ganzes Jahr Gesundheitsüberblick für weniger als 0,10 € pro Tag.',
+    offerBody: 'Aktiviere die vollständige Gesundheitskarte zum Einführungspreis für frühe Fitliner-Health-Mitglieder.',
+    perMonth: '2,90 € / Monat', dailyPrice: '≈ 0,10 € pro Tag', billedYearly: 'Heute 34,80 € für 12 Monate',
+    renewalNote: 'Danach 34,80 € alle 12 Monate. Vor der nächsten Zahlung kündbar.',
+    priceGuarantee: 'Der Gründerpreis von 34,80 € pro Jahr bleibt bei ununterbrochenem Abo erhalten.',
+    merchantDisclosure: 'Sichere Zahlung über Stripe für Globalio LLC.', accessLabel: '12 Monate Zugang', subscribe: 'Fitliner Health aktivieren',
     submitting: 'Sichere Zahlung wird vorbereitet…', checkoutError: 'Die Zahlung konnte nicht geöffnet werden. Prüfe deine E-Mail und versuche es erneut.',
   };
-  if (locale === 'es') return {...base, questions: translatedQuestions('es'), language: 'es', introEyebrow: 'Tarjeta de Salud Fitliner', introTitle: 'Tus resultados de salud, por fin claros.', introBody: 'Sube análisis de laboratorio o informes de báscula diagnóstica. Fitliner organiza cada métrica, muestra su evolución y da más contexto a tu Entrenador IA.', introCta: 'Crear mi resumen de salud', stepLabel: 'Paso', continue: 'Continuar', back: 'Atrás', emailTitle: '¿A qué cuenta asignamos tu Tarjeta de Salud?', emailBody: 'Usa el mismo correo con el que entrarás en la app Fitliner. Tras el pago, Health se activará para esa cuenta.', emailPlaceholder: 'tu@correo.es', emailCta: 'Ver mi plan y precio', offerEyebrow: 'Fitliner Health · plan anual', offerTitle: 'Empieza a ver tu salud en contexto.', perMonth: '2,90 € / mes', billedYearly: '34,80 € una vez al año', subscribe: 'Activar Fitliner Health', submitting: 'Preparando pago seguro…'};
-  if (locale === 'fr') return {...base, questions: translatedQuestions('fr'), language: 'fr', introEyebrow: 'Carte Santé Fitliner', introTitle: 'Vos résultats de santé, enfin faciles à comprendre.', introBody: 'Importez vos bilans de laboratoire ou d’impédancemètre. Fitliner organise chaque mesure, montre son évolution et donne plus de contexte à votre Coach IA.', introCta: 'Créer mon aperçu santé', stepLabel: 'Étape', continue: 'Continuer', back: 'Retour', emailTitle: 'À quel compte associer votre Carte Santé ?', emailBody: 'Utilisez la même adresse e-mail que dans l’app Fitliner. Après paiement, Health sera activé pour ce compte.', emailPlaceholder: 'vous@exemple.fr', emailCta: 'Voir mon plan et le prix', offerEyebrow: 'Fitliner Health · formule annuelle', offerTitle: 'Comprenez votre santé dans son ensemble.', perMonth: '2,90 € / mois', billedYearly: '34,80 € facturés une fois par an', subscribe: 'Activer Fitliner Health', submitting: 'Préparation du paiement sécurisé…'};
-  if (locale === 'zh-Hans') return {...base, questions: translatedQuestions('zh-Hans'), language: 'zh-Hans', introEyebrow: 'Fitliner 健康档案', introTitle: '让你的健康数据终于清晰易懂。', introBody: '上传化验单或体成分报告。Fitliner 会整理每项指标、展示长期变化，并为 AI 教练提供更完整的背景。', introCta: '生成我的健康概览', stepLabel: '步骤', continue: '继续', back: '返回', emailTitle: '健康档案应关联到哪个账号？', emailBody: '请使用登录 Fitliner 应用时相同的邮箱。付款后，Health 会自动为该账号开通。', emailPlaceholder: 'you@example.com', emailCta: '查看方案和价格', offerEyebrow: 'Fitliner Health · 年度方案', offerTitle: '从整体背景理解你的健康。', perMonth: '每月 €2.90', billedYearly: '每年一次性支付 €34.80', subscribe: '开通 Fitliner Health', submitting: '正在准备安全支付…'};
+  if (locale === 'es') return {...base, questions: translatedQuestions('es'), language: 'es', introEyebrow: 'Tarjeta de Salud Fitliner', introTitle: 'Tus resultados de salud, por fin claros.', introBody: 'Sube análisis de laboratorio o informes de báscula diagnóstica. Fitliner organiza cada métrica, muestra su evolución y da más contexto a tu Entrenador IA.', introCta: 'Crear mi resumen de salud', stepLabel: 'Paso', continue: 'Continuar', back: 'Atrás', emailTitle: '¿A qué cuenta asignamos tu Tarjeta de Salud?', emailBody: 'Usa el mismo correo con el que entrarás en la app Fitliner. Tras el pago, Health se activará para esa cuenta.', emailPlaceholder: 'tu@correo.es', emailCta: 'Ver mi plan y precio', offerEyebrow: 'Fitliner Health · plan anual', offerBadge: 'Precio fundador', offerTitle: 'Un año completo de contexto de salud por menos de 0,10 € al día.', offerBody: 'Activa la Tarjeta de Salud completa con el precio de lanzamiento para los primeros miembros.', perMonth: '2,90 € / mes', dailyPrice: '≈ 0,10 € al día', billedYearly: 'Paga hoy 34,80 € por 12 meses', renewalNote: 'Después, 34,80 € cada 12 meses. Cancela antes del próximo cobro.', priceGuarantee: 'Mantén el precio fundador de 34,80 € al año mientras tu suscripción siga activa.', merchantDisclosure: 'Pago seguro procesado por Stripe para Globalio LLC.', accessLabel: '12 meses de acceso', subscribe: 'Activar Fitliner Health', submitting: 'Preparando pago seguro…'};
+  if (locale === 'fr') return {...base, questions: translatedQuestions('fr'), language: 'fr', introEyebrow: 'Carte Santé Fitliner', introTitle: 'Vos résultats de santé, enfin faciles à comprendre.', introBody: 'Importez vos bilans de laboratoire ou d’impédancemètre. Fitliner organise chaque mesure, montre son évolution et donne plus de contexte à votre Coach IA.', introCta: 'Créer mon aperçu santé', stepLabel: 'Étape', continue: 'Continuer', back: 'Retour', emailTitle: 'À quel compte associer votre Carte Santé ?', emailBody: 'Utilisez la même adresse e-mail que dans l’app Fitliner. Après paiement, Health sera activé pour ce compte.', emailPlaceholder: 'vous@exemple.fr', emailCta: 'Voir mon plan et le prix', offerEyebrow: 'Fitliner Health · formule annuelle', offerBadge: 'Prix fondateur', offerTitle: 'Une année complète de suivi santé pour moins de 0,10 € par jour.', offerBody: 'Activez la Carte Santé complète au tarif de lancement réservé aux premiers membres.', perMonth: '2,90 € / mois', dailyPrice: '≈ 0,10 € par jour', billedYearly: 'Payez 34,80 € aujourd’hui pour 12 mois', renewalNote: 'Puis 34,80 € tous les 12 mois. Résiliable avant le prochain paiement.', priceGuarantee: 'Conservez le prix fondateur de 34,80 € par an tant que votre abonnement reste actif.', merchantDisclosure: 'Paiement sécurisé traité par Stripe pour Globalio LLC.', accessLabel: '12 mois d’accès', subscribe: 'Activer Fitliner Health', submitting: 'Préparation du paiement sécurisé…'};
+  if (locale === 'zh-Hans') return {...base, questions: translatedQuestions('zh-Hans'), language: 'zh-Hans', introEyebrow: 'Fitliner 健康档案', introTitle: '让你的健康数据终于清晰易懂。', introBody: '上传化验单或体成分报告。Fitliner 会整理每项指标、展示长期变化，并为 AI 教练提供更完整的背景。', introCta: '生成我的健康概览', stepLabel: '步骤', continue: '继续', back: '返回', emailTitle: '健康档案应关联到哪个账号？', emailBody: '请使用登录 Fitliner 应用时相同的邮箱。付款后，Health 会自动为该账号开通。', emailPlaceholder: 'you@example.com', emailCta: '查看方案和价格', offerEyebrow: 'Fitliner Health · 年度方案', offerBadge: '创始会员价', offerTitle: '每天不到 €0.10，获得一整年的健康趋势管理。', offerBody: '首批 Fitliner Health 会员可按上线优惠价开通完整健康档案。', perMonth: '每月 €2.90', dailyPrice: '每天约 €0.10', billedYearly: '今天支付 €34.80，使用 12 个月', renewalNote: '之后每 12 个月支付 €34.80，可在下次扣款前取消。', priceGuarantee: '订阅持续有效期间，保留每年 €34.80 的创始会员价。', merchantDisclosure: '由 Stripe 为 Globalio LLC 安全处理付款。', accessLabel: '12 个月访问权限', subscribe: '开通 Fitliner Health', submitting: '正在准备安全支付…'};
   return base;
 }
 
@@ -451,16 +468,19 @@ export default function HealthFunnel({locale}: {locale: string}) {
           </div>}
 
           {screen === 11 && <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.offerEyebrow}</p>
+            <div className="flex flex-wrap items-center gap-2"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.offerEyebrow}</p><span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">{t.offerBadge}</span></div>
             <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{t.offerTitle}</h1>
             <p className="mt-5 text-base leading-7 text-white/65">{t.offerBody}</p>
             <div className="mt-7 rounded-[1.75rem] border border-[#9B73FF]/40 bg-gradient-to-br from-[#7C3AED]/20 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_20px_80px_rgba(124,58,237,0.18)]">
-              <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">{t.perMonth}</div><div className="mt-2 text-sm text-white/55">{t.billedYearly}</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">12 MONTHS</div></div>
+              <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">{t.perMonth}</div><div className="mt-2 text-sm font-semibold text-emerald-300">{t.dailyPrice}</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">{t.accessLabel}</div></div>
+              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4"><p className="font-semibold text-white/90">{t.billedYearly}</p><p className="mt-1 text-sm leading-6 text-white/55">{t.renewalNote}</p></div>
               <div className="my-6 h-px bg-white/10" />
               <ul className="space-y-3">{t.included.map((item) => <li key={item} className="flex gap-3 text-sm leading-6 text-white/75"><span className="text-emerald-400">✓</span><span>{item}</span></li>)}</ul>
+              <div className="mt-6 flex gap-3 rounded-2xl border border-[#9B73FF]/25 bg-[#7C3AED]/12 p-4 text-sm leading-6 text-white/70"><span className="text-lg text-[#B9A1FF]">✦</span><span>{t.priceGuarantee}</span></div>
             </div>
             <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.termsConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/terms`}>Terms</Link></span></label>
             <button disabled={!termsAccepted || isSubmitting} onClick={startCheckout} className="mt-6 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.3)] disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? t.submitting : t.subscribe}</button>
+            <p className="mt-3 text-center text-xs text-white/42">🔒 {t.merchantDisclosure}</p>
             {error && <p className="mt-4 rounded-xl border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-sm leading-6 text-amber-100" role="alert">{error}</p>}
             <div className="mt-5 rounded-2xl border border-white/8 bg-white/[0.035] p-4"><p className="text-sm font-bold">{t.alreadyMember}</p><p className="mt-1 text-sm leading-6 text-white/58">{t.alreadyMemberCta}</p></div>
             <p className="mt-5 text-xs leading-5 text-white/38">{t.medicalNote}</p>
