@@ -346,6 +346,15 @@ export default function HealthFunnel({locale}: {locale: string}) {
       if (value) next[key] = value.slice(0, 200);
     }
     setAttribution(next);
+    const resumedRequestId = params.get('rid');
+    if (resumedRequestId && /^[0-9a-f-]{36}$/i.test(resumedRequestId)) {
+      window.localStorage.setItem('fitliner_health_funnel_request_id', resumedRequestId);
+    }
+    const offerToken = params.get('offer');
+    if (offerToken && /^[0-9a-f-]{36}$/i.test(offerToken)) {
+      window.localStorage.setItem('fitliner_health_funnel_offer_token', offerToken);
+      window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
+    }
   }, []);
 
   useEffect(() => {
@@ -443,6 +452,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
           privacy_consent: healthConsent,
           terms_accepted: termsAccepted,
           marketing_consent: marketingConsent,
+          offer_token: window.localStorage.getItem('fitliner_health_funnel_offer_token'),
         }),
       });
       const payload = await response.json().catch(() => ({}));
