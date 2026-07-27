@@ -220,11 +220,11 @@ const copy: Record<string, FunnelCopy> = {
       {title: 'Osobný kontext', body: 'AI tréner spojí výsledky s jedlom, tréningom a profilom.', icon: '✦'},
     ], resultCta: 'Poslať môj plán na e-mail',
     emailTitle: 'Kam ti máme priradiť Zdravotnú kartu?',
-    emailBody: 'Použi rovnaký e-mail, ktorým sa prihlásiš do aplikácie Fitliner. Po úhrade sa Health aktivuje práve tomuto účtu.',
+    emailBody: 'Použi rovnaký e-mail, ktorým sa prihlásiš do aplikácie Fitliner. Health sa aktivuje práve tomuto účtu.',
     emailPlaceholder: 'tvoj@email.sk',
     healthConsent: 'Súhlasím so spracovaním odpovedí z dotazníka na prípravu a správu mojej Zdravotnej karty.',
-    marketingConsent: 'Chcem dostávať užitočné tipy a novinky Fitliner e-mailom. (nepovinné)',
-    emailCta: 'Zobraziť môj plán a cenu',
+    marketingConsent: 'Chcem dostať svoj plán, užitočné tipy a pripomenutie, ak aktiváciu nedokončím. (nepovinné)',
+    emailCta: 'Zobraziť môj plán',
     offerEyebrow: 'Fitliner Health · ročný plán', offerBadge: 'Zakladateľská cena',
     offerTitle: 'Celý rok zdravia pod kontrolou za menej než 0,10 € denne.',
     offerBody: 'Aktivuj si kompletnú Zdravotnú kartu za uvádzaciu cenu pre prvých používateľov Fitliner Health.',
@@ -259,9 +259,9 @@ const copy: Record<string, FunnelCopy> = {
       {title: 'Six-month check-in', body: 'We remind you about blood tests about every six months.', icon: '◒'},
       {title: 'Personal context', body: 'Your AI Trainer connects results with meals, training and profile data.', icon: '✦'},
     ], resultCta: 'Send my plan to email', emailTitle: 'Which account should receive your Health Card?',
-    emailBody: 'Use the same email you will use in the Fitliner app. After payment, Health is activated for that exact account.',
+    emailBody: 'Use the same email you will use in the Fitliner app. Health is activated for that exact account.',
     emailPlaceholder: 'you@example.com', healthConsent: 'I agree to the processing of my questionnaire answers to prepare and manage my Health Card.',
-    marketingConsent: 'Send me useful Fitliner tips and product news by email. (optional)', emailCta: 'Show my plan and price',
+    marketingConsent: 'Send me my plan, useful tips and a reminder if I do not finish activation. (optional)', emailCta: 'Show my plan',
     offerEyebrow: 'Fitliner Health · annual plan', offerBadge: 'Founding price',
     offerTitle: 'A full year of health context for less than €0.10 a day.',
     offerBody: 'Unlock the complete Health Card at the introductory price for early Fitliner Health members.',
@@ -287,8 +287,8 @@ function localizedCopy(locale: string): FunnelCopy {
     introBody: 'Lade Labor- oder Körperanalyse-Berichte hoch. Fitliner ordnet jede Messgröße, zeigt Veränderungen und gibt deinem AI Trainer besseren Kontext.',
     introCta: 'Meine Gesundheitsübersicht erstellen', introTrust: ['PDF oder Foto', 'Berichte in verschiedenen Sprachen', 'Alles vor dem Speichern prüfen'],
     stepLabel: 'Schritt', continue: 'Weiter', back: 'Zurück',
-    emailTitle: 'Welchem Konto sollen wir deine Gesundheitskarte zuordnen?', emailBody: 'Nutze dieselbe E-Mail-Adresse wie in der Fitliner App. Nach der Zahlung wird Health genau für dieses Konto aktiviert.',
-    emailPlaceholder: 'du@beispiel.de', emailCta: 'Plan und Preis anzeigen',
+    emailTitle: 'Welchem Konto sollen wir deine Gesundheitskarte zuordnen?', emailBody: 'Nutze dieselbe E-Mail-Adresse wie in der Fitliner App. Health wird genau für dieses Konto aktiviert.',
+    emailPlaceholder: 'du@beispiel.de', marketingConsent: 'Sende mir meinen Plan, nützliche Tipps und eine Erinnerung, falls ich die Aktivierung nicht abschließe. (optional)', emailCta: 'Meinen Plan anzeigen',
     offerEyebrow: 'Fitliner Health · Jahresplan', offerBadge: 'Gründerpreis', offerTitle: 'Ein ganzes Jahr Gesundheitsüberblick für weniger als 0,10 € pro Tag.',
     offerBody: 'Aktiviere die vollständige Gesundheitskarte zum Einführungspreis für frühe Fitliner-Health-Mitglieder.',
     perMonth: '2,90 € / Monat', dailyPrice: '≈ 0,10 € pro Tag', billedYearly: 'Heute 34,80 € für 12 Monate',
@@ -316,6 +316,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSavingLead, setIsSavingLead] = useState(false);
   const [error, setError] = useState('');
   const [attribution, setAttribution] = useState<Attribution>({});
 
@@ -376,8 +377,45 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setScreen(1);
   };
 
-  const showOffer = () => {
-    setScreen(11);
+  const requestId = () => {
+    const key = 'fitliner_health_funnel_request_id';
+    const existing = window.localStorage.getItem(key);
+    if (existing) return existing;
+    const created = crypto.randomUUID();
+    window.localStorage.setItem(key, created);
+    return created;
+  };
+
+  const showOffer = async () => {
+    if (!emailOk || !healthConsent || isSavingLead) return;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    setIsSavingLead(true);
+    try {
+      if (supabaseUrl && anonKey) {
+        const response = await fetch(`${supabaseUrl}/functions/v1/health-save-web-lead`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
+          body: JSON.stringify({
+            request_id: requestId(),
+            email: email.trim().toLowerCase(),
+            locale,
+            answers,
+            attribution,
+            source_url: `${window.location.origin}${window.location.pathname}`,
+            health_data_consent: true,
+            privacy_consent: true,
+            marketing_consent: marketingConsent,
+          }),
+        });
+        if (!response.ok) console.error('Health lead capture failed', await response.text());
+      }
+    } catch (leadError) {
+      console.error('Health lead capture failed', leadError);
+    } finally {
+      setIsSavingLead(false);
+      setScreen(11);
+    }
   };
 
   const startCheckout = async () => {
@@ -391,12 +429,11 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setIsSubmitting(true);
     setError('');
     try {
-      const requestId = crypto.randomUUID();
       const response = await fetch(`${supabaseUrl}/functions/v1/stripe-create-health-web-checkout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
         body: JSON.stringify({
-          request_id: requestId,
+          request_id: requestId(),
           email: email.trim().toLowerCase(),
           locale,
           answers,
@@ -491,7 +528,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <input id="health-email" type="email" inputMode="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={t.emailPlaceholder} className="mt-2 min-h-14 w-full rounded-2xl border border-white/12 bg-white/[0.055] px-4 text-base text-white outline-none placeholder:text-white/28 focus:border-[#9B73FF]" />
             <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={healthConsent} onChange={(event) => setHealthConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.healthConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/privacy`}>Privacy</Link></span></label>
             <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/55"><input type="checkbox" checked={marketingConsent} onChange={(event) => setMarketingConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.marketingConsent}</span></label>
-            <button disabled={!emailOk || !healthConsent} onClick={showOffer} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-35">{t.emailCta}</button>
+            <button disabled={!emailOk || !healthConsent || isSavingLead} onClick={showOffer} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-35">{t.emailCta}</button>
           </div>}
 
           {screen === 11 && <div>
