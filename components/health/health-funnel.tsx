@@ -15,6 +15,8 @@ type Question = {
   options: Array<{value: string; label: string; icon: string}>;
 };
 
+const ANALYSIS_SCREEN_DURATION_MS = 5200;
+
 type FunnelCopy = {
   language: string;
   introEyebrow: string;
@@ -351,7 +353,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
   useEffect(() => {
     if (screen !== 8) return;
-    const timer = window.setTimeout(() => setScreen(9), 1900);
+    const timer = window.setTimeout(() => setScreen(9), ANALYSIS_SCREEN_DURATION_MS);
     return () => window.clearTimeout(timer);
   }, [screen]);
 
