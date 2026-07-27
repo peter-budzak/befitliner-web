@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import {useEffect, useMemo, useState} from 'react';
 
@@ -196,8 +197,8 @@ const copy: Record<string, FunnelCopy> = {
   sk: {
     language: 'sk', introEyebrow: 'Fitliner Zdravotná karta',
     introTitle: 'Tvoje zdravotné výsledky konečne dávajú zmysel.',
-    introBody: 'Nahraj výsledky z laboratória alebo diagnostickej váhy. Fitliner ich usporiada, ukáže vývoj v čase a dá AI trénerovi kontext pre užitočnejšie odporúčania.',
-    introCta: 'Vytvoriť môj zdravotný prehľad',
+    introBody: 'Nahraj výsledky krvných testov z laboratória alebo výsledky z diagnostickej váhy. Fitliner ich usporiada, ukáže vývoj v čase a dá AI trénerovi kontext pre užitočnejšie odporúčania.',
+    introCta: 'Zistiť, čo hovoria moje výsledky',
     introTrust: ['PDF alebo fotografia', 'Výsledky v rôznych jazykoch', 'Pred uložením všetko skontroluješ'],
     stepLabel: 'Krok', continue: 'Pokračovať', back: 'Späť', questions: commonQuestions.sk,
     educationEyebrow: 'Jeden bezpečný archív', educationTitle: 'Z papiera na prehľadný vývoj za pár sekúnd.',
@@ -424,7 +425,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
   return (
     <main className="min-h-screen overflow-hidden bg-[#070709] text-white">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(124,58,237,0.28),transparent_42%)]" />
-      <div className="relative mx-auto flex min-h-screen w-full max-w-3xl flex-col px-5 pb-10 pt-6 sm:px-8">
+      <div className={`relative mx-auto flex min-h-screen w-full flex-col px-5 pb-10 pt-6 sm:px-8 ${screen === 0 ? 'max-w-5xl' : 'max-w-3xl'}`}>
         <header className="flex items-center justify-between gap-4">
           <Link href={`/${locale}`} aria-label="Fitliner home"><Brand /></Link>
           {screen > 0 && screen < 11 && <div className="text-xs font-medium text-white/45">{t.stepLabel} {Math.min(screen, 9)} / 9</div>}
@@ -434,12 +435,15 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
         <section className="flex flex-1 flex-col justify-center py-8 sm:py-12">
           {screen === 0 && <div className="text-center">
-            <div className="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-[2rem] border border-[#A78BFA]/25 bg-gradient-to-br from-[#7C3AED]/35 to-[#111116] shadow-[0_0_70px_rgba(124,58,237,0.28)]"><span className="text-5xl text-[#B79AFF]">✦</span></div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.introEyebrow}</p>
             <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-bold leading-[1.04] tracking-[-0.04em] sm:text-6xl">{t.introTitle}</h1>
             <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-white/66 sm:text-lg">{t.introBody}</p>
-            <button onClick={startQuiz} className="mt-8 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.32)] transition hover:brightness-110">{t.introCta} <span aria-hidden>→</span></button>
-            <div className="mt-6 grid gap-2 text-left sm:grid-cols-3">{t.introTrust.map((item) => <div key={item} className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-3 text-xs text-white/58"><span className="mr-2 text-emerald-400">✓</span>{item}</div>)}</div>
+            <button onClick={startQuiz} className="mx-auto mt-7 min-h-14 w-full max-w-2xl rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.32)] transition hover:brightness-110">{t.introCta} <span aria-hidden>→</span></button>
+            <div className="mx-auto mt-5 grid max-w-4xl gap-2 text-left sm:grid-cols-3">{t.introTrust.map((item) => <div key={item} className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-3 text-xs text-white/58"><span className="mr-2 text-emerald-400">✓</span>{item}</div>)}</div>
+            <div className="relative mx-auto mt-7 w-full max-w-4xl overflow-hidden rounded-[1.5rem] border border-[#A78BFA]/15 bg-[#0B0911] shadow-[0_24px_90px_rgba(87,43,180,0.2)] sm:rounded-[2rem]">
+              <Image src="/images/health/fitliner-health-paper-to-history-hero.jpg" alt="" width={1600} height={900} priority sizes="(max-width: 640px) 100vw, 896px" className="h-auto w-full" />
+              <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/[0.035]" />
+            </div>
           </div>}
 
           {question && <div>
