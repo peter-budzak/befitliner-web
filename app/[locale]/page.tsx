@@ -868,6 +868,25 @@ export default async function Page({
           </div>
         </section>
 
+        <section className="mt-16 overflow-hidden rounded-[2rem] border border-[#8B5CF6]/30 bg-gradient-to-br from-[#7C3AED]/25 via-white/[0.055] to-white/[0.025] p-7 sm:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#B9A1FF]">
+                {locale === 'sk' ? 'Novinka · Zdravotná karta' : locale === 'de' ? 'Neu · Gesundheitskarte' : locale === 'es' ? 'Nuevo · Tarjeta de Salud' : locale === 'fr' ? 'Nouveau · Carte Santé' : locale === 'zh-Hans' ? '全新 · 健康档案' : 'New · Health Card'}
+              </div>
+              <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl">
+                {locale === 'sk' ? 'Krvné testy a výsledky z váhy. Prehľadne, v čase a s kontextom.' : locale === 'de' ? 'Blutwerte und Körperanalyse. Klar, im Verlauf und mit Kontext.' : locale === 'es' ? 'Análisis de sangre y composición corporal, claros y con contexto.' : locale === 'fr' ? 'Bilans sanguins et composition corporelle, clairs et contextualisés.' : locale === 'zh-Hans' ? '化验结果与体成分数据，清晰展示长期趋势。' : 'Blood tests and body composition, clear over time and in context.'}
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 sm:text-base">
+                {locale === 'sk' ? 'Nahraj PDF alebo fotografiu, skontroluj rozpoznané hodnoty a sleduj každú metriku vo vlastnom grafe. Aktívni členovia partnerských gymov ju majú v cene.' : locale === 'de' ? 'PDF oder Foto hochladen, erkannte Werte prüfen und jede Messgröße im eigenen Verlauf verfolgen. Bei aktiver Mitgliedschaft in einem Partnerstudio inklusive.' : locale === 'es' ? 'Sube un PDF o una foto, revisa los valores detectados y sigue cada métrica en su propio gráfico.' : locale === 'fr' ? 'Importez un PDF ou une photo, vérifiez les valeurs détectées et suivez chaque mesure dans son propre graphique.' : locale === 'zh-Hans' ? '上传 PDF 或照片，确认识别结果，并在独立图表中追踪每项指标。' : 'Upload a PDF or photo, review detected values and follow every metric in its own chart. Included with active partner-gym memberships.'}
+              </p>
+            </div>
+            <Link href={`/${locale}/health`} className="inline-flex min-h-14 items-center justify-center rounded-2xl bg-[#8B5CF6] px-7 py-4 font-bold text-white shadow-[0_16px_45px_rgba(124,58,237,0.3)] transition hover:brightness-110">
+              {locale === 'sk' ? 'Zistiť, ako funguje' : locale === 'de' ? 'So funktioniert es' : locale === 'es' ? 'Ver cómo funciona' : locale === 'fr' ? 'Découvrir' : locale === 'zh-Hans' ? '了解详情' : 'See how it works'} →
+            </Link>
+          </div>
+        </section>
+
         <footer className="mt-16 border-t border-white/10 pt-10 pb-10">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {/* Brand */}
@@ -895,6 +914,9 @@ export default async function Page({
                 </Link>
                 <Link className="hover:text-white" href={`/${locale}/gyms`}>
                   🏋️ {t.footer.for_gyms}
+                </Link>
+                <Link className="hover:text-white" href={`/${locale}/health`}>
+                  ✦ {locale === 'sk' ? 'Zdravotná karta' : locale === 'de' ? 'Gesundheitskarte' : locale === 'es' ? 'Tarjeta de Salud' : locale === 'fr' ? 'Carte Santé' : locale === 'zh-Hans' ? '健康档案' : 'Health Card'}
                 </Link>
                 <Link className="hover:text-white" href={`/${locale}/support`}>
                   💬 {supportLabel}
