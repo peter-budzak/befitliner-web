@@ -1,4 +1,10 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Fitliner Health activated',
+  robots: {index: false, follow: false, noarchive: true}
+};
 
 const copy: Record<string, {eyebrow: string; title: string; body: string; cta: string; note: string}> = {
   sk: {eyebrow: 'Platba prebehla úspešne', title: 'Tvoja Zdravotná karta je pripravená.', body: 'Otvor aplikáciu Fitliner a prihlás sa rovnakým e-mailom, ktorý si použil pri platbe. Health sa aktivuje automaticky.', cta: 'Stiahnuť Fitliner', note: 'Ak už aplikáciu máš, stačí ju otvoriť a obnoviť Zdravotnú kartu.'},
