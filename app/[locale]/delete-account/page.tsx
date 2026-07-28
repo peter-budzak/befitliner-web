@@ -1,5 +1,8 @@
 
 
+import type {Metadata} from 'next';
+import {isSiteLocale, pageMetadata} from '@/lib/seo';
+
 const copyByLocale = {
   en: {
     badge: 'Account deletion',
@@ -178,6 +181,19 @@ function resolveLocale(locale: string): LocaleKey {
   }
 
   return 'en';
+}
+
+export async function generateMetadata({params}: PageProps): Promise<Metadata> {
+  const {locale} = await params;
+  if (!isSiteLocale(locale)) return {};
+  const copy = copyByLocale[resolveLocale(locale)];
+  return pageMetadata({
+    locale,
+    path: 'delete-account',
+    title: copy.title,
+    description: copy.subtitle,
+    index: false
+  });
 }
 
 export default async function DeleteAccountPage({ params }: PageProps) {

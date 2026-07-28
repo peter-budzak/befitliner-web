@@ -58,6 +58,15 @@ function localeRequestHeaders(request: NextRequest, locale: string | null) {
 }
 
 export function proxy(request: NextRequest) {
+  const rawHost = request.headers.get('host')?.toLowerCase() ?? '';
+
+  if (rawHost === 'befitliner.com') {
+    const canonicalUrl = request.nextUrl.clone();
+    canonicalUrl.hostname = 'www.befitliner.com';
+    canonicalUrl.port = '';
+    return NextResponse.redirect(canonicalUrl, 308);
+  }
+
   const slug = getGymSlugFromHost(request.headers.get('host'));
   const pathLocale = request.nextUrl.pathname.split('/').filter(Boolean)[0] ?? null;
 
