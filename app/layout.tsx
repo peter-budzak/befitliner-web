@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -45,13 +46,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const HTML_LANGS = new Set(["en", "sk", "de", "es", "fr", "zh-Hans"]);
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const requestedLocale = requestHeaders.get("x-fitliner-locale") ?? "en";
+  const htmlLang = HTML_LANGS.has(requestedLocale) ? requestedLocale : "en";
+
   return (
-    <html lang="en">
+    <html lang={htmlLang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -51,11 +51,20 @@ function getGymSlugFromHost(hostHeader: string | null) {
   return slug;
 }
 
+function localeRequestHeaders(request: NextRequest, locale: string | null) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-fitliner-locale', locale && LOCALES.has(locale) ? locale : 'en');
+  return requestHeaders;
+}
+
 export function proxy(request: NextRequest) {
   const slug = getGymSlugFromHost(request.headers.get('host'));
+  const pathLocale = request.nextUrl.pathname.split('/').filter(Boolean)[0] ?? null;
 
   if (!slug) {
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {headers: localeRequestHeaders(request, pathLocale)},
+    });
   }
 
   const url = request.nextUrl.clone();
@@ -63,17 +72,23 @@ export function proxy(request: NextRequest) {
 
   if (path === '/') {
     url.pathname = `/g/${slug}/sk`;
-    return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url, {
+      request: {headers: localeRequestHeaders(request, 'sk')},
+    });
   }
 
   const maybeLocale = path.replace('/', '');
 
   if (LOCALES.has(maybeLocale)) {
     url.pathname = `/g/${slug}/${maybeLocale}`;
-    return NextResponse.rewrite(url);
+    return NextResponse.rewrite(url, {
+      request: {headers: localeRequestHeaders(request, maybeLocale)},
+    });
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: {headers: localeRequestHeaders(request, pathLocale)},
+  });
 }
 
 export const config = {
