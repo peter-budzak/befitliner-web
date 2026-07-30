@@ -2,6 +2,7 @@ const baseUrl = process.env.SEO_BASE_URL || 'http://localhost:3000';
 const canonicalOrigin = 'https://www.befitliner.com';
 const locales = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'];
 const guideSlugs = ['phone-gym-access', 'gym-management-software-checklist', 'health-report-timeline'];
+const indexNowKey = '0e935919121d415d9af24d2c46582931';
 const errors = [];
 
 function count(source, pattern) {
@@ -23,6 +24,11 @@ if (!robots.body.includes(`Sitemap: ${canonicalOrigin}/sitemap.xml`)) {
 const sitemap = await fetchText('/sitemap.xml');
 if (!sitemap.body.includes(`<loc>${canonicalOrigin}/en</loc>`)) errors.push('/sitemap.xml: missing English home');
 if (sitemap.body.includes('http://localhost')) errors.push('/sitemap.xml: contains localhost URL');
+
+const indexNowKeyFile = await fetchText(`/${indexNowKey}.txt`);
+if (indexNowKeyFile.body.trim() !== indexNowKey) {
+  errors.push(`/${indexNowKey}.txt: missing or invalid IndexNow ownership key`);
+}
 
 const indexable = locales.flatMap((locale) => [
   {path: `/${locale}`, alternates: 7},
@@ -61,5 +67,5 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`Validated ${indexable.length} canonical SEO pages, robots, sitemap and utility noindex rules.`);
+  console.log(`Validated ${indexable.length} canonical SEO pages, robots, sitemap, IndexNow ownership and utility noindex rules.`);
 }

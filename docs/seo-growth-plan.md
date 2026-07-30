@@ -9,6 +9,7 @@ Technical SEO and useful on-site content create indexable assets; they do not cr
 - [ ] Add `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` in production instead of hard-coding a verification token.
 - [ ] Connect analytics that respects consent choices and record organic landing page, locale, app-store click and gym-lead conversion.
 - [ ] Inspect the home, Health, gyms and each guide URL after deployment; request indexing only after canonical and hreflang validation.
+- [ ] After each production content publish, refresh, redirect or deletion, notify IndexNow only after the deployment succeeds; keep the ownership key file at the canonical host root.
 
 ## High-trust links worth earning
 
