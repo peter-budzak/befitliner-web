@@ -1,0 +1,9 @@
+[mcp_servers.fitliner_meta_ads]
+command = "node"
+args = ["/Users/peterbudzak/befitliner_web/tools/meta-ads-mcp/server.mjs"]
+cwd = "/Users/peterbudzak/befitliner_web"
+env = { META_AD_ACCOUNT_ID = "1189711561621244", META_GRAPH_API_VERSION = "v26.0", META_KEYCHAIN_SERVICE = "fitliner-meta-ads-access-token" }
+enabled = true
+required = false
+enabled_tools = ["meta_connection_status", "meta_list_campaigns", "meta_list_adsets", "meta_list_ads", "meta_get_insights"]
+default_tools_approval_mode = "auto"
