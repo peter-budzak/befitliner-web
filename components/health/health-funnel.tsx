@@ -16,6 +16,93 @@ type Question = {
 };
 
 const ANALYSIS_SCREEN_DURATION_MS = 5200;
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '475851925437843';
+const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+    _fbq?: unknown;
+  }
+}
+
+function trackingCopy(locale: string) {
+  if (locale === 'en') return {body: 'Optional marketing measurement helps us understand which ads work. We never send health answers or results to Meta.', reject: 'Reject', accept: 'Allow measurement'};
+  if (locale === 'de') return {body: 'Optionale Marketingmessung hilft uns zu erkennen, welche Anzeigen funktionieren. Gesundheitsantworten oder Ergebnisse senden wir niemals an Meta.', reject: 'Ablehnen', accept: 'Messung erlauben'};
+  if (locale === 'es') return {body: 'La medición de marketing opcional nos ayuda a saber qué anuncios funcionan. Nunca enviamos respuestas ni resultados de salud a Meta.', reject: 'Rechazar', accept: 'Permitir medición'};
+  if (locale === 'fr') return {body: 'La mesure marketing facultative nous aide à savoir quelles publicités fonctionnent. Nous n’envoyons jamais vos réponses ou résultats de santé à Meta.', reject: 'Refuser', accept: 'Autoriser la mesure'};
+  if (locale === 'zh-Hans') return {body: '可选的营销衡量可帮助我们了解哪些广告有效。我们绝不会向 Meta 发送健康问卷答案或健康结果。', reject: '拒绝', accept: '允许衡量'};
+  return {body: 'Voliteľné marketingové meranie nám pomáha zistiť, ktoré reklamy fungujú. Zdravotné odpovede ani výsledky do Meta neposielame.', reject: 'Odmietnuť', accept: 'Povoliť meranie'};
+}
+
+function readAttribution(allowMarketingIdentifiers: boolean): Attribution {
+  const params = new URLSearchParams(window.location.search);
+  const next: Attribution = {};
+  for (const key of ATTRIBUTION_KEYS) {
+    const value = params.get(key)?.trim();
+    if (value) next[key] = value.slice(0, 200);
+  }
+  const fbclid = params.get('fbclid')?.trim();
+  if (allowMarketingIdentifiers && fbclid) next.fbclid = fbclid.slice(0, 250);
+  return next;
+}
+
+function sourceUrl(allowMarketingIdentifiers: boolean) {
+  const url = new URL(window.location.href);
+  if (!allowMarketingIdentifiers) url.searchParams.delete('fbclid');
+  return url.toString();
+}
+
+function ensureMetaPixel() {
+  if (!PIXEL_ID || window.fbq) return;
+  const fbq = (...args: unknown[]) => {
+    (fbq as unknown as {queue: unknown[][]}).queue.push(args);
+  };
+  (fbq as unknown as {queue: unknown[][]}).queue = [];
+  (fbq as unknown as {loaded: boolean}).loaded = true;
+  (fbq as unknown as {version: string}).version = '2.0';
+  window.fbq = fbq;
+  window._fbq = fbq;
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+  document.head.appendChild(script);
+  window.fbq('init', PIXEL_ID);
+  window.fbq('track', 'PageView');
+  window.fbq('trackCustom', 'HealthLandingView');
+}
+
+function trackMetaCustom(event: string) {
+  window.fbq?.('trackCustom', event);
+}
+
+function trackMetaStandard(event: string, parameters: Record<string, string | number>, eventId?: string) {
+  window.fbq?.('track', event, parameters, eventId ? {eventID: eventId} : undefined);
+}
+
+function cookieValue(name: string) {
+  const prefix = `${name}=`;
+  const entry = document.cookie.split(';').map((value) => value.trim()).find((value) => value.startsWith(prefix));
+  return entry ? decodeURIComponent(entry.slice(prefix.length)) : '';
+}
+
+async function sendServerRegistrationEvent(eventId: string, requestId: string, email: string) {
+  const response = await fetch('/api/meta/conversions', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      event_name: 'CompleteRegistration',
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      event_source_url: sourceUrl(true),
+      email,
+      external_id: requestId,
+      fbp: cookieValue('_fbp'),
+      fbc: cookieValue('_fbc'),
+    }),
+  });
+  if (!response.ok) throw new Error('Server conversion event failed.');
+}
 
 type FunnelCopy = {
   language: string;
@@ -309,6 +396,7 @@ function Brand() {
 
 export default function HealthFunnel({locale}: {locale: string}) {
   const t = useMemo(() => localizedCopy(locale), [locale]);
+  const tracking = useMemo(() => trackingCopy(locale), [locale]);
   const [screen, setScreen] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [email, setEmail] = useState('');
@@ -319,6 +407,8 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [isSavingLead, setIsSavingLead] = useState(false);
   const [error, setError] = useState('');
   const [attribution, setAttribution] = useState<Attribution>({});
+  const [trackingConsent, setTrackingConsent] = useState(false);
+  const [trackingChoice, setTrackingChoice] = useState<'accepted' | 'rejected' | ''>('');
 
   const educationScreen = 3;
   const questionIndex = screen === 1 ? 0 : screen === 2 ? 1 : screen >= 4 && screen <= 7 ? screen - 2 : -1;
@@ -340,12 +430,16 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const next: Attribution = {};
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
-      const value = params.get(key)?.trim();
-      if (value) next[key] = value.slice(0, 200);
+    const savedTrackingChoice = window.localStorage.getItem('fitliner_marketing_tracking_consent');
+    const trackingAllowed = savedTrackingChoice === 'accepted';
+    setAttribution(readAttribution(trackingAllowed));
+    if (trackingAllowed) {
+      setTrackingChoice('accepted');
+      setTrackingConsent(true);
+      ensureMetaPixel();
+    } else if (savedTrackingChoice === 'rejected') {
+      setTrackingChoice('rejected');
     }
-    setAttribution(next);
     const resumedRequestId = params.get('rid');
     if (resumedRequestId && /^[0-9a-f-]{36}$/i.test(resumedRequestId)) {
       window.localStorage.setItem('fitliner_health_funnel_request_id', resumedRequestId);
@@ -384,6 +478,22 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
   const startQuiz = () => {
     setScreen(1);
+    trackMetaCustom('HealthQuizStart');
+  };
+
+  const acceptTracking = () => {
+    window.localStorage.setItem('fitliner_marketing_tracking_consent', 'accepted');
+    setTrackingChoice('accepted');
+    setTrackingConsent(true);
+    setAttribution(readAttribution(true));
+    ensureMetaPixel();
+  };
+
+  const rejectTracking = () => {
+    window.localStorage.setItem('fitliner_marketing_tracking_consent', 'rejected');
+    setTrackingChoice('rejected');
+    setTrackingConsent(false);
+    setAttribution(readAttribution(false));
   };
 
   const requestId = () => {
@@ -411,13 +521,22 @@ export default function HealthFunnel({locale}: {locale: string}) {
             locale,
             answers,
             attribution,
-            source_url: `${window.location.origin}${window.location.pathname}`,
+            source_url: sourceUrl(trackingConsent),
             health_data_consent: true,
             privacy_consent: true,
             marketing_consent: marketingConsent,
           }),
         });
-        if (!response.ok) console.error('Health lead capture failed', await response.text());
+        if (!response.ok) {
+          console.error('Health lead capture failed', await response.text());
+        } else if (trackingConsent) {
+          const registrationEventId = crypto.randomUUID();
+          const id = requestId();
+          trackMetaStandard('CompleteRegistration', {content_name: 'Fitliner Health'}, registrationEventId);
+          void sendServerRegistrationEvent(registrationEventId, id, email.trim().toLowerCase()).catch((conversionError) => {
+            console.error('Meta server registration event failed', conversionError);
+          });
+        }
       }
     } catch (leadError) {
       console.error('Health lead capture failed', leadError);
@@ -438,6 +557,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setIsSubmitting(true);
     setError('');
     try {
+      if (trackingConsent) trackMetaStandard('InitiateCheckout', {value: 34.8, currency: 'EUR'});
       const response = await fetch(`${supabaseUrl}/functions/v1/stripe-create-health-web-checkout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
@@ -447,11 +567,12 @@ export default function HealthFunnel({locale}: {locale: string}) {
           locale,
           answers,
           attribution,
-          source_url: `${window.location.origin}${window.location.pathname}`,
+          source_url: sourceUrl(trackingConsent),
           health_data_consent: healthConsent,
           privacy_consent: healthConsent,
           terms_accepted: termsAccepted,
           marketing_consent: marketingConsent,
+          marketing_tracking_consent: trackingConsent,
           offer_token: window.localStorage.getItem('fitliner_health_funnel_offer_token'),
         }),
       });
@@ -563,6 +684,14 @@ export default function HealthFunnel({locale}: {locale: string}) {
 
         {screen > 0 && screen !== 8 && <button onClick={() => setScreen((current) => current === 4 ? 3 : Math.max(0, current - 1))} className="self-start rounded-xl px-2 py-2 text-sm text-white/45 transition hover:text-white">← {t.back}</button>}
       </div>
+
+      {!trackingChoice && <aside className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl rounded-2xl border border-white/15 bg-[#17141e]/95 p-4 shadow-2xl backdrop-blur-xl md:flex md:items-center md:gap-5">
+        <p className="text-xs leading-5 text-white/65">{tracking.body}</p>
+        <div className="mt-3 flex shrink-0 gap-2 md:mt-0">
+          <button type="button" onClick={rejectTracking} className="rounded-xl border border-white/10 px-4 py-2 text-xs font-semibold text-white/65">{tracking.reject}</button>
+          <button type="button" onClick={acceptTracking} className="rounded-xl bg-violet-600 px-4 py-2 text-xs font-semibold">{tracking.accept}</button>
+        </div>
+      </aside>}
     </main>
   );
 }

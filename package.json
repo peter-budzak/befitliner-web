@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "check:legal": "node scripts/check-legal.mjs",
-    "check:seo": "node scripts/check-seo.mjs"
+    "check:seo": "node scripts/check-seo.mjs",
+    "meta:mcp": "node tools/meta-ads-mcp/server.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@supabase/supabase-js": "^2.104.1",
     "gray-matter": "^4.0.3",
     "marked": "^17.0.1",
