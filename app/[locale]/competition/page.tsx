@@ -1,3 +1,6 @@
+import type {Metadata} from 'next';
+import {isSiteLocale, pageMetadata} from '@/lib/seo';
+
 type Locale = 'en' | 'sk' | 'de' | 'fr' | 'es' | 'zh-hans';
 
 type CompetitionCopy = {
@@ -272,6 +275,19 @@ const copyByLocale: Record<Locale, CompetitionCopy> = {
 function getCopy(locale: string): CompetitionCopy {
   const normalized = locale.toLowerCase();
   return copyByLocale[(normalized as Locale)] ?? copyByLocale.en;
+}
+
+export async function generateMetadata({params}: {params: Promise<{locale: string}> | {locale: string}}): Promise<Metadata> {
+  const resolved = params instanceof Promise ? await params : params;
+  if (!isSiteLocale(resolved.locale)) return {};
+  const copy = getCopy(resolved.locale);
+  return pageMetadata({
+    locale: resolved.locale,
+    path: 'competition',
+    title: copy.title,
+    description: copy.intro,
+    index: false
+  });
 }
 
 export default async function CompetitionPage({

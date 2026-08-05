@@ -1,10 +1,24 @@
 import {promises as fs} from 'fs';
 import path from 'path';
+import type {Metadata} from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
+import JsonLd from '@/components/seo/json-ld';
+import {HOME_SEO, isSiteLocale, pageMetadata, SITE_URL} from '@/lib/seo';
 
 const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
 type Locale = (typeof LOCALES)[number];
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}> | {locale: string};
+}): Promise<Metadata> {
+  const resolved = params instanceof Promise ? await params : params;
+  if (!isSiteLocale(resolved.locale)) return {};
+  return pageMetadata({locale: resolved.locale, ...HOME_SEO[resolved.locale]});
+}
 
 type Messages = {
   brand: string;
@@ -371,7 +385,7 @@ function getShowcaseItems(locale: string): ShowcaseItem[] {
 }
 
 async function loadMessages(locale: string): Promise<Messages> {
-  if (!LOCALES.includes(locale as any)) notFound();
+  if (!isSiteLocale(locale)) notFound();
   const filePath = path.join(process.cwd(), 'messages', `${locale}.json`);
   const raw = await fs.readFile(filePath, 'utf8');
   return JSON.parse(raw) as Messages;
@@ -495,8 +509,37 @@ export default async function Page({
   const androidUrl =
     process.env.NEXT_PUBLIC_PLAYSTORE_URL ||
     'https://play.google.com/store/apps/details?id=com.fitliner.app';
+  const guides = locale === 'sk'
+    ? [
+        {slug: 'phone-gym-access', title: 'Ako funguje vstup do fitka cez telefón', description: 'Bezpečnosť, záložné scenáre a čo očakávať pri dverách.'},
+        {slug: 'gym-management-software-checklist', title: 'Ako vybrať systém pre fitnesscentrum', description: 'Praktický checklist pre vstup, platby, členstvá a migráciu.'},
+        {slug: 'health-report-timeline', title: 'Ako si vytvoriť prehľad zdravotných výsledkov', description: 'Ako bezpečne nahrať, overiť a sledovať hodnoty bez nahrádzania lekára.'}
+      ]
+    : locale === 'en'
+      ? [
+          {slug: 'phone-gym-access', title: 'How phone-based gym access works', description: 'Security, backup scenarios and what members should expect at the door.'},
+          {slug: 'gym-management-software-checklist', title: 'How to choose gym management software', description: 'A practical checklist for access, payments, memberships and migration.'},
+          {slug: 'health-report-timeline', title: 'How to build a useful health-report timeline', description: 'Upload, verify and follow results responsibly without replacing medical care.'}
+        ]
+      : [];
+  const mobileApplication = {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    '@id': `${SITE_URL}/#app`,
+    name: 'Fitliner',
+    operatingSystem: 'iOS, Android',
+    applicationCategory: 'HealthApplication',
+    url: `${SITE_URL}/${locale}`,
+    description: HOME_SEO[locale].description,
+    image: `${SITE_URL}/icon.png`,
+    downloadUrl: [iosUrl, androidUrl],
+    publisher: {'@id': `${SITE_URL}/#organization`},
+    featureList: hero.bullets
+  };
 
   return (
+    <>
+      <JsonLd data={mobileApplication} />
     <main className="min-h-screen bg-[#0B0B0D] text-white">
       <div className="mx-auto max-w-6xl px-6 py-8">
         <div className="flex items-start justify-between gap-4">
@@ -552,9 +595,11 @@ export default async function Page({
                 aria-label="Download Fitliner on the App Store"
                 className="flex min-h-[78px] items-center justify-center gap-5 rounded-[18px] border-2 border-[#A6A6A6] bg-black px-6 py-3 text-white shadow-lg shadow-black/25 transition hover:border-white/80 hover:bg-[#050505]"
               >
-                <img
+                <Image
                   src="/badge/appstore.png"
                   alt=""
+                  width={48}
+                  height={48}
                   className="h-12 w-12 object-contain"
                   aria-hidden="true"
                 />
@@ -585,9 +630,11 @@ export default async function Page({
                 aria-label="Get Fitliner on Google Play"
                 className="flex min-h-[78px] items-center justify-center gap-5 rounded-[18px] border-2 border-[#A6A6A6] bg-black px-6 py-3 text-white shadow-lg shadow-black/25 transition hover:border-white/80 hover:bg-[#050505]"
               >
-                <img
+                <Image
                   src="/badge/googleplay.png"
                   alt=""
+                  width={48}
+                  height={48}
                   className="h-12 w-12 object-contain"
                   aria-hidden="true"
                 />
@@ -628,9 +675,13 @@ export default async function Page({
 
                 <div className="px-4 pb-4">
                   <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                    <img
+                    <Image
                       src="/gym.png"
                       alt="Fitliner gym access screen"
+                      width={600}
+                      height={900}
+                      priority
+                      sizes="(max-width: 1024px) 420px, 36vw"
                       className="h-[620px] w-full object-cover object-top"
                     />
                   </div>
@@ -722,7 +773,7 @@ export default async function Page({
         </section>
 
         <section className="mt-16 grid gap-5 lg:grid-cols-3">
-          {showcase.map((item, index) => (
+          {showcase.map((item) => (
             <div
               key={item.title}
               className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-white/5 transition hover:scale-[1.02] hover:shadow-[0_20px_60px_rgba(124,58,237,0.25)]"
@@ -739,9 +790,12 @@ export default async function Page({
 
               <div className="p-5">
                 <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                  <img
+                  <Image
                     src={item.imageSrc}
                     alt={item.imageAlt}
+                    width={600}
+                    height={900}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                     className="h-[420px] w-full object-cover object-top"
                     style={item.imagePosition ? {objectPosition: item.imagePosition} : undefined}
                   />
@@ -796,9 +850,12 @@ export default async function Page({
 
             <div className="p-5">
               <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                <img
+                <Image
                   src="/home.png"
                   alt="Fitliner home screen"
+                  width={600}
+                  height={900}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-[520px] w-full object-cover object-top"
                 />
               </div>
@@ -827,9 +884,12 @@ export default async function Page({
               </div>
               <div className="p-5">
                 <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                  <img
+                  <Image
                     src="/messenger.png"
                     alt="Fitliner messenger screen"
+                    width={600}
+                    height={900}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="h-[280px] w-full object-cover object-top"
                   />
                 </div>
@@ -857,14 +917,67 @@ export default async function Page({
               </div>
               <div className="p-5">
                 <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black">
-                  <img
+                  <Image
                     src="/exercise.png"
                     alt="Fitliner exercise detail screen"
+                    width={600}
+                    height={900}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="h-[280px] w-full object-cover object-top"
                   />
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {guides.length > 0 && (
+          <section className="mt-16" aria-labelledby="guides-heading">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">
+                  {locale === 'sk' ? 'Praktické návody' : 'Practical guides'}
+                </div>
+                <h2 id="guides-heading" className="mt-3 text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
+                  {locale === 'sk' ? 'Rozhoduj sa podľa faktov, nie marketingu' : 'Make informed fitness-tech decisions'}
+                </h2>
+              </div>
+              <Link className="text-sm font-semibold text-[#B9A1FF] hover:text-white" href={`/${locale}/guides`}>
+                {locale === 'sk' ? 'Všetky návody' : 'All guides'} →
+              </Link>
+            </div>
+            <div className="mt-7 grid gap-4 lg:grid-cols-3">
+              {guides.map((guide) => (
+                <article key={guide.slug} className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
+                  <h3 className="text-xl font-semibold leading-tight">
+                    <Link className="hover:text-[#C4B5FD]" href={`/${locale}/guides/${guide.slug}`}>{guide.title}</Link>
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-white/62">{guide.description}</p>
+                  <Link className="mt-5 inline-flex text-sm font-semibold text-[#B9A1FF]" href={`/${locale}/guides/${guide.slug}`}>
+                    {locale === 'sk' ? 'Čítať návod' : 'Read guide'} →
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mt-16 overflow-hidden rounded-[2rem] border border-[#8B5CF6]/30 bg-gradient-to-br from-[#7C3AED]/25 via-white/[0.055] to-white/[0.025] p-7 sm:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div>
+              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#B9A1FF]">
+                {locale === 'sk' ? 'Novinka · Zdravotná karta' : locale === 'de' ? 'Neu · Gesundheitskarte' : locale === 'es' ? 'Nuevo · Tarjeta de Salud' : locale === 'fr' ? 'Nouveau · Carte Santé' : locale === 'zh-Hans' ? '全新 · 健康档案' : 'New · Health Card'}
+              </div>
+              <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-4xl">
+                {locale === 'sk' ? 'Krvné testy a výsledky z váhy. Prehľadne, v čase a s kontextom.' : locale === 'de' ? 'Blutwerte und Körperanalyse. Klar, im Verlauf und mit Kontext.' : locale === 'es' ? 'Análisis de sangre y composición corporal, claros y con contexto.' : locale === 'fr' ? 'Bilans sanguins et composition corporelle, clairs et contextualisés.' : locale === 'zh-Hans' ? '化验结果与体成分数据，清晰展示长期趋势。' : 'Blood tests and body composition, clear over time and in context.'}
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 sm:text-base">
+                {locale === 'sk' ? 'Nahraj PDF alebo fotografiu, skontroluj rozpoznané hodnoty a sleduj každú metriku vo vlastnom grafe. Aktívni členovia partnerských gymov ju majú v cene.' : locale === 'de' ? 'PDF oder Foto hochladen, erkannte Werte prüfen und jede Messgröße im eigenen Verlauf verfolgen. Bei aktiver Mitgliedschaft in einem Partnerstudio inklusive.' : locale === 'es' ? 'Sube un PDF o una foto, revisa los valores detectados y sigue cada métrica en su propio gráfico.' : locale === 'fr' ? 'Importez un PDF ou une photo, vérifiez les valeurs détectées et suivez chaque mesure dans son propre graphique.' : locale === 'zh-Hans' ? '上传 PDF 或照片，确认识别结果，并在独立图表中追踪每项指标。' : 'Upload a PDF or photo, review detected values and follow every metric in its own chart. Included with active partner-gym memberships.'}
+              </p>
+            </div>
+            <Link href={`/${locale}/health`} className="inline-flex min-h-14 items-center justify-center rounded-2xl bg-[#8B5CF6] px-7 py-4 font-bold text-white shadow-[0_16px_45px_rgba(124,58,237,0.3)] transition hover:brightness-110">
+              {locale === 'sk' ? 'Zistiť, ako funguje' : locale === 'de' ? 'So funktioniert es' : locale === 'es' ? 'Ver cómo funciona' : locale === 'fr' ? 'Découvrir' : locale === 'zh-Hans' ? '了解详情' : 'See how it works'} →
+            </Link>
           </div>
         </section>
 
@@ -896,9 +1009,17 @@ export default async function Page({
                 <Link className="hover:text-white" href={`/${locale}/gyms`}>
                   🏋️ {t.footer.for_gyms}
                 </Link>
+                <Link className="hover:text-white" href={`/${locale}/health`}>
+                  ✦ {locale === 'sk' ? 'Zdravotná karta' : locale === 'de' ? 'Gesundheitskarte' : locale === 'es' ? 'Tarjeta de Salud' : locale === 'fr' ? 'Carte Santé' : locale === 'zh-Hans' ? '健康档案' : 'Health Card'}
+                </Link>
                 <Link className="hover:text-white" href={`/${locale}/support`}>
                   💬 {supportLabel}
                 </Link>
+                {(locale === 'en' || locale === 'sk') && (
+                  <Link className="hover:text-white" href={`/${locale}/guides`}>
+                    📚 {locale === 'sk' ? 'Návody' : 'Guides'}
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -936,5 +1057,6 @@ export default async function Page({
         </footer>
       </div>
     </main>
+    </>
   );
 }

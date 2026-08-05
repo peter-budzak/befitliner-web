@@ -1,6 +1,9 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+
+export const metadata: Metadata = {robots: {index: false, follow: true}};
 
 const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
 type Locale = (typeof LOCALES)[number];

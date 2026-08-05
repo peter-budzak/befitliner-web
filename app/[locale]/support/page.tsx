@@ -1,3 +1,7 @@
+import type {Metadata} from 'next';
+import JsonLd from '@/components/seo/json-ld';
+import {isSiteLocale, pageMetadata, SITE_URL, SUPPORT_EMAIL as SEO_SUPPORT_EMAIL, SUPPORT_SEO} from '@/lib/seo';
+
 const SUPPORT_EMAIL = 'support@fitliner.eu';
 
 type Locale = 'en' | 'sk' | 'de' | 'fr' | 'es' | 'zh-hans';
@@ -195,6 +199,12 @@ function getCopy(locale: string): SupportCopy {
   return copyByLocale[(normalized as Locale)] ?? copyByLocale.en;
 }
 
+export async function generateMetadata({params}: {params: Promise<{locale: string}> | {locale: string}}): Promise<Metadata> {
+  const resolved = params instanceof Promise ? await params : params;
+  if (!isSiteLocale(resolved.locale)) return {};
+  return pageMetadata({locale: resolved.locale, path: 'support', ...SUPPORT_SEO[resolved.locale]});
+}
+
 export default async function SupportPage({
   params,
 }: {
@@ -202,9 +212,27 @@ export default async function SupportPage({
 }) {
   const { locale } = await params;
   const copy = getCopy(locale);
+  const contactPage = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${SITE_URL}/${locale}/support#page`,
+    name: copy.title,
+    url: `${SITE_URL}/${locale}/support`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: SEO_SUPPORT_EMAIL,
+        availableLanguage: ['English', 'Slovak', 'German', 'Spanish', 'French', 'Chinese']
+      }
+    }
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
+      <JsonLd data={contactPage} />
       <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8 lg:py-24">
         <div className="mb-10">
           <div className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/70">

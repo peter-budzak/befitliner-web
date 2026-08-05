@@ -1,6 +1,9 @@
 import {notFound} from 'next/navigation';
+import {isSiteLocale, LOCALES} from '@/lib/seo';
 
-const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({locale}));
+}
 
 export default async function LocaleLayout({
   children,
@@ -12,7 +15,7 @@ export default async function LocaleLayout({
   const resolved = params instanceof Promise ? await params : params;
   const locale = resolved?.locale;
 
-  if (!locale || !LOCALES.includes(locale as any)) {
+  if (!locale || !isSiteLocale(locale)) {
     notFound();
   }
 

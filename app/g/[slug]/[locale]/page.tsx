@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import JsonLd from '@/components/seo/json-ld';
+import {OPEN_GRAPH_LOCALES, SITE_URL} from '@/lib/seo';
 import { supabase } from '@/lib/supabase';
 
 const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
@@ -384,26 +387,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
       title: 'Fitliner',
       description: copy.titleBody,
+      robots: {index: false, follow: false},
     };
   }
 
   const title = gymPageMetaTitle(gym.name, locale);
   const description = gymPageMetaDescription(copy);
   const url = `https://${gym.slug}.befitliner.com/${locale}`;
-  const imageUrl = 'https://befitliner.com/og/gym-default.png';
+  const imageUrl = `${SITE_URL}/og/gym-default.png`;
+  const languages = Object.fromEntries([
+    ...LOCALES.map((item) => [item, `https://${gym.slug}.befitliner.com/${item}`]),
+    ['x-default', `https://${gym.slug}.befitliner.com/sk`],
+  ]);
 
   return {
-    title,
+    title: {absolute: title},
     description,
     alternates: {
       canonical: url,
+      languages,
     },
+    robots: {index: true, follow: true, googleBot: {index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1}},
     openGraph: {
       title,
       description,
       url,
       siteName: 'Fitliner',
       type: 'website',
+      locale: OPEN_GRAPH_LOCALES[locale as Locale],
+      alternateLocale: LOCALES.filter((item) => item !== locale).map((item) => OPEN_GRAPH_LOCALES[item]),
       images: [
         {
           url: imageUrl,
@@ -468,9 +480,34 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
   const instagramUrl = cleanUrl(gym.instagram);
   const tiktokUrl = cleanUrl(gym.tiktok);
   const videoEmbedUrl = youtubeEmbedUrl(gym.public_video_url);
+  const gymUrl = `https://${gym.slug}.befitliner.com/${locale}`;
+  const sameAs = [websiteUrl, facebookUrl, instagramUrl, tiktokUrl].filter((value): value is string => Boolean(value));
+  const gymSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'HealthClub',
+    '@id': `${gymUrl}#gym`,
+    name: gym.name,
+    url: gymUrl,
+    address: gym.address ? {'@type': 'PostalAddress', streetAddress: gym.address} : undefined,
+    email: gym.contact_email ?? undefined,
+    telephone: gym.contact_phone ?? undefined,
+    sameAs: sameAs.length > 0 ? sameAs : undefined,
+    isPartOf: {'@id': `${SITE_URL}/#website`}
+  };
+
+  if (stats.reviews_count > 0 && stats.reviews_avg > 0) {
+    gymSchema.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: stats.reviews_avg.toFixed(1),
+      reviewCount: stats.reviews_count,
+      bestRating: '5',
+      worstRating: '1'
+    };
+  }
 
   return (
     <main className="min-h-screen bg-[#0B0B12] text-white">
+      <JsonLd data={gymSchema} />
       <section className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-6 py-8 sm:px-8">
         <header className="mb-10 flex items-center justify-between gap-4">
           <Link
@@ -569,9 +606,11 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
               aria-label={copy.ios}
               className="flex min-h-[78px] items-center justify-center gap-5 rounded-[18px] border-2 border-[#A6A6A6] bg-black px-6 py-3 text-white shadow-lg shadow-black/25 transition hover:border-white/80 hover:bg-[#050505]"
             >
-              <img
+              <Image
                 src="/badge/appstore.png"
                 alt=""
+                width={48}
+                height={48}
                 className="h-12 w-12 object-contain"
                 aria-hidden="true"
               />
@@ -592,9 +631,11 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
               aria-label={copy.android}
               className="flex min-h-[78px] items-center justify-center gap-5 rounded-[18px] border-2 border-[#A6A6A6] bg-black px-6 py-3 text-white shadow-lg shadow-black/25 transition hover:border-white/80 hover:bg-[#050505]"
             >
-              <img
+              <Image
                 src="/badge/googleplay.png"
                 alt=""
+                width={48}
+                height={48}
                 className="h-12 w-12 object-contain"
                 aria-hidden="true"
               />
