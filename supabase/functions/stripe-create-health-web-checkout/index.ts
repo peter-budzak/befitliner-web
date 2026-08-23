@@ -13,6 +13,13 @@ type CheckoutSession = {
   expires_at?: number | null;
 };
 
+type StripeCoupon = {
+  id: string;
+  duration?: string | null;
+  percent_off?: number | null;
+  valid?: boolean;
+};
+
 const ALLOWED_LOCALES = new Set(["en", "sk", "de", "es", "fr", "zh-Hans"]);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -115,6 +122,7 @@ serve(async (req) => {
     const sourceUrl = String(body?.source_url ?? "").trim().slice(0, 2000) || null;
     const marketingTrackingConsent = body?.marketing_tracking_consent === true;
     const offerToken = String(body?.offer_token ?? "").trim();
+    const offerRequested = offerToken.length > 0;
     const attribution = sanitizedAttribution(
       body?.attribution,
       marketingTrackingConsent,
@@ -168,6 +176,12 @@ serve(async (req) => {
       existingSubmission?.discount_token === offerToken &&
       Boolean(existingSubmission.discount_expires_at) &&
       new Date(existingSubmission.discount_expires_at).getTime() > Date.now();
+
+    // Never silently downgrade a claimed VIP checkout to the standard price.
+    // The client must receive an error instead of a full-price Stripe session.
+    if (offerRequested && !discountedOffer) {
+      throw new HttpError(409, "This discount offer is invalid or has expired");
+    }
 
     if (existingSubmission?.checkout_attempt_id && !discountedOffer) {
       const { data: existingAttempt, error: attemptLookupError } = await admin
@@ -451,27 +465,50 @@ serve(async (req) => {
       params.set("discounts[0][coupon]", liveTestCouponId);
     }
     if (discountedOffer) {
-      const couponId = "fitliner_health_abandoned_50_once";
+      const couponId = "fitliner_health_vip_50_once_v3";
+      let coupon: StripeCoupon | null = null;
       try {
-        await stripeRequest("GET", `/v1/coupons/${couponId}`, undefined, {
-          connectedAccountId,
-          secretKeyEnv,
-        });
+        coupon = await stripeRequest<StripeCoupon>(
+          "GET",
+          `/v1/coupons/${couponId}`,
+          undefined,
+          {
+            connectedAccountId,
+            secretKeyEnv,
+          },
+        );
       } catch {
         const couponParams = new URLSearchParams();
         couponParams.set("id", couponId);
         couponParams.set("percent_off", "50");
         couponParams.set("duration", "once");
-        couponParams.set("name", "Fitliner Health abandoned checkout 50% first year");
-        await stripeRequest("POST", "/v1/coupons", couponParams, {
-          connectedAccountId,
-          secretKeyEnv,
-          idempotencyKey: couponId,
-        });
+        couponParams.set("name", "Fitliner Health VIP 50% first year");
+        coupon = await stripeRequest<StripeCoupon>(
+          "POST",
+          "/v1/coupons",
+          couponParams,
+          {
+            connectedAccountId,
+            secretKeyEnv,
+            idempotencyKey: couponId,
+          },
+        );
+      }
+      if (
+        !coupon ||
+        coupon.id !== couponId ||
+        coupon.percent_off !== 50 ||
+        coupon.duration !== "once" ||
+        coupon.valid === false
+      ) {
+        throw new HttpError(409, "The Fitliner Health VIP discount is not configured correctly");
       }
       params.set("discounts[0][coupon]", couponId);
       params.set("metadata[fitliner_health_offer]", "abandoned_50_first_year");
       params.set("subscription_data[metadata][fitliner_health_offer]", "abandoned_50_first_year");
+      params.set("subscription_data[metadata][fitliner_health_initial_price_minor]", "1740");
+    } else {
+      params.set("subscription_data[metadata][fitliner_health_initial_price_minor]", "3480");
     }
     params.set("metadata[fitliner_health_plan_id]", plan.id);
     params.set("metadata[fitliner_health_user_id]", userId);
@@ -527,6 +564,8 @@ serve(async (req) => {
     return reply(req, {
       ok: true,
       reused: false,
+      discount_applied: discountedOffer,
+      initial_price_minor: discountedOffer ? 1740 : 3480,
       checkout_url: session.url,
       expires_at: session.expires_at ?? null,
     });

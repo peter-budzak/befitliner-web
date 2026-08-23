@@ -7,6 +7,11 @@ import {useEffect, useMemo, useState} from 'react';
 type AnswerValue = string | string[];
 type Answers = Record<string, AnswerValue>;
 type Attribution = Record<string, string>;
+type DiscountOffer = {
+  token: string;
+  requestId: string;
+  expiresAt: string;
+};
 type Question = {
   id: string;
   title: string;
@@ -16,6 +21,7 @@ type Question = {
 };
 
 const ANALYSIS_SCREEN_DURATION_MS = 5200;
+const DISCOUNT_OFFER_STORAGE_KEY = 'fitliner_health_funnel_discount_offer_v2';
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '475851925437843';
 const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
 
@@ -51,6 +57,36 @@ function sourceUrl(allowMarketingIdentifiers: boolean) {
   const url = new URL(window.location.href);
   if (!allowMarketingIdentifiers) url.searchParams.delete('fbclid');
   return url.toString();
+}
+
+function validUuid(value: string | null): value is string {
+  return Boolean(value && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value));
+}
+
+function saveDiscountOffer(offer: DiscountOffer) {
+  window.localStorage.setItem(DISCOUNT_OFFER_STORAGE_KEY, JSON.stringify(offer));
+  window.localStorage.removeItem('fitliner_health_funnel_offer_token');
+  window.localStorage.removeItem('fitliner_health_funnel_offer_expires_at');
+}
+
+function readDiscountOffer(requestId: string): DiscountOffer | null {
+  const raw = window.localStorage.getItem(DISCOUNT_OFFER_STORAGE_KEY);
+  if (!raw) return null;
+  try {
+    const offer = JSON.parse(raw) as Partial<DiscountOffer>;
+    if (
+      validUuid(offer.token ?? null) &&
+      offer.requestId === requestId &&
+      typeof offer.expiresAt === 'string' &&
+      new Date(offer.expiresAt).getTime() > Date.now()
+    ) {
+      return offer as DiscountOffer;
+    }
+  } catch {
+    // Invalid or legacy offers are cleared below.
+  }
+  window.localStorage.removeItem(DISCOUNT_OFFER_STORAGE_KEY);
+  return null;
 }
 
 function ensureMetaPixel() {
@@ -449,9 +485,10 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [trackingConsent, setTrackingConsent] = useState(false);
   const [trackingChoice, setTrackingChoice] = useState<'accepted' | 'rejected' | ''>('');
   const [showExitOffer, setShowExitOffer] = useState(false);
-  const [discountedOffer, setDiscountedOffer] = useState(false);
+  const [discountOffer, setDiscountOffer] = useState<DiscountOffer | null>(null);
   const [isClaimingOffer, setIsClaimingOffer] = useState(false);
   const [exitOfferDismissed, setExitOfferDismissed] = useState(false);
+  const discountedOffer = Boolean(discountOffer);
 
   const educationScreen = isSkBloodHistory ? 1 : 3;
   const emailScreen = isSkBloodHistory ? 2 : 10;
@@ -488,21 +525,27 @@ export default function HealthFunnel({locale}: {locale: string}) {
       setTrackingChoice('rejected');
     }
     const resumedRequestId = params.get('rid');
-    if (resumedRequestId && /^[0-9a-f-]{36}$/i.test(resumedRequestId)) {
+    if (validUuid(resumedRequestId)) {
       window.localStorage.setItem('fitliner_health_funnel_request_id', resumedRequestId);
     }
     const offerToken = params.get('offer');
-    if (offerToken && /^[0-9a-f-]{36}$/i.test(offerToken)) {
-      window.localStorage.setItem('fitliner_health_funnel_offer_token', offerToken);
-      setDiscountedOffer(true);
+    const currentRequestId = validUuid(resumedRequestId)
+      ? resumedRequestId
+      : window.localStorage.getItem('fitliner_health_funnel_request_id');
+    if (validUuid(offerToken) && validUuid(currentRequestId)) {
+      const offer = {
+        token: offerToken,
+        requestId: currentRequestId,
+        expiresAt: new Date(Date.now() + 48 * 3_600_000).toISOString(),
+      };
+      saveDiscountOffer(offer);
+      setDiscountOffer(offer);
       window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
-    } else {
-      const savedOfferToken = window.localStorage.getItem('fitliner_health_funnel_offer_token');
-      const savedOfferExpiry = window.localStorage.getItem('fitliner_health_funnel_offer_expires_at');
-      if (savedOfferToken && savedOfferExpiry && new Date(savedOfferExpiry).getTime() > Date.now()) {
-        setDiscountedOffer(true);
-      }
+    } else if (validUuid(currentRequestId)) {
+      setDiscountOffer(readDiscountOffer(currentRequestId));
     }
+    window.localStorage.removeItem('fitliner_health_funnel_offer_token');
+    window.localStorage.removeItem('fitliner_health_funnel_offer_expires_at');
   }, []);
 
   useEffect(() => {
@@ -623,20 +666,26 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setIsClaimingOffer(true);
     setError('');
     try {
+      const currentRequestId = requestId();
       const response = await fetch(`${supabaseUrl}/functions/v1/health-save-web-lead`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
         body: JSON.stringify({
           action: 'claim_exit_offer',
-          request_id: requestId(),
+          request_id: currentRequestId,
           email: email.trim().toLowerCase(),
         }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload?.offer_token) throw new Error(payload?.error || 'offer_failed');
-      window.localStorage.setItem('fitliner_health_funnel_offer_token', payload.offer_token);
-      if (payload?.expires_at) window.localStorage.setItem('fitliner_health_funnel_offer_expires_at', payload.expires_at);
-      setDiscountedOffer(true);
+      const offer = {
+        token: String(payload.offer_token),
+        requestId: currentRequestId,
+        expiresAt: String(payload.expires_at),
+      };
+      if (!validUuid(offer.token) || !offer.expiresAt) throw new Error('invalid_offer');
+      saveDiscountOffer(offer);
+      setDiscountOffer(offer);
       setShowExitOffer(false);
       setTermsAccepted(false);
       if (trackingConsent) trackMetaCustom('HealthExitOfferAccepted');
@@ -676,11 +725,14 @@ export default function HealthFunnel({locale}: {locale: string}) {
           terms_accepted: termsAccepted,
           marketing_consent: marketingConsent,
           marketing_tracking_consent: trackingConsent,
-          offer_token: window.localStorage.getItem('fitliner_health_funnel_offer_token'),
+          offer_token: discountOffer?.token ?? null,
         }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload?.error || 'checkout_failed');
+      if (discountOffer && payload?.discount_applied !== true) {
+        throw new Error('discount_not_applied');
+      }
       if (payload?.already_active) {
         setError(t.alreadyMemberCta);
         return;
@@ -689,7 +741,9 @@ export default function HealthFunnel({locale}: {locale: string}) {
       window.location.assign(payload.checkout_url);
     } catch (checkoutError) {
       console.error('Health web checkout failed', checkoutError);
-      setError(t.checkoutError);
+      setError(discountOffer
+        ? 'VIP zľavu sa nepodarilo potvrdiť, preto sme platbu neotvorili. Obnov stránku a skús ponuku aktivovať znova.'
+        : t.checkoutError);
     } finally {
       setIsSubmitting(false);
     }
