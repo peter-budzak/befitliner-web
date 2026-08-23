@@ -108,6 +108,7 @@ Cena je v texte zámerne. Pri malom rozpočte chceme menej lacných zvedavých r
 - e-mail sa uloží po povinnom súhlase so správou účtu,
 - marketingový follow-up sa posiela iba pri samostatnom, dobrovoľnom a vopred nezaškrtnutom súhlase,
 - follow-up sekvencia: plán po 1 hodine, pripomenutie hodnoty po 24 hodinách, VIP ponuka po 72 hodinách,
+- e-mailový cron beží každých 15 minút a vyžaduje Supabase JWT aj samostatný tajný header uložený v Supabase Vault-e,
 - VIP ponuka platí 48 hodín a znižuje iba prvú ročnú platbu z 34,80 € na 17,40 €; ďalšia ročná obnova je 34,80 €,
 - rovnaká VIP ponuka sa môže zobraziť pri exit-intent na poslednom kroku; používateľ ju môže odmietnuť bez blokovania odchodu,
 - Stripe používa 50 % kupón s trvaním `once`, takže zľava sa neuplatní na druhú faktúru,

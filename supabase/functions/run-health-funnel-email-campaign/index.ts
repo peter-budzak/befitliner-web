@@ -12,6 +12,15 @@ const HOURS = [1, 24, 72];
 const APP_URL = "https://befitliner.com";
 const FUNCTION_URL = "https://jkjncktexqqkrmezdjui.supabase.co/functions/v1";
 
+function safeEqual(left: string, right: string): boolean {
+  if (!left || left.length !== right.length) return false;
+  let difference = 0;
+  for (let index = 0; index < left.length; index += 1) {
+    difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  }
+  return difference === 0;
+}
+
 function textValue(value: string | string[] | undefined): string {
   return Array.isArray(value) ? value[0] ?? "" : value ?? "";
 }
@@ -68,6 +77,10 @@ async function sendEmail(lead: Lead, step: number) {
 
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
+  const cronSecret = req.headers.get("x-health-cron-secret") ?? "";
+  if (!safeEqual(cronSecret, requireEnv("HEALTH_FUNNEL_CRON_SECRET"))) {
+    return new Response("Unauthorized", { status: 401 });
+  }
   const admin = createClient(requireEnv("SUPABASE_URL"), requireEnv("SUPABASE_SERVICE_ROLE_KEY"), { auth: { persistSession: false, autoRefreshToken: false } });
   const { data, error } = await admin.from("health_web_funnel_submissions")
     .select("id,request_id,user_id,email,locale,answers,campaign_eligible_at,unsubscribe_token,discount_token,status,health_funnel_email_log(sequence_step)")
