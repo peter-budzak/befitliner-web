@@ -326,8 +326,8 @@ const copy: Record<string, FunnelCopy> = {
     introCta: 'Vytvoriť históriu',
     introTrust: ['Šifrovaný prenos a chránený prístup', 'Hlavná databáza v EÚ (Írsko)', 'Osobné ani zdravotné údaje nepredávame'],
     stepLabel: 'Krok', continue: 'Pokračovať', back: 'Späť', questions: commonQuestions.sk,
-    educationEyebrow: 'Jeden bezpečný archív', educationTitle: 'Z papierových výsledkov na prehľadný vývoj.',
-    educationBody: 'Fitliner rozpozná metriky, jednotky, dátum aj referenčné rozpätie z krvného výsledku. Pred uložením ti nájdené hodnoty ukáže na kontrolu, aby sa nič nepomiešalo.',
+    educationEyebrow: 'Novinka pre prvých používateľov v EÚ', educationTitle: 'Premeň svoje krvné výsledky na nástroj, ktorý rastie s tebou.',
+    educationBody: 'Odfotíš alebo nahráš výsledok. Fitliner rozpozná metriky, jednotky, dátum aj referenčné rozpätie a pred uložením ti všetko ukáže na kontrolu. Z jednotlivých papierov tak postupne vznikne tvoja prehľadná zdravotná história.',
     educationItems: [
       {title: 'Ľubovoľný formát', body: 'PDF, fotografia alebo ručné zadanie.', icon: '▤'},
       {title: 'Každá metrika zvlášť', body: 'Cholesterol, glukóza či pečeňové testy majú vlastnú históriu.', icon: '⌁'},
@@ -466,6 +466,34 @@ function BloodHistoryPreview() {
     </div>
     <p className="relative mt-4 text-center text-[10px] leading-4 text-white/35">Ilustračný príklad zobrazenia. Fitliner neposkytuje diagnózu ani nenahrádza lekára.</p>
   </div>;
+}
+
+function ResultsToChartPhonePreview() {
+  return <figure className="relative mx-auto w-full max-w-[220px] sm:max-w-[250px]">
+    <div className="pointer-events-none absolute -inset-8 rounded-full bg-[#7C3AED]/24 blur-3xl" />
+    <div className="relative rounded-[2.7rem] border border-white/20 bg-gradient-to-b from-[#29252F] via-[#121016] to-[#050506] p-[7px] shadow-[0_28px_90px_rgba(0,0,0,0.58),0_0_0_1px_rgba(167,139,250,0.16)]">
+      <div className="pointer-events-none absolute left-1/2 top-[13px] z-10 h-[18px] w-[72px] -translate-x-1/2 rounded-full bg-black/90 shadow-[0_1px_0_rgba(255,255,255,0.08)]" />
+      <div className="relative aspect-[9/16] overflow-hidden rounded-[2.25rem] bg-[#09090B] ring-1 ring-inset ring-white/10">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/videos/health/results-to-chart-poster.jpg"
+          aria-label="Ukážka premeny papierového krvného výsledku na prehľadný graf vo Fitliner Health"
+          className="h-full w-full object-cover"
+        >
+          <source src="/videos/health/results-to-chart.mp4" type="video/mp4" />
+        </video>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-3 bottom-3 rounded-xl border border-white/15 bg-black/55 px-3 py-2 text-center text-[10px] font-semibold leading-4 text-white/88 backdrop-blur-md">
+          Papier → potvrdené hodnoty → graf
+        </div>
+      </div>
+    </div>
+    <figcaption className="mt-3 text-center text-[10px] leading-4 text-white/38">Ukážka spracovania výsledku v aplikácii</figcaption>
+  </figure>;
 }
 
 export default function HealthFunnel({locale}: {locale: string}) {
@@ -789,9 +817,15 @@ export default function HealthFunnel({locale}: {locale: string}) {
           </div>}
 
           {screen === educationScreen && <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.educationEyebrow}</p>
-            <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{t.educationTitle}</h1>
-            <p className="mt-5 text-base leading-7 text-white/65">{t.educationBody}</p>
+            <div className={isSkBloodHistory ? 'grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_250px] md:gap-10' : ''}>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.educationEyebrow}</p>
+                <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{t.educationTitle}</h1>
+                <p className="mt-5 text-base leading-7 text-white/65">{t.educationBody}</p>
+                {isSkBloodHistory && <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/8 px-3 py-2 text-xs font-semibold text-emerald-300"><span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />Včasný prístup k Fitliner Health</div>}
+              </div>
+              {isSkBloodHistory && <ResultsToChartPhonePreview />}
+            </div>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">{t.educationItems.map((item) => <div key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5"><div className="text-2xl text-[#A78BFA]">{item.icon}</div><h2 className="mt-4 font-bold">{item.title}</h2><p className="mt-2 text-sm leading-6 text-white/55">{item.body}</p></div>)}</div>
             <button onClick={() => setScreen(isSkBloodHistory ? emailScreen : 4)} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold">{t.educationCta}</button>
           </div>}
