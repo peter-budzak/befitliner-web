@@ -1,5 +1,7 @@
 # Fitliner Health — štartovacia stratégia Meta Ads
 
+> Aktuálny experiment s maximálnym rozpočtom 200 € a zúžením na históriu krvných testov je v `fitliner-health-blood-history-test-2026-08.md`. Pri rozdiele má tento experimentálny dokument prednosť.
+
 Aktualizované: 5. august 2026
 
 ## 1. Strategické rozhodnutie

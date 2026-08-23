@@ -58,8 +58,8 @@ export const HEALTH_SEO: Record<SiteLocale, {title: string; description: string}
     description: 'Upload a lab report or diagnostic-scale result, review extracted values and follow confirmed health metrics over time. Not a diagnosis or medical advice.'
   },
   sk: {
-    title: 'Fitliner Zdravotná karta: výsledky prehľadne v čase',
-    description: 'Nahraj laboratórny výsledok alebo report z diagnostickej váhy, skontroluj rozpoznané hodnoty a sleduj potvrdené metriky v čase.'
+    title: 'Fitliner Health: história krvných výsledkov v jednom prehľade',
+    description: 'Nahraj staré aj nové krvné výsledky z PDF alebo fotografie, skontroluj rozpoznané hodnoty a sleduj ich potvrdený vývoj v čase.'
   },
   de: {
     title: 'Fitliner Gesundheitskarte: Gesundheitswerte im Zeitverlauf',
