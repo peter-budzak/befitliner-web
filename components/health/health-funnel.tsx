@@ -287,8 +287,8 @@ const copy: Record<string, FunnelCopy> = {
     language: 'sk', introEyebrow: 'Fitliner Health · história krvných testov',
     introTitle: 'Jeden krvný test je číslo. História ukáže vývoj.',
     introBody: 'Nahraj staré aj nové krvné výsledky z PDF alebo fotografie. Fitliner ich usporiada podľa rokov a ukáže vývoj cholesterolu, cukru, pečeňových testov a ďalších potvrdených hodnôt.',
-    introCta: 'Vytvoriť históriu · 34,80 € ročne',
-    introTrust: ['PDF alebo fotografia', 'Pred uložením všetko skontroluješ', '34,80 € na 12 mesiacov'],
+    introCta: 'Vytvoriť históriu',
+    introTrust: ['Šifrovaný prenos a chránený prístup', 'Hlavná databáza v EÚ (Írsko)', 'Osobné ani zdravotné údaje nepredávame'],
     stepLabel: 'Krok', continue: 'Pokračovať', back: 'Späť', questions: commonQuestions.sk,
     educationEyebrow: 'Jeden bezpečný archív', educationTitle: 'Z papierových výsledkov na prehľadný vývoj.',
     educationBody: 'Fitliner rozpozná metriky, jednotky, dátum aj referenčné rozpätie z krvného výsledku. Pred uložením ti nájdené hodnoty ukáže na kontrolu, aby sa nič nepomiešalo.',
@@ -307,11 +307,11 @@ const copy: Record<string, FunnelCopy> = {
       {title: 'Prehľad pre konzultáciu', body: 'Vývoj môžeš pri ďalšej návšteve ukázať svojmu lekárovi.', icon: '◒'},
     ], resultCta: 'Poslať môj plán na e-mail',
     emailTitle: 'Kam ti môžeme poslať aktiváciu?',
-    emailBody: 'Použi rovnaký e-mail, ktorým sa prihlásiš do aplikácie Fitliner. Pred platbou ešte uvidíš celý obsah plánu aj ročnú cenu 34,80 €.',
+    emailBody: 'Ak už máš registráciu vo Fitliner, použi rovnaký e-mail.',
     emailPlaceholder: 'tvoj@email.sk',
     healthConsent: 'Súhlasím so spracovaním e-mailu na vytvorenie a správu môjho účtu Fitliner Health.',
-    marketingConsent: 'Chcem dostať svoj plán, užitočné tipy a pripomenutie, ak aktiváciu nedokončím. (nepovinné)',
-    emailCta: 'Zobraziť plán a cenu',
+    marketingConsent: 'Chcem dostať svoj osobný plán, praktické tipy a ak aktiváciu nedokončím, aj časovo obmedzenú VIP ponuku. Kedykoľvek sa môžem odhlásiť. (nepovinné)',
+    emailCta: 'Pokračovať a dokončiť',
     offerEyebrow: 'Fitliner Health · ročný plán', offerBadge: 'Zakladateľská cena',
     offerTitle: 'Celá história krvných výsledkov za menej než 0,10 € denne.',
     offerBody: 'Aktivuj si Fitliner Health a začni budovať digitálnu históriu svojich krvných testov.',
@@ -448,6 +448,10 @@ export default function HealthFunnel({locale}: {locale: string}) {
   const [attribution, setAttribution] = useState<Attribution>({});
   const [trackingConsent, setTrackingConsent] = useState(false);
   const [trackingChoice, setTrackingChoice] = useState<'accepted' | 'rejected' | ''>('');
+  const [showExitOffer, setShowExitOffer] = useState(false);
+  const [discountedOffer, setDiscountedOffer] = useState(false);
+  const [isClaimingOffer, setIsClaimingOffer] = useState(false);
+  const [exitOfferDismissed, setExitOfferDismissed] = useState(false);
 
   const educationScreen = isSkBloodHistory ? 1 : 3;
   const emailScreen = isSkBloodHistory ? 2 : 10;
@@ -490,7 +494,14 @@ export default function HealthFunnel({locale}: {locale: string}) {
     const offerToken = params.get('offer');
     if (offerToken && /^[0-9a-f-]{36}$/i.test(offerToken)) {
       window.localStorage.setItem('fitliner_health_funnel_offer_token', offerToken);
+      setDiscountedOffer(true);
       window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}`);
+    } else {
+      const savedOfferToken = window.localStorage.getItem('fitliner_health_funnel_offer_token');
+      const savedOfferExpiry = window.localStorage.getItem('fitliner_health_funnel_offer_expires_at');
+      if (savedOfferToken && savedOfferExpiry && new Date(savedOfferExpiry).getTime() > Date.now()) {
+        setDiscountedOffer(true);
+      }
     }
   }, []);
 
@@ -503,6 +514,18 @@ export default function HealthFunnel({locale}: {locale: string}) {
     const timer = window.setTimeout(() => setScreen(9), ANALYSIS_SCREEN_DURATION_MS);
     return () => window.clearTimeout(timer);
   }, [screen]);
+
+  useEffect(() => {
+    if (!isSkBloodHistory || screen !== offerScreen || discountedOffer || exitOfferDismissed || showExitOffer) return;
+    const onMouseOut = (event: MouseEvent) => {
+      if (event.clientY <= 0 && !event.relatedTarget) {
+        setShowExitOffer(true);
+        if (trackingConsent) trackMetaCustom('HealthExitOfferShown');
+      }
+    };
+    document.addEventListener('mouseout', onMouseOut);
+    return () => document.removeEventListener('mouseout', onMouseOut);
+  }, [discountedOffer, exitOfferDismissed, isSkBloodHistory, offerScreen, screen, showExitOffer, trackingConsent]);
 
   const choose = (value: string) => {
     if (!question) return;
@@ -589,6 +612,43 @@ export default function HealthFunnel({locale}: {locale: string}) {
     }
   };
 
+  const claimExitOffer = async () => {
+    if (!emailOk || isClaimingOffer) return;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!supabaseUrl || !anonKey) {
+      setError(t.checkoutError);
+      return;
+    }
+    setIsClaimingOffer(true);
+    setError('');
+    try {
+      const response = await fetch(`${supabaseUrl}/functions/v1/health-save-web-lead`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
+        body: JSON.stringify({
+          action: 'claim_exit_offer',
+          request_id: requestId(),
+          email: email.trim().toLowerCase(),
+        }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload?.offer_token) throw new Error(payload?.error || 'offer_failed');
+      window.localStorage.setItem('fitliner_health_funnel_offer_token', payload.offer_token);
+      if (payload?.expires_at) window.localStorage.setItem('fitliner_health_funnel_offer_expires_at', payload.expires_at);
+      setDiscountedOffer(true);
+      setShowExitOffer(false);
+      setTermsAccepted(false);
+      if (trackingConsent) trackMetaCustom('HealthExitOfferAccepted');
+    } catch (offerError) {
+      console.error('Health exit offer failed', offerError);
+      setError('VIP ponuku sa nepodarilo aktivovať. Skús to, prosím, znova.');
+      setShowExitOffer(false);
+    } finally {
+      setIsClaimingOffer(false);
+    }
+  };
+
   const startCheckout = async () => {
     if (!emailOk || !healthConsent || !termsAccepted || isSubmitting) return;
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -600,7 +660,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
     setIsSubmitting(true);
     setError('');
     try {
-      if (trackingConsent) trackMetaStandard('InitiateCheckout', {value: 34.8, currency: 'EUR'});
+      if (trackingConsent) trackMetaStandard('InitiateCheckout', {value: discountedOffer ? 17.4 : 34.8, currency: 'EUR'});
       const response = await fetch(`${supabaseUrl}/functions/v1/stripe-create-health-web-checkout`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json', apikey: anonKey, Authorization: `Bearer ${anonKey}`},
@@ -653,6 +713,7 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-white/66 sm:text-lg">{t.introBody}</p>
             <button onClick={startQuiz} className="mx-auto mt-7 min-h-14 w-full max-w-2xl rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.32)] transition hover:brightness-110">{t.introCta} <span aria-hidden>→</span></button>
             <div className="mx-auto mt-5 grid max-w-4xl gap-2 text-left sm:grid-cols-3">{t.introTrust.map((item) => <div key={item} className="rounded-xl border border-white/8 bg-white/[0.035] px-3 py-3 text-xs text-white/58"><span className="mr-2 text-emerald-400">✓</span>{item}</div>)}</div>
+            {isSkBloodHistory && <p className="mx-auto mt-3 max-w-2xl text-xs leading-5 text-white/40">Ochranu údajov a tvoje práva nastavujeme podľa pravidiel GDPR. <Link className="text-[#B9A1FF] underline" href="/sk/privacy">Ako chránime údaje</Link></p>}
             {isSkBloodHistory ? <BloodHistoryPreview /> : <div className="relative mx-auto mt-7 w-full max-w-4xl overflow-hidden rounded-[1.5rem] border border-[#A78BFA]/15 bg-[#0B0911] shadow-[0_24px_90px_rgba(87,43,180,0.2)] sm:rounded-[2rem]">
               <Image src="/images/health/fitliner-health-paper-to-history-hero.jpg" alt="" width={1600} height={900} priority sizes="(max-width: 640px) 100vw, 896px" className="h-auto w-full" />
               <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/[0.035]" />
@@ -701,23 +762,23 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <label className="mt-7 block text-sm font-semibold" htmlFor="health-email">Email</label>
             <input id="health-email" type="email" inputMode="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={t.emailPlaceholder} className="mt-2 min-h-14 w-full rounded-2xl border border-white/12 bg-white/[0.055] px-4 text-base text-white outline-none placeholder:text-white/28 focus:border-[#9B73FF]" />
             <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={healthConsent} onChange={(event) => setHealthConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.healthConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/privacy`}>Privacy</Link></span></label>
-            <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/55"><input type="checkbox" checked={marketingConsent} onChange={(event) => setMarketingConsent(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.marketingConsent}</span></label>
+            <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-2xl border border-[#9B73FF]/25 bg-[#7C3AED]/10 p-4 text-sm leading-6 text-white/72 transition hover:border-[#9B73FF]/45"><input type="checkbox" checked={marketingConsent} onChange={(event) => setMarketingConsent(event.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-[#8B5CF6]" /><span>{isSkBloodHistory && <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#B9A1FF]">Bonus zdarma</span>}{t.marketingConsent}</span></label>
             <button disabled={!emailOk || !healthConsent || isSavingLead} onClick={showOffer} className="mt-7 min-h-14 w-full rounded-2xl bg-[#8B5CF6] px-6 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-35">{t.emailCta}</button>
           </div>}
 
           {screen === offerScreen && <div>
-            <div className="flex flex-wrap items-center gap-2"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.offerEyebrow}</p><span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">{t.offerBadge}</span></div>
-            <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{t.offerTitle}</h1>
+            <div className="flex flex-wrap items-center gap-2"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.offerEyebrow}</p><span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">{discountedOffer && isSkBloodHistory ? 'VIP · −50 % na prvý rok' : t.offerBadge}</span></div>
+            <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{discountedOffer && isSkBloodHistory ? 'Prvý rok Fitliner Health za polovicu.' : t.offerTitle}</h1>
             <p className="mt-5 text-base leading-7 text-white/65">{t.offerBody}</p>
             <div className="mt-7 rounded-[1.75rem] border border-[#9B73FF]/40 bg-gradient-to-br from-[#7C3AED]/20 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_20px_80px_rgba(124,58,237,0.18)]">
-              <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">{t.perMonth}</div><div className="mt-2 text-sm font-semibold text-emerald-300">{t.dailyPrice}</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">{t.accessLabel}</div></div>
-              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4"><p className="font-semibold text-white/90">{t.billedYearly}</p><p className="mt-1 text-sm leading-6 text-white/55">{t.renewalNote}</p></div>
+              <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">{discountedOffer && isSkBloodHistory ? '1,45 € / mesiac prvý rok' : t.perMonth}</div><div className="mt-2 text-sm font-semibold text-emerald-300">{discountedOffer && isSkBloodHistory ? '≈ 0,05 € denne' : t.dailyPrice}</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">{t.accessLabel}</div></div>
+              <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4"><p className="font-semibold text-white/90">{discountedOffer && isSkBloodHistory ? 'Dnes zaplatíš 17,40 € za prvých 12 mesiacov' : t.billedYearly}</p><p className="mt-1 text-sm leading-6 text-white/55">{t.renewalNote}</p></div>
               <div className="my-6 h-px bg-white/10" />
               <ul className="space-y-3">{t.included.map((item) => <li key={item} className="flex gap-3 text-sm leading-6 text-white/75"><span className="text-emerald-400">✓</span><span>{item}</span></li>)}</ul>
-              <div className="mt-6 flex gap-3 rounded-2xl border border-[#9B73FF]/25 bg-[#7C3AED]/12 p-4 text-sm leading-6 text-white/70"><span className="text-lg text-[#B9A1FF]">✦</span><span>{t.priceGuarantee}</span></div>
+              <div className="mt-6 flex gap-3 rounded-2xl border border-[#9B73FF]/25 bg-[#7C3AED]/12 p-4 text-sm leading-6 text-white/70"><span className="text-lg text-[#B9A1FF]">✦</span><span>{discountedOffer && isSkBloodHistory ? 'VIP zľava platí 48 hodín a uplatní sa iba na prvú ročnú platbu.' : t.priceGuarantee}</span></div>
             </div>
-            <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{t.termsConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/terms`}>Terms</Link></span></label>
-            <button disabled={!termsAccepted || isSubmitting} onClick={startCheckout} className="mt-6 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.3)] disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? t.submitting : t.subscribe}</button>
+            <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{discountedOffer && isSkBloodHistory ? 'Súhlasím s Podmienkami používania, dnešnou platbou 17,40 € za prvý rok a následnou opakovanou ročnou platbou 34,80 €, kým predplatné nezruším.' : t.termsConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/terms`}>Terms</Link></span></label>
+            <button disabled={!termsAccepted || isSubmitting} onClick={startCheckout} className="mt-6 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.3)] disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? t.submitting : discountedOffer && isSkBloodHistory ? 'Aktivovať prvý rok za 17,40 €' : t.subscribe}</button>
             <p className="mt-3 text-center text-xs text-white/42">🔒 {t.merchantDisclosure}</p>
             {error && <p className="mt-4 rounded-xl border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-sm leading-6 text-amber-100" role="alert">{error}</p>}
             <div className="mt-5 rounded-2xl border border-white/8 bg-white/[0.035] p-4"><p className="text-sm font-bold">{t.alreadyMember}</p><p className="mt-1 text-sm leading-6 text-white/58">{t.alreadyMemberCta}</p></div>
@@ -735,6 +796,16 @@ export default function HealthFunnel({locale}: {locale: string}) {
           <button type="button" onClick={acceptTracking} className="rounded-xl bg-violet-600 px-4 py-2 text-xs font-semibold">{tracking.accept}</button>
         </div>
       </aside>}
+
+      {showExitOffer && <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="health-exit-offer-title">
+        <div className="w-full max-w-lg rounded-[1.75rem] border border-[#A78BFA]/35 bg-[#15111d] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.65)] sm:p-8">
+          <span className="inline-flex rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-200">VIP ponuka · 48 hodín</span>
+          <h2 id="health-exit-offer-title" className="mt-4 text-3xl font-bold leading-tight tracking-[-0.03em]">Počkaj — ak ťa zastavila cena, prvý rok máš za polovicu.</h2>
+          <p className="mt-4 text-base leading-7 text-white/68">Aktivuj Fitliner Health za <strong className="text-white">17,40 € na prvých 12 mesiacov</strong>, teda približne 0,05 € denne. Potom 34,80 € ročne; zrušiť môžeš pred obnovením.</p>
+          <button type="button" disabled={isClaimingOffer} onClick={claimExitOffer} className="mt-6 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-5 py-4 font-bold disabled:opacity-50">{isClaimingOffer ? 'Aktivujem VIP ponuku…' : 'Áno, chcem prvý rok za 17,40 €'}</button>
+          <button type="button" onClick={() => { setShowExitOffer(false); setExitOfferDismissed(true); }} className="mt-3 min-h-11 w-full rounded-xl px-4 py-3 text-sm text-white/48 transition hover:text-white">Nie, ďakujem</button>
+        </div>
+      </div>}
     </main>
   );
 }

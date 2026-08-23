@@ -1,6 +1,6 @@
 # Fitliner Health — test histórie krvných výsledkov
 
-Aktuálne rozhodnutie: 22. august 2026  
+Aktuálne rozhodnutie: 23. august 2026
 Tento dokument má prednosť pred pôvodným štartovacím rozpočtom v `fitliner-health-meta-ads-strategy.md`.
 
 ## Čo testujeme
@@ -26,6 +26,8 @@ Kým nemáme skutočný payout, refundácie a priemerný počet importov na zák
 - pásmo na opatrnú ďalšiu validáciu: **15–20 €**,
 - nad **20 €** neškálujeme,
 - absolútny break-even CAC nie je 34,80 €, ale približne 25 € pri jednom spracovanom teste.
+
+Pri VIP záchrannej ponuke je prvý rok **17,40 €** a ďalšie roky 34,80 €. Orientačný príspevok prvého roka po DPH, platobných poplatkoch a jednom AI spracovaní je iba približne **12 €**. Preto pri nákupoch cez VIP ponuku cielime na CAC do 8 € a nad 10 € ich neškálujeme. Report musí oddeľovať plnú cenu od VIP ceny; priemer ich nesmie zakryť.
 
 Pri rozpočte 200 € potrebujeme približne 8 platiacich zákazníkov iba na orientačný break-even a aspoň 10 zákazníkov na rozumný prvý zisk. Jeden alebo dva nákupy ešte nepotvrdzujú udržateľnú ekonomiku.
 
@@ -99,6 +101,17 @@ Ostatné hooky zostávajú v zásobníku. H09 je blízky duplikát H02. H01 a H1
 `utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_term={{adset.name}}&utm_content={{ad.name}}&campaign_id={{campaign.id}}&adset_id={{adset.id}}&ad_id={{ad.id}}`
 
 Cena je v texte zámerne. Pri malom rozpočte chceme menej lacných zvedavých registrácií a viac ľudí, ktorí vopred poznajú cenu.
+
+## Funnel, záchrana odchodu a e-maily
+
+- prvé CTA na landing page neobsahuje cenu; cena zostáva transparentne uvedená v reklame a na poslednom kroku pred platbou,
+- e-mail sa uloží po povinnom súhlase so správou účtu,
+- marketingový follow-up sa posiela iba pri samostatnom, dobrovoľnom a vopred nezaškrtnutom súhlase,
+- follow-up sekvencia: plán po 1 hodine, pripomenutie hodnoty po 24 hodinách, VIP ponuka po 72 hodinách,
+- VIP ponuka platí 48 hodín a znižuje iba prvú ročnú platbu z 34,80 € na 17,40 €; ďalšia ročná obnova je 34,80 €,
+- rovnaká VIP ponuka sa môže zobraziť pri exit-intent na poslednom kroku; používateľ ju môže odmietnuť bez blokovania odchodu,
+- Stripe používa 50 % kupón s trvaním `once`, takže zľava sa neuplatní na druhú faktúru,
+- osobné ani zdravotné údaje sa neposielajú Mete; Pixel/CAPI dostáva iba povolené marketingové udalosti bez odpovedí a výsledkov.
 
 ## Rozdelenie 200 €
 
