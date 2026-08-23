@@ -348,16 +348,16 @@ const copy: Record<string, FunnelCopy> = {
     healthConsent: 'Súhlasím so spracovaním e-mailu na vytvorenie a správu môjho účtu Fitliner Health.',
     marketingConsent: 'Chcem dostať svoj osobný plán, praktické tipy a ak aktiváciu nedokončím, aj časovo obmedzenú VIP ponuku. Kedykoľvek sa môžem odhlásiť. (nepovinné)',
     emailCta: 'Pokračovať a dokončiť',
-    offerEyebrow: 'Fitliner Health · ročný plán', offerBadge: 'Zakladateľská cena',
-    offerTitle: 'Celá história krvných výsledkov za menej než 0,10 € denne.',
-    offerBody: 'Aktivuj si Fitliner Health a začni budovať digitálnu históriu svojich krvných testov.',
-    perMonth: '2,90 € / mesiac', dailyPrice: '≈ 0,10 € denne', billedYearly: 'Dnes zaplatíš 34,80 € za 12 mesiacov',
+    offerEyebrow: 'Posledný krok · ročný plán', offerBadge: 'Zakladateľská cena',
+    offerTitle: 'Výsledky z minulosti už nezmeníš. Od dneška ich však nemusíš strácať.',
+    offerBody: 'Začni budovať svoju digitálnu históriu teraz. Pri každom ďalšom odbere bude hodnotnejšia, pretože nové výsledky konečne uvidíš v súvislostiach s tými predchádzajúcimi.',
+    perMonth: '2,90 € / mesiac', dailyPrice: '≈ 0,10 € denne', billedYearly: 'Dnes si aktivuješ 12 mesiacov za 34,80 €',
     renewalNote: 'Potom 34,80 € každých 12 mesiacov. Zrušiť môžeš pred ďalšou platbou.',
-    priceGuarantee: 'Zakladateľskú cenu 34,80 € ročne si zachováš, kým zostane predplatné nepretržite aktívne.',
+    priceGuarantee: 'Aktiváciou dnes si uzamkneš zakladateľskú cenu 34,80 € ročne na celý čas nepretržitého predplatného.',
     merchantDisclosure: 'Predané cez Link. Link je oficiálnym predajcom transakcie a Stripe zabezpečuje platbu aj transakčnú podporu.', accessLabel: '12 mesiacov prístupu',
     included: ['Staré aj nové krvné výsledky na jednom bezpečnom mieste', 'Neobmedzený import PDF a fotografií v rôznych jazykoch', 'Kontrola rozpoznaných hodnôt pred uložením', 'Jasné grafy a referenčné rozpätia pre každú metriku', 'Pripomienky ďalších krvných testov'],
     termsConsent: 'Súhlasím s Podmienkami používania a s opakovanou ročnou platbou 34,80 €, kým predplatné nezruším.',
-    subscribe: 'Aktivovať Fitliner Health', alreadyMember: 'Máš aktívne členstvo v partnerskom gyme?',
+    subscribe: 'Začať svoju históriu za 34,80 €', alreadyMember: 'Máš aktívne členstvo v partnerskom gyme?',
     alreadyMemberCta: 'Zdravotnú kartu už máš v cene. Otvor Fitliner aplikáciu a nepriplácaj.',
     medicalNote: 'Fitliner neposkytuje diagnózu ani lekársku radu. Výsledky a odporúčania vždy konzultuj s kvalifikovaným zdravotníkom.',
     checkoutError: 'Platbu sa nepodarilo otvoriť. Skontroluj e-mail a skús to znova.', submitting: 'Pripravujem bezpečnú platbu…',
@@ -858,15 +858,21 @@ export default function HealthFunnel({locale}: {locale: string}) {
             <div className="flex flex-wrap items-center gap-2"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{t.offerEyebrow}</p><span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">{discountedOffer && isSkBloodHistory ? 'VIP · −50 % na prvý rok' : t.offerBadge}</span></div>
             <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.03em] sm:text-5xl">{discountedOffer && isSkBloodHistory ? 'Prvý rok Fitliner Health za polovicu.' : t.offerTitle}</h1>
             <p className="mt-5 text-base leading-7 text-white/65">{t.offerBody}</p>
+            {isSkBloodHistory && <div className="mt-6 flex gap-4 rounded-2xl border border-amber-300/25 bg-gradient-to-r from-amber-300/10 to-[#7C3AED]/12 p-4 shadow-[0_14px_45px_rgba(251,191,36,0.08)]">
+              <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber-200/20 bg-amber-200/10 text-lg">⌁</span>
+              <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-200">{discountedOffer ? 'VIP ponuka je aktívna' : 'Prečo začať dnes'}</p><p className="mt-1 text-sm leading-6 text-white/72">{discountedOffer ? 'Prvý rok máš za 17,40 €. Ponuka platí 48 hodín. Po prvom roku sa predplatné obnoví za štandardnú zakladateľskú cenu.' : 'Každý ďalší krvný výsledok má väčšiu hodnotu, keď ho máš s čím porovnať. Tvoj prvý graf môže vzniknúť ešte dnes.'}</p></div>
+            </div>}
             <div className="mt-7 rounded-[1.75rem] border border-[#9B73FF]/40 bg-gradient-to-br from-[#7C3AED]/20 via-white/[0.045] to-white/[0.025] p-6 shadow-[0_20px_80px_rgba(124,58,237,0.18)]">
               <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="text-3xl font-bold tracking-[-0.04em] sm:text-4xl">{discountedOffer && isSkBloodHistory ? '1,45 € / mesiac prvý rok' : t.perMonth}</div><div className="mt-2 text-sm font-semibold text-emerald-300">{discountedOffer && isSkBloodHistory ? '≈ 0,05 € denne' : t.dailyPrice}</div></div><div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">{t.accessLabel}</div></div>
+              {isSkBloodHistory && <p className="mt-4 text-sm leading-6 text-white/62">Za symbolických {discountedOffer ? '0,05 €' : '0,10 €'} denne si buduješ prehľad, ktorého hodnota rastie s každým výsledkom.</p>}
               <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4"><p className="font-semibold text-white/90">{discountedOffer && isSkBloodHistory ? 'Dnes zaplatíš 17,40 € za prvých 12 mesiacov' : t.billedYearly}</p><p className="mt-1 text-sm leading-6 text-white/55">{t.renewalNote}</p></div>
               <div className="my-6 h-px bg-white/10" />
               <ul className="space-y-3">{t.included.map((item) => <li key={item} className="flex gap-3 text-sm leading-6 text-white/75"><span className="text-emerald-400">✓</span><span>{item}</span></li>)}</ul>
               <div className="mt-6 flex gap-3 rounded-2xl border border-[#9B73FF]/25 bg-[#7C3AED]/12 p-4 text-sm leading-6 text-white/70"><span className="text-lg text-[#B9A1FF]">✦</span><span>{discountedOffer && isSkBloodHistory ? 'VIP zľava platí 48 hodín a uplatní sa iba na prvú ročnú platbu.' : t.priceGuarantee}</span></div>
             </div>
-            <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{discountedOffer && isSkBloodHistory ? 'Súhlasím s Podmienkami používania, dnešnou platbou 17,40 € za prvý rok a následnou opakovanou ročnou platbou 34,80 €, kým predplatné nezruším.' : t.termsConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/terms`}>Terms</Link></span></label>
+            <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/65"><input type="checkbox" checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} className="mt-1 h-5 w-5 accent-[#8B5CF6]" /><span>{discountedOffer && isSkBloodHistory ? 'Súhlasím s Podmienkami používania, dnešnou platbou 17,40 € za prvý rok a následnou opakovanou ročnou platbou 34,80 €, kým predplatné nezruším.' : t.termsConsent} <Link className="text-[#B9A1FF] underline" href={`/${locale}/terms`}>{isSkBloodHistory ? 'Podmienky' : 'Terms'}</Link></span></label>
             <button disabled={!termsAccepted || isSubmitting} onClick={startCheckout} className="mt-6 min-h-14 w-full rounded-2xl bg-gradient-to-r from-[#6D38FF] to-[#9B5CFF] px-6 py-4 text-base font-bold shadow-[0_18px_50px_rgba(124,58,237,0.3)] disabled:cursor-not-allowed disabled:opacity-40">{isSubmitting ? t.submitting : discountedOffer && isSkBloodHistory ? 'Aktivovať prvý rok za 17,40 €' : t.subscribe}</button>
+            {isSkBloodHistory && <p className="mt-3 text-center text-xs font-medium text-white/52">12 mesiacov prístupu · bezpečná platba · zrušenie pred obnovením</p>}
             <p className="mt-3 text-center text-xs text-white/42">🔒 {t.merchantDisclosure}</p>
             {error && <p className="mt-4 rounded-xl border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-sm leading-6 text-amber-100" role="alert">{error}</p>}
             <div className="mt-5 rounded-2xl border border-white/8 bg-white/[0.035] p-4"><p className="text-sm font-bold">{t.alreadyMember}</p><p className="mt-1 text-sm leading-6 text-white/58">{t.alreadyMemberCta}</p></div>
