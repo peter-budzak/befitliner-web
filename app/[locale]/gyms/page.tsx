@@ -1,177 +1,450 @@
 import type {Metadata} from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import JsonLd from '@/components/seo/json-ld';
-import GymsFunnel from '@/components/gyms/gyms-funnel';
-import {GYMS_SEO, isSiteLocale, pageMetadata, SITE_URL, type SiteLocale} from '@/lib/seo';
+import {
+  GymFaq,
+  GymLink,
+  GymQualification,
+  GymTracking,
+} from '@/components/gyms/gyms-interactions';
+import {
+  GYMS_COPY,
+  GYMS_CHECKOUT_URL,
+  GYMS_VEED_EMBED_URL,
+  GYMS_PACKAGE_IMAGE,
+} from '@/lib/gyms';
+import {
+  isSiteLocale,
+  LOCALES,
+  pageMetadata,
+  SITE_URL,
+  SUPPORT_EMAIL,
+} from '@/lib/seo';
+import './gyms.css';
 
 type PageProps = {params: Promise<{locale: string}> | {locale: string}};
-
-type GymPageCopy = {
-  eyebrow: string;
-  title: string;
-  intro: string;
-  benefitsTitle: string;
-  benefits: Array<{title: string; body: string}>;
-  funnelTitle: string;
-  funnelBody: string;
-  back: string;
-};
-
-const COPY: Record<SiteLocale, GymPageCopy> = {
-  en: {
-    eyebrow: 'Fitliner for gyms',
-    title: 'One system for gym access, memberships and member experience.',
-    intro: 'Fitliner connects supported smart locks, digital memberships, online payments, member communication and useful traffic insights without forcing your members to juggle separate apps and access cards.',
-    benefitsTitle: 'What a connected gym system should solve',
-    benefits: [
-      {title: 'Phone-based access', body: 'Give eligible members a clear digital entry flow and retain technical access logs for support and security.'},
-      {title: 'Memberships and payments', body: 'Connect products, validity and online checkout so paid access does not depend on manual approval.'},
-      {title: 'Member communication', body: 'Keep gym information, passes and direct communication close to the training experience.'},
-      {title: 'Operational visibility', body: 'Use available entry activity to understand patterns while treating traffic figures as estimates, not safety counters.'}
-    ],
-    funnelTitle: 'Check whether Fitliner fits your gym',
-    funnelBody: 'Answer a short set of operational questions. We use the details to assess your current access setup and next steps.',
-    back: 'Fitliner for members'
-  },
-  sk: {
-    eyebrow: 'Fitliner pre fitnesscentrá',
-    title: 'Jeden systém pre vstup, členstvá a lepší zážitok členov.',
-    intro: 'Fitliner prepája podporované smart zámky, digitálne členstvá, online platby, komunikáciu a užitočný prehľad návštevnosti bez ďalších kariet a oddelených aplikácií.',
-    benefitsTitle: 'Čo má prepojený systém pre fitko vyriešiť',
-    benefits: [
-      {title: 'Vstup cez telefón', body: 'Oprávnený člen dostane jasný digitálny vstup a fitko technické záznamy pre podporu a bezpečnosť.'},
-      {title: 'Členstvá a platby', body: 'Prepojte produkty, platnosť a online checkout, aby zaplatený vstup nečakal na ručné schválenie.'},
-      {title: 'Komunikácia s členmi', body: 'Informácie o fitku, vstupy pre hostí a správy ostávajú blízko samotného tréningu.'},
-      {title: 'Prehľad o prevádzke', body: 'Aktivitu vstupov využite na pochopenie trendov; návštevnosť je odhad, nie bezpečnostné počítadlo.'}
-    ],
-    funnelTitle: 'Overte si, či je Fitliner vhodný pre vaše fitko',
-    funnelBody: 'Odpovedzte na krátke otázky o prevádzke. Podľa nich posúdime súčasný vstupný systém a ďalší postup.',
-    back: 'Fitliner pre členov'
-  },
-  de: {
-    eyebrow: 'Fitliner für Fitnessstudios',
-    title: 'Ein System für Zutritt, Mitgliedschaften und Mitgliedererlebnis.',
-    intro: 'Fitliner verbindet unterstützte Smart Locks, digitale Mitgliedschaften, Online-Zahlungen, Kommunikation und Auslastungseinblicke – ohne zusätzliche Karten und getrennte Apps.',
-    benefitsTitle: 'Was ein verbundenes Studiosystem lösen sollte',
-    benefits: [
-      {title: 'Zutritt per Smartphone', body: 'Berechtigte Mitglieder erhalten einen klaren digitalen Zugang; technische Protokolle helfen bei Support und Sicherheit.'},
-      {title: 'Mitgliedschaften und Zahlungen', body: 'Produkte, Laufzeiten und Online-Checkout werden verbunden, damit bezahlter Zutritt nicht manuell freigegeben werden muss.'},
-      {title: 'Kommunikation', body: 'Studioinformationen, Gastpässe und Nachrichten bleiben nah am Trainingserlebnis.'},
-      {title: 'Betriebliche Übersicht', body: 'Zutrittsaktivität zeigt Trends; Auslastungszahlen bleiben Schätzungen und sind keine Sicherheitszähler.'}
-    ],
-    funnelTitle: 'Prüfe, ob Fitliner zu deinem Studio passt',
-    funnelBody: 'Beantworte einige kurze Fragen zum Betrieb. Damit bewerten wir das aktuelle Zutrittssystem und mögliche nächste Schritte.',
-    back: 'Fitliner für Mitglieder'
-  },
-  es: {
-    eyebrow: 'Fitliner para gimnasios',
-    title: 'Un sistema para acceso, membresías y experiencia del socio.',
-    intro: 'Fitliner conecta cerraduras compatibles, membresías digitales, pagos online, comunicación y datos útiles de afluencia sin obligar a usar tarjetas y apps separadas.',
-    benefitsTitle: 'Qué debe resolver un sistema conectado',
-    benefits: [
-      {title: 'Acceso con el móvil', body: 'Los socios autorizados obtienen un acceso digital claro y el gimnasio conserva registros técnicos para soporte y seguridad.'},
-      {title: 'Membresías y pagos', body: 'Conecta productos, vigencia y checkout para que el acceso pagado no dependa de aprobación manual.'},
-      {title: 'Comunicación', body: 'Información, pases de invitado y mensajes permanecen cerca de la experiencia de entrenamiento.'},
-      {title: 'Visibilidad operativa', body: 'La actividad de entrada ayuda a ver tendencias; la afluencia es una estimación, no un contador de seguridad.'}
-    ],
-    funnelTitle: 'Comprueba si Fitliner encaja con tu gimnasio',
-    funnelBody: 'Responde unas preguntas breves sobre la operación. Las usamos para valorar el acceso actual y los siguientes pasos.',
-    back: 'Fitliner para socios'
-  },
-  fr: {
-    eyebrow: 'Fitliner pour les salles',
-    title: 'Un système pour l’accès, les abonnements et l’expérience membre.',
-    intro: 'Fitliner relie serrures compatibles, abonnements numériques, paiements en ligne, communication et données de fréquentation sans multiplier cartes et applications.',
-    benefitsTitle: 'Ce qu’un système connecté doit résoudre',
-    benefits: [
-      {title: 'Accès par téléphone', body: 'Les membres autorisés bénéficient d’un parcours clair et la salle conserve les journaux techniques utiles au support et à la sécurité.'},
-      {title: 'Abonnements et paiements', body: 'Reliez produits, validité et checkout afin que l’accès payé ne dépende pas d’une validation manuelle.'},
-      {title: 'Communication', body: 'Informations, invitations et messages restent proches de l’expérience d’entraînement.'},
-      {title: 'Vue opérationnelle', body: 'L’activité d’entrée révèle des tendances ; la fréquentation reste une estimation, pas un compteur de sécurité.'}
-    ],
-    funnelTitle: 'Vérifiez si Fitliner convient à votre salle',
-    funnelBody: 'Répondez à quelques questions sur votre fonctionnement. Elles nous aident à évaluer l’accès actuel et les prochaines étapes.',
-    back: 'Fitliner pour les membres'
-  },
-  'zh-Hans': {
-    eyebrow: 'Fitliner 健身房解决方案',
-    title: '一个系统管理门禁、会员和会员体验。',
-    intro: 'Fitliner 将兼容的智能门锁、数字会员、在线付款、会员沟通和客流洞察连接起来，减少独立应用和门禁卡。',
-    benefitsTitle: '互联系统应解决的问题',
-    benefits: [
-      {title: '手机门禁', body: '符合条件的会员获得清晰的数字入场流程，健身房保留用于支持和安全的技术记录。'},
-      {title: '会员与付款', body: '连接产品、有效期和在线结账，已付款的门禁无需依赖人工审批。'},
-      {title: '会员沟通', body: '健身房信息、访客通行证和消息都与训练体验保持在一起。'},
-      {title: '运营洞察', body: '使用入场活动了解趋势；客流数据是估算值，不可作为安全人数计数器。'}
-    ],
-    funnelTitle: '看看 Fitliner 是否适合你的健身房',
-    funnelBody: '回答几个简短的运营问题，我们会据此评估当前门禁方式和后续步骤。',
-    back: '会员版 Fitliner'
-  }
-};
-
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
-  const resolved = params instanceof Promise ? await params : params;
-  if (!isSiteLocale(resolved.locale)) return {};
-  return pageMetadata({locale: resolved.locale, path: 'gyms', ...GYMS_SEO[resolved.locale]});
+  const {locale} = await params;
+  if (!isSiteLocale(locale)) return {};
+  const copy = GYMS_COPY[locale];
+  return pageMetadata({
+    locale,
+    path: 'gyms',
+    title: `${copy.eyebrow} · ${copy.sticky}`,
+    description: copy.intro,
+  });
+}
+
+function AccessIcon({kind}: {kind: number}) {
+  return (
+    <svg
+      viewBox="0 0 80 80"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+    >
+      {kind === 0 ? (
+        <>
+          <path d="M18 68V12h38v56M12 68h52M27 60V20h21v40Z" />
+          <path d="M41 37v9M61 27h9v18h-9zM63 34h5" />
+        </>
+      ) : kind === 1 ? (
+        <>
+          <path d="M12 68h47M19 68V14h35v54M25 14v10h23V14M44 39v9M62 35h12v16H62z" />
+          <circle cx="68" cy="43" r="2" />
+        </>
+      ) : (
+        <>
+          <path d="M12 28h56v17H12zM20 45v24M60 45v24M40 39v22M40 48l-17-8M40 48l18-12" />
+          <path d="M53 21h9" />
+        </>
+      )}
+    </svg>
+  );
 }
 
 export default async function GymsPage({params}: PageProps) {
-  const resolved = params instanceof Promise ? await params : params;
-  if (!isSiteLocale(resolved.locale)) notFound();
-  const locale = resolved.locale;
-  const copy = COPY[locale];
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${SITE_URL}/${locale}/gyms#service`,
-    name: GYMS_SEO[locale].title,
-    description: GYMS_SEO[locale].description,
-    url: `${SITE_URL}/${locale}/gyms`,
-    provider: {'@id': `${SITE_URL}/#organization`},
-    serviceType: 'Gym management, membership and smart access platform',
-    areaServed: 'Worldwide',
-    audience: {'@type': 'BusinessAudience', audienceType: 'Fitness studios and gyms'}
-  };
-
+  const {locale} = await params;
+  if (!isSiteLocale(locale)) notFound();
+  const t = GYMS_COPY[locale];
+  const order = (location: string, label = t.cta) => (
+    <GymLink href="#offer" location={location} className="gym-button">
+      {label}
+      <span aria-hidden="true">↗</span>
+    </GymLink>
+  );
+  const callHref = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`${t.eyebrow} — ${t.verify}`)}`;
   return (
-    <main className="min-h-screen bg-[#0B0B0D] text-white">
-      <JsonLd data={serviceSchema} />
-      <div className="mx-auto max-w-6xl px-6 py-10 sm:px-8 sm:py-16">
-        <Link className="text-sm text-white/60 hover:text-white" href={`/${locale}`}>← {copy.back}</Link>
-        <header className="mt-10 max-w-4xl">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A78BFA]">{copy.eyebrow}</p>
-          <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl">{copy.title}</h1>
-          <p className="mt-6 max-w-3xl text-base leading-8 text-white/68 sm:text-lg">{copy.intro}</p>
-        </header>
-
-        <section className="mt-14" aria-labelledby="gym-benefits-title">
-          <h2 id="gym-benefits-title" className="text-2xl font-bold sm:text-3xl">{copy.benefitsTitle}</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {copy.benefits.map((benefit) => (
-              <article key={benefit.title} className="rounded-3xl border border-white/10 bg-white/5 p-6">
-                <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/62">{benefit.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-16 rounded-[2rem] border border-[#8B5CF6]/25 bg-[#7C3AED]/10 p-5 sm:p-8" aria-labelledby="gym-fit-title">
-          <h2 id="gym-fit-title" className="text-2xl font-bold sm:text-3xl">{copy.funnelTitle}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-white/65 sm:text-base">{copy.funnelBody}</p>
-          <GymsFunnel locale={locale} />
-        </section>
-
-        {(locale === 'en' || locale === 'sk') && (
-          <p className="mt-10 text-sm text-white/55">
-            <Link className="font-semibold text-[#B9A1FF] hover:text-white" href={`/${locale}/guides/gym-management-software-checklist`}>
-              {locale === 'sk' ? 'Prečítať checklist výberu systému pre fitko' : 'Read the gym software selection checklist'} →
+    <main className="gym-landing">
+      <JsonLd
+        data={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            '@id': `${SITE_URL}/${locale}/gyms#service`,
+            name: t.eyebrow,
+            description: t.intro,
+            url: `${SITE_URL}/${locale}/gyms`,
+            provider: {'@id': `${SITE_URL}/#organization`},
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            inLanguage: locale,
+            mainEntity: t.faq.map(([name, text]) => ({
+              '@type': 'Question',
+              name,
+              acceptedAnswer: {'@type': 'Answer', text},
+            })),
+          },
+        ]}
+      />
+      <nav className="gym-nav gym-container" aria-label={t.eyebrow}>
+        <Link className="gym-wordmark" href={`/${locale}`}>
+          FITLINER<span>®</span>
+        </Link>
+        <div className="gym-languages">
+          {LOCALES.map((lang) => (
+            <Link
+              key={lang}
+              href={`/${lang}/gyms`}
+              hrefLang={lang}
+              aria-current={lang === locale ? 'page' : undefined}
+            >
+              {lang === 'zh-Hans' ? '中文' : lang.toUpperCase()}
             </Link>
+          ))}
+        </div>
+      </nav>
+
+      <header id="gym-hero" className="gym-hero gym-container">
+        <p className="gym-eyebrow">
+          <span />
+          {t.eyebrow}
+        </p>
+        <h1>{t.title}</h1>
+        <p className="gym-intro">{t.intro}</p>
+        <div className="gym-hero-actions">
+          {order('hero')}
+          <a className="gym-text-link" href="#film">
+            <span aria-hidden="true">▷</span> {t.watch}
+          </a>
+        </div>
+        <p className="gym-small">{t.shipping}</p>
+        <ul className="gym-reassurance">
+          {t.reassurance.map((item) => (
+            <li key={item}>
+              <span aria-hidden="true">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div className="gym-hero-line" aria-hidden="true">
+          <span>FITLINER</span>
+          <span>01 — 13</span>
+        </div>
+      </header>
+
+      <section id="film" className="gym-section gym-film gym-container">
+        <div className="gym-section-heading">
+          <span className="gym-index">01 /</span>
+          <h2>{t.videoTitle}</h2>
+        </div>
+        <p className="gym-body">{t.videoBody}</p>
+        <div className="gym-video">
+          <iframe
+            src={GYMS_VEED_EMBED_URL}
+            title={t.watch}
+            loading="lazy"
+            allow="fullscreen; picture-in-picture"
+            allowFullScreen
+            className="gym-veed-embed"
+          />
+        </div>
+        {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
+        <div className="gym-after-video">
+          {order('video', t.videoCta)}
+          <p className="gym-small">
+            {t.sticky} · {t.shipping}
           </p>
-        )}
-      </div>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container">
+        <div className="gym-section-heading">
+          <span className="gym-index">02 /</span>
+          <h2>{t.automationTitle}</h2>
+        </div>
+        <p className="gym-body">{t.automationBody}</p>
+        <ol className="gym-workflow">
+          {t.workflow.map((step, index) => (
+            <li key={step}>
+              <span className="gym-step-number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <p>{step}</p>
+              <span className="gym-flow-arrow" aria-hidden="true">
+                ↓
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="gym-existing">
+        <div className="gym-container gym-split">
+          <div>
+            <p className="gym-eyebrow">03 / {t.existingTitle}</p>
+            <h2>{t.existingAnswer}</h2>
+            <p className="gym-body">{t.existingBody}</p>
+            <ul className="gym-check-list">
+              {t.existingBenefits.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <GymLink
+              href="#compatibility"
+              event="gyms_existing_system_cta_click"
+              location="existing-system"
+              className="gym-text-link"
+            >
+              {t.verify} <span aria-hidden="true">↗</span>
+            </GymLink>
+          </div>
+          <div
+            className="gym-system-diagram"
+            aria-label={`${t.currentSystem} + Fitliner → ${t.door}`}
+          >
+            <div className="gym-system-inputs">
+              <div>
+                <span aria-hidden="true">▤</span>
+                {t.currentSystem}
+              </div>
+              <span className="gym-plus" aria-hidden="true">
+                +
+              </span>
+              <div className="gym-system-fitliner">
+                <span aria-hidden="true">F</span>FITLINER
+              </div>
+            </div>
+            <div className="gym-system-connector" aria-hidden="true" />
+            <div className="gym-system-door">
+              <AccessIcon kind={0} />
+              <span>{t.door}</span>
+            </div>
+            <p>{t.existingBenefits[2]}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container">
+        <div className="gym-section-heading">
+          <span className="gym-index">04 /</span>
+          <h2>{t.accessTitle}</h2>
+        </div>
+        <p className="gym-body">{t.accessBody}</p>
+        <div className="gym-access-grid">
+          {t.access.map((item, index) => (
+            <article key={item}>
+              <AccessIcon kind={index} />
+              <h3>{item}</h3>
+            </article>
+          ))}
+        </div>
+        <div className="gym-install-note">
+          <h3>{t.unknown}</h3>
+          <p>{t.technician}</p>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container gym-split gym-package">
+        <figure className="gym-package-visual">
+          {GYMS_PACKAGE_IMAGE ? (
+            <Image
+              src={GYMS_PACKAGE_IMAGE}
+              alt={t.packageTitle}
+              width={800}
+              height={1000}
+              sizes="(max-width: 700px) 90vw, 500px"
+            />
+          ) : (
+            <>
+              <div className="gym-sheet">
+                <span className="gym-sheet-brand">FITLINER</span>
+                <p>{t.diagram}</p>
+                <svg
+                  viewBox="0 0 260 85"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  aria-hidden="true"
+                >
+                  <rect x="12" y="22" width="60" height="40" rx="4" />
+                  <path d="M72 42h40V15h65v27h25M112 42v29h65V42" />
+                  <rect x="202" y="22" width="44" height="40" rx="4" />
+                </svg>
+                <div className="gym-module" aria-hidden="true">
+                  <span>FITLINER</span>
+                  <i />
+                  <div>••••••</div>
+                </div>
+                <div className="gym-sheet-lines" aria-hidden="true" />
+              </div>
+              <figcaption>{t.packagePreview}</figcaption>
+            </>
+          )}
+        </figure>
+        <div>
+          <p className="gym-eyebrow">05 / FITLINER STARTER KIT</p>
+          <h2>{t.packageTitle}</h2>
+          <p className="gym-body">{t.packageBody}</p>
+          <ul className="gym-package-items">
+            {t.packageItems.map((item, index) => (
+              <li key={item}>
+                <span>0{index + 1}</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="gym-body">{t.packageNote}</p>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container gym-benefits">
+        <p className="gym-index">06 /</p>
+        <h2>{t.benefitsTitle}</h2>
+        <ul>
+          {t.benefits.map((benefit, index) => (
+            <li key={benefit}>
+              <span>0{index + 1}</span>
+              {benefit}
+              <span aria-hidden="true">↗</span>
+            </li>
+          ))}
+        </ul>
+        <blockquote>{t.quote}</blockquote>
+      </section>
+
+      <section className="gym-member">
+        <div className="gym-container gym-split">
+          <div>
+            <p className="gym-eyebrow">07 / FITLINER APP</p>
+            <h2>{t.memberTitle}</h2>
+            <p className="gym-body">{t.memberBody}</p>
+            <ul className="gym-check-list">
+              {t.memberFeatures.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="gym-phone">
+            <Image
+              src="/app_screen.png"
+              alt={t.screenAlt}
+              width={1125}
+              height={2436}
+              sizes="(max-width: 768px) 260px, 300px"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container">
+        <div className="gym-section-heading">
+          <span className="gym-index">08 /</span>
+          <h2>{t.howTitle}</h2>
+        </div>
+        <ol className="gym-onboarding">
+          {t.steps.map((step, index) => (
+            <li key={step}>
+              <span>0{index + 1}</span>
+              <h3>{step}</h3>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="offer" className="gym-section gym-container">
+        <div className="gym-offer">
+          <div>
+            <p className="gym-eyebrow">09 / FITLINER STARTER KIT</p>
+            <h2>{t.offerTitle}</h2>
+            <p className="gym-body">{t.offerBody}</p>
+            <ul className="gym-check-list">
+              {t.packageItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="gym-offer-price">
+            <p className="gym-price">
+              15 <span>€</span>
+            </p>
+            <p>{t.priceLabel}</p>
+            <GymLink
+              href={GYMS_CHECKOUT_URL}
+              order
+              location="offer-checkout"
+              className="gym-button"
+            >
+              {t.cta}
+              <span aria-hidden="true">↗</span>
+            </GymLink>
+            <p className="gym-small">{t.offerReassurance}</p>
+            <p className="gym-price-note">{t.priceNote}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container gym-founder">
+        <span className="gym-index">10 /</span>
+        <div>
+          <h2>{t.founderTitle}</h2>
+          <p className="gym-body">{t.founderBody}</p>
+          <a href="#film" className="gym-text-link">
+            {t.watch} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section className="gym-section gym-container">
+        <div className="gym-section-heading">
+          <span className="gym-index">11 /</span>
+          <h2>{t.faqTitle}</h2>
+        </div>
+        <GymFaq items={t.faq} />
+      </section>
+      <section className="gym-container gym-qualification-wrap">
+        <GymQualification locale={locale} copy={t} />
+      </section>
+      <section className="gym-section gym-container gym-close">
+        <p className="gym-eyebrow">FITLINER</p>
+        <h2>{t.closeTitle}</h2>
+        <p className="gym-body">{t.closeBody}</p>
+        {order('final')}
+        <GymLink
+          href={callHref}
+          location="final-call"
+          event="gyms_call_cta_click"
+          className="gym-call"
+        >
+          {t.call} ↗
+        </GymLink>
+      </section>
+      <footer className="gym-container gym-footer">
+        <Link className="gym-wordmark" href={`/${locale}`}>
+          FITLINER
+        </Link>
+        <div>
+          <Link href={`/${locale}`}>{t.back}</Link>
+          <Link href={`/${locale}/privacy`}>{t.privacy}</Link>
+          <Link href={`/${locale}/terms`}>{t.terms}</Link>
+        </div>
+        <GymTracking key={locale} copy={t} locale={locale} />
+      </footer>
     </main>
   );
 }

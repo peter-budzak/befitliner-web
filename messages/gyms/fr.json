@@ -1,0 +1,138 @@
+{
+  "eyebrow": "Fitliner pour les salles de sport",
+  "title": "Votre salle peut fonctionner même quand vous ne travaillez pas.",
+  "intro": "Accès, abonnements et paiements peuvent être automatisés. Avec ou sans accueil. Et, si votre installation est compatible, en parallèle de votre système actuel.",
+  "cta": "Commander le kit de démarrage à 15 €",
+  "shipping": "Vous payez uniquement les frais de port et de préparation. Livraison dans toute l’UE.",
+  "watch": "Voir comment fonctionne Fitliner",
+  "reassurance": [
+    "L’accès actuel peut rester",
+    "Votre électricien peut l’installer",
+    "Vous pouvez conserver l’accueil"
+  ],
+  "videoTitle": "Je dirige une salle. Je voulais plus de temps pour la développer.",
+  "videoBody": "C’est pour cela que Fitliner est né. Découvrez comment il relie les tâches du quotidien, du paiement à l’ouverture de la porte.",
+  "videoLanguage": "La vidéo est actuellement disponible en slovaque.",
+  "videoCta": "Je veux Fitliner dans ma salle",
+  "automationTitle": "Ce que vous faites à la main peut devenir automatique.",
+  "automationBody": "Sans appel. Sans attendre à l’accueil. Sans valider chaque entrée manuellement.",
+  "workflow": [
+    "Le membre achète un abonnement",
+    "Le paiement est enregistré",
+    "L’abonnement est activé",
+    "Le membre reçoit son autorisation d’accès",
+    "Il ouvre la salle avec son téléphone",
+    "À la fin de l’abonnement, l’accès est ajusté selon vos paramètres"
+  ],
+  "existingTitle": "Vous avez déjà des cartes, des badges, un tourniquet ou un autre système d’accès ?",
+  "existingAnswer": "Vous n’avez pas à le jeter.",
+  "existingBody": "Avec une configuration technique compatible, Fitliner peut être raccordé en parallèle à votre système actuel. Vous conservez le mode d’entrée existant et ajoutez l’accès par application et l’automatisation.",
+  "existingBenefits": [
+    "Faites la transition des membres progressivement.",
+    "Gardez les équipements qui fonctionnent.",
+    "Nous vérifions votre configuration avant l’installation."
+  ],
+  "verify": "Vérifier mon installation",
+  "currentSystem": "Votre système actuel",
+  "door": "Entrée de la salle",
+  "accessTitle": "La plupart des salles n’ont pas besoin de changer toute la porte.",
+  "accessBody": "Le module peut s’intégrer aux solutions d’accès courantes lorsque leur configuration technique le permet.",
+  "access": [
+    "Gâche électrique / ouverture par buzzer",
+    "Ventouse magnétique avec bouton de sortie",
+    "Tourniquet"
+  ],
+  "unknown": "Vous ne savez pas quel système vous avez ? Aucun souci.",
+  "technician": "Nous vous aidons à le vérifier. Un électricien ou technicien qualifié réalise l’installation selon le schéma fourni.",
+  "packageTitle": "Voici ce que nous vous envoyons.",
+  "packageBody": "Un premier pas vers l’accès automatisé. Tout est réuni, avec une suite claire.",
+  "packageItems": [
+    "Module d’accès Fitliner",
+    "Schéma de raccordement",
+    "Instructions de configuration",
+    "Prochaines étapes et assistance"
+  ],
+  "packageNote": "Notre technicien n’a pas besoin de se déplacer. Votre électricien peut suivre le schéma, avec notre aide à distance si nécessaire.",
+  "packagePreview": "Illustration du contenu du kit",
+  "diagram": "Schéma de raccordement",
+  "benefitsTitle": "Moins de travail. Pas un système de plus à gérer.",
+  "benefits": [
+    "Moins de tâches à l’accueil",
+    "Abonnements et paiements automatisés",
+    "Possibilité d’élargir les horaires ou d’ouvrir 24 h/24",
+    "Moins d’administration au quotidien",
+    "Une salle moins dépendante de votre présence"
+  ],
+  "quote": "Le propriétaire d’une salle ne devrait pas passer sa vie à vérifier les paiements et ouvrir les portes. Il devrait développer sa salle.",
+  "memberTitle": "Vos membres reçoivent plus qu’une clé numérique.",
+  "memberBody": "La plupart des systèmes d’accès s’arrêtent à la porte. Pour Fitliner, l’ouverture de la porte n’est que le début.",
+  "memberFeatures": [
+    "Programmes d’entraînement",
+    "Nutrition et suivi des progrès",
+    "Échanges avec les coachs et la communauté"
+  ],
+  "screenAlt": "Capture réelle de l’application Fitliner",
+  "howTitle": "Du kit à la première entrée automatique.",
+  "steps": [
+    "Vous commandez le kit.",
+    "Nous vérifions ensemble votre configuration d’accès.",
+    "Votre électricien installe Fitliner selon le schéma.",
+    "Nous configurons la salle, les abonnements et les accès."
+  ],
+  "offerTitle": "Essayez Fitliner dans votre salle.",
+  "offerBody": "Nous développons notre réseau de salles partenaires et souhaitons rendre le premier pas aussi simple que possible.",
+  "priceLabel": "expédition et préparation du kit de démarrage",
+  "priceNote": "15 € n’est pas le prix d’une utilisation à vie. Nous conviendrons des conditions du service avant la mise en route.",
+  "offerReassurance": "Vous n’avez pas à changer votre système maintenant. Nous vérifions d’abord la solution adaptée à votre salle.",
+  "founderTitle": "Nous l’avons d’abord construit pour notre propre salle.",
+  "founderBody": "Fitliner n’est pas né d’une liste de fonctionnalités dans un bureau. Il est né du quotidien : paiements, abonnements et portes à ouvrir. Aujourd’hui, il aide d’autres propriétaires à gérer ces mêmes tâches.",
+  "faqTitle": "Vous avez encore des questions ?",
+  "faq": [
+    [
+      "Dois-je remplacer mon système d’accès actuel ?",
+      "Pas forcément. Fitliner peut fonctionner en parallèle si la configuration technique est compatible. Nous la vérifions avant l’installation."
+    ],
+    [
+      "Dois-je supprimer l’accueil ?",
+      "Non. Vous pouvez le garder. Fitliner automatise les tâches courantes et complète votre fonctionnement."
+    ],
+    [
+      "Dois-je ouvrir 24 h/24 ?",
+      "Non. Vous choisissez vos horaires. L’ouverture permanente est une possibilité, pas une obligation."
+    ],
+    [
+      "Qui installe Fitliner ?",
+      "Un électricien ou technicien qualifié selon le schéma fourni. Nous pouvons l’aider à distance si nécessaire."
+    ],
+    [
+      "Et si je ne connais pas mon système ?",
+      "Aucun souci. Décrivez votre entrée dans la vérification facultative et nous vous aiderons à évaluer l’installation."
+    ],
+    [
+      "Que comprend l’offre à 15 € ?",
+      "Le kit contient le module Fitliner, le schéma, les instructions, les prochaines étapes et l’assistance. Les 15 € couvrent l’expédition et la préparation, pas le service à vie."
+    ],
+    [
+      "Que se passe-t-il après la commande ?",
+      "Nous évaluons l’entrée et convenons des conditions et des prochaines étapes. Votre électricien installe le module, puis nous configurons ensemble la salle, les abonnements et l’accès."
+    ],
+    [
+      "Fitliner fonctionne-t-il avec un tourniquet ?",
+      "Cela dépend de ses commandes et de sa configuration technique. Nous vérifions d’abord le modèle concerné."
+    ]
+  ],
+  "closeTitle": "Votre salle peut fonctionner même pendant votre temps libre.",
+  "closeBody": "Commencez avec le kit de démarrage Fitliner.",
+  "call": "Mon installation est particulière — je préfère en parler",
+  "qualificationTitle": "Regardons votre entrée ensemble.",
+  "qualificationBody": "Vérification de compatibilité facultative. Le questionnaire n’est pas nécessaire pour commander le kit.",
+  "qualificationDone": "Merci. Vos informations sont enregistrées pour que nous puissions discuter de votre installation.",
+  "sticky": "Kit de démarrage · 15 €",
+  "back": "Fitliner pour les membres",
+  "privacy": "Confidentialité",
+  "terms": "Conditions",
+  "consent": "Autoriser la mesure publicitaire facultative ? Elle nous aide à comprendre quelles annonces fonctionnent. Nous n’envoyons pas les réponses du questionnaire à Meta.",
+  "accept": "Autoriser la mesure",
+  "reject": "Refuser",
+  "settings": "Réglages de mesure"
+}

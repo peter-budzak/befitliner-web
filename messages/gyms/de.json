@@ -1,0 +1,138 @@
+{
+  "eyebrow": "Fitliner für Fitnessstudios",
+  "title": "Dein Studio kann arbeiten, auch wenn du gerade frei hast.",
+  "intro": "Zutritt, Mitgliedschaften und Zahlungen laufen automatisch. Mit oder ohne Rezeption. Und bei kompatibler Installation auch parallel zu deinem bestehenden System.",
+  "cta": "Starterpaket für 15 € bestellen",
+  "shipping": "Sie zahlen nur Versand und Verpackung. Lieferung in die gesamte EU.",
+  "watch": "So funktioniert Fitliner",
+  "reassurance": [
+    "Bestehender Zutritt kann bleiben",
+    "Dein Elektriker kann es installieren",
+    "Die Rezeption muss nicht weg"
+  ],
+  "videoTitle": "Ich betreibe ein Studio. Und wollte mehr Zeit, es weiterzuentwickeln.",
+  "videoBody": "Deshalb gibt es Fitliner. Schau dir an, wie es den Studioalltag verbindet — von der Zahlung bis zur offenen Tür.",
+  "videoLanguage": "Das Video ist derzeit auf Slowakisch verfügbar.",
+  "videoCta": "Ich möchte Fitliner in meinem Studio",
+  "automationTitle": "Was du heute von Hand erledigst, kann automatisch laufen.",
+  "automationBody": "Ohne Anruf. Ohne Warten an der Rezeption. Ohne jeden Zutritt einzeln freizugeben.",
+  "workflow": [
+    "Ein Mitglied kauft eine Mitgliedschaft",
+    "Die Zahlung wird erfasst",
+    "Die Mitgliedschaft wird aktiviert",
+    "Das Mitglied erhält die Zutrittsberechtigung",
+    "Es öffnet das Studio per Smartphone",
+    "Nach Ablauf wird der Zutritt gemäß deinen Einstellungen angepasst"
+  ],
+  "existingTitle": "Du nutzt bereits Karten, Chips, ein Drehkreuz oder ein anderes Zutrittssystem?",
+  "existingAnswer": "Du musst es nicht wegwerfen.",
+  "existingBody": "Bei kompatibler technischer Konfiguration kann Fitliner parallel zu deinem bestehenden System angeschlossen werden. Der bisherige Zutritt bleibt erhalten, App-Zutritt und Automatisierung kommen hinzu.",
+  "existingBenefits": [
+    "Mitglieder schrittweise umstellen.",
+    "Funktionierende Technik weiter nutzen.",
+    "Wir prüfen die Konfiguration vor der Installation."
+  ],
+  "verify": "Meine Anlage prüfen",
+  "currentSystem": "Dein bestehendes System",
+  "door": "Studioeingang",
+  "accessTitle": "Die meisten Studios brauchen keine komplett neue Tür.",
+  "accessBody": "Die Zutrittseinheit lässt sich in gängige Zugangslösungen einbinden, sofern die technische Konfiguration passt.",
+  "access": [
+    "Elektrischer Türöffner / Summer",
+    "Magnetschloss mit Ausgangstaster",
+    "Drehkreuz"
+  ],
+  "unknown": "Du weißt nicht, welches System du hast? Kein Problem.",
+  "technician": "Wir helfen bei der Prüfung. Ein qualifizierter Elektriker oder Techniker installiert die Einheit nach dem mitgelieferten Schaltplan.",
+  "packageTitle": "Das schicken wir dir.",
+  "packageBody": "Dein erster Schritt zum automatisierten Zutritt. Alles zusammen, mit einem klaren weiteren Ablauf.",
+  "packageItems": [
+    "Fitliner-Zutrittseinheit",
+    "Schaltplan",
+    "Einrichtungsanleitung",
+    "Nächste Schritte und Unterstützung"
+  ],
+  "packageNote": "Unser Techniker muss nicht vor Ort sein. Dein Elektriker kann nach dem Schaltplan arbeiten; bei Bedarf unterstützen wir aus der Ferne.",
+  "packagePreview": "Schematische Darstellung des Paketinhalts",
+  "diagram": "Schaltplan",
+  "benefitsTitle": "Weniger Arbeit. Kein weiteres System zum Verwalten.",
+  "benefits": [
+    "Weniger Verwaltungsarbeit an der Rezeption",
+    "Automatische Mitgliedschaften und Zahlungen",
+    "Längere Öffnungszeiten oder 24/7 als Option",
+    "Weniger tägliche Administration",
+    "Ein Betrieb, der weniger von deiner Anwesenheit abhängt"
+  ],
+  "quote": "Studioinhaber sollten ihr Leben nicht mit Zahlungskontrollen und Türöffnen verbringen. Sie sollten ihr Studio weiterentwickeln.",
+  "memberTitle": "Deine Mitglieder bekommen mehr als einen digitalen Schlüssel.",
+  "memberBody": "Die meisten Zutrittssysteme hören an der Tür auf. Für Fitliner ist das Türöffnen erst der Anfang.",
+  "memberFeatures": [
+    "Trainingspläne",
+    "Ernährung und Fortschrittsverfolgung",
+    "Kommunikation mit Coaches und der Community"
+  ],
+  "screenAlt": "Echter Screenshot der Fitliner-App",
+  "howTitle": "Vom Paket zum ersten automatischen Zutritt.",
+  "steps": [
+    "Starterpaket bestellen.",
+    "Gemeinsam die Zutrittskonfiguration prüfen.",
+    "Dein Elektriker installiert Fitliner nach Schaltplan.",
+    "Studio, Mitgliedschaften und Zutritt einrichten."
+  ],
+  "offerTitle": "Teste Fitliner in deinem Fitnessstudio.",
+  "offerBody": "Wir erweitern unser Netzwerk an Partnerstudios und möchten den ersten Schritt so einfach wie möglich machen.",
+  "priceLabel": "Versand und Verpackung des Starterpakets",
+  "priceNote": "15 € sind nicht die Kosten für eine lebenslange Nutzung. Die laufenden Servicebedingungen vereinbaren wir vor dem Start.",
+  "offerReassurance": "Du musst dein bestehendes System jetzt nicht ändern. Wir prüfen zuerst die konkrete Lösung für dein Studio.",
+  "founderTitle": "Zuerst haben wir es für unser eigenes Studio gebaut.",
+  "founderBody": "Fitliner entstand nicht als Funktionsliste im Büro. Es entstand im Studioalltag: aus Zahlungen, Mitgliedschaften und Türen, die geöffnet werden mussten. Heute hilft es anderen Inhabern bei denselben Aufgaben.",
+  "faqTitle": "Noch Fragen offen?",
+  "faq": [
+    [
+      "Muss ich mein bestehendes Zutrittssystem ersetzen?",
+      "Nicht unbedingt. Bei kompatibler Technik kann Fitliner parallel zum bestehenden System laufen. Wir prüfen die Konfiguration vor der Installation."
+    ],
+    [
+      "Muss ich die Rezeption abschaffen?",
+      "Nein. Die Rezeption kann bleiben. Fitliner übernimmt Routineaufgaben und ergänzt deinen bisherigen Betrieb."
+    ],
+    [
+      "Muss ich rund um die Uhr öffnen?",
+      "Nein. Du bestimmst die Öffnungszeiten. 24/7 ist eine Möglichkeit, keine Voraussetzung."
+    ],
+    [
+      "Wer installiert Fitliner?",
+      "Ein qualifizierter Elektriker oder Techniker nach dem mitgelieferten Schaltplan. Bei Bedarf helfen wir aus der Ferne."
+    ],
+    [
+      "Was, wenn ich mein System nicht kenne?",
+      "Kein Problem. Beschreibe deinen Eingang in der optionalen Kompatibilitätsprüfung. Wir helfen bei der Einschätzung."
+    ],
+    [
+      "Was bekomme ich für 15 €?",
+      "Das Starterpaket enthält die Zutrittseinheit, den Schaltplan, Anleitungen, nächste Schritte und Unterstützung. 15 € decken Versand und Verpackung, nicht die lebenslange Nutzung."
+    ],
+    [
+      "Was passiert nach der Bestellung?",
+      "Wir prüfen den Eingang und vereinbaren die nächsten Schritte und Servicebedingungen. Dein Elektriker installiert die Einheit; gemeinsam richten wir Studio, Mitgliedschaften und Zutritt ein."
+    ],
+    [
+      "Funktioniert Fitliner mit einem Drehkreuz?",
+      "Das hängt von Steuerung und technischer Konfiguration ab. Wir prüfen das konkrete Modell vorab."
+    ]
+  ],
+  "closeTitle": "Dein Studio kann arbeiten, wenn du frei hast.",
+  "closeBody": "Starte mit dem Fitliner-Starterpaket.",
+  "call": "Meine Anlage ist speziell — ich möchte zuerst sprechen",
+  "qualificationTitle": "Schauen wir uns deinen Eingang an.",
+  "qualificationBody": "Eine freiwillige Kompatibilitätsprüfung. Für die Bestellung musst du den Fragebogen nicht ausfüllen.",
+  "qualificationDone": "Danke. Deine Angaben sind gespeichert, damit wir die konkrete Installation besprechen können.",
+  "sticky": "Starterpaket · 15 €",
+  "back": "Fitliner für Mitglieder",
+  "privacy": "Datenschutz",
+  "terms": "Bedingungen",
+  "consent": "Optionale Werbemessung erlauben? Sie zeigt uns, welche Anzeigen funktionieren. Antworten aus dem Fragebogen senden wir nicht an Meta.",
+  "accept": "Messung erlauben",
+  "reject": "Ablehnen",
+  "settings": "Messeinstellungen"
+}

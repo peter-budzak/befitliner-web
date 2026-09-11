@@ -1,0 +1,138 @@
+{
+  "eyebrow": "Fitliner for gym owners",
+  "title": "Your gym can work even when you’re not working.",
+  "intro": "Access, memberships and payments can run automatically. With or without reception. And, where compatible, alongside the system you already use.",
+  "cta": "Order the Starter Kit for €15",
+  "shipping": "You only pay shipping and handling. Delivery throughout the EU.",
+  "watch": "See how Fitliner works",
+  "reassurance": [
+    "Your existing access can stay",
+    "Your electrician can install it",
+    "Keep your reception if you want"
+  ],
+  "videoTitle": "I own a gym. I wanted more time to build it.",
+  "videoBody": "That’s why Fitliner exists. See how it connects everyday gym operations — from payment to opening the door.",
+  "videoLanguage": "The video is currently available in Slovak.",
+  "videoCta": "I want Fitliner in my gym",
+  "automationTitle": "The things you do by hand today can happen automatically.",
+  "automationBody": "No phone call. No waiting at reception. No manual approval for every visit.",
+  "workflow": [
+    "A member buys a membership",
+    "The payment is recorded",
+    "The membership activates",
+    "The member receives access permission",
+    "They open the gym with their phone",
+    "When membership ends, access updates according to your settings"
+  ],
+  "existingTitle": "Already using cards, fobs, a turnstile or another access system?",
+  "existingAnswer": "You don’t have to throw it away.",
+  "existingBody": "With a compatible technical setup, Fitliner can connect in parallel with your existing system. Keep your current entry method and add app-based access and automation.",
+  "existingBenefits": [
+    "Move members over gradually.",
+    "Keep working equipment in place.",
+    "We check your setup before installation."
+  ],
+  "verify": "Check my setup",
+  "currentSystem": "Your current system",
+  "door": "Gym entrance",
+  "accessTitle": "Most gyms don’t need a whole new door.",
+  "accessBody": "The access unit can connect to common entry solutions where the technical configuration allows it.",
+  "access": [
+    "Electric door release / buzzer",
+    "Magnetic lock with exit button",
+    "Turnstile"
+  ],
+  "unknown": "Not sure which system you have? That’s OK.",
+  "technician": "We’ll help assess it. A qualified electrician or technician installs the unit using the supplied wiring diagram.",
+  "packageTitle": "Here’s what we send you.",
+  "packageBody": "Your first step towards automated access. Everything together, with a clear way forward.",
+  "packageItems": [
+    "Fitliner access unit",
+    "Wiring diagram",
+    "Setup instructions",
+    "Next steps and support"
+  ],
+  "packageNote": "Our technician doesn’t have to do the installation. Your electrician can follow the diagram, with remote help from us if needed.",
+  "packagePreview": "Illustration of the kit contents",
+  "diagram": "Wiring diagram",
+  "benefitsTitle": "Less work. Not another system to manage.",
+  "benefits": [
+    "Less reception admin",
+    "Automated memberships and payments",
+    "The option of longer or 24/7 opening hours",
+    "Less day-to-day paperwork",
+    "A gym that depends less on you being there"
+  ],
+  "quote": "A gym owner shouldn’t spend their life checking payments and opening doors. They should be building their gym.",
+  "memberTitle": "Your members get more than a digital key.",
+  "memberBody": "Most access systems stop at the door. For Fitliner, opening the door is just the beginning.",
+  "memberFeatures": [
+    "Training plans",
+    "Nutrition and progress tracking",
+    "Communication with coaches and the community"
+  ],
+  "screenAlt": "Actual Fitliner app screen",
+  "howTitle": "From the kit to your first automated entry.",
+  "steps": [
+    "Order your Starter Kit.",
+    "We check your access setup together.",
+    "Your electrician installs Fitliner using the diagram.",
+    "We set up your gym, memberships and access."
+  ],
+  "offerTitle": "Try Fitliner in your gym.",
+  "offerBody": "We’re growing our network of partner gyms and want to make the first step as simple as possible.",
+  "priceLabel": "Starter Kit shipping and handling",
+  "priceNote": "€15 is not the lifetime cost of Fitliner. We’ll agree the ongoing service terms before you go live.",
+  "offerReassurance": "You don’t need to change your current system now. We’ll check your gym’s specific setup first.",
+  "founderTitle": "First, we built it for our own gym.",
+  "founderBody": "Fitliner didn’t start as a feature list in an office. It grew out of everyday gym life: payments, memberships and doors that needed opening. Now it helps other owners handle those same tasks.",
+  "faqTitle": "Still have a few questions?",
+  "faq": [
+    [
+      "Do I have to replace my existing access system?",
+      "Not necessarily. Fitliner can run alongside your existing system if the technical setup is compatible. We check it before installation."
+    ],
+    [
+      "Do I have to remove reception?",
+      "No. Keep your reception. Fitliner can handle routine tasks and complement the way you already operate."
+    ],
+    [
+      "Do I have to open 24/7?",
+      "No. You choose your opening hours. Round-the-clock access is an option, not a requirement."
+    ],
+    [
+      "Who installs Fitliner?",
+      "A qualified electrician or technician, using the supplied diagram. We can help remotely if needed."
+    ],
+    [
+      "What if I don’t know which system I use?",
+      "That’s fine. Describe your entrance in the optional compatibility check and we’ll help assess the setup."
+    ],
+    [
+      "What do I get for €15?",
+      "The Starter Kit includes the Fitliner access unit, wiring diagram, instructions, next steps and support. €15 covers shipping and handling, not lifetime service."
+    ],
+    [
+      "What happens after I order?",
+      "We assess your entrance, agree the next steps and service terms. Your electrician installs the unit and we set up your gym, memberships and access together."
+    ],
+    [
+      "Does Fitliner work with turnstiles?",
+      "It can, depending on the turnstile’s controls and technical configuration. We check the specific model first."
+    ]
+  ],
+  "closeTitle": "Let your gym work when you don’t have to.",
+  "closeBody": "Start with the Fitliner Starter Kit.",
+  "call": "My setup is unusual — I’d like to talk first",
+  "qualificationTitle": "Let’s look at your entrance.",
+  "qualificationBody": "An optional compatibility check. You don’t need to complete this questionnaire to order the kit.",
+  "qualificationDone": "Thank you. Your details are saved so we can discuss your specific setup.",
+  "sticky": "Starter Kit · €15",
+  "back": "Fitliner for members",
+  "privacy": "Privacy",
+  "terms": "Terms",
+  "consent": "Allow optional advertising measurement? It helps us understand which ads work. We don’t send questionnaire answers to Meta.",
+  "accept": "Allow measurement",
+  "reject": "Reject",
+  "settings": "Measurement settings"
+}
