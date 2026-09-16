@@ -10,7 +10,7 @@ const copies = locales.map((locale) =>
 );
 for (const copy of copies) {
   assert.deepEqual(Object.keys(copy).sort(), Object.keys(copies[0]).sort());
-  assert.equal(copy.faq.length, 8);
+  assert.equal(copy.faq.length, 9);
   assert.equal(copy.workflow.length, 6);
   assert.equal(copy.steps.length, 4);
   assert.equal(copy.packageItems.length, 4);

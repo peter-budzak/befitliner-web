@@ -127,11 +127,21 @@ export default async function GymsPage({params}: PageProps) {
         </p>
         <h1>{t.title}</h1>
         <p className="gym-intro">{t.intro}</p>
+        <div id="film" className="gym-hero-video">
+          <div className="gym-video">
+            <iframe
+              src={GYMS_VEED_EMBED_URL}
+              title={t.watch}
+              loading="eager"
+              allow="fullscreen; picture-in-picture"
+              allowFullScreen
+              className="gym-veed-embed"
+            />
+          </div>
+          {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
+        </div>
         <div className="gym-hero-actions">
           {order('hero')}
-          <a className="gym-text-link" href="#film">
-            <span aria-hidden="true">▷</span> {t.watch}
-          </a>
         </div>
         <p className="gym-small">{t.shipping}</p>
         <ul className="gym-reassurance">
@@ -147,31 +157,6 @@ export default async function GymsPage({params}: PageProps) {
           <span>01 — 13</span>
         </div>
       </header>
-
-      <section id="film" className="gym-section gym-film gym-container">
-        <div className="gym-section-heading">
-          <span className="gym-index">01 /</span>
-          <h2>{t.videoTitle}</h2>
-        </div>
-        <p className="gym-body">{t.videoBody}</p>
-        <div className="gym-video">
-          <iframe
-            src={GYMS_VEED_EMBED_URL}
-            title={t.watch}
-            loading="lazy"
-            allow="fullscreen; picture-in-picture"
-            allowFullScreen
-            className="gym-veed-embed"
-          />
-        </div>
-        {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
-        <div className="gym-after-video">
-          {order('video', t.videoCta)}
-          <p className="gym-small">
-            {t.sticky} · {t.shipping}
-          </p>
-        </div>
-      </section>
 
       <section className="gym-section gym-container">
         <div className="gym-section-heading">
