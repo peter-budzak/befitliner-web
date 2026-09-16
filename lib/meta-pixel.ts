@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-/** Call only after marketing consent. Returns true only when initialized here. */
+/** Caller controls tracking preferences. Returns true only when initialized here. */
 export function ensureMetaPixel() {
   if (!PIXEL_ID || window.fbq) return false;
   const fbq = (...args: unknown[]) => {

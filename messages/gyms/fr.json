@@ -2,8 +2,8 @@
   "eyebrow": "Fitliner pour les salles de sport",
   "title": "Votre salle peut fonctionner même quand vous ne travaillez pas.",
   "intro": "Accès, abonnements et paiements peuvent être automatisés. Avec ou sans accueil. Et, si votre installation est compatible, en parallèle de votre système actuel.",
-  "cta": "Commander le kit de démarrage à 15 €",
-  "shipping": "Vous payez uniquement les frais de port et de préparation. Livraison dans toute l’UE.",
+  "cta": "Paiement unique de 15 €",
+  "shipping": "15 € une seule fois. Aucun abonnement mensuel. Livraison dans toute l’UE.",
   "watch": "Voir comment fonctionne Fitliner",
   "reassurance": [
     "L’accès actuel peut rester",
@@ -44,10 +44,10 @@
   ],
   "unknown": "Vous ne savez pas quel système vous avez ? Aucun souci.",
   "technician": "Nous vous aidons à le vérifier. Un électricien ou technicien qualifié réalise l’installation selon le schéma fourni.",
-  "packageTitle": "Voici ce que nous vous envoyons.",
-  "packageBody": "Un premier pas vers l’accès automatisé. Tout est réuni, avec une suite claire.",
+  "packageTitle": "Une puce Fitliner pour votre porte ou tourniquet.",
+  "packageBody": "La puce, les instructions et l’assistance à l’installation. Avec un accès gratuit à vie à l’application pour vous et vos clients.",
   "packageItems": [
-    "Module d’accès Fitliner",
+    "Puce Fitliner pour porte ou tourniquet",
     "Schéma de raccordement",
     "Instructions de configuration",
     "Prochaines étapes et assistance"
@@ -80,9 +80,9 @@
     "Nous configurons la salle, les abonnements et les accès."
   ],
   "offerTitle": "Essayez Fitliner dans votre salle.",
-  "offerBody": "Nous développons notre réseau de salles partenaires et souhaitons rendre le premier pas aussi simple que possible.",
-  "priceLabel": "expédition et préparation du kit de démarrage",
-  "priceNote": "15 € n’est pas le prix d’une utilisation à vie. Nous conviendrons des conditions du service avant la mise en route.",
+  "offerBody": "Placez la puce Fitliner sur votre porte ou tourniquet. Le paiement unique de 15 € comprend la puce et la livraison dans l’UE.",
+  "priceLabel": "paiement unique pour la puce Fitliner sur votre porte ou tourniquet",
+  "priceNote": "Vous ne payez qu’une fois. Les propriétaires de salle et leurs clients bénéficient d’un accès gratuit à vie à l’application Fitliner. Aucun abonnement mensuel.",
   "offerReassurance": "Vous n’avez pas à changer votre système maintenant. Nous vérifions d’abord la solution adaptée à votre salle.",
   "founderTitle": "Nous l’avons d’abord construit pour notre propre salle.",
   "founderBody": "Fitliner n’est pas né d’une liste de fonctionnalités dans un bureau. Il est né du quotidien : paiements, abonnements et portes à ouvrir. Aujourd’hui, il aide d’autres propriétaires à gérer ces mêmes tâches.",
@@ -109,8 +109,8 @@
       "Aucun souci. Décrivez votre entrée dans la vérification facultative et nous vous aiderons à évaluer l’installation."
     ],
     [
-      "Que comprend l’offre à 15 € ?",
-      "Le kit contient le module Fitliner, le schéma, les instructions, les prochaines étapes et l’assistance. Les 15 € couvrent l’expédition et la préparation, pas le service à vie."
+      "Que comprend le paiement unique de 15 € ?",
+      "Une puce Fitliner pour votre porte ou tourniquet, un schéma de branchement, les instructions et l’assistance. La livraison dans l’UE est incluse. Propriétaires et clients bénéficient d’un accès gratuit à vie à l’application, sans abonnement mensuel."
     ],
     [
       "Que se passe-t-il après la commande ?",
@@ -122,12 +122,12 @@
     ]
   ],
   "closeTitle": "Votre salle peut fonctionner même pendant votre temps libre.",
-  "closeBody": "Commencez avec le kit de démarrage Fitliner.",
+  "closeBody": "Commencez avec la puce Fitliner pour un paiement unique de 15 €. Sans abonnement mensuel.",
   "call": "Mon installation est particulière — je préfère en parler",
   "qualificationTitle": "Regardons votre entrée ensemble.",
   "qualificationBody": "Vérification de compatibilité facultative. Le questionnaire n’est pas nécessaire pour commander le kit.",
   "qualificationDone": "Merci. Vos informations sont enregistrées pour que nous puissions discuter de votre installation.",
-  "sticky": "Kit de démarrage · 15 €",
+  "sticky": "Paiement unique · 15 €",
   "back": "Fitliner pour les membres",
   "privacy": "Confidentialité",
   "terms": "Conditions",

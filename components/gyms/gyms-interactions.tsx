@@ -21,7 +21,7 @@ type EventName =
 
 function allowed() {
   try {
-    return localStorage.getItem(MARKETING_CONSENT_KEY) === 'accepted';
+    return localStorage.getItem(MARKETING_CONSENT_KEY) !== 'rejected';
   } catch {
     return false;
   }
@@ -186,12 +186,12 @@ export function GymTracking({copy, locale}: {copy: GymsCopy; locale: string}) {
   useEffect(() => {
     let saved = '';
     try {
-      saved = localStorage.getItem(MARKETING_CONSENT_KEY) || '';
+      saved = localStorage.getItem(MARKETING_CONSENT_KEY) || 'default';
     } catch {
       /* Measurement remains disabled. */
     }
     setChoice(saved);
-    if (saved === 'accepted') recordView();
+    if (allowed()) recordView();
     const hero = document.getElementById('gym-hero');
     const observer = new IntersectionObserver(([entry]) =>
       setSticky(!entry.isIntersecting && entry.boundingClientRect.bottom < 0),

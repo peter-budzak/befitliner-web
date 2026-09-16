@@ -2,8 +2,8 @@
   "eyebrow": "Fitliner für Fitnessstudios",
   "title": "Dein Studio kann arbeiten, auch wenn du gerade frei hast.",
   "intro": "Zutritt, Mitgliedschaften und Zahlungen laufen automatisch. Mit oder ohne Rezeption. Und bei kompatibler Installation auch parallel zu deinem bestehenden System.",
-  "cta": "Starterpaket für 15 € bestellen",
-  "shipping": "Sie zahlen nur Versand und Verpackung. Lieferung in die gesamte EU.",
+  "cta": "Einmalige Zahlung von 15 €",
+  "shipping": "Einmalig 15 €. Keine monatliche Grundgebühr. EU-weite Lieferung.",
   "watch": "So funktioniert Fitliner",
   "reassurance": [
     "Bestehender Zutritt kann bleiben",
@@ -44,10 +44,10 @@
   ],
   "unknown": "Du weißt nicht, welches System du hast? Kein Problem.",
   "technician": "Wir helfen bei der Prüfung. Ein qualifizierter Elektriker oder Techniker installiert die Einheit nach dem mitgelieferten Schaltplan.",
-  "packageTitle": "Das schicken wir dir.",
-  "packageBody": "Dein erster Schritt zum automatisierten Zutritt. Alles zusammen, mit einem klaren weiteren Ablauf.",
+  "packageTitle": "Der Fitliner-Chip für Ihre Tür oder Ihr Drehkreuz.",
+  "packageBody": "Chip, Anleitung und Unterstützung beim Anschluss. Dazu lebenslanger kostenloser App-Zugang für Sie und Ihre Mitglieder.",
   "packageItems": [
-    "Fitliner-Zutrittseinheit",
+    "Fitliner-Chip für Tür oder Drehkreuz",
     "Schaltplan",
     "Einrichtungsanleitung",
     "Nächste Schritte und Unterstützung"
@@ -80,9 +80,9 @@
     "Studio, Mitgliedschaften und Zutritt einrichten."
   ],
   "offerTitle": "Teste Fitliner in deinem Fitnessstudio.",
-  "offerBody": "Wir erweitern unser Netzwerk an Partnerstudios und möchten den ersten Schritt so einfach wie möglich machen.",
-  "priceLabel": "Versand und Verpackung des Starterpakets",
-  "priceNote": "15 € sind nicht die Kosten für eine lebenslange Nutzung. Die laufenden Servicebedingungen vereinbaren wir vor dem Start.",
+  "offerBody": "Bringen Sie den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz an. Die einmaligen 15 € enthalten den Chip und die Lieferung innerhalb der EU.",
+  "priceLabel": "einmalig für den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz",
+  "priceNote": "Sie zahlen nur einmal. Studiobetreiber und ihre Mitglieder erhalten lebenslangen kostenlosen Zugang zur Fitliner-App. Keine monatliche Grundgebühr.",
   "offerReassurance": "Du musst dein bestehendes System jetzt nicht ändern. Wir prüfen zuerst die konkrete Lösung für dein Studio.",
   "founderTitle": "Zuerst haben wir es für unser eigenes Studio gebaut.",
   "founderBody": "Fitliner entstand nicht als Funktionsliste im Büro. Es entstand im Studioalltag: aus Zahlungen, Mitgliedschaften und Türen, die geöffnet werden mussten. Heute hilft es anderen Inhabern bei denselben Aufgaben.",
@@ -109,8 +109,8 @@
       "Kein Problem. Beschreibe deinen Eingang in der optionalen Kompatibilitätsprüfung. Wir helfen bei der Einschätzung."
     ],
     [
-      "Was bekomme ich für 15 €?",
-      "Das Starterpaket enthält die Zutrittseinheit, den Schaltplan, Anleitungen, nächste Schritte und Unterstützung. 15 € decken Versand und Verpackung, nicht die lebenslange Nutzung."
+      "Was erhalte ich für einmalig 15 €?",
+      "Einen Fitliner-Chip für Tür oder Drehkreuz, einen Anschlussplan, Anleitungen und Unterstützung. Die EU-weite Lieferung ist enthalten. Betreiber und Mitglieder erhalten lebenslangen kostenlosen App-Zugang ohne monatliche Grundgebühr."
     ],
     [
       "Was passiert nach der Bestellung?",
@@ -122,12 +122,12 @@
     ]
   ],
   "closeTitle": "Dein Studio kann arbeiten, wenn du frei hast.",
-  "closeBody": "Starte mit dem Fitliner-Starterpaket.",
+  "closeBody": "Starten Sie mit dem Fitliner-Chip für einmalig 15 €. Ohne monatliche Grundgebühr.",
   "call": "Meine Anlage ist speziell — ich möchte zuerst sprechen",
   "qualificationTitle": "Schauen wir uns deinen Eingang an.",
   "qualificationBody": "Eine freiwillige Kompatibilitätsprüfung. Für die Bestellung musst du den Fragebogen nicht ausfüllen.",
   "qualificationDone": "Danke. Deine Angaben sind gespeichert, damit wir die konkrete Installation besprechen können.",
-  "sticky": "Starterpaket · 15 €",
+  "sticky": "Einmalige Zahlung · 15 €",
   "back": "Fitliner für Mitglieder",
   "privacy": "Datenschutz",
   "terms": "Bedingungen",

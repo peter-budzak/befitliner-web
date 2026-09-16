@@ -2,8 +2,8 @@
   "eyebrow": "Fitliner pre fitnesscentrá",
   "title": "Vaše fitko môže fungovať, aj keď vy práve nepracujete.",
   "intro": "Vstup, členstvá a platby môžu bežať automaticky. S recepciou aj bez nej. A pri kompatibilnom zapojení aj popri systéme, ktorý už máte.",
-  "cta": "Objednať štartovací balík za 15 €",
-  "shipping": "Platíte iba poštovné a balné. Doručujeme do celej EÚ.",
+  "cta": "Jednorazová platba 15 €",
+  "shipping": "Jednorazovo 15 €. Žiadny mesačný paušál. Doručenie do celej EÚ.",
   "watch": "Pozrieť, ako Fitliner funguje",
   "reassurance": [
     "Existujúci vstup môže zostať",
@@ -44,10 +44,10 @@
   ],
   "unknown": "Netušíte, aký systém používate? Nevadí.",
   "technician": "Pomôžeme overiť zapojenie. Inštaláciu vykoná kvalifikovaný elektrikár alebo technik podľa dodanej schémy.",
-  "packageTitle": "Toto vám pošleme.",
-  "packageBody": "Všetko na prvý krok k automatizovanému vstupu. Prehľadne, spolu a s jasným ďalším postupom.",
+  "packageTitle": "Fitliner čip na vaše dvere alebo turniket.",
+  "packageBody": "Čip, návod a podpora pri zapojení. K tomu doživotný bezplatný prístup k aplikácii pre vás aj vašich klientov.",
   "packageItems": [
-    "Prístupová jednotka Fitliner",
+    "Fitliner čip na dvere alebo turniket",
     "Schéma zapojenia",
     "Pokyny na nastavenie",
     "Ďalšie kroky a podpora"
@@ -80,9 +80,9 @@
     "Nastavíme fitko, členstvá a vstupy."
   ],
   "offerTitle": "Vyskúšajte Fitliner vo svojom fitness centre.",
-  "offerBody": "Rozširujeme sieť partnerských fitiek. Preto chceme, aby bol prvý krok čo najjednoduchší.",
-  "priceLabel": "poštovné a balné štartovacieho balíka",
-  "priceNote": "15 € nie je cena celoživotného používania Fitliner. Podmienky ďalšej prevádzky si dohodneme pred spustením.",
+  "offerBody": "Fitliner čip umiestnite na dvere alebo turniket. Jednorazová platba 15 € zahŕňa čip aj doručenie v rámci EÚ.",
+  "priceLabel": "jednorazovo za Fitliner čip na dvere alebo turniket",
+  "priceNote": "Zaplatíte iba raz. Majiteľ fitka aj jeho klienti získajú doživotný bezplatný prístup k aplikácii Fitliner. Bez mesačného paušálu.",
   "offerReassurance": "Súčasný systém nemusíte teraz meniť. Najskôr overíme konkrétne riešenie vašej prevádzky.",
   "founderTitle": "Najskôr sme ho postavili pre vlastné fitko.",
   "founderBody": "Fitliner nevznikol ako zoznam funkcií v kancelárii. Vznikol z každodenného chodu fitnesscentra: z platieb, členstiev a dverí, ktoré bolo treba otvárať. Rovnaké veci teraz pomáha riešiť ďalším majiteľom.",
@@ -109,8 +109,8 @@
       "Nevadí. Cez voliteľné overenie nám opíšete vstup a pomôžeme posúdiť technické riešenie."
     ],
     [
-      "Čo dostanem za 15 €?",
-      "Štartovací balík obsahuje prístupovú jednotku Fitliner, schému zapojenia, pokyny a ďalšie kroky s podporou. 15 € pokrýva poštovné a balné, nie celoživotnú prevádzku služby."
+      "Čo dostanem za jednorazových 15 €?",
+      "Fitliner čip na dvere alebo turniket, schému zapojenia, pokyny a podporu. Cena zahŕňa doručenie do celej EÚ. Majiteľ aj klienti získajú doživotný bezplatný prístup k aplikácii Fitliner bez mesačného paušálu."
     ],
     [
       "Čo nasleduje po objednávke?",
@@ -122,12 +122,12 @@
     ]
   ],
   "closeTitle": "Fitko môže pracovať aj vtedy, keď vy nemusíte.",
-  "closeBody": "Začnite štartovacím balíkom Fitliner.",
+  "closeBody": "Začnite s Fitliner čipom za jednorazových 15 €. Bez mesačného paušálu.",
   "call": "Mám atypický systém – chcem sa najprv poradiť",
   "qualificationTitle": "Pozrime sa na váš vstup.",
   "qualificationBody": "Voliteľné overenie kompatibility. Na objednanie balíka nemusíte vypĺňať dotazník.",
   "qualificationDone": "Ďakujeme. Údaje máme uložené a môžeme s vami prejsť konkrétne zapojenie.",
-  "sticky": "Štartovací balík · 15 €",
+  "sticky": "Jednorazová platba 15 €",
   "back": "Fitliner pre členov",
   "privacy": "Ochrana súkromia",
   "terms": "Podmienky",

@@ -55,7 +55,11 @@ vm.runInNewContext(source, {
   },
 });
 exports.trackGymEvent('gyms_landing_view');
-assert.equal(events.length, 0, 'No event before consent');
+assert.equal(events.length, 0, 'An existing opt-out blocks events');
+consent = null;
+exports.trackGymEvent('gyms_landing_view');
+assert.equal(events.length, 1, 'New visits use automatic measurement');
+events.length = 0;
 const link = exports.GymLink({
   href: '/checkout',
   location: 'offer',
@@ -134,7 +138,7 @@ assert.equal(pixelExports.ensureMetaPixel(), false);
 assert.equal(scripts.length, 1);
 assert.equal(pixelWindow.fbq.queue.filter((e) => e[0] === 'init').length, 1);
 console.log(
-  'PASS: six locale dictionaries; consent gating and revocation; one CTA/order event per click; deduplicated VSL milestones; FAQ opens; single shared pixel initialization.',
+  'PASS: six locale dictionaries; automatic measurement and existing opt-out; one CTA/order event per click; deduplicated VSL milestones; FAQ opens; single shared pixel initialization.',
 );
 
 // Walk the optional flow against a fake Supabase transport. No production lead is created.

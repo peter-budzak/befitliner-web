@@ -2,8 +2,8 @@
   "eyebrow": "Fitliner para gimnasios",
   "title": "Tu gimnasio puede funcionar aunque tú no estés trabajando.",
   "intro": "Acceso, membresías y pagos automáticos. Con o sin recepción. Y, si la instalación es compatible, junto al sistema que ya utilizas.",
-  "cta": "Pedir el kit de inicio por 15 €",
-  "shipping": "Solo pagas el envío y la preparación. Entrega en toda la UE.",
+  "cta": "Pago único de 15 €",
+  "shipping": "15 € una sola vez. Sin cuota mensual. Entrega en toda la UE.",
   "watch": "Ver cómo funciona Fitliner",
   "reassurance": [
     "Puedes mantener el acceso actual",
@@ -44,10 +44,10 @@
   ],
   "unknown": "¿No sabes qué sistema tienes? No pasa nada.",
   "technician": "Te ayudamos a comprobarlo. Un electricista o técnico cualificado realiza la instalación siguiendo el esquema suministrado.",
-  "packageTitle": "Esto es lo que te enviamos.",
-  "packageBody": "Tu primer paso hacia el acceso automático. Todo junto y con los siguientes pasos claros.",
+  "packageTitle": "Un chip Fitliner para tu puerta o torno.",
+  "packageBody": "El chip, las instrucciones y el soporte para la instalación. Además, acceso gratuito de por vida a la app para ti y tus clientes.",
   "packageItems": [
-    "Unidad de acceso Fitliner",
+    "Chip Fitliner para puerta o torno",
     "Esquema de conexión",
     "Instrucciones de configuración",
     "Siguientes pasos y asistencia"
@@ -80,9 +80,9 @@
     "Configuramos el gimnasio, las membresías y los accesos."
   ],
   "offerTitle": "Prueba Fitliner en tu gimnasio.",
-  "offerBody": "Estamos ampliando nuestra red de gimnasios colaboradores y queremos que dar el primer paso sea lo más sencillo posible.",
-  "priceLabel": "envío y preparación del kit de inicio",
-  "priceNote": "15 € no es el precio de Fitliner de por vida. Acordaremos las condiciones del servicio antes de la puesta en marcha.",
+  "offerBody": "Coloca el chip Fitliner en tu puerta o torno. El pago único de 15 € incluye el chip y el envío dentro de la UE.",
+  "priceLabel": "pago único por el chip Fitliner para tu puerta o torno",
+  "priceNote": "Pagas una sola vez. Los propietarios del gimnasio y sus clientes obtienen acceso gratuito de por vida a la app Fitliner. Sin cuota mensual.",
   "offerReassurance": "No necesitas cambiar tu sistema ahora. Primero comprobamos la solución concreta para tu gimnasio.",
   "founderTitle": "Primero lo creamos para nuestro propio gimnasio.",
   "founderBody": "Fitliner no nació como una lista de funciones en una oficina. Surgió del trabajo diario: pagos, membresías y puertas que había que abrir. Ahora ayuda a otros propietarios con esas mismas tareas.",
@@ -109,8 +109,8 @@
       "No pasa nada. Describe tu entrada en la comprobación opcional y te ayudaremos a evaluar la instalación."
     ],
     [
-      "¿Qué recibo por 15 €?",
-      "El kit incluye la unidad Fitliner, el esquema, instrucciones, siguientes pasos y asistencia. Los 15 € cubren envío y preparación, no el servicio de por vida."
+      "¿Qué recibo por el pago único de 15 €?",
+      "Un chip Fitliner para la puerta o el torno, un esquema de conexión, instrucciones y soporte. Incluye el envío dentro de la UE. Propietarios y clientes obtienen acceso gratuito de por vida a la app, sin cuota mensual."
     ],
     [
       "¿Qué ocurre después del pedido?",
@@ -122,12 +122,12 @@
     ]
   ],
   "closeTitle": "Tu gimnasio puede trabajar cuando tú no tengas que hacerlo.",
-  "closeBody": "Empieza con el kit de inicio Fitliner.",
+  "closeBody": "Empieza con el chip Fitliner por un pago único de 15 €. Sin cuota mensual.",
   "call": "Mi sistema es especial: prefiero hablar primero",
   "qualificationTitle": "Veamos cómo es tu entrada.",
   "qualificationBody": "Comprobación de compatibilidad opcional. No necesitas rellenar el cuestionario para pedir el kit.",
   "qualificationDone": "Gracias. Tus datos están guardados para que podamos hablar de tu instalación.",
-  "sticky": "Kit de inicio · 15 €",
+  "sticky": "Pago único · 15 €",
   "back": "Fitliner para socios",
   "privacy": "Privacidad",
   "terms": "Condiciones",
