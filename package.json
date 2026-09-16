@@ -9,7 +9,8 @@
     "lint": "eslint",
     "check:legal": "node scripts/check-legal.mjs",
     "check:seo": "node scripts/check-seo.mjs",
-    "meta:mcp": "node tools/meta-ads-mcp/server.mjs"
+    "meta:mcp": "node tools/meta-ads-mcp/server.mjs",
+    "check:admin": "node scripts/check-admin.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

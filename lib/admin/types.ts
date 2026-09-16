@@ -1,0 +1,107 @@
+export type Gym = {
+  id: string;
+  name: string;
+  slug: string | null;
+  address: string | null;
+  contact_email: string | null;
+  contact_phone: string | null;
+  owner_email: string | null;
+  currency: string;
+  created_at: string;
+  note: string;
+  note_updated_at: string | null;
+  members_total: number;
+  members_active: number;
+  modules_total: number;
+  modules_active: number;
+  ordered_modules: number;
+  paid_modules: number;
+  last_order_at: string | null;
+  fee_bps: number;
+  fee_override: number | null;
+  payment_provider: string | null;
+  stripe_live: boolean;
+  charges_enabled: boolean;
+};
+export type Finance = {
+  gym_id: string;
+  month: string;
+  currency: string;
+  gross_minor: number;
+  fee_minor: number;
+  payment_count: number;
+  unknown_fee_count: number;
+  refunds_minor: number;
+  fee_refunds_minor: number;
+};
+export type ModuleOrder = {
+  id: string;
+  stripe_session_id: string;
+  stripe_payment_intent_id: string | null;
+  gym_id: string | null;
+  customer_name: string | null;
+  customer_email: string | null;
+  customer_phone: string | null;
+  shipping_address: Record<string, unknown>;
+  quantity: number;
+  amount_minor: number;
+  refunded_minor: number;
+  currency: string;
+  payment_status: string;
+  fulfillment_status: string;
+  tracking_number: string;
+  note: string;
+  created_at: string;
+  paid_at: string | null;
+  shipped_at: string | null;
+  delivered_at: string | null;
+  synced_at: string;
+  revision: number;
+};
+export type Dashboard = {
+  generated_at: string;
+  month: string;
+  gyms: Gym[];
+  finance: Finance[];
+  modules: {
+    id: string;
+    gym_id: string;
+    name: string;
+    status: string;
+    created_at: string;
+  }[];
+  orders: ModuleOrder[];
+  order_count: number;
+  module_finance: {
+    month: string;
+    currency: string;
+    gross_minor: number;
+    refunded_minor: number;
+    quantity: number;
+  }[];
+  leads: {
+    id: string;
+    gym_name: string | null;
+    address: string | null;
+    contact_name: string | null;
+    email: string | null;
+    phone: string | null;
+    created_at: string;
+    completed_step: number;
+    checkout_clicked: boolean;
+  }[];
+  activity: {
+    id: number;
+    entity_type: string;
+    entity_id: string;
+    action: string;
+    details: Record<string, unknown>;
+    created_at: string;
+  }[];
+  sync: {
+    last_success_at: string | null;
+    last_error: string | null;
+    imported_count: number;
+    webhook_configured: boolean;
+  };
+};
