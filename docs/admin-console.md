@@ -48,8 +48,32 @@ Every imported order is retrieved again from Stripe instead of trusting event pa
 
 ## Deployment and verification
 
-1. Apply `supabase/migrations/20260916190000_gym_admin_console.sql` once through the trusted Supabase management connection. This is additive to the existing Fitliner schema.
-2. Run `supabase/tests/gym_admin_console.sql` (all test writes roll back).
+### Paid module SMS alerts
+
+`20260917100000_gym_order_alerts.sql` adds a private, durable queue for the first verified payment of a module order at EUR 15 per module. Checkout openings, pending payments, other prices/currencies, and payments older than the installation cutoff do not queue alerts. A unique order constraint deduplicates webhook retries and scheduled imports. Pending alerts are canceled if the order is refunded before dispatch. New qualifying payments are queued even while sending is disabled, so setup does not silently discard them.
+
+The recipient is stored in the private `gym_admin_alert_settings` table, and is only shown as its last four digits in the console. Sending is disabled by default. The requested destination ends in `9969`; configure the full E.164 number through the trusted database connection, not in source control.
+
+To activate SMS, connect a funded Twilio account with Slovakia enabled in messaging geographic permissions and a supported sender. Set these Supabase Edge Function secrets:
+
+- `GYM_ADMIN_TWILIO_ACCOUNT_SID`
+- `GYM_ADMIN_TWILIO_API_KEY` and `GYM_ADMIN_TWILIO_API_SECRET` (Messages create/read access)
+- `GYM_ADMIN_SMS_FROM` (defaults to the alphanumeric sender `Fitliner`)
+
+After verifying the account, sender and recipient, set `gym_admin_alert_settings.enabled=true` using the trusted database administration connection. No credentials are requested in chat or returned by the admin API. As of this implementation, the provider account is not connected and SMS sending remains disabled; no test SMS has been sent.
+
+The Stripe handler starts the sender in a Supabase background task after committing imported orders. The existing 15-minute sync also drains the queue, so a failed notification does not prevent payment synchronization. Atomic claims prevent simultaneous senders from sending the same queue item. A run sends at most three alerts and polls up to three previously accepted messages for delivery receipts. SMS content uses ASCII, includes amount, quantity, an abbreviated order ID and the authenticated admin URL, and excludes customer names/contact data.
+
+Provider acceptance is not reported as delivery. Only a delivery receipt marks an alert delivered. HTTP 429 retries are limited to five attempts. A timeout, ambiguous server response or interrupted sender is marked `unknown` and never automatically resent: check Twilio logs before resolving it. Other failures appear in the console's attention count. Inspect the private queue by `order_id` for details; do not reset an uncertain attempt to pending without confirming that no SMS was accepted by the provider. Sending cannot be made exactly-once across an external provider and a database transaction.
+
+Run `npm run check:order-alerts` for the provider contract and error cases, and `supabase/tests/gym_order_alerts.sql` for rollback-only database tests. No SMS is sent by either test suite. Provider activation still requires a real delivery test to the configured recipient.
+
+References: [Twilio SMS API](https://www.twilio.com/docs/messaging/api/message-resource), [Slovakia sender support](https://www.twilio.com/en-us/guidelines/sk/sms), [Supabase background tasks](https://supabase.com/docs/guides/functions/background-tasks).
+
+### Application deployment
+
+1. Apply `supabase/migrations/20260916190000_gym_admin_console.sql` and then `20260917100000_gym_order_alerts.sql` once through the trusted Supabase management connection. These are additive to the existing Fitliner schema.
+2. Run `supabase/tests/gym_admin_console.sql` and `supabase/tests/gym_order_alerts.sql` (all test writes roll back).
 3. Deploy `admin-gym-orders` with `--no-verify-jwt` and configure its Stripe key as above.
 4. Apply the production scheduler SQL. Do not run this production-specific schedule in staging unchanged.
 5. Deploy the Next.js source to the existing Vercel project. The only web environment variables remain the existing public Supabase URL and anon key.

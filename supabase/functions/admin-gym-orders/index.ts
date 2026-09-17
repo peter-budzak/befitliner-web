@@ -5,6 +5,8 @@ import {
   PAYMENT_LINK,
   STRIPE_ACCOUNT,
 } from "./normalize.mjs";
+import { dispatchOrderAlerts } from "./alerts.mjs";
+declare const EdgeRuntime: { waitUntil(task: Promise<unknown>): void };
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -46,6 +48,23 @@ async function saveState(values: Record<string, unknown>) {
     .update(values)
     .eq("id", true);
   if (error) throw new Error("Synchronizačný stav sa nepodarilo uložiť.");
+}
+async function notifyPaidOrders() {
+  // SMS availability must never prevent recording a payment or acknowledging Stripe.
+  let lastError: string | null = null;
+  try {
+    await dispatchOrderAlerts(db, (name: string) => Deno.env.get(name));
+  } catch (error) {
+    lastError = error instanceof Error ? error.message : "Odosielanie SMS zlyhalo.";
+  }
+  try {
+    await db.from("gym_admin_alert_settings").update({
+      last_error: lastError,
+      checked_at: new Date().toISOString(),
+    }).eq("id", true);
+  } catch {
+    // Queue state survives; Stripe acknowledgment does not depend on SMS diagnostics.
+  }
 }
 let verifiedKey: string | null = null;
 async function stripeKey() {
@@ -151,6 +170,7 @@ Deno.serve(async (req) => {
         for (const order of data || [])
           await importSession(order.stripe_session_id);
       }
+      EdgeRuntime.waitUntil(notifyPaidOrders());
       return reply(req, { received: true });
     }
     const token =
@@ -238,6 +258,7 @@ Deno.serve(async (req) => {
       last_error: null,
       imported_count: config.imported_count + imported,
     });
+    EdgeRuntime.waitUntil(notifyPaidOrders());
     return reply(req, { imported, has_more: more });
   } catch (error) {
     const message =

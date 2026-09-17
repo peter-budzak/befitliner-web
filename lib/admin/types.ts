@@ -59,6 +59,15 @@ export type ModuleOrder = {
   revision: number;
 };
 export type Dashboard = {
+  notifications?: {
+    enabled: boolean;
+    recipient_suffix: string | null;
+    last_error: string | null;
+    pending: number;
+    accepted: number;
+    delivered: number;
+    attention: number;
+  };
   generated_at: string;
   month: string;
   gyms: Gym[];

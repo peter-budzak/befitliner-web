@@ -374,7 +374,9 @@ export default function AdminConsole() {
             ? "Tento účet nemá prístup do administrácie."
             : "Údaje sa nepodarilo načítať. Skontrolujte pripojenie a skúste obnoviť.",
         );
-      if (generation.current === request) setData(data as Dashboard);
+      const notifications = await adminClient().rpc("gym_admin_alert_status");
+      if (generation.current === request)
+        setData({ ...data, notifications: notifications.error ? undefined : notifications.data } as Dashboard);
     } catch (e) {
       if (generation.current === request) setError((e as Error).message);
     } finally {
@@ -1542,6 +1544,16 @@ function Coverage({ data }: { data: Dashboard }) {
             ? "Automatické aktualizácie platieb sú zapnuté."
             : "Automatické aktualizácie platieb zatiaľ nie sú pripojené."}
           {data.sync.last_error && ` Chyba: ${data.sync.last_error}`}
+        </p>
+        <p>
+          SMS pri zaplatenej objednávke modulu:{" "}
+          {!data.notifications
+            ? "stav upozornení sa nepodarilo načítať."
+            : !data.notifications.enabled
+              ? "zatiaľ nie sú aktivované; čaká sa na pripojenie SMS služby."
+              : `zapnuté na číslo končiace ${data.notifications.recipient_suffix}. Čakajúce: ${data.notifications.pending}, prijaté SMS službou: ${data.notifications.accepted}, doručené: ${data.notifications.delivered}.`}
+          {!!data.notifications?.attention && ` Kontrolu vyžaduje ${data.notifications.attention} upozornení.`}
+          {data.notifications?.last_error && ` ${data.notifications.last_error}`}
         </p>
       </div>
     </div>

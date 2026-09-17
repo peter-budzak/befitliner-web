@@ -1,0 +1,47 @@
+-- Test writes never commit and cannot be observed by the SMS sender.
+begin;
+do $$
+declare payload jsonb; oid uuid; aid uuid; result jsonb; actor uuid;
+begin
+  if has_table_privilege('authenticated','public.gym_admin_alert_settings','select') then raise exception 'Notification settings exposed'; end if;
+  if has_table_privilege('anon','public.gym_admin_order_alerts','select') then raise exception 'Alerts exposed'; end if;
+  if has_function_privilege('authenticated','public.gym_admin_claim_order_alerts()','execute') then raise exception 'Untrusted sender access'; end if;
+  if has_function_privilege('anon','public.gym_admin_alert_status()','execute') then raise exception 'Anonymous status access'; end if;
+  perform set_config('request.jwt.claims','{"role":"authenticated","sub":"00000000-0000-0000-0000-000000000001","email":"peter@peterbudzak.com"}',true);
+  begin perform public.gym_admin_alert_status(); raise exception 'Unauthorized status allowed'; exception when insufficient_privilege then null; end;
+  select user_id into actor from public.gym_admin_access limit 1;
+  perform set_config('request.jwt.claims',jsonb_build_object('role','authenticated','sub',actor)::text,true);
+  if public.gym_admin_alert_status() ? 'recipient' then raise exception 'Full destination exposed'; end if;
+  update public.gym_admin_alert_settings set enabled=false,starts_at=now()-interval '1 minute',recipient='+421900000000' where id=true;
+  payload:=jsonb_build_object('stripe_session_id','cs_alert_rollback_test','quantity',1,'amount_minor',1500,'refunded_minor',0,'currency','EUR','payment_status','unpaid','created_at',now(),'synced_at',now());
+  perform public.gym_admin_import_order(payload);
+  select id into oid from public.gym_module_orders where stripe_session_id='cs_alert_rollback_test';
+  if exists(select 1 from public.gym_admin_order_alerts where order_id=oid) then raise exception 'Unpaid checkout queued'; end if;
+  perform public.gym_admin_import_order(payload||jsonb_build_object('payment_status','processing','synced_at',now()+interval '1 second'));
+  if exists(select 1 from public.gym_admin_order_alerts where order_id=oid) then raise exception 'Processing checkout queued'; end if;
+  payload:=payload||jsonb_build_object('payment_status','paid','paid_at',now(),'synced_at',now()+interval '2 seconds');
+  perform public.gym_admin_import_order(payload);
+  select id into aid from public.gym_admin_order_alerts where order_id=oid;
+  if aid is null then raise exception 'Paid order not queued'; end if;
+  perform public.gym_admin_import_order(payload||jsonb_build_object('synced_at',now()+interval '3 seconds'));
+  if (select count(*) from public.gym_admin_order_alerts where order_id=oid)<>1 then raise exception 'Duplicate notification'; end if;
+  if public.gym_admin_claim_order_alerts()<>'[]'::jsonb then raise exception 'Disabled sender claimed work'; end if;
+  update public.gym_admin_alert_settings set enabled=true where id=true;
+  result:=public.gym_admin_claim_order_alerts();
+  if not exists(select 1 from jsonb_array_elements(result) x where x->>'id'=aid::text) then raise exception 'Paid alert not claimed'; end if;
+  if exists(select 1 from jsonb_array_elements(public.gym_admin_claim_order_alerts()) x where x->>'id'=aid::text) then raise exception 'Duplicate claim'; end if;
+  update public.gym_admin_order_alerts set updated_at=now()-interval '11 minutes' where id=aid;
+  perform public.gym_admin_claim_order_alerts();
+  if (select status from public.gym_admin_order_alerts where id=aid)<>'unknown' then raise exception 'Uncertain send retried'; end if;
+  update public.gym_admin_order_alerts set status='pending' where id=aid;
+  perform public.gym_admin_import_order(payload||jsonb_build_object('payment_status','refunded','refunded_minor',1500,'synced_at',now()+interval '4 seconds'));
+  perform public.gym_admin_claim_order_alerts();
+  if (select status from public.gym_admin_order_alerts where id=aid)<>'canceled' then raise exception 'Refunded order sent'; end if;
+  perform public.gym_admin_import_order(payload||jsonb_build_object('stripe_session_id','cs_old_alert_rollback_test','paid_at',now()-interval '1 day'));
+  if exists(select 1 from public.gym_admin_order_alerts a join public.gym_module_orders o on a.order_id=o.id where o.stripe_session_id='cs_old_alert_rollback_test') then raise exception 'Historical payment queued'; end if;
+  perform public.gym_admin_import_order(payload||jsonb_build_object('stripe_session_id','cs_price_alert_rollback_test','amount_minor',1000));
+  if exists(select 1 from public.gym_admin_order_alerts a join public.gym_module_orders o on a.order_id=o.id where o.stripe_session_id='cs_price_alert_rollback_test') then raise exception 'Other price queued'; end if;
+end;
+$$;
+rollback;
+select 'PASS: alert authorization, payment-only queue, replay deduplication, disabled sending, exclusive claims, uncertain send isolation, refund cancellation and historical/price exclusions' as result;
