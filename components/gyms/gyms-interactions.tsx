@@ -177,7 +177,15 @@ export function GymFloatingVideo({
   );
 }
 
-export function GymTracking({copy, locale}: {copy: GymsCopy; locale: string}) {
+export function GymTracking({
+  copy,
+  locale,
+  checkoutUrl,
+}: {
+  copy: GymsCopy;
+  locale: string;
+  checkoutUrl: string;
+}) {
   const [choice, setChoice] = useState<string | null>(null);
   const [sticky, setSticky] = useState(false);
   const viewed = useRef(false);
@@ -238,8 +246,13 @@ export function GymTracking({copy, locale}: {copy: GymsCopy; locale: string}) {
       </div>
       {sticky && choice !== '' && choice !== null && (
         <div className="gym-sticky">
-          <GymLink href="#offer" location="sticky" className="gym-button">
-            {copy.sticky}
+          <GymLink
+            href={checkoutUrl}
+            location="sticky-checkout"
+            order
+            className="gym-button"
+          >
+            {copy.cta}
             <span aria-hidden="true">↗</span>
           </GymLink>
         </div>

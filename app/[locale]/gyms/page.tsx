@@ -473,7 +473,12 @@ export default async function GymsPage({params}: PageProps) {
           <Link href={`/${locale}/privacy`}>{t.privacy}</Link>
           <Link href={`/${locale}/terms`}>{t.terms}</Link>
         </div>
-        <GymTracking key={locale} copy={t} locale={locale} />
+        <GymTracking
+          key={locale}
+          copy={t}
+          locale={locale}
+          checkoutUrl={GYMS_CHECKOUT_URL}
+        />
       </footer>
     </main>
   );
