@@ -58,6 +58,7 @@
 .gym-hero {
   padding-top: 88px;
   position: relative;
+  text-align: center;
 }
 .gym-hero:before {
   content: '';
@@ -78,6 +79,7 @@
 .gym-hero .gym-eyebrow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 .gym-eyebrow > span {
@@ -94,7 +96,7 @@
   line-height: 1.075;
   max-width: 1050px;
   position: relative;
-  margin: 0;
+  margin: 0 auto;
   text-wrap: balance;
 }
 .gym-intro {
@@ -102,7 +104,7 @@
   line-height: 1.75;
   color: var(--gym-muted);
   max-width: 685px;
-  margin: 30px 0;
+  margin: 30px auto;
 }
 .gym-button {
   display: inline-flex;
@@ -136,6 +138,7 @@
 .gym-hero-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 28px;
   flex-wrap: wrap;
 }
@@ -160,6 +163,7 @@
 }
 .gym-reassurance {
   display: flex;
+  justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
   list-style: none;
@@ -1174,8 +1178,20 @@
 .gym-hero-video {
   width: 100%;
   max-width: 800px;
-  margin: 32px 0;
+  margin: 32px auto;
   scroll-margin-top: 24px;
+}
+
+.gym-hero > .gym-small {
+  width: fit-content;
+  max-width: 100%;
+  margin: 14px auto 0;
+  padding: 8px 12px;
+  border: 1px solid #b7ef5b42;
+  border-radius: 999px;
+  background: #b7ef5b0d;
+  color: #dfffb0;
+  font-weight: 650;
 }
 
 .gym-workflow li { overflow: hidden; }
