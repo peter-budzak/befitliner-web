@@ -1,7 +1,11 @@
 {
   "eyebrow": "Fitliner para gimnasios",
-  "title": "Automatiza tu gimnasio de una vez por todas. Sin cuotas mensuales.",
-  "intro": "Paga una sola vez y mantén tu gimnasio funcionando sin parar. Los 297 € incluyen hardware y software con uso ilimitado: no necesitas comprar nada más.",
+  "title": "Automatiza tu gimnasio de una vez por todas.",
+  "titleAccent": "Sin cuotas mensuales.",
+  "introLead": "Pagas una sola vez",
+  "intro": "y mantienes tu gimnasio funcionando sin parar. Los 297 € incluyen hardware y software con uso ilimitado: no necesitas comprar nada más.",
+  "offlineLabel": "Funciona sin internet",
+  "closeVideo": "Cerrar el vídeo flotante",
   "cta": "Comprar Fitliner por 297 € una vez",
   "shipping": "Haz tu pedido hoy. El módulo Fitliner llegará en un máximo de 7 días laborables.",
   "watch": "Ver cómo funciona Fitliner",
@@ -26,24 +30,23 @@
   ],
   "existingTitle": "¿Ya tienes tarjetas, llaveros, un torno u otro sistema de acceso?",
   "existingAnswer": "No tienes que deshacerte de él.",
-  "existingBody": "Con una configuración técnica compatible, Fitliner puede conectarse en paralelo al sistema actual. Conservas tu forma de entrada y añades acceso desde la app y automatización.",
+  "existingBody": "Fitliner se conecta en paralelo a cualquier sistema de acceso que ya utilices. Conservas tu forma de entrada y añades acceso desde la app y automatización.",
   "existingBenefits": [
-    "Haz la transición de los socios poco a poco.",
-    "Conserva los equipos que funcionan.",
-    "Comprobamos la instalación antes de realizarla."
+    "Tus tarjetas, llaveros y torno actuales se mantienen.",
+    "El módulo mide solo 3 × 4 cm y cabe en un cuadro eléctrico o una caja de pared estándar.",
+    "Solo necesita alimentación de 12 V y estar a menos de 5 metros de la puerta o el torno."
   ],
-  "verify": "Comprobar mi sistema",
   "currentSystem": "Tu sistema actual",
   "door": "Entrada al gimnasio",
-  "accessTitle": "La mayoría de los gimnasios no necesitan cambiar toda la puerta.",
-  "accessBody": "La unidad puede integrarse con soluciones habituales de acceso cuando la configuración técnica lo permite.",
+  "accessTitle": "Un módulo diminuto. Cualquier sistema de acceso existente.",
+  "accessBody": "El chip Fitliner de 3 × 4 cm se conecta en paralelo a tu sistema. Solo necesita 12 V y un lugar a menos de 5 metros de la puerta o el torno.",
   "access": [
     "Abrepuertas eléctrico / zumbador",
     "Cerradura magnética con botón de salida",
     "Torno"
   ],
-  "unknown": "¿No sabes qué sistema tienes? No pasa nada.",
-  "technician": "Te ayudamos a comprobarlo. Un electricista o técnico cualificado realiza la instalación siguiendo el esquema suministrado.",
+  "unknown": "¿Dónde cabe un módulo tan pequeño? Casi en cualquier lugar.",
+  "technician": "Puede instalarse en un cuadro eléctrico, una caja de pared estándar u otro lugar adecuado. Un electricista cualificado lo conecta siguiendo el esquema suministrado.",
   "packageTitle": "Un chip Fitliner para tu puerta o torno.",
   "packageBody": "El chip, las instrucciones y el soporte para la instalación. Además, acceso gratuito de por vida a la app para ti y tus clientes.",
   "packageItems": [
@@ -75,7 +78,7 @@
   "howTitle": "Del kit a la primera entrada automática.",
   "steps": [
     "Pides tu kit de inicio.",
-    "Comprobamos juntos el sistema de acceso.",
+    "Colocas el módulo de 3 × 4 cm a menos de 5 metros de la entrada.",
     "Tu electricista instala Fitliner según el esquema.",
     "Configuramos el gimnasio, las membresías y los accesos."
   ],
@@ -83,14 +86,14 @@
   "offerBody": "Coloca el chip Fitliner en tu puerta o torno. El pago único de 297 € incluye el chip y el envío dentro de la UE.",
   "priceLabel": "pago único por el chip Fitliner para tu puerta o torno",
   "priceNote": "Pagas una sola vez. Los propietarios del gimnasio y sus clientes obtienen acceso gratuito de por vida a la app Fitliner. Sin cuota mensual.",
-  "offerReassurance": "No necesitas cambiar tu sistema ahora. Primero comprobamos la solución concreta para tu gimnasio.",
+  "offerReassurance": "Mantienes tu sistema actual. Fitliner se conecta en paralelo.",
   "founderTitle": "Primero lo creamos para nuestro propio gimnasio.",
   "founderBody": "Fitliner no nació como una lista de funciones en una oficina. Surgió del trabajo diario: pagos, membresías y puertas que había que abrir. Ahora ayuda a otros propietarios con esas mismas tareas.",
   "faqTitle": "¿Te queda alguna duda?",
   "faq": [
     [
       "¿Tengo que sustituir mi sistema de acceso?",
-      "No necesariamente. Fitliner puede funcionar en paralelo si la configuración técnica es compatible. Lo comprobamos antes de instalar."
+      "No. Fitliner se conecta en paralelo a cualquier sistema existente. Tus tarjetas, llaveros o torno siguen funcionando."
     ],
     [
       "¿Tengo que eliminar la recepción?",
@@ -106,7 +109,7 @@
     ],
     [
       "¿Y si no sé qué sistema utilizo?",
-      "No pasa nada. Describe tu entrada en la comprobación opcional y te ayudaremos a evaluar la instalación."
+      "No pasa nada. Fitliner se conecta en paralelo. El módulo solo necesita 12 V y un lugar a menos de 5 metros de la puerta o el torno."
     ],
     [
       "¿Qué recibo por el pago único de 297 €?",
@@ -114,7 +117,7 @@
     ],
     [
       "¿Qué ocurre después del pedido?",
-      "Evaluamos la entrada y acordamos las condiciones y los siguientes pasos. Tu electricista instala la unidad y configuramos juntos el gimnasio, las membresías y el acceso."
+      "Descarga la app, crea tu gimnasio y configura la pasarela de pago. El módulo llega en un máximo de 7 días laborables y tu electricista lo conecta según el esquema incluido."
     ],
     [
       "¿Fitliner necesita internet en el gimnasio?",
@@ -122,20 +125,17 @@
     ],
     [
       "¿Funciona con un torno?",
-      "Puede funcionar, según el control y la configuración técnica del torno. Primero comprobamos el modelo concreto."
+      "Sí. Fitliner se conecta en paralelo al torno. El módulo solo necesita 12 V y un lugar a menos de 5 metros de la entrada."
     ]
   ],
   "closeTitle": "Tu gimnasio puede trabajar cuando tú no tengas que hacerlo.",
   "closeBody": "Empieza con el chip Fitliner por un pago único de 297 €. Sin cuota mensual.",
-  "call": "Mi sistema es especial: prefiero hablar primero",
-  "qualificationTitle": "Veamos cómo es tu entrada.",
-  "qualificationBody": "Comprobación de compatibilidad opcional. No necesitas rellenar el cuestionario para pedir el kit.",
-  "qualificationDone": "Gracias. Tus datos están guardados para que podamos hablar de tu instalación.",
+  "call": "Tengo una pregunta técnica: quiero hablar",
   "sticky": "Pago único · 297 €",
   "back": "Fitliner para socios",
   "privacy": "Privacidad",
   "terms": "Condiciones",
-  "consent": "¿Permites la medición publicitaria opcional? Nos ayuda a saber qué anuncios funcionan. No enviamos las respuestas del cuestionario a Meta.",
+  "consent": "¿Permites la medición publicitaria opcional? Nos ayuda a saber qué anuncios funcionan. No enviamos tus datos personales a Meta.",
   "accept": "Permitir medición",
   "reject": "Rechazar",
   "settings": "Ajustes de medición"

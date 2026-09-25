@@ -1,7 +1,11 @@
 {
   "eyebrow": "Fitliner pour les salles de sport",
-  "title": "Automatisez votre salle une fois pour toutes. Sans frais mensuels.",
-  "intro": "Payez une seule fois et laissez votre salle fonctionner sans interruption. Les 297 € incluent le matériel et le logiciel en usage illimité : rien d’autre à acheter.",
+  "title": "Automatisez votre salle une fois pour toutes.",
+  "titleAccent": "Sans frais mensuels.",
+  "introLead": "Vous ne payez qu’une fois",
+  "intro": "et votre salle peut fonctionner sans interruption. Les 297 € incluent le matériel et le logiciel en usage illimité : rien d’autre à acheter.",
+  "offlineLabel": "Fonctionne sans internet",
+  "closeVideo": "Fermer la vidéo flottante",
   "cta": "Acheter Fitliner pour 297 € une fois",
   "shipping": "Commandez aujourd’hui. Votre module Fitliner arrivera sous 7 jours ouvrés maximum.",
   "watch": "Voir comment fonctionne Fitliner",
@@ -26,24 +30,23 @@
   ],
   "existingTitle": "Vous avez déjà des cartes, des badges, un tourniquet ou un autre système d’accès ?",
   "existingAnswer": "Vous n’avez pas à le jeter.",
-  "existingBody": "Avec une configuration technique compatible, Fitliner peut être raccordé en parallèle à votre système actuel. Vous conservez le mode d’entrée existant et ajoutez l’accès par application et l’automatisation.",
+  "existingBody": "Fitliner se raccorde en parallèle à n’importe quel système d’accès déjà utilisé. Vous conservez votre mode d’entrée actuel tout en ajoutant l’accès par application et l’automatisation.",
   "existingBenefits": [
-    "Faites la transition des membres progressivement.",
-    "Gardez les équipements qui fonctionnent.",
-    "Nous vérifions votre configuration avant l’installation."
+    "Vos badges, cartes et tourniquet actuels restent en place.",
+    "Le module ne mesure que 3 × 4 cm et tient dans un tableau électrique ou une boîte murale standard.",
+    "Il lui faut une alimentation 12 V et un emplacement à moins de 5 mètres de la porte ou du tourniquet."
   ],
-  "verify": "Vérifier mon installation",
   "currentSystem": "Votre système actuel",
   "door": "Entrée de la salle",
-  "accessTitle": "La plupart des salles n’ont pas besoin de changer toute la porte.",
-  "accessBody": "Le module peut s’intégrer aux solutions d’accès courantes lorsque leur configuration technique le permet.",
+  "accessTitle": "Un module minuscule. N’importe quel système d’accès existant.",
+  "accessBody": "La puce Fitliner de 3 × 4 cm se raccorde en parallèle à votre système. Il lui suffit d’une alimentation 12 V et d’un emplacement à moins de 5 mètres de la porte ou du tourniquet.",
   "access": [
     "Gâche électrique / ouverture par buzzer",
     "Ventouse magnétique avec bouton de sortie",
     "Tourniquet"
   ],
-  "unknown": "Vous ne savez pas quel système vous avez ? Aucun souci.",
-  "technician": "Nous vous aidons à le vérifier. Un électricien ou technicien qualifié réalise l’installation selon le schéma fourni.",
+  "unknown": "Où placer un module aussi petit ? Presque partout.",
+  "technician": "Dans un tableau électrique, une boîte murale standard ou tout autre emplacement adapté. Un électricien qualifié le raccorde selon le schéma fourni.",
   "packageTitle": "Une puce Fitliner pour votre porte ou tourniquet.",
   "packageBody": "La puce, les instructions et l’assistance à l’installation. Avec un accès gratuit à vie à l’application pour vous et vos clients.",
   "packageItems": [
@@ -75,7 +78,7 @@
   "howTitle": "Du kit à la première entrée automatique.",
   "steps": [
     "Vous commandez le kit.",
-    "Nous vérifions ensemble votre configuration d’accès.",
+    "Placez le module de 3 × 4 cm à moins de 5 mètres de l’entrée.",
     "Votre électricien installe Fitliner selon le schéma.",
     "Nous configurons la salle, les abonnements et les accès."
   ],
@@ -83,14 +86,14 @@
   "offerBody": "Placez la puce Fitliner sur votre porte ou tourniquet. Le paiement unique de 297 € comprend la puce et la livraison dans l’UE.",
   "priceLabel": "paiement unique pour la puce Fitliner sur votre porte ou tourniquet",
   "priceNote": "Vous ne payez qu’une fois. Les propriétaires de salle et leurs clients bénéficient d’un accès gratuit à vie à l’application Fitliner. Aucun abonnement mensuel.",
-  "offerReassurance": "Vous n’avez pas à changer votre système maintenant. Nous vérifions d’abord la solution adaptée à votre salle.",
+  "offerReassurance": "Vous gardez votre système actuel. Fitliner se raccorde en parallèle.",
   "founderTitle": "Nous l’avons d’abord construit pour notre propre salle.",
   "founderBody": "Fitliner n’est pas né d’une liste de fonctionnalités dans un bureau. Il est né du quotidien : paiements, abonnements et portes à ouvrir. Aujourd’hui, il aide d’autres propriétaires à gérer ces mêmes tâches.",
   "faqTitle": "Vous avez encore des questions ?",
   "faq": [
     [
       "Dois-je remplacer mon système d’accès actuel ?",
-      "Pas forcément. Fitliner peut fonctionner en parallèle si la configuration technique est compatible. Nous la vérifions avant l’installation."
+      "Non. Fitliner se raccorde en parallèle à n’importe quel système existant. Vos badges, cartes ou tourniquet continuent de fonctionner."
     ],
     [
       "Dois-je supprimer l’accueil ?",
@@ -106,7 +109,7 @@
     ],
     [
       "Et si je ne connais pas mon système ?",
-      "Aucun souci. Décrivez votre entrée dans la vérification facultative et nous vous aiderons à évaluer l’installation."
+      "Aucun souci. Fitliner se raccorde en parallèle. Le module n’a besoin que d’une alimentation 12 V et d’un emplacement à moins de 5 mètres de la porte ou du tourniquet."
     ],
     [
       "Que comprend le paiement unique de 297 € ?",
@@ -114,7 +117,7 @@
     ],
     [
       "Que se passe-t-il après la commande ?",
-      "Nous évaluons l’entrée et convenons des conditions et des prochaines étapes. Votre électricien installe le module, puis nous configurons ensemble la salle, les abonnements et l’accès."
+      "Téléchargez l’application, créez votre salle et configurez la passerelle de paiement. Le module arrive sous 7 jours ouvrés maximum et votre électricien le raccorde selon le schéma fourni."
     ],
     [
       "Fitliner a-t-il besoin d’internet dans la salle ?",
@@ -122,20 +125,17 @@
     ],
     [
       "Fitliner fonctionne-t-il avec un tourniquet ?",
-      "Cela dépend de ses commandes et de sa configuration technique. Nous vérifions d’abord le modèle concerné."
+      "Oui. Fitliner se raccorde en parallèle au tourniquet. Le module n’a besoin que d’une alimentation 12 V et d’un emplacement à moins de 5 mètres de l’entrée."
     ]
   ],
   "closeTitle": "Votre salle peut fonctionner même pendant votre temps libre.",
   "closeBody": "Commencez avec la puce Fitliner pour un paiement unique de 297 €. Sans abonnement mensuel.",
-  "call": "Mon installation est particulière — je préfère en parler",
-  "qualificationTitle": "Regardons votre entrée ensemble.",
-  "qualificationBody": "Vérification de compatibilité facultative. Le questionnaire n’est pas nécessaire pour commander le kit.",
-  "qualificationDone": "Merci. Vos informations sont enregistrées pour que nous puissions discuter de votre installation.",
+  "call": "J’ai une question technique — parlons-en",
   "sticky": "Paiement unique · 297 €",
   "back": "Fitliner pour les membres",
   "privacy": "Confidentialité",
   "terms": "Conditions",
-  "consent": "Autoriser la mesure publicitaire facultative ? Elle nous aide à comprendre quelles annonces fonctionnent. Nous n’envoyons pas les réponses du questionnaire à Meta.",
+  "consent": "Autoriser la mesure publicitaire facultative ? Elle nous aide à comprendre quelles annonces fonctionnent. Nous n’envoyons pas vos données personnelles à Meta.",
   "accept": "Autoriser la mesure",
   "reject": "Refuser",
   "settings": "Réglages de mesure"

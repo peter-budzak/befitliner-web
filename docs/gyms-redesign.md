@@ -2,9 +2,9 @@
 
 ## Scope and architecture
 
-The existing Next.js App Router route `app/[locale]/gyms/page.tsx` now renders a server-first sales page with small client components for video events, links, FAQ, consent, sticky CTA and optional qualification. No database migration or new runtime dependency was introduced. The gym checkout now uses a direct Stripe Payment Link.
+The existing Next.js App Router route `app/[locale]/gyms/page.tsx` now renders a server-first sales page with small client components for video, links, FAQ, consent and the sticky CTA. No database migration or new runtime dependency was introduced. The gym checkout uses a direct Stripe Payment Link.
 
-Sequence: hero → existing Slovak video → six-step automation story → parallel access-system compatibility → three installation scenarios → starter package → owner outcomes → real member app screenshot → four onboarding steps → €297 one-time system offer → founder story → FAQ → optional qualification → final order/contact close.
+Sequence: hero → existing Slovak video → six-step automation story → universal parallel access-system connection → three installation scenarios → starter package → owner outcomes → real member app screenshot → four onboarding steps → €297 one-time system offer → founder story → FAQ → final order/contact close.
 
 SK, EN, DE, ES, FR and simplified Chinese have complete independent dictionaries under `messages/gyms/`. The route keeps localized canonical/hreflang metadata, one H1, the existing safe JSON-LD renderer, localized Service description and FAQ schema generated from the visible FAQ. The source copy is Slovak. Metadata uses the new dictionary directly; unrelated site metadata remains unchanged.
 
@@ -12,8 +12,8 @@ SK, EN, DE, ES, FR and simplified Chinese have complete independent dictionaries
 
 - `app/[locale]/gyms/page.tsx`: complete page, metadata and structured data.
 - `app/[locale]/gyms/gyms.css`: scoped responsive styles, focus indicators, reduced-motion support and reserved media dimensions.
-- `components/gyms/gyms-interactions.tsx`: events respecting stored opt-outs, native video, FAQ, optional lazy-loaded form and mobile CTA.
-- `components/gyms/gyms-funnel.tsx`: optional four-question-stage mode retaining the existing backend payload; accessible input names, manual-address fallback, storage-blocked fallback. Legacy six-step mode remains available.
+- `components/gyms/gyms-interactions.tsx`: events respecting stored opt-outs, floating video, FAQ and responsive sticky CTA.
+- `components/gyms/gyms-funnel.tsx`: retained legacy component, no longer rendered on the gym sales page.
 - `components/gyms/gym-testimonials.tsx`: reusable renderer for future approved owner quotes; no invented testimonials are displayed.
 - `lib/gyms.ts`: dictionaries, Stripe checkout URL/config override, replaceable video/poster, optional real package image and Slovak headline variants.
 - `lib/meta-pixel.ts`: extracted existing Meta initializer, shared without duplicate scripts.
@@ -21,11 +21,9 @@ SK, EN, DE, ES, FR and simplified Chinese have complete independent dictionaries
 - `messages/gyms/{sk,en,de,es,fr,zh-Hans}.json`: six complete translations.
 - `scripts/check-gyms.mjs`: isolated conversion/consent and qualification-contract regression tests.
 
-## Order and qualification behavior
+## Order behavior
 
-All primary landing CTAs scroll to the offer. The offer CTA goes directly to the Stripe-hosted checkout, without completing a questionnaire. The mobile sticky CTA appears after the hero; it is hidden while the consent panel is open so the two do not overlap. Consultation uses the existing public support email via a mailto link; no message is sent automatically.
-
-“Check my setup” opens the optional compatibility section. It retains the existing Supabase table, submission ID, field names, Slovak enum values, partial-save sequence and Google Places endpoint. It starts at the owner question and omits the old introductory and final sales videos. After contact submission it displays an acknowledgement, not an unverified compatibility guarantee. A typed address is sufficient when Places cannot supply a match.
+All primary landing CTAs scroll to the offer. The offer CTA goes directly to the Stripe-hosted checkout. The sticky CTA appears after the hero. On desktop, the VSL docks in the lower-right corner after the hero leaves the viewport and can be dismissed. Consultation uses the existing public support email via a mailto link; no message is sent automatically. The former multi-step compatibility form is no longer rendered.
 
 ## Tracking
 
@@ -38,7 +36,6 @@ Implemented events:
 - `gyms_landing_view`
 - `gyms_vsl_play`, `gyms_vsl_25`, `gyms_vsl_50`, `gyms_vsl_75`, `gyms_vsl_complete`
 - `gyms_primary_cta_click`
-- `gyms_existing_system_cta_click`
 - `gyms_starter_order_start`
 - `gyms_call_cta_click`
 - `gyms_faq_interaction`
@@ -55,7 +52,7 @@ Video milestones and play/completion are deduplicated per mounted video. Milesto
 - `node scripts/check-gyms.mjs`: six dictionary shapes, automatic measurement and stored opt-outs, one primary/order event per click, deduplicated VSL events, FAQ open-only events, single shared pixel initialization, optional four-stage form and unchanged saved backend payload. Network calls are mocked; no production lead or payment was created.
 - Existing `check:seo`: 26 canonical pages, locale alternates, sitemap, robots, IndexNow and noindex rules passed, including member-facing and health routes.
 - Existing `check:legal`: all 12 localized documents passed.
-- Browser checks at 375, 768 and 1440 px across all six languages: no horizontal document overflow, one H1 and eight FAQ entries. Hero, offer anchor, sticky CTA, optional compatibility opening and FAQ expansion inspected. Slovak mobile/tablet/desktop and German desktop/Chinese mobile screenshots reviewed.
+- Browser checks cover responsive layouts across all six languages with no horizontal overflow, one H1, the hero, floating video, sticky CTA, offer anchor and FAQ.
 
 ## Before paid traffic / remaining external work
 
@@ -63,4 +60,4 @@ The owner authorized direct Stripe payment to Globalio LLC and delivery to all 2
 
 All six locales now use this link and state EU delivery. All use the supplied Slovak VEED video. Published on 2026-09-11. On 2026-09-16 the owner revised the offer to a one-time EUR 297 Fitliner system and module with free lifetime app access for owners and clients and no monthly subscription. All locale copy reflects this offer; no transaction fees are displayed on the landing. Stripe product description update requires the owner to sign in again.
 
-Update: the video now appears directly below the hero heading and introduction, before the order CTA, with eager iframe loading. A ninth FAQ immediately before turnstile compatibility explains unlimited ad-free app use and the optional 10% service fee for card payments with automatic membership renewals and invoicing. This owner-approved FAQ supersedes the previous instruction not to display transaction fees.
+Update: the video appears directly below the hero heading and introduction, before the order CTA, with eager iframe loading. The public offer does not display internal payment-processing fees.

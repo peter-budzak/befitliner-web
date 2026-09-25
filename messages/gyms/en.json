@@ -1,7 +1,11 @@
 {
   "eyebrow": "Fitliner for gym owners",
-  "title": "Automate your gym once and for all. No monthly fees.",
-  "intro": "Pay once and keep your gym running around the clock. €297 includes the hardware and software with unlimited use — there is nothing else to buy.",
+  "title": "Automate your gym once and for all.",
+  "titleAccent": "No monthly fees.",
+  "introLead": "Pay only once",
+  "intro": "and keep your gym running around the clock. €297 includes the hardware and software with unlimited use — there is nothing else to buy.",
+  "offlineLabel": "Works without internet",
+  "closeVideo": "Close floating video",
   "cta": "Get Fitliner for €297 once",
   "shipping": "Order today. Your Fitliner module will arrive within 7 business days.",
   "watch": "See how Fitliner works",
@@ -26,24 +30,23 @@
   ],
   "existingTitle": "Already using cards, fobs, a turnstile or another access system?",
   "existingAnswer": "You don’t have to throw it away.",
-  "existingBody": "With a compatible technical setup, Fitliner can connect in parallel with your existing system. Keep your current entry method and add app-based access and automation.",
+  "existingBody": "Fitliner connects in parallel with any access system you already use. Your current entry method stays in place while Fitliner adds app access and automation.",
   "existingBenefits": [
-    "Move members over gradually.",
-    "Keep working equipment in place.",
-    "We check your setup before installation."
+    "Your existing fobs, cards and turnstile can stay.",
+    "The module is only 3 × 4 cm and fits in a switchboard or a standard wall box.",
+    "It needs 12 V power and a position within 5 metres of the door or turnstile."
   ],
-  "verify": "Check my setup",
   "currentSystem": "Your current system",
   "door": "Gym entrance",
-  "accessTitle": "Most gyms don’t need a whole new door.",
-  "accessBody": "The access unit can connect to common entry solutions where the technical configuration allows it.",
+  "accessTitle": "One tiny module. Any existing entrance system.",
+  "accessBody": "The 3 × 4 cm Fitliner chip connects in parallel with your system. It only needs 12 V power and a position within 5 metres of the door or turnstile.",
   "access": [
     "Electric door release / buzzer",
     "Magnetic lock with exit button",
     "Turnstile"
   ],
-  "unknown": "Not sure which system you have? That’s OK.",
-  "technician": "We’ll help assess it. A qualified electrician or technician installs the unit using the supplied wiring diagram.",
+  "unknown": "Where does such a small module fit? Almost anywhere.",
+  "technician": "Place it in a switchboard, a standard electrical wall box or another suitable location. A qualified electrician installs it using the supplied wiring diagram.",
   "packageTitle": "A Fitliner chip for your door or turnstile.",
   "packageBody": "The chip, instructions and installation support. Plus free lifetime app access for you and your clients.",
   "packageItems": [
@@ -75,7 +78,7 @@
   "howTitle": "From the kit to your first automated entry.",
   "steps": [
     "Order your Starter Kit.",
-    "We check your access setup together.",
+    "Place the 3 × 4 cm module within 5 metres of the entrance.",
     "Your electrician installs Fitliner using the diagram.",
     "We set up your gym, memberships and access."
   ],
@@ -83,14 +86,14 @@
   "offerBody": "Place the Fitliner chip on your door or turnstile. The one-time €297 payment includes the chip and delivery within the EU.",
   "priceLabel": "one-time payment for a Fitliner chip for your door or turnstile",
   "priceNote": "Pay only once. Gym owners and their clients get free lifetime access to the Fitliner app. No monthly subscription.",
-  "offerReassurance": "You don’t need to change your current system now. We’ll check your gym’s specific setup first.",
+  "offerReassurance": "Keep your current system. Fitliner connects alongside it in parallel.",
   "founderTitle": "First, we built it for our own gym.",
   "founderBody": "Fitliner didn’t start as a feature list in an office. It grew out of everyday gym life: payments, memberships and doors that needed opening. Now it helps other owners handle those same tasks.",
   "faqTitle": "Still have a few questions?",
   "faq": [
     [
       "Do I have to replace my existing access system?",
-      "Not necessarily. Fitliner can run alongside your existing system if the technical setup is compatible. We check it before installation."
+      "No. Fitliner connects in parallel with any system you already use. Existing fobs, cards or the turnstile remain fully functional."
     ],
     [
       "Do I have to remove reception?",
@@ -106,7 +109,7 @@
     ],
     [
       "What if I don’t know which system I use?",
-      "That’s fine. Describe your entrance in the optional compatibility check and we’ll help assess the setup."
+      "That’s fine. Fitliner connects in parallel with the existing system. The module only needs 12 V power and a position within 5 metres of the door or turnstile."
     ],
     [
       "What do I get for a one-time €297 payment?",
@@ -114,7 +117,7 @@
     ],
     [
       "What happens after I order?",
-      "We assess your entrance, agree the next steps and service terms. Your electrician installs the unit and we set up your gym, memberships and access together."
+      "Download the app to create your gym and connect your payment gateway. The module arrives within 7 business days and your electrician installs it using the supplied diagram."
     ],
     [
       "Does Fitliner need internet at the gym?",
@@ -122,20 +125,17 @@
     ],
     [
       "Does Fitliner work with turnstiles?",
-      "It can, depending on the turnstile’s controls and technical configuration. We check the specific model first."
+      "Yes. Fitliner connects in parallel with the turnstile. The module only needs 12 V power and a position within 5 metres of the entrance."
     ]
   ],
   "closeTitle": "Less operation on your shoulders. More room to build your gym.",
   "closeBody": "One €297 investment can replace years of monthly licences.",
-  "call": "My setup is unusual — I’d like to talk first",
-  "qualificationTitle": "Let’s look at your entrance.",
-  "qualificationBody": "An optional compatibility check. You don’t need to complete this questionnaire to order the kit.",
-  "qualificationDone": "Thank you. Your details are saved so we can discuss your specific setup.",
+  "call": "I have a technical question — let’s talk",
   "sticky": "One-time payment · €297",
   "back": "Fitliner for members",
   "privacy": "Privacy",
   "terms": "Terms",
-  "consent": "Allow optional advertising measurement? It helps us understand which ads work. We don’t send questionnaire answers to Meta.",
+  "consent": "Allow optional advertising measurement? It helps us understand which ads work. We don’t send your personal data to Meta.",
   "accept": "Allow measurement",
   "reject": "Reject",
   "settings": "Measurement settings"

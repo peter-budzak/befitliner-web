@@ -1,11 +1,9 @@
 'use client';
 
 import {useEffect, useRef, useState, type ReactNode} from 'react';
-import dynamic from 'next/dynamic';
 import {ensureMetaPixel, MARKETING_CONSENT_KEY} from '@/lib/meta-pixel';
 import type {GymsCopy} from '@/lib/gyms';
 
-const GymsFunnel = dynamic(() => import('./gyms-funnel'));
 type EventName =
   | 'gyms_landing_view'
   | 'gyms_vsl_play'
@@ -14,7 +12,6 @@ type EventName =
   | 'gyms_vsl_75'
   | 'gyms_vsl_complete'
   | 'gyms_primary_cta_click'
-  | 'gyms_existing_system_cta_click'
   | 'gyms_starter_order_start'
   | 'gyms_call_cta_click'
   | 'gyms_faq_interaction';
@@ -131,44 +128,52 @@ export function GymFaq({items}: {items: string[][]}) {
   );
 }
 
-export function GymQualification({
-  locale,
-  copy,
+export function GymFloatingVideo({
+  src,
+  title,
+  closeLabel,
 }: {
-  locale: string;
-  copy: GymsCopy;
+  src: string;
+  title: string;
+  closeLabel: string;
 }) {
-  const [open, setOpen] = useState(false);
-  const details = useRef<HTMLDetailsElement>(null);
+  const [floating, setFloating] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
   useEffect(() => {
-    const reveal = () => {
-      if (window.location.hash === '#compatibility' && details.current)
-        details.current.open = true;
-    };
-    reveal();
-    window.addEventListener('hashchange', reveal);
-    return () => window.removeEventListener('hashchange', reveal);
+    const hero = document.getElementById('gym-hero');
+    const observer = new IntersectionObserver(([entry]) => {
+      const hasPassedHero = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
+      setFloating(hasPassedHero);
+      if (entry.isIntersecting) setDismissed(false);
+    });
+    if (hero) observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
+
   return (
-    <details
-      ref={details}
-      id="compatibility"
-      className="gym-qualification"
-      onToggle={(e) => setOpen(e.currentTarget.open)}
+    <div
+      className={`gym-floating-video ${floating && !dismissed ? 'is-floating' : ''}`}
     >
-      <summary>
-        {copy.qualificationTitle}
-        <span aria-hidden="true"> +</span>
-      </summary>
-      <p>{copy.qualificationBody}</p>
-      {open && (
-        <GymsFunnel
-          locale={locale}
-          assessmentOnly
-          resultCopy={copy.qualificationDone}
-        />
+      {floating && !dismissed && (
+        <button
+          type="button"
+          className="gym-floating-video-close"
+          aria-label={closeLabel}
+          onClick={() => setDismissed(true)}
+        >
+          ×
+        </button>
       )}
-    </details>
+      <iframe
+        src={src}
+        title={title}
+        loading="eager"
+        allow="fullscreen; picture-in-picture"
+        allowFullScreen
+        className="gym-veed-embed"
+      />
+    </div>
   );
 }
 

@@ -1,7 +1,11 @@
 {
   "eyebrow": "Fitliner für Fitnessstudios",
-  "title": "Automatisiere dein Fitnessstudio ein für alle Mal. Ohne monatliche Gebühren.",
-  "intro": "Du zahlst nur einmal und dein Studio kann rund um die Uhr laufen. Für 297 € erhältst du Hardware und Software zur unbegrenzten Nutzung — du musst nichts dazukaufen.",
+  "title": "Automatisiere dein Fitnessstudio ein für alle Mal.",
+  "titleAccent": "Ohne monatliche Gebühren.",
+  "introLead": "Du zahlst nur einmal",
+  "intro": "und dein Studio kann rund um die Uhr laufen. Für 297 € erhältst du Hardware und Software zur unbegrenzten Nutzung — du musst nichts dazukaufen.",
+  "offlineLabel": "Funktioniert ohne Internet",
+  "closeVideo": "Schwebendes Video schließen",
   "cta": "Fitliner einmalig für 297 € kaufen",
   "shipping": "Bestelle heute. Dein Fitliner-Modul kommt innerhalb von 7 Werktagen an.",
   "watch": "So funktioniert Fitliner",
@@ -26,24 +30,23 @@
   ],
   "existingTitle": "Du nutzt bereits Karten, Chips, ein Drehkreuz oder ein anderes Zutrittssystem?",
   "existingAnswer": "Du musst es nicht wegwerfen.",
-  "existingBody": "Bei kompatibler technischer Konfiguration kann Fitliner parallel zu deinem bestehenden System angeschlossen werden. Der bisherige Zutritt bleibt erhalten, App-Zutritt und Automatisierung kommen hinzu.",
+  "existingBody": "Fitliner wird parallel an jedes bereits vorhandene Zutrittssystem angeschlossen. Der bisherige Zutritt bleibt erhalten, App-Zutritt und Automatisierung kommen hinzu.",
   "existingBenefits": [
-    "Mitglieder schrittweise umstellen.",
-    "Funktionierende Technik weiter nutzen.",
-    "Wir prüfen die Konfiguration vor der Installation."
+    "Vorhandene Chips, Karten und Drehkreuze bleiben bestehen.",
+    "Das Modul ist nur 3 × 4 cm groß und passt in einen Schaltschrank oder eine normale Unterputzdose.",
+    "Es benötigt 12 V und einen Platz höchstens 5 Meter von Tür oder Drehkreuz entfernt."
   ],
-  "verify": "Meine Anlage prüfen",
   "currentSystem": "Dein bestehendes System",
   "door": "Studioeingang",
-  "accessTitle": "Die meisten Studios brauchen keine komplett neue Tür.",
-  "accessBody": "Die Zutrittseinheit lässt sich in gängige Zugangslösungen einbinden, sofern die technische Konfiguration passt.",
+  "accessTitle": "Ein winziges Modul. Jedes bestehende Zutrittssystem.",
+  "accessBody": "Der 3 × 4 cm große Fitliner-Chip wird parallel an dein System angeschlossen. Er benötigt nur 12 V und einen Platz höchstens 5 Meter von Tür oder Drehkreuz entfernt.",
   "access": [
     "Elektrischer Türöffner / Summer",
     "Magnetschloss mit Ausgangstaster",
     "Drehkreuz"
   ],
-  "unknown": "Du weißt nicht, welches System du hast? Kein Problem.",
-  "technician": "Wir helfen bei der Prüfung. Ein qualifizierter Elektriker oder Techniker installiert die Einheit nach dem mitgelieferten Schaltplan.",
+  "unknown": "Wo passt ein so kleines Modul hin? Fast überall.",
+  "technician": "Zum Beispiel in einen Schaltschrank, eine normale Unterputzdose oder an einen anderen geeigneten Ort. Ein qualifizierter Elektriker installiert es nach dem mitgelieferten Schaltplan.",
   "packageTitle": "Der Fitliner-Chip für Ihre Tür oder Ihr Drehkreuz.",
   "packageBody": "Chip, Anleitung und Unterstützung beim Anschluss. Dazu lebenslanger kostenloser App-Zugang für Sie und Ihre Mitglieder.",
   "packageItems": [
@@ -75,7 +78,7 @@
   "howTitle": "Vom Paket zum ersten automatischen Zutritt.",
   "steps": [
     "Starterpaket bestellen.",
-    "Gemeinsam die Zutrittskonfiguration prüfen.",
+    "Das 3 × 4 cm große Modul höchstens 5 Meter vom Eingang entfernt platzieren.",
     "Dein Elektriker installiert Fitliner nach Schaltplan.",
     "Studio, Mitgliedschaften und Zutritt einrichten."
   ],
@@ -83,14 +86,14 @@
   "offerBody": "Bringen Sie den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz an. Die einmaligen 297 € enthalten den Chip und die Lieferung innerhalb der EU.",
   "priceLabel": "einmalig für den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz",
   "priceNote": "Sie zahlen nur einmal. Studiobetreiber und ihre Mitglieder erhalten lebenslangen kostenlosen Zugang zur Fitliner-App. Keine monatliche Grundgebühr.",
-  "offerReassurance": "Du musst dein bestehendes System jetzt nicht ändern. Wir prüfen zuerst die konkrete Lösung für dein Studio.",
+  "offerReassurance": "Dein bestehendes System bleibt. Fitliner wird parallel dazu angeschlossen.",
   "founderTitle": "Zuerst haben wir es für unser eigenes Studio gebaut.",
   "founderBody": "Fitliner entstand nicht als Funktionsliste im Büro. Es entstand im Studioalltag: aus Zahlungen, Mitgliedschaften und Türen, die geöffnet werden mussten. Heute hilft es anderen Inhabern bei denselben Aufgaben.",
   "faqTitle": "Noch Fragen offen?",
   "faq": [
     [
       "Muss ich mein bestehendes Zutrittssystem ersetzen?",
-      "Nicht unbedingt. Bei kompatibler Technik kann Fitliner parallel zum bestehenden System laufen. Wir prüfen die Konfiguration vor der Installation."
+      "Nein. Fitliner wird parallel an jedes vorhandene System angeschlossen. Bestehende Chips, Karten und Drehkreuze bleiben voll funktionsfähig."
     ],
     [
       "Muss ich die Rezeption abschaffen?",
@@ -106,7 +109,7 @@
     ],
     [
       "Was, wenn ich mein System nicht kenne?",
-      "Kein Problem. Beschreibe deinen Eingang in der optionalen Kompatibilitätsprüfung. Wir helfen bei der Einschätzung."
+      "Kein Problem. Fitliner wird parallel angeschlossen. Das Modul benötigt nur 12 V und einen Platz höchstens 5 Meter von Tür oder Drehkreuz entfernt."
     ],
     [
       "Was erhalte ich für einmalig 297 €?",
@@ -114,7 +117,7 @@
     ],
     [
       "Was passiert nach der Bestellung?",
-      "Wir prüfen den Eingang und vereinbaren die nächsten Schritte und Servicebedingungen. Dein Elektriker installiert die Einheit; gemeinsam richten wir Studio, Mitgliedschaften und Zutritt ein."
+      "Lade die App herunter, erstelle dein Studio und richte das Zahlungs-Gateway ein. Das Modul kommt innerhalb von 7 Werktagen und wird nach dem mitgelieferten Schaltplan installiert."
     ],
     [
       "Braucht Fitliner Internet im Studio?",
@@ -122,20 +125,17 @@
     ],
     [
       "Funktioniert Fitliner mit einem Drehkreuz?",
-      "Das hängt von Steuerung und technischer Konfiguration ab. Wir prüfen das konkrete Modell vorab."
+      "Ja. Fitliner wird parallel an das Drehkreuz angeschlossen. Das Modul benötigt 12 V und einen Platz höchstens 5 Meter vom Eingang entfernt."
     ]
   ],
   "closeTitle": "Dein Studio kann arbeiten, wenn du frei hast.",
   "closeBody": "Starten Sie mit dem Fitliner-Chip für einmalig 297 €. Ohne monatliche Grundgebühr.",
-  "call": "Meine Anlage ist speziell — ich möchte zuerst sprechen",
-  "qualificationTitle": "Schauen wir uns deinen Eingang an.",
-  "qualificationBody": "Eine freiwillige Kompatibilitätsprüfung. Für die Bestellung musst du den Fragebogen nicht ausfüllen.",
-  "qualificationDone": "Danke. Deine Angaben sind gespeichert, damit wir die konkrete Installation besprechen können.",
+  "call": "Ich habe eine technische Frage — lass uns sprechen",
   "sticky": "Einmalige Zahlung · 297 €",
   "back": "Fitliner für Mitglieder",
   "privacy": "Datenschutz",
   "terms": "Bedingungen",
-  "consent": "Optionale Werbemessung erlauben? Sie zeigt uns, welche Anzeigen funktionieren. Antworten aus dem Fragebogen senden wir nicht an Meta.",
+  "consent": "Optionale Werbemessung erlauben? Sie zeigt uns, welche Anzeigen funktionieren. Persönliche Daten senden wir nicht an Meta.",
   "accept": "Messung erlauben",
   "reject": "Ablehnen",
   "settings": "Messeinstellungen"

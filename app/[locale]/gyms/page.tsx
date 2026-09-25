@@ -5,8 +5,8 @@ import {notFound} from 'next/navigation';
 import JsonLd from '@/components/seo/json-ld';
 import {
   GymFaq,
+  GymFloatingVideo,
   GymLink,
-  GymQualification,
   GymTracking,
 } from '@/components/gyms/gyms-interactions';
 import {
@@ -29,11 +29,12 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
   if (!isSiteLocale(locale)) return {};
   const copy = GYMS_COPY[locale];
+  const description = `${copy.introLead} ${copy.intro}`;
   return pageMetadata({
     locale,
     path: 'gyms',
     title: `${copy.eyebrow} · ${copy.sticky}`,
-    description: copy.intro,
+    description,
     image: '/og/fitliner-gyms-297.png',
   });
 }
@@ -71,13 +72,14 @@ export default async function GymsPage({params}: PageProps) {
   const {locale} = await params;
   if (!isSiteLocale(locale)) notFound();
   const t = GYMS_COPY[locale];
+  const description = `${t.introLead} ${t.intro}`;
   const order = (location: string, label = t.cta) => (
     <GymLink href="#offer" location={location} className="gym-button">
       {label}
       <span aria-hidden="true">↗</span>
     </GymLink>
   );
-  const callHref = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`${t.eyebrow} — ${t.verify}`)}`;
+  const callHref = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`${t.eyebrow} — ${t.call}`)}`;
   return (
     <main className="gym-landing">
       <JsonLd
@@ -87,7 +89,7 @@ export default async function GymsPage({params}: PageProps) {
             '@type': 'Service',
             '@id': `${SITE_URL}/${locale}/gyms#service`,
             name: t.eyebrow,
-            description: t.intro,
+            description,
             url: `${SITE_URL}/${locale}/gyms`,
             provider: {'@id': `${SITE_URL}/#organization`},
           },
@@ -96,7 +98,7 @@ export default async function GymsPage({params}: PageProps) {
             '@type': 'Product',
             '@id': `${SITE_URL}/${locale}/gyms#product`,
             name: 'Fitliner',
-            description: t.intro,
+            description,
             image: `${SITE_URL}/og/fitliner-gyms-297.png`,
             brand: {'@type': 'Brand', name: 'Fitliner'},
             offers: {
@@ -151,17 +153,20 @@ export default async function GymsPage({params}: PageProps) {
           <span />
           {t.eyebrow}
         </p>
-        <h1>{t.title}</h1>
-        <p className="gym-intro">{t.intro}</p>
+        <h1>
+          <span>{t.title}</span>
+          <span className="gym-title-accent">{t.titleAccent}</span>
+        </h1>
+        <p className="gym-intro">
+          <strong className="gym-intro-lead">{t.introLead}</strong>{' '}
+          {t.intro}
+        </p>
         <div id="film" className="gym-hero-video">
-          <div className="gym-video">
-            <iframe
+          <div className="gym-video-stage">
+            <GymFloatingVideo
               src={GYMS_VEED_EMBED_URL[locale]}
               title={t.watch}
-              loading="eager"
-              allow="fullscreen; picture-in-picture"
-              allowFullScreen
-              className="gym-veed-embed"
+              closeLabel={t.closeVideo}
             />
           </div>
           {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
@@ -178,10 +183,6 @@ export default async function GymsPage({params}: PageProps) {
             </li>
           ))}
         </ul>
-        <div className="gym-hero-line" aria-hidden="true">
-          <span>FITLINER</span>
-          <span>01 — 13</span>
-        </div>
       </header>
 
       <section className="gym-section gym-container">
@@ -208,7 +209,7 @@ export default async function GymsPage({params}: PageProps) {
       <section className="gym-offline">
         <div className="gym-container gym-split">
           <div>
-            <p className="gym-eyebrow">OFFLINE FIRST</p>
+            <p className="gym-eyebrow">{t.offlineLabel}</p>
             <h2>{t.faq[7][0]}</h2>
             <p className="gym-body">{t.faq[7][1]}</p>
           </div>
@@ -232,14 +233,6 @@ export default async function GymsPage({params}: PageProps) {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <GymLink
-              href="#compatibility"
-              event="gyms_existing_system_cta_click"
-              location="existing-system"
-              className="gym-text-link"
-            >
-              {t.verify} <span aria-hidden="true">↗</span>
-            </GymLink>
           </div>
           <div
             className="gym-system-diagram"
@@ -456,9 +449,6 @@ export default async function GymsPage({params}: PageProps) {
           <h2>{t.faqTitle}</h2>
         </div>
         <GymFaq items={t.faq} />
-      </section>
-      <section className="gym-container gym-qualification-wrap">
-        <GymQualification locale={locale} copy={t} />
       </section>
       <section className="gym-section gym-container gym-close">
         <p className="gym-eyebrow">FITLINER</p>

@@ -1,7 +1,11 @@
 {
   "eyebrow": "Fitliner pre fitnesscentrá",
-  "title": "Automatizujte svoje fitnescentrum raz a navždy. Bez mesačných poplatkov.",
-  "intro": "Zaplatíte iba raz a vaše fitko môže fungovať nonstop. Za 297 € získate hardvér aj softvér s neobmedzeným používaním — nič ďalšie nemusíte dokupovať.",
+  "title": "Automatizujte svoje fitnescentrum raz a navždy.",
+  "titleAccent": "Bez mesačných poplatkov.",
+  "introLead": "Zaplatíte iba raz",
+  "intro": "a vaše fitko môže fungovať nonstop. Za 297 € získate hardvér aj softvér s neobmedzeným používaním — nič ďalšie nemusíte dokupovať.",
+  "offlineLabel": "Funguje aj bez internetu",
+  "closeVideo": "Zavrieť plávajúce video",
   "cta": "Kúpiť Fitliner za 297 € jednorazovo",
   "shipping": "Objednajte dnes. Fitliner modul k vám dorazí najneskôr do 7 pracovných dní.",
   "watch": "Pozrieť, ako Fitliner funguje",
@@ -26,24 +30,23 @@
   ],
   "existingTitle": "Už máte čipy, karty, turniket alebo iný vstupný systém?",
   "existingAnswer": "Nemusíte ho vyhadzovať.",
-  "existingBody": "Pri kompatibilnej technickej konfigurácii sa Fitliner môže pripojiť paralelne k vášmu systému. Súčasný spôsob vstupu zostane zachovaný a Fitliner pridá vstup cez aplikáciu a automatizáciu.",
+  "existingBody": "Fitliner sa pripája paralelne k akémukoľvek vstupnému systému, ktorý už používate. Súčasný spôsob vstupu zostane zachovaný a Fitliner pridá vstup cez aplikáciu a automatizáciu.",
   "existingBenefits": [
-    "Členov môžete presúvať postupne.",
-    "Funkčné vybavenie môže zostať na mieste.",
-    "Konkrétne zapojenie overíme pred realizáciou."
+    "Existujúce čipy, karty aj turniket môžu zostať.",
+    "Modul má iba 3 × 4 cm a zmestí sa do rozvodnej skrine alebo krabičky v stene.",
+    "Potrebuje 12 V napájanie a umiestnenie do 5 metrov od dverí alebo turniketu."
   ],
-  "verify": "Overiť moje riešenie",
   "currentSystem": "Váš súčasný systém",
   "door": "Vstup do fitka",
-  "accessTitle": "Vo väčšine fitiek netreba meniť celé dvere.",
-  "accessBody": "Prístupová jednotka sa dá zapojiť do bežných riešení vstupu, ak to ich technická konfigurácia umožňuje.",
+  "accessTitle": "Jeden malý modul. Akýkoľvek existujúci vstup.",
+  "accessBody": "Fitliner čip s rozmermi 3 × 4 cm sa zapojí paralelne k vášmu systému. Stačí 12 V napájanie a miesto do 5 metrov od dverí alebo turniketu.",
   "access": [
     "Elektrický otvárač dverí / bzučiak",
     "Magnetický zámok s odchodovým tlačidlom",
     "Turniket"
   ],
-  "unknown": "Netušíte, aký systém používate? Nevadí.",
-  "technician": "Pomôžeme overiť zapojenie. Inštaláciu vykoná kvalifikovaný elektrikár alebo technik podľa dodanej schémy.",
+  "unknown": "Kam sa taký malý modul zmestí? Prakticky kamkoľvek.",
+  "technician": "Môže byť v rozvodnej skrini, v klasickej elektrickej krabičke v stene alebo na inom vhodnom mieste. Zapojí ho kvalifikovaný elektrikár podľa dodanej schémy.",
   "packageTitle": "Fitliner čip na vaše dvere alebo turniket.",
   "packageBody": "Čip, návod a podpora pri zapojení. K tomu doživotný bezplatný prístup k aplikácii pre vás aj vašich klientov.",
   "packageItems": [
@@ -75,7 +78,7 @@
   "howTitle": "Od balíka k prvému automatickému vstupu.",
   "steps": [
     "Objednáte si štartovací balík.",
-    "Spoločne overíme konfiguráciu vstupu.",
+    "Umiestnite 3 × 4 cm modul do 5 metrov od vstupu.",
     "Elektrikár zapojí Fitliner podľa schémy.",
     "Nastavíme fitko, členstvá a vstupy."
   ],
@@ -83,14 +86,14 @@
   "offerBody": "Fitliner čip umiestnite na dvere alebo turniket. Jednorazová platba 297 € zahŕňa čip aj doručenie v rámci EÚ.",
   "priceLabel": "jednorazovo za Fitliner čip na dvere alebo turniket",
   "priceNote": "Zaplatíte iba raz. Majiteľ fitka aj jeho klienti získajú doživotný bezplatný prístup k aplikácii Fitliner. Bez mesačného paušálu.",
-  "offerReassurance": "Súčasný systém nemusíte teraz meniť. Najskôr overíme konkrétne riešenie vašej prevádzky.",
+  "offerReassurance": "Súčasný systém nemeníte. Fitliner sa k nemu pripojí paralelne.",
   "founderTitle": "Najskôr sme ho postavili pre vlastné fitko.",
   "founderBody": "Fitliner nevznikol ako zoznam funkcií v kancelárii. Vznikol z každodenného chodu fitnesscentra: z platieb, členstiev a dverí, ktoré bolo treba otvárať. Rovnaké veci teraz pomáha riešiť ďalším majiteľom.",
   "faqTitle": "Ešte vám niečo vŕta v hlave?",
   "faq": [
     [
       "Už mám vstupný systém. Musím ho vymeniť?",
-      "Nie nevyhnutne. Pri kompatibilnom zapojení môže Fitliner fungovať paralelne so súčasným systémom. Konfiguráciu overíme pred realizáciou."
+      "Nie. Fitliner sa pripája paralelne k akémukoľvek systému, ktorý už používate. Existujúce čipy, karty alebo turniket zostanú funkčné."
     ],
     [
       "Musím zrušiť recepciu?",
@@ -106,7 +109,7 @@
     ],
     [
       "Čo ak neviem, aký systém používam?",
-      "Nevadí. Cez voliteľné overenie nám opíšete vstup a pomôžeme posúdiť technické riešenie."
+      "Nevadí. Fitliner sa pripája paralelne k existujúcemu systému. Modul potrebuje iba 12 V napájanie a miesto do 5 metrov od dverí alebo turniketu."
     ],
     [
       "Čo dostanem za jednorazových 297 €?",
@@ -114,7 +117,7 @@
     ],
     [
       "Čo nasleduje po objednávke?",
-      "Overíme konfiguráciu vstupu, dohodneme ďalšie podmienky a postup. Elektrikár zapojí jednotku a spoločne nastavíme fitko, členstvá a vstupy."
+      "Stiahnete si aplikáciu a môžete vytvoriť svoje fitko a nastaviť platobnú bránu. Modul dorazí do 7 pracovných dní a elektrikár ho zapojí podľa dodanej schémy."
     ],
     [
       "Potrebuje Fitliner v prevádzke internet?",
@@ -122,20 +125,17 @@
     ],
     [
       "Funguje Fitliner s turniketom?",
-      "Môže, ak to umožňuje ovládanie a technická konfigurácia turniketu. Kompatibilitu konkrétneho modelu najskôr overíme."
+      "Áno. Fitliner sa pripojí paralelne k turniketu. Modul stačí napájať 12 V a umiestniť do 5 metrov od vstupu."
     ]
   ],
   "closeTitle": "Menej prevádzky na pleciach. Viac priestoru pre vaše fitko.",
   "closeBody": "Jedna investícia 297 € môže nahradiť roky mesačných licencií.",
-  "call": "Mám atypický systém – chcem sa najprv poradiť",
-  "qualificationTitle": "Pozrime sa na váš vstup.",
-  "qualificationBody": "Voliteľné overenie kompatibility. Na objednanie balíka nemusíte vypĺňať dotazník.",
-  "qualificationDone": "Ďakujeme. Údaje máme uložené a môžeme s vami prejsť konkrétne zapojenie.",
+  "call": "Mám technickú otázku – chcem sa poradiť",
   "sticky": "Jednorazová platba 297 €",
   "back": "Fitliner pre členov",
   "privacy": "Ochrana súkromia",
   "terms": "Podmienky",
-  "consent": "Povolíte voliteľné meranie reklám? Pomáha nám zistiť, ktoré reklamy fungujú. Údaje z dotazníka do Meta neposielame.",
+  "consent": "Povolíte voliteľné meranie reklám? Pomáha nám zistiť, ktoré reklamy fungujú. Vaše osobné údaje do Meta neposielame.",
   "accept": "Povoliť meranie",
   "reject": "Odmietnuť",
   "settings": "Nastavenia merania"
