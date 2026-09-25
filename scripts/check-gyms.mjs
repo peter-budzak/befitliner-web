@@ -14,7 +14,7 @@ for (const copy of copies) {
   assert.equal(copy.workflow.length, 6);
   assert.equal(copy.steps.length, 4);
   assert.equal(copy.packageItems.length, 4);
-  assert.ok(copy.cta.includes('15'));
+  assert.ok(copy.cta.includes('297'));
   assert.ok(!JSON.stringify(copy).includes('undefined'));
 }
 

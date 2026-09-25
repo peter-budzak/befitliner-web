@@ -34,6 +34,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
     path: 'gyms',
     title: `${copy.eyebrow} · ${copy.sticky}`,
     description: copy.intro,
+    image: '/og/fitliner-gyms-297.png',
   });
 }
 
@@ -92,6 +93,31 @@ export default async function GymsPage({params}: PageProps) {
           },
           {
             '@context': 'https://schema.org',
+            '@type': 'Product',
+            '@id': `${SITE_URL}/${locale}/gyms#product`,
+            name: 'Fitliner',
+            description: t.intro,
+            image: `${SITE_URL}/og/fitliner-gyms-297.png`,
+            brand: {'@type': 'Brand', name: 'Fitliner'},
+            offers: {
+              '@type': 'Offer',
+              url: `${SITE_URL}/${locale}/gyms#offer`,
+              price: '297',
+              priceCurrency: 'EUR',
+              availability: 'https://schema.org/InStock',
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'VideoObject',
+            name: t.videoTitle,
+            description: t.videoBody,
+            thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
+            embedUrl: GYMS_VEED_EMBED_URL[locale],
+            uploadDate: '2026-09-25',
+          },
+          {
+            '@context': 'https://schema.org',
             '@type': 'FAQPage',
             inLanguage: locale,
             mainEntity: t.faq.map(([name, text]) => ({
@@ -130,7 +156,7 @@ export default async function GymsPage({params}: PageProps) {
         <div id="film" className="gym-hero-video">
           <div className="gym-video">
             <iframe
-              src={GYMS_VEED_EMBED_URL}
+              src={GYMS_VEED_EMBED_URL[locale]}
               title={t.watch}
               loading="eager"
               allow="fullscreen; picture-in-picture"
@@ -177,6 +203,22 @@ export default async function GymsPage({params}: PageProps) {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="gym-offline">
+        <div className="gym-container gym-split">
+          <div>
+            <p className="gym-eyebrow">OFFLINE FIRST</p>
+            <h2>{t.faq[7][0]}</h2>
+            <p className="gym-body">{t.faq[7][1]}</p>
+          </div>
+          <div className="gym-offline-visual" aria-hidden="true">
+            <div className="gym-offline-wifi"><i /><i /><i /><b>×</b></div>
+            <div className="gym-offline-module"><span>FITLINER</span><i /></div>
+            <div className="gym-offline-door"><i /></div>
+            <span className="gym-offline-flow">••••••</span>
+          </div>
+        </div>
       </section>
 
       <section className="gym-existing">
@@ -366,7 +408,7 @@ export default async function GymsPage({params}: PageProps) {
           </div>
           <div className="gym-offer-price">
             <p className="gym-price">
-              15 <span>€</span>
+              297 <span>€</span>
             </p>
             <p>{t.priceLabel}</p>
             <GymLink
@@ -380,6 +422,19 @@ export default async function GymsPage({params}: PageProps) {
             </GymLink>
             <p className="gym-small">{t.offerReassurance}</p>
             <p className="gym-price-note">{t.priceNote}</p>
+            <p className="gym-value-anchor">
+              {locale === 'sk'
+                ? 'Podobné systémy stoja približne 100 € mesačne. Fitliner sa môže vyplatiť už za tri mesiace.'
+                : locale === 'de'
+                  ? 'Vergleichbare Systeme kosten etwa 100 € im Monat. Fitliner kann sich in rund drei Monaten rechnen.'
+                  : locale === 'es'
+                    ? 'Sistemas similares cuestan unos 100 € al mes. Fitliner puede amortizarse en unos tres meses.'
+                    : locale === 'fr'
+                      ? 'Des solutions similaires coûtent environ 100 € par mois. Fitliner peut être amorti en trois mois environ.'
+                      : locale === 'zh-Hans'
+                        ? '类似系统每月约 100 欧元。Fitliner 约三个月即可抵回成本。'
+                        : 'Comparable systems cost around €100 every month. Fitliner can pay for itself in about three months.'}
+            </p>
           </div>
         </div>
       </section>

@@ -15,12 +15,12 @@ export const GYMS_COPY: Record<SiteLocale, GymsCopy> = {
   fr,
   'zh-Hans': zh,
 };
-// Verified one-off EUR 15 Payment Link for Globalio LLC, shipping to all 27 EU countries.
+// Verified one-off EUR 297 Payment Link for Globalio LLC, shipping to all 27 EU countries.
 // Override only with a verified starter-kit checkout URL. Never infer payment success from a redirect.
 export const GYMS_CHECKOUT_URL =
   process.env.NEXT_PUBLIC_GYMS_CHECKOUT_URL ||
   'https://buy.stripe.com/4gM4gyavMcLYaLa7a904800';
-// Replace these together when the long-form VSL is approved; the current video is Slovak.
+// Replace individual locale entries as localized VSL edits become available.
 export const GYMS_VIDEO = {
   src: '/videos/gyms/sk.mp4',
   poster: '/images/gyms/sk-poster.jpg',
@@ -36,5 +36,13 @@ export const SK_HERO_VARIANTS = [
 export const GYMS_PACKAGE_IMAGE: string | undefined = undefined;
 
 // User-approved Slovak VSL, shared across all locales until translations arrive.
-export const GYMS_VEED_EMBED_URL =
+const CURRENT_GYMS_VEED_EMBED_URL =
   'https://www.veed.io/embed/a9516a8e-03bc-47f0-a32a-42a577303925?watermark=0&color=&sharing=0&title=0';
+export const GYMS_VEED_EMBED_URL: Record<SiteLocale, string> = {
+  en: CURRENT_GYMS_VEED_EMBED_URL,
+  sk: CURRENT_GYMS_VEED_EMBED_URL,
+  de: CURRENT_GYMS_VEED_EMBED_URL,
+  es: CURRENT_GYMS_VEED_EMBED_URL,
+  fr: CURRENT_GYMS_VEED_EMBED_URL,
+  'zh-Hans': CURRENT_GYMS_VEED_EMBED_URL,
+};

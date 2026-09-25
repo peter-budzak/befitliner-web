@@ -1,14 +1,14 @@
 {
   "eyebrow": "Fitliner für Fitnessstudios",
-  "title": "Dein Studio kann arbeiten, auch wenn du gerade frei hast.",
-  "intro": "Zutritt, Mitgliedschaften und Zahlungen laufen automatisch. Mit oder ohne Rezeption. Und bei kompatibler Installation auch parallel zu deinem bestehenden System.",
-  "cta": "Einmalige Zahlung von 15 €",
-  "shipping": "Einmalig 15 €. Keine monatliche Grundgebühr. EU-weite Lieferung.",
+  "title": "Dein Studio kann weiter verdienen, ohne dass du darin leben musst.",
+  "intro": "Mitglieder kommen hinein, bezahlen und trainieren ohne Wartezeit. Du gewinnst Ruhe, Überblick und Zeit für den Aufbau deines Studios.",
+  "cta": "Einmalige Zahlung von 297 €",
+  "shipping": "Einmalig 297 €. Keine monatliche Grundgebühr. EU-weite Lieferung.",
   "watch": "So funktioniert Fitliner",
   "reassurance": [
     "Bestehender Zutritt kann bleiben",
     "Dein Elektriker kann es installieren",
-    "Die Rezeption muss nicht weg"
+    "Funktioniert offline — kein Internet vor Ort nötig"
   ],
   "videoTitle": "Ich betreibe ein Studio. Und wollte mehr Zeit, es weiterzuentwickeln.",
   "videoBody": "Deshalb gibt es Fitliner. Schau dir an, wie es den Studioalltag verbindet — von der Zahlung bis zur offenen Tür.",
@@ -80,7 +80,7 @@
     "Studio, Mitgliedschaften und Zutritt einrichten."
   ],
   "offerTitle": "Teste Fitliner in deinem Fitnessstudio.",
-  "offerBody": "Bringen Sie den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz an. Die einmaligen 15 € enthalten den Chip und die Lieferung innerhalb der EU.",
+  "offerBody": "Bringen Sie den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz an. Die einmaligen 297 € enthalten den Chip und die Lieferung innerhalb der EU.",
   "priceLabel": "einmalig für den Fitliner-Chip an Ihrer Tür oder Ihrem Drehkreuz",
   "priceNote": "Sie zahlen nur einmal. Studiobetreiber und ihre Mitglieder erhalten lebenslangen kostenlosen Zugang zur Fitliner-App. Keine monatliche Grundgebühr.",
   "offerReassurance": "Du musst dein bestehendes System jetzt nicht ändern. Wir prüfen zuerst die konkrete Lösung für dein Studio.",
@@ -109,7 +109,7 @@
       "Kein Problem. Beschreibe deinen Eingang in der optionalen Kompatibilitätsprüfung. Wir helfen bei der Einschätzung."
     ],
     [
-      "Was erhalte ich für einmalig 15 €?",
+      "Was erhalte ich für einmalig 297 €?",
       "Einen Fitliner-Chip für Tür oder Drehkreuz, einen Anschlussplan, Anleitungen und Unterstützung. Die EU-weite Lieferung ist enthalten. Betreiber und Mitglieder erhalten lebenslangen kostenlosen App-Zugang ohne monatliche Grundgebühr."
     ],
     [
@@ -117,8 +117,8 @@
       "Wir prüfen den Eingang und vereinbaren die nächsten Schritte und Servicebedingungen. Dein Elektriker installiert die Einheit; gemeinsam richten wir Studio, Mitgliedschaften und Zutritt ein."
     ],
     [
-      "Was kosten Transaktionen?",
-      "Sie und alle Ihre Kunden können Fitliner völlig kostenlos, ohne Einschränkungen und Werbung nutzen. Wenn Sie Kartenzahlungen mit automatischer Mitgliedschaftsverlängerung und Rechnungsstellung nutzen möchten, berechnen wir auf diese Zahlungen eine Servicegebühr von 10 %."
+      "Braucht Fitliner Internet im Studio?",
+      "Nein. Das Fitliner Modul funktioniert zuverlässig offline. Es sind keine Datenkabel nötig und ein Internetausfall stoppt den Zutritt nicht."
     ],
     [
       "Funktioniert Fitliner mit einem Drehkreuz?",
@@ -126,12 +126,12 @@
     ]
   ],
   "closeTitle": "Dein Studio kann arbeiten, wenn du frei hast.",
-  "closeBody": "Starten Sie mit dem Fitliner-Chip für einmalig 15 €. Ohne monatliche Grundgebühr.",
+  "closeBody": "Starten Sie mit dem Fitliner-Chip für einmalig 297 €. Ohne monatliche Grundgebühr.",
   "call": "Meine Anlage ist speziell — ich möchte zuerst sprechen",
   "qualificationTitle": "Schauen wir uns deinen Eingang an.",
   "qualificationBody": "Eine freiwillige Kompatibilitätsprüfung. Für die Bestellung musst du den Fragebogen nicht ausfüllen.",
   "qualificationDone": "Danke. Deine Angaben sind gespeichert, damit wir die konkrete Installation besprechen können.",
-  "sticky": "Einmalige Zahlung · 15 €",
+  "sticky": "Einmalige Zahlung · 297 €",
   "back": "Fitliner für Mitglieder",
   "privacy": "Datenschutz",
   "terms": "Bedingungen",

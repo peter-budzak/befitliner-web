@@ -1,14 +1,14 @@
 {
   "eyebrow": "Fitliner for gym owners",
-  "title": "Your gym can work even when you’re not working.",
-  "intro": "Access, memberships and payments can run automatically. With or without reception. And, where compatible, alongside the system you already use.",
-  "cta": "One-time payment of €15",
-  "shipping": "€15 once. No monthly subscription. Delivery throughout the EU.",
+  "title": "Your gym can keep earning while you stop living at work.",
+  "intro": "Give members the freedom to enter, pay and train without waiting. You get calm, visibility and time to grow the gym — not babysit software.",
+  "cta": "Build a freer gym for €297",
+  "shipping": "One payment. Unlimited use. No monthly software fee.",
   "watch": "See how Fitliner works",
   "reassurance": [
     "Your existing access can stay",
     "Your electrician can install it",
-    "Keep your reception if you want"
+    "Works offline — no on-site internet required"
   ],
   "videoTitle": "I own a gym. I wanted more time to build it.",
   "videoBody": "That’s why Fitliner exists. See how it connects everyday gym operations — from payment to opening the door.",
@@ -80,7 +80,7 @@
     "We set up your gym, memberships and access."
   ],
   "offerTitle": "Try Fitliner in your gym.",
-  "offerBody": "Place the Fitliner chip on your door or turnstile. The one-time €15 payment includes the chip and delivery within the EU.",
+  "offerBody": "Place the Fitliner chip on your door or turnstile. The one-time €297 payment includes the chip and delivery within the EU.",
   "priceLabel": "one-time payment for a Fitliner chip for your door or turnstile",
   "priceNote": "Pay only once. Gym owners and their clients get free lifetime access to the Fitliner app. No monthly subscription.",
   "offerReassurance": "You don’t need to change your current system now. We’ll check your gym’s specific setup first.",
@@ -109,7 +109,7 @@
       "That’s fine. Describe your entrance in the optional compatibility check and we’ll help assess the setup."
     ],
     [
-      "What do I get for a one-time €15 payment?",
+      "What do I get for a one-time €297 payment?",
       "A Fitliner chip for your door or turnstile, a wiring diagram, instructions and support. EU delivery is included. Owners and clients get free lifetime access to the Fitliner app with no monthly subscription."
     ],
     [
@@ -117,21 +117,21 @@
       "We assess your entrance, agree the next steps and service terms. Your electrician installs the unit and we set up your gym, memberships and access together."
     ],
     [
-      "How much do transactions cost?",
-      "You and all your customers can use Fitliner completely free, without limits or ads. If you choose card payments with automatic membership renewals and invoicing, we charge a 10% service fee on those payments."
+      "Does Fitliner need internet at the gym?",
+      "No. The Fitliner module is designed to work reliably offline. You do not need data cabling, and an internet outage does not stop members from entering."
     ],
     [
       "Does Fitliner work with turnstiles?",
       "It can, depending on the turnstile’s controls and technical configuration. We check the specific model first."
     ]
   ],
-  "closeTitle": "Let your gym work when you don’t have to.",
-  "closeBody": "Start with a Fitliner chip for a one-time €15 payment. No monthly subscription.",
+  "closeTitle": "Less operation on your shoulders. More room to build your gym.",
+  "closeBody": "One €297 investment can replace years of monthly licences.",
   "call": "My setup is unusual — I’d like to talk first",
   "qualificationTitle": "Let’s look at your entrance.",
   "qualificationBody": "An optional compatibility check. You don’t need to complete this questionnaire to order the kit.",
   "qualificationDone": "Thank you. Your details are saved so we can discuss your specific setup.",
-  "sticky": "One-time payment · €15",
+  "sticky": "One-time payment · €297",
   "back": "Fitliner for members",
   "privacy": "Privacy",
   "terms": "Terms",

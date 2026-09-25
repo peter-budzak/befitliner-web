@@ -57,7 +57,7 @@ export function GymLink({
         if (order)
           trackGymEvent('gyms_starter_order_start', {
             location,
-            value: 15,
+            value: 297,
             currency: 'EUR',
           });
       }}

@@ -1114,6 +1114,15 @@
     transform: none;
   }
 }
+.gym-success { min-height: 100vh; }
+.gym-success h1 { max-width: 1000px; margin: 0 0 30px; font-size: clamp(48px, 8vw, 104px); line-height: .92; letter-spacing: -.065em; }
+.gym-success .gym-intro { max-width: 760px; }
+.gym-success-store { margin: 46px 0; padding: 32px; background: #121214; color: white; }
+.gym-success-store h2 { margin: 0 0 22px; }
+.gym-success-store > div { display: flex; flex-wrap: wrap; gap: 12px; }
+.gym-success-store a { padding: 14px 18px; background: var(--gym-lime); color: #111; font-size: 14px; font-weight: 850; }
+.gym-success .gym-onboarding { margin-bottom: 38px; }
+.gym-success .gym-onboarding p { color: var(--gym-muted); line-height: 1.55; }
 
 .gym-consent-prompt {
   position: fixed;
@@ -1167,4 +1176,60 @@
   max-width: 800px;
   margin: 32px 0;
   scroll-margin-top: 24px;
+}
+
+.gym-workflow li { overflow: hidden; }
+.gym-workflow li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gym-lime);
+  transform: translateX(-102%);
+  animation: gym-process 6s ease-in-out infinite;
+}
+.gym-workflow li:nth-child(2)::after { animation-delay: 1s; }
+.gym-workflow li:nth-child(3)::after { animation-delay: 2s; }
+.gym-workflow li:nth-child(4)::after { animation-delay: 3s; }
+.gym-workflow li:nth-child(5)::after { animation-delay: 4s; }
+.gym-workflow li:nth-child(6)::after { animation-delay: 5s; }
+.gym-system-connector { animation: gym-signal 2.2s ease-in-out infinite; }
+.gym-access-grid svg { transition: transform .35s ease, color .35s ease; }
+.gym-access-grid article:hover svg { transform: translateY(-7px); color: var(--gym-purple); }
+.gym-phone img { animation: gym-float 5s ease-in-out infinite; }
+
+.gym-offline { padding: 120px 0; background: #121214; color: white; }
+.gym-offline .gym-body { color: #b8b8c0; }
+.gym-offline-visual { position: relative; min-height: 430px; border: 1px solid #ffffff28; background: #ffffff08; overflow: hidden; }
+.gym-offline-module { position: absolute; left: 50%; top: 43%; width: 180px; height: 104px; transform: translate(-50%,-50%); border-radius: 10px; padding: 20px; background: var(--gym-lime); color: #111; font-size: 12px; font-weight: 900; letter-spacing: .12em; box-shadow: 0 22px 70px #0007; }
+.gym-offline-module i { position: absolute; right: 17px; bottom: 17px; width: 12px; height: 12px; border-radius: 50%; background: #111; animation: gym-led 1.3s infinite; }
+.gym-offline-door { position: absolute; right: 11%; bottom: 38px; width: 102px; height: 166px; border: 5px solid white; }
+.gym-offline-door i { position: absolute; right: 11px; top: 74px; width: 9px; height: 9px; border-radius: 50%; background: var(--gym-lime); }
+.gym-offline-wifi { position: absolute; left: 11%; top: 52px; width: 100px; height: 80px; }
+.gym-offline-wifi i { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); border: 4px solid var(--gym-purple); border-left-color: transparent; border-right-color: transparent; border-bottom: 0; border-radius: 50% 50% 0 0; }
+.gym-offline-wifi i:nth-child(1){width:90px;height:55px}.gym-offline-wifi i:nth-child(2){width:60px;height:38px}.gym-offline-wifi i:nth-child(3){width:25px;height:18px}
+.gym-offline-wifi b { position: absolute; right: -9px; top: -20px; color: #ff6060; font-size: 46px; transform: rotate(10deg); }
+.gym-offline-flow { position: absolute; left: calc(50% + 92px); top: 45%; color: var(--gym-lime); letter-spacing: 10px; animation: gym-flow 1.7s linear infinite; }
+.gym-value-anchor { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gym-line); font-weight: 750; line-height: 1.55; }
+
+@keyframes gym-process { 0%,12%{transform:translateX(-102%)} 45%,100%{transform:translateX(102%)} }
+@keyframes gym-signal { 50%{filter:drop-shadow(0 0 9px var(--gym-lime));opacity:.5} }
+@keyframes gym-float { 50%{transform:translateY(-9px) rotate(.5deg)} }
+@keyframes gym-led { 50%{opacity:.2;box-shadow:0 0 18px #111} }
+@keyframes gym-flow { 50%{transform:translateX(12px);opacity:.45} }
+
+@media (max-width: 760px) {
+  .gym-offline { padding: 78px 0; }
+  .gym-offline-visual { min-height: 350px; }
+  .gym-offline-module { width: 150px; height: 92px; }
+  .gym-offline-door { right: 7%; width: 75px; height: 130px; }
+  .gym-offline-wifi { left: 5%; transform: scale(.75); transform-origin: left top; }
+  .gym-offline-flow { left: calc(50% + 74px); letter-spacing: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gym-workflow li::after, .gym-system-connector, .gym-phone img,
+  .gym-offline-module i, .gym-offline-flow { animation: none !important; }
 }

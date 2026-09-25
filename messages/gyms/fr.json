@@ -1,14 +1,14 @@
 {
   "eyebrow": "Fitliner pour les salles de sport",
-  "title": "Votre salle peut fonctionner même quand vous ne travaillez pas.",
-  "intro": "Accès, abonnements et paiements peuvent être automatisés. Avec ou sans accueil. Et, si votre installation est compatible, en parallèle de votre système actuel.",
-  "cta": "Paiement unique de 15 €",
-  "shipping": "15 € une seule fois. Aucun abonnement mensuel. Livraison dans toute l’UE.",
+  "title": "Votre salle peut continuer à produire, sans que vous y viviez.",
+  "intro": "Vos membres entrent, paient et s’entraînent sans attendre. Vous retrouvez sérénité, visibilité et temps pour développer votre salle.",
+  "cta": "Paiement unique de 297 €",
+  "shipping": "297 € une seule fois. Aucun abonnement mensuel. Livraison dans toute l’UE.",
   "watch": "Voir comment fonctionne Fitliner",
   "reassurance": [
     "L’accès actuel peut rester",
     "Votre électricien peut l’installer",
-    "Vous pouvez conserver l’accueil"
+    "Fonctionne hors ligne, sans internet sur place"
   ],
   "videoTitle": "Je dirige une salle. Je voulais plus de temps pour la développer.",
   "videoBody": "C’est pour cela que Fitliner est né. Découvrez comment il relie les tâches du quotidien, du paiement à l’ouverture de la porte.",
@@ -80,7 +80,7 @@
     "Nous configurons la salle, les abonnements et les accès."
   ],
   "offerTitle": "Essayez Fitliner dans votre salle.",
-  "offerBody": "Placez la puce Fitliner sur votre porte ou tourniquet. Le paiement unique de 15 € comprend la puce et la livraison dans l’UE.",
+  "offerBody": "Placez la puce Fitliner sur votre porte ou tourniquet. Le paiement unique de 297 € comprend la puce et la livraison dans l’UE.",
   "priceLabel": "paiement unique pour la puce Fitliner sur votre porte ou tourniquet",
   "priceNote": "Vous ne payez qu’une fois. Les propriétaires de salle et leurs clients bénéficient d’un accès gratuit à vie à l’application Fitliner. Aucun abonnement mensuel.",
   "offerReassurance": "Vous n’avez pas à changer votre système maintenant. Nous vérifions d’abord la solution adaptée à votre salle.",
@@ -109,7 +109,7 @@
       "Aucun souci. Décrivez votre entrée dans la vérification facultative et nous vous aiderons à évaluer l’installation."
     ],
     [
-      "Que comprend le paiement unique de 15 € ?",
+      "Que comprend le paiement unique de 297 € ?",
       "Une puce Fitliner pour votre porte ou tourniquet, un schéma de branchement, les instructions et l’assistance. La livraison dans l’UE est incluse. Propriétaires et clients bénéficient d’un accès gratuit à vie à l’application, sans abonnement mensuel."
     ],
     [
@@ -117,8 +117,8 @@
       "Nous évaluons l’entrée et convenons des conditions et des prochaines étapes. Votre électricien installe le module, puis nous configurons ensemble la salle, les abonnements et l’accès."
     ],
     [
-      "Combien coûtent les transactions ?",
-      "Vous et tous vos clients pouvez utiliser Fitliner entièrement gratuitement, sans limites ni publicité. Si vous choisissez les paiements par carte avec renouvellement automatique des abonnements et facturation, nous prélevons des frais de service de 10 % sur ces paiements."
+      "Fitliner a-t-il besoin d’internet dans la salle ?",
+      "Non. Le module fonctionne de manière fiable hors ligne. Aucun câblage réseau n’est nécessaire et une panne internet ne bloque pas l’accès."
     ],
     [
       "Fitliner fonctionne-t-il avec un tourniquet ?",
@@ -126,12 +126,12 @@
     ]
   ],
   "closeTitle": "Votre salle peut fonctionner même pendant votre temps libre.",
-  "closeBody": "Commencez avec la puce Fitliner pour un paiement unique de 15 €. Sans abonnement mensuel.",
+  "closeBody": "Commencez avec la puce Fitliner pour un paiement unique de 297 €. Sans abonnement mensuel.",
   "call": "Mon installation est particulière — je préfère en parler",
   "qualificationTitle": "Regardons votre entrée ensemble.",
   "qualificationBody": "Vérification de compatibilité facultative. Le questionnaire n’est pas nécessaire pour commander le kit.",
   "qualificationDone": "Merci. Vos informations sont enregistrées pour que nous puissions discuter de votre installation.",
-  "sticky": "Paiement unique · 15 €",
+  "sticky": "Paiement unique · 297 €",
   "back": "Fitliner pour les membres",
   "privacy": "Confidentialité",
   "terms": "Conditions",
