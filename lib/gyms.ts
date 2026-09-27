@@ -46,3 +46,14 @@ export const GYMS_VEED_EMBED_URL: Record<SiteLocale, string> = {
   fr: CURRENT_GYMS_VEED_EMBED_URL,
   'zh-Hans': CURRENT_GYMS_VEED_EMBED_URL,
 };
+
+// Paste the approved portrait VEED embed URL into the relevant locale.
+// Empty entries intentionally render the localized "coming soon" hero placeholder.
+export const GYMS_PORTRAIT_VEED_EMBED_URL: Record<SiteLocale, string | null> = {
+  en: null,
+  sk: null,
+  de: null,
+  es: null,
+  fr: null,
+  'zh-Hans': null,
+};
