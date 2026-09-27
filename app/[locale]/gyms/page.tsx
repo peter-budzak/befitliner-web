@@ -12,7 +12,7 @@ import {
 import {
   GYMS_COPY,
   GYMS_CHECKOUT_URL,
-  GYMS_PORTRAIT_VEED_EMBED_URL,
+  GYMS_VEED_EMBED_URL,
   GYMS_PACKAGE_IMAGE,
 } from '@/lib/gyms';
 import {
@@ -73,7 +73,6 @@ export default async function GymsPage({params}: PageProps) {
   if (!isSiteLocale(locale)) notFound();
   const t = GYMS_COPY[locale];
   const description = `${t.introLead} ${t.intro}`;
-  const portraitVideoUrl = GYMS_PORTRAIT_VEED_EMBED_URL[locale];
   const order = (location: string, label = t.cta) => (
     <GymLink href="#offer" location={location} className="gym-button">
       {label}
@@ -110,19 +109,15 @@ export default async function GymsPage({params}: PageProps) {
               availability: 'https://schema.org/InStock',
             },
           },
-          ...(portraitVideoUrl
-            ? [
-                {
-                  '@context': 'https://schema.org',
-                  '@type': 'VideoObject',
-                  name: t.videoTitle,
-                  description: t.videoBody,
-                  thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
-                  embedUrl: portraitVideoUrl,
-                  uploadDate: '2026-09-25',
-                },
-              ]
-            : []),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'VideoObject',
+            name: t.videoTitle,
+            description: t.videoBody,
+            thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
+            embedUrl: GYMS_VEED_EMBED_URL[locale],
+            uploadDate: '2026-09-25',
+          },
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
@@ -154,57 +149,40 @@ export default async function GymsPage({params}: PageProps) {
       </nav>
 
       <header id="gym-hero" className="gym-hero gym-container">
-        <div className="gym-hero-grid">
-          <div className="gym-hero-copy">
-            <p className="gym-eyebrow">
-              <span />
-              {t.eyebrow}
-            </p>
-            <h1>
-              <span>{t.title}</span>
-              <span className="gym-title-accent">{t.titleAccent}</span>
-            </h1>
-            <p className="gym-intro">
-              <strong className="gym-intro-lead">{t.introLead}</strong>{' '}
-              {t.intro}
-            </p>
-            <div className="gym-hero-actions">{order('hero')}</div>
-            <p className="gym-small">{t.shipping}</p>
-            <ul className="gym-reassurance">
-              {t.reassurance.map((item) => (
-                <li key={item}>
-                  <span aria-hidden="true">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+        <p className="gym-eyebrow">
+          <span />
+          {t.eyebrow}
+        </p>
+        <h1>
+          <span>{t.title}</span>
+          <span className="gym-title-accent">{t.titleAccent}</span>
+        </h1>
+        <p className="gym-intro">
+          <strong className="gym-intro-lead">{t.introLead}</strong>{' '}
+          {t.intro}
+        </p>
+        <div id="film" className="gym-hero-video">
+          <div className="gym-video-stage">
+            <GymFloatingVideo
+              src={GYMS_VEED_EMBED_URL[locale]}
+              title={t.watch}
+              closeLabel={t.closeVideo}
+            />
           </div>
-          <div id="film" className="gym-portrait-media">
-            <div className="gym-portrait-stage">
-              {portraitVideoUrl ? (
-                <GymFloatingVideo
-                  src={portraitVideoUrl}
-                  title={t.watch}
-                  closeLabel={t.closeVideo}
-                />
-              ) : (
-                <div
-                  className="gym-portrait-placeholder"
-                  role="img"
-                  aria-label={t.videoComingSoon}
-                >
-                  <span className="gym-portrait-format">VIDEO · 9:16</span>
-                  <span className="gym-portrait-play" aria-hidden="true">▶</span>
-                  <strong>{t.videoComingSoon}</strong>
-                  <small>{t.watch}</small>
-                </div>
-              )}
-            </div>
-            {portraitVideoUrl && locale !== 'sk' && (
-              <p className="gym-small">{t.videoLanguage}</p>
-            )}
-          </div>
+          {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
         </div>
+        <div className="gym-hero-actions">
+          {order('hero')}
+        </div>
+        <p className="gym-small">{t.shipping}</p>
+        <ul className="gym-reassurance">
+          {t.reassurance.map((item) => (
+            <li key={item}>
+              <span aria-hidden="true">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
       </header>
 
       <section className="gym-section gym-container">
