@@ -29,13 +29,13 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
   if (!isSiteLocale(locale)) return {};
   const copy = GYMS_COPY[locale];
-  const description = `${copy.introLead} ${copy.intro}`;
+  const description = `${copy.introLead} ${copy.intro} ${copy.introEmphasis}`;
   return pageMetadata({
     locale,
     path: 'gyms',
-    title: `${copy.eyebrow} · ${copy.sticky}`,
+    title: `${copy.title} ${copy.titleAccent}`,
     description,
-    image: '/og/fitliner-gyms-297.png',
+    image: '/og/fitliner-gym-access-v2.jpg',
   });
 }
 
@@ -73,7 +73,7 @@ export default async function GymsPage({params}: PageProps) {
   if (!isSiteLocale(locale)) notFound();
   const t = GYMS_COPY[locale];
   const video = getGymVideo(locale);
-  const description = `${t.introLead} ${t.intro}`;
+  const description = `${t.introLead} ${t.intro} ${t.introEmphasis}`;
   const order = (location: string, label = t.cta) => (
     <GymLink href="#offer" location={location} className="gym-button">
       {label}
@@ -96,38 +96,12 @@ export default async function GymsPage({params}: PageProps) {
           },
           {
             '@context': 'https://schema.org',
-            '@type': 'Product',
-            '@id': `${SITE_URL}/${locale}/gyms#product`,
-            name: 'Fitliner',
-            description,
-            image: `${SITE_URL}/og/fitliner-gyms-297.png`,
-            brand: {'@type': 'Brand', name: 'Fitliner'},
-            offers: {
-              '@type': 'Offer',
-              url: `${SITE_URL}/${locale}/gyms#offer`,
-              price: '297',
-              priceCurrency: 'EUR',
-              availability: 'https://schema.org/InStock',
-            },
-          },
-          {
-            '@context': 'https://schema.org',
             '@type': 'VideoObject',
             name: t.videoTitle,
             description: t.videoBody,
             thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
             embedUrl: video.src,
             uploadDate: '2026-09-25',
-          },
-          {
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            inLanguage: locale,
-            mainEntity: t.faq.map(([name, text]) => ({
-              '@type': 'Question',
-              name,
-              acceptedAnswer: {'@type': 'Answer', text},
-            })),
           },
         ]}
       />
@@ -160,7 +134,8 @@ export default async function GymsPage({params}: PageProps) {
         </h1>
         <p className="gym-intro">
           <strong className="gym-intro-lead">{t.introLead}</strong>{' '}
-          {t.intro}
+          {t.intro}{' '}
+          <strong className="gym-intro-emphasis">{t.introEmphasis}</strong>
         </p>
         <div id="film" className="gym-hero-video">
           <div className="gym-video-stage">

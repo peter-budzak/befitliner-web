@@ -1,9 +1,10 @@
 {
   "eyebrow": "Fitliner 健身房解决方案",
-  "title": "一次完成健身房自动化。",
-  "titleAccent": "从此不再支付月费。",
+  "title": "让你的健身房实现自动化。",
+  "titleAccent": "无需月费。",
   "introLead": "只需支付一次",
-  "intro": "健身房即可全天候运行。297 欧元包含硬件和软件，可无限使用，无需再购买其他设备。",
+  "intro": "，你的健身房即可全天候运行。硬件和软件均包含在内，可无限使用——",
+  "introEmphasis": "无需再购买任何东西！",
   "offlineLabel": "无需互联网也能运行",
   "closeVideo": "关闭浮动视频",
   "cta": "一次性 297 欧元购买 Fitliner",

@@ -1,9 +1,10 @@
 {
   "eyebrow": "Fitliner pour les salles de sport",
-  "title": "Automatisez votre salle une fois pour toutes.",
+  "title": "Automatisez votre salle de sport.",
   "titleAccent": "Sans frais mensuels.",
   "introLead": "Vous ne payez qu’une fois",
-  "intro": "et votre salle peut fonctionner sans interruption. Les 297 € incluent le matériel et le logiciel en usage illimité : rien d’autre à acheter.",
+  "intro": "et votre salle peut fonctionner 24 h/24. Vous bénéficiez du matériel et du logiciel en usage illimité —",
+  "introEmphasis": "vous n’avez rien d’autre à acheter !",
   "offlineLabel": "Fonctionne sans internet",
   "closeVideo": "Fermer la vidéo flottante",
   "cta": "Acheter Fitliner pour 297 € une fois",

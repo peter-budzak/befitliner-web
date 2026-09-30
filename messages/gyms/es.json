@@ -1,9 +1,10 @@
 {
   "eyebrow": "Fitliner para gimnasios",
-  "title": "Automatiza tu gimnasio de una vez por todas.",
+  "title": "Automatiza tu gimnasio.",
   "titleAccent": "Sin cuotas mensuales.",
   "introLead": "Pagas una sola vez",
-  "intro": "y mantienes tu gimnasio funcionando sin parar. Los 297 € incluyen hardware y software con uso ilimitado: no necesitas comprar nada más.",
+  "intro": "y tu gimnasio puede funcionar las 24 horas. Recibes hardware y software con uso ilimitado —",
+  "introEmphasis": "¡no necesitas comprar nada más!",
   "offlineLabel": "Funciona sin internet",
   "closeVideo": "Cerrar el vídeo flotante",
   "cta": "Comprar Fitliner por 297 € una vez",

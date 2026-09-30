@@ -116,6 +116,10 @@
   max-width: 685px;
   margin: 30px auto;
 }
+.gym-intro-emphasis {
+  color: #fff;
+  font-weight: 760;
+}
 .gym-intro-lead {
   position: relative;
   isolation: isolate;
