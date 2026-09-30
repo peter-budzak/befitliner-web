@@ -1169,7 +1169,7 @@
 .gym-veed-embed {
   display: block;
   width: 100%;
-  aspect-ratio: 744 / 504;
+  aspect-ratio: 9 / 16;
   border: 0;
   background: #0b0b0e;
 }
@@ -1183,7 +1183,7 @@
 .gym-video-stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 744 / 504;
+  aspect-ratio: 9 / 16;
 }
 .gym-floating-video {
   position: absolute;
@@ -1217,8 +1217,8 @@
     position: fixed;
     z-index: 40;
     inset: auto 24px 24px auto;
-    width: min(50vw, 720px);
-    aspect-ratio: 744 / 504;
+    width: min(22vw, 270px, calc((100dvh - 48px) * 9 / 16));
+    aspect-ratio: 9 / 16;
     animation: gym-video-dock .28s ease-out both;
     box-shadow: 0 28px 100px #000c, 0 0 0 1px #b69aff55;
   }
@@ -1292,3 +1292,6 @@
   .gym-workflow li::after, .gym-system-connector, .gym-phone img,
   .gym-offline-module i, .gym-offline-flow { animation: none !important; }
 }
+
+/* Portrait VSL: keep the full frame visible on phones and wide screens. */
+.gym-hero-video { max-width: 380px; }

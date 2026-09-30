@@ -61,3 +61,5 @@ The owner authorized direct Stripe payment to Globalio LLC and delivery to all 2
 All six locales now use this link and state EU delivery. All use the supplied Slovak VEED video. Published on 2026-09-11. On 2026-09-16 the owner revised the offer to a one-time EUR 297 Fitliner system and module with free lifetime app access for owners and clients and no monthly subscription. All locale copy reflects this offer; no transaction fees are displayed on the landing. Stripe product description update requires the owner to sign in again.
 
 Update: the video appears directly below the hero heading and introduction, before the order CTA, with eager iframe loading. The public offer does not display internal payment-processing fees.
+
+2026-09-30: New portrait VEED video uses a 9:16 frame capped at 380px. The floating desktop player is also portrait and constrained to the viewport height. `GYMS_VIDEOS` in `lib/gyms.ts` has slots for SK, EN, DE, ES, FR and zh-Hans; null slots use the approved Slovak video. Adding a translated src and matching language automatically removes the fallback-language notice.

@@ -12,7 +12,7 @@ import {
 import {
   GYMS_COPY,
   GYMS_CHECKOUT_URL,
-  GYMS_VEED_EMBED_URL,
+  getGymVideo,
   GYMS_PACKAGE_IMAGE,
 } from '@/lib/gyms';
 import {
@@ -72,6 +72,7 @@ export default async function GymsPage({params}: PageProps) {
   const {locale} = await params;
   if (!isSiteLocale(locale)) notFound();
   const t = GYMS_COPY[locale];
+  const video = getGymVideo(locale);
   const description = `${t.introLead} ${t.intro}`;
   const order = (location: string, label = t.cta) => (
     <GymLink href="#offer" location={location} className="gym-button">
@@ -115,7 +116,7 @@ export default async function GymsPage({params}: PageProps) {
             name: t.videoTitle,
             description: t.videoBody,
             thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
-            embedUrl: GYMS_VEED_EMBED_URL[locale],
+            embedUrl: video.src,
             uploadDate: '2026-09-25',
           },
           {
@@ -164,12 +165,12 @@ export default async function GymsPage({params}: PageProps) {
         <div id="film" className="gym-hero-video">
           <div className="gym-video-stage">
             <GymFloatingVideo
-              src={GYMS_VEED_EMBED_URL[locale]}
+              src={video.src}
               title={t.watch}
               closeLabel={t.closeVideo}
             />
           </div>
-          {locale !== 'sk' && <p className="gym-small">{t.videoLanguage}</p>}
+          {video.language !== locale && <p className="gym-small">{t.videoLanguage}</p>}
         </div>
         <div className="gym-hero-actions">
           {order('hero')}

@@ -35,14 +35,19 @@ export const SK_HERO_VARIANTS = [
 // Set to a real approved package photo in public/ when available.
 export const GYMS_PACKAGE_IMAGE: string | undefined = undefined;
 
-// User-approved Slovak VSL, shared across all locales until translations arrive.
-const CURRENT_GYMS_VEED_EMBED_URL =
-  'https://www.veed.io/embed/a9516a8e-03bc-47f0-a32a-42a577303925?watermark=0&color=&sharing=0&title=0';
-export const GYMS_VEED_EMBED_URL: Record<SiteLocale, string> = {
-  en: CURRENT_GYMS_VEED_EMBED_URL,
-  sk: CURRENT_GYMS_VEED_EMBED_URL,
-  de: CURRENT_GYMS_VEED_EMBED_URL,
-  es: CURRENT_GYMS_VEED_EMBED_URL,
-  fr: CURRENT_GYMS_VEED_EMBED_URL,
-  'zh-Hans': CURRENT_GYMS_VEED_EMBED_URL,
+// Fill a locale slot when its translated portrait video is approved.
+export const GYMS_VIDEOS: Record<SiteLocale, {src: string; language: SiteLocale} | null> = {
+  sk: {
+    src: 'https://www.veed.io/embed/4aa6517b-23b5-4f35-8463-44844014563e?watermark=0&color=&sharing=0&title=0',
+    language: 'sk',
+  },
+  en: null,
+  de: null,
+  es: null,
+  fr: null,
+  'zh-Hans': null,
 };
+
+export function getGymVideo(locale: SiteLocale) {
+  return GYMS_VIDEOS[locale] ?? GYMS_VIDEOS.sk!;
+}
