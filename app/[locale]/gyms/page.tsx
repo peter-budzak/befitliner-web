@@ -35,7 +35,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
     path: 'gyms',
     title: `${copy.title} ${copy.titleAccent}`,
     description,
-    image: '/og/fitliner-gym-access-v2.jpg',
+    image: '/og/fitliner-gym-access-v3.jpg',
   });
 }
 

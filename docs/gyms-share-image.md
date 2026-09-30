@@ -1,6 +1,6 @@
 # Gym sharing image
 
-Asset: `public/og/fitliner-gym-access-v2.jpg` (1200 × 630).
+Asset: `public/og/fitliner-gym-access-v3.jpg` (1200 × 630).
 
 Generated with the built-in image generation tool, then resized and encoded as JPEG for Open Graph. All gym locales use this language-neutral image. Page titles and descriptions are localized; price-bearing Product and FAQ structured data were removed from this landing page to keep sharing metadata price-free. Visible pricing and FAQ content are unchanged.
 
@@ -13,3 +13,7 @@ Composition: over-the-shoulder three-quarter view, person with a gym bag steppin
 Lighting: polished but realistic warm interior lighting against dark charcoal entrance; sharp readable subject and smartphone, premium gym ambiance, not overly dark.
 Text (verbatim): "F I T L I N E R" as a clean tasteful white widely spaced wordmark in upper left.
 Constraints: The wordmark is the ONLY text anywhere. No other lettering, labels, captions, prices, slogans, numbers, watermark, badges or other brands. No collage, inset screen, floating diagram, graphic arrows or magical beams. One coherent photographic scene.
+
+## Anatomy correction
+
+Edited with the built-in image generation tool. Prompt: correct the three-arm anatomy to exactly two arms. Keep the left arm hanging naturally; the right hand holds the smartphone and its thumb presses the green unlock button. Remove the extra phone-holding hand and forearm. Preserve the woman, gym bag, open doorway, gym interior, lighting and FITLINER wordmark; no other text. Saved as v3 to refresh the social preview asset URL.
