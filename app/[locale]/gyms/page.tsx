@@ -16,8 +16,8 @@ import {
   GYMS_PACKAGE_IMAGE,
 } from '@/lib/gyms';
 import {
-  isSiteLocale,
-  LOCALES,
+  isGymLocale,
+  GYM_LOCALES,
   pageMetadata,
   SITE_URL,
   SUPPORT_EMAIL,
@@ -27,7 +27,7 @@ import './gyms.css';
 type PageProps = {params: Promise<{locale: string}> | {locale: string}};
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
-  if (!isSiteLocale(locale)) return {};
+  if (!isGymLocale(locale)) return {};
   const copy = GYMS_COPY[locale];
   const description = `${copy.introLead} ${copy.intro} ${copy.introEmphasis}`;
   return pageMetadata({
@@ -70,8 +70,9 @@ function AccessIcon({kind}: {kind: number}) {
 
 export default async function GymsPage({params}: PageProps) {
   const {locale} = await params;
-  if (!isSiteLocale(locale)) notFound();
+  if (!isGymLocale(locale)) notFound();
   const t = GYMS_COPY[locale];
+  const generalLocale = locale === 'pl' ? 'en' : locale;
   const video = getGymVideo(locale);
   const description = `${t.introLead} ${t.intro} ${t.introEmphasis}`;
   const order = (location: string, label = t.cta) => (
@@ -101,16 +102,17 @@ export default async function GymsPage({params}: PageProps) {
             description: t.videoBody,
             thumbnailUrl: `${SITE_URL}/images/gyms/sk-final-poster.jpg`,
             embedUrl: video.src,
+            inLanguage: video.language,
             uploadDate: '2026-09-25',
           },
         ]}
       />
       <nav className="gym-nav gym-container" aria-label={t.eyebrow}>
-        <Link className="gym-wordmark" href={`/${locale}`}>
+        <Link className="gym-wordmark" href={`/${generalLocale}`}>
           FITLINER<span>®</span>
         </Link>
         <div className="gym-languages">
-          {LOCALES.map((lang) => (
+          {GYM_LOCALES.map((lang) => (
             <Link
               key={lang}
               href={`/${lang}/gyms`}
@@ -392,7 +394,9 @@ export default async function GymsPage({params}: PageProps) {
             <p className="gym-small">{t.offerReassurance}</p>
             <p className="gym-price-note">{t.priceNote}</p>
             <p className="gym-value-anchor">
-              {locale === 'sk'
+              {locale === 'pl'
+                ? 'Podobne systemy kosztują około 100 € miesięcznie. Fitliner może się zwrócić już po około trzech miesiącach.'
+                : locale === 'sk'
                 ? 'Podobné systémy stoja približne 100 € mesačne. Fitliner sa môže vyplatiť už za tri mesiace.'
                 : locale === 'de'
                   ? 'Vergleichbare Systeme kosten etwa 100 € im Monat. Fitliner kann sich in rund drei Monaten rechnen.'
@@ -441,13 +445,13 @@ export default async function GymsPage({params}: PageProps) {
         </GymLink>
       </section>
       <footer className="gym-container gym-footer">
-        <Link className="gym-wordmark" href={`/${locale}`}>
+        <Link className="gym-wordmark" href={`/${generalLocale}`}>
           FITLINER
         </Link>
         <div>
-          <Link href={`/${locale}`}>{t.back}</Link>
-          <Link href={`/${locale}/privacy`}>{t.privacy}</Link>
-          <Link href={`/${locale}/terms`}>{t.terms}</Link>
+          <Link href={`/${generalLocale}`}>{t.back}</Link>
+          <Link href={`/${generalLocale}/privacy`}>{t.privacy}</Link>
+          <Link href={`/${generalLocale}/terms`}>{t.terms}</Link>
         </div>
         <GymTracking
           key={locale}

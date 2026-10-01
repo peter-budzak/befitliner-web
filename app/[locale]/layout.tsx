@@ -1,8 +1,8 @@
 import {notFound} from 'next/navigation';
-import {isSiteLocale, LOCALES} from '@/lib/seo';
+import {isGymLocale, GYM_LOCALES} from '@/lib/seo';
 
 export function generateStaticParams() {
-  return LOCALES.map((locale) => ({locale}));
+  return GYM_LOCALES.map((locale) => ({locale}));
 }
 
 export default async function LocaleLayout({
@@ -15,7 +15,7 @@ export default async function LocaleLayout({
   const resolved = params instanceof Promise ? await params : params;
   const locale = resolved?.locale;
 
-  if (!locale || !isSiteLocale(locale)) {
+  if (!locale || !isGymLocale(locale)) {
     notFound();
   }
 

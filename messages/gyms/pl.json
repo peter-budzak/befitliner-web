@@ -1,0 +1,143 @@
+{
+  "eyebrow": "Fitliner dla siłowni",
+  "title": "Zautomatyzuj swoją siłownię.",
+  "titleAccent": "Bez miesięcznych opłat.",
+  "introLead": "Płacisz tylko raz,",
+  "intro": "a Twoja siłownia może działać przez całą dobę. Otrzymujesz sprzęt i oprogramowanie do nieograniczonego użytku —",
+  "introEmphasis": "nie musisz niczego dokupować!",
+  "offlineLabel": "Działa również bez internetu",
+  "closeVideo": "Zamknij pływające wideo",
+  "cta": "Kup Fitliner za jednorazowe 297 €",
+  "shipping": "Zamów dziś. Moduł Fitliner dotrze do Ciebie najpóźniej w ciągu 7 dni roboczych.",
+  "watch": "Zobacz, jak działa Fitliner",
+  "reassurance": [
+    "Sprzęt i oprogramowanie w cenie",
+    "Nieograniczone użytkowanie bez abonamentu",
+    "Działa również offline — bez internetu w obiekcie"
+  ],
+  "videoTitle": "Jestem właścicielem siłowni. Chciałem mieć więcej czasu na jej rozwój.",
+  "videoBody": "Dlatego powstał Fitliner. Zobacz, jak łączy codzienne funkcjonowanie siłowni — od płatności po otwarcie drzwi.",
+  "videoLanguage": "Film jest dostępny w języku polskim.",
+  "videoCta": "Chcę Fitliner w swojej siłowni",
+  "automationTitle": "To, co dziś robisz ręcznie, może dziać się automatycznie.",
+  "automationBody": "Bez dzwonienia. Bez czekania na recepcji. Bez ręcznego zatwierdzania każdego wejścia.",
+  "workflow": [
+    "Klient kupuje karnet",
+    "Płatność zostaje zarejestrowana",
+    "Karnet zostaje aktywowany",
+    "Klient otrzymuje uprawnienia dostępu",
+    "Otwiera siłownię telefonem",
+    "Po wygaśnięciu karnetu dostęp zmienia się zgodnie z ustawieniami"
+  ],
+  "existingTitle": "Masz już breloki, karty, bramkę obrotową lub inny system dostępu?",
+  "existingAnswer": "Nie musisz go wyrzucać.",
+  "existingBody": "Fitliner podłącza się równolegle do dowolnego systemu dostępu, którego już używasz. Obecny sposób wejścia pozostaje bez zmian, a Fitliner dodaje dostęp przez aplikację i automatyzację.",
+  "existingBenefits": [
+    "Obecne breloki, karty i bramka obrotowa mogą zostać.",
+    "Moduł ma zaledwie 3 × 4 cm i mieści się w rozdzielnicy lub puszce w ścianie.",
+    "Wymaga zasilania 12 V i umieszczenia do 5 metrów od drzwi lub bramki obrotowej."
+  ],
+  "currentSystem": "Twój obecny system",
+  "door": "Wejście do siłowni",
+  "accessTitle": "Jeden mały moduł. Dowolny istniejący system wejścia.",
+  "accessBody": "Moduł Fitliner o wymiarach 3 × 4 cm podłącza się równolegle do Twojego systemu. Wystarczy zasilanie 12 V i miejsce do 5 metrów od drzwi lub bramki obrotowej.",
+  "access": [
+    "Elektrozaczep drzwiowy",
+    "Zamek magnetyczny z przyciskiem wyjścia",
+    "Bramka obrotowa"
+  ],
+  "unknown": "Gdzie zmieści się tak mały moduł? Praktycznie wszędzie.",
+  "technician": "Może znajdować się w rozdzielnicy, standardowej puszce w ścianie lub innym odpowiednim miejscu. Podłączy go wykwalifikowany elektryk zgodnie z dołączonym schematem.",
+  "packageTitle": "Moduł Fitliner do Twoich drzwi lub bramki obrotowej.",
+  "packageBody": "Moduł, instrukcja i wsparcie przy podłączeniu. Do tego dożywotni bezpłatny dostęp do aplikacji dla Ciebie i Twoich klientów.",
+  "packageItems": [
+    "Moduł Fitliner do drzwi lub bramki obrotowej",
+    "Schemat podłączenia",
+    "Instrukcja konfiguracji",
+    "Dalsze kroki i wsparcie"
+  ],
+  "packageNote": "Podłączenia nie musi wykonywać nasz technik. Twój elektryk może zrobić to według schematu, a w razie potrzeby pomożemy mu zdalnie.",
+  "packagePreview": "Ilustracja zawartości zestawu",
+  "diagram": "Schemat podłączenia",
+  "benefitsTitle": "Mniej pracy zamiast kolejnego systemu do obsługi.",
+  "benefits": [
+    "Mniej pracy na recepcji",
+    "Zautomatyzowane karnety i płatności",
+    "Możliwość wydłużenia godzin otwarcia lub działania 24/7",
+    "Mniej codziennej administracji",
+    "Działalność mniej zależna od Twojej obecności"
+  ],
+  "quote": "Właściciel siłowni nie powinien spędzać życia na sprawdzaniu płatności i otwieraniu drzwi. Powinien rozwijać swoją siłownię.",
+  "memberTitle": "Klient otrzymuje więcej niż cyfrowy klucz.",
+  "memberBody": "Większość systemów dostępu kończy się na otwarciu drzwi. Dla Fitliner otwarcie drzwi to dopiero początek.",
+  "memberFeatures": [
+    "Plany treningowe",
+    "Odżywianie i śledzenie postępów",
+    "Kontakt z trenerem i społecznością"
+  ],
+  "screenAlt": "Rzeczywisty ekran aplikacji Fitliner",
+  "howTitle": "Od przesyłki do pierwszego automatycznego wejścia.",
+  "steps": [
+    "Zamawiasz zestaw startowy.",
+    "Umieszczasz moduł 3 × 4 cm do 5 metrów od wejścia.",
+    "Elektryk podłącza Fitliner według schematu.",
+    "Konfigurujemy siłownię, karnety i dostęp."
+  ],
+  "offerTitle": "Wypróbuj Fitliner w swojej siłowni.",
+  "offerBody": "Umieść moduł Fitliner przy drzwiach lub bramce obrotowej. Jednorazowa opłata 297 € obejmuje moduł i dostawę na terenie UE.",
+  "priceLabel": "jednorazowo za moduł Fitliner do drzwi lub bramki obrotowej",
+  "priceNote": "Płacisz tylko raz. Właściciel siłowni i jego klienci otrzymują dożywotni bezpłatny dostęp do aplikacji Fitliner. Bez miesięcznego abonamentu.",
+  "offerReassurance": "Nie zmieniasz obecnego systemu. Fitliner podłącza się do niego równolegle.",
+  "founderTitle": "Najpierw stworzyliśmy go dla własnej siłowni.",
+  "founderBody": "Fitliner nie powstał jako lista funkcji w biurze. Wyrósł z codziennej pracy siłowni: płatności, karnetów i drzwi, które trzeba było otwierać. Teraz pomaga rozwiązywać te same sprawy innym właścicielom.",
+  "faqTitle": "Masz jeszcze pytania?",
+  "faq": [
+    [
+      "Mam już system dostępu. Czy muszę go wymienić?",
+      "Nie. Fitliner podłącza się równolegle do dowolnego systemu, którego już używasz. Obecne breloki, karty i bramka obrotowa nadal będą działać."
+    ],
+    [
+      "Czy muszę zrezygnować z recepcji?",
+      "Nie. Recepcja może zostać. Fitliner może zautomatyzować rutynowe zadania i uzupełnić obecny sposób prowadzenia siłowni."
+    ],
+    [
+      "Czy muszę mieć otwarte 24/7?",
+      "Nie. Samodzielnie ustalasz godziny otwarcia. Działanie przez całą dobę to możliwość, a nie warunek."
+    ],
+    [
+      "Kto podłączy Fitliner?",
+      "Wykwalifikowany elektryk lub technik zgodnie z dołączonym schematem. W razie potrzeby pomożemy mu zdalnie."
+    ],
+    [
+      "Co jeśli nie wiem, jakiego systemu używam?",
+      "To nie problem. Fitliner podłącza się równolegle do istniejącego systemu. Moduł wymaga jedynie zasilania 12 V i miejsca do 5 metrów od drzwi lub bramki obrotowej."
+    ],
+    [
+      "Co otrzymam za jednorazowe 297 €?",
+      "Moduł Fitliner do drzwi lub bramki obrotowej, schemat podłączenia, instrukcje i wsparcie. Cena obejmuje dostawę na terenie całej UE. Właściciel i klienci otrzymują dożywotni bezpłatny dostęp do aplikacji Fitliner bez miesięcznego abonamentu."
+    ],
+    [
+      "Co się dzieje po zamówieniu?",
+      "Pobierasz aplikację i możesz dodać swoją siłownię oraz skonfigurować bramkę płatniczą. Moduł dotrze w ciągu 7 dni roboczych, a elektryk podłączy go zgodnie z dołączonym schematem."
+    ],
+    [
+      "Czy Fitliner wymaga internetu w obiekcie?",
+      "Nie. Moduł Fitliner został zaprojektowany tak, aby niezawodnie działał również offline. Nie musisz prowadzić kabli sieciowych, a awaria internetu nie zatrzyma wejść klientów."
+    ],
+    [
+      "Czy Fitliner działa z bramką obrotową?",
+      "Tak. Fitliner podłącza się równolegle do bramki obrotowej. Wystarczy zasilić moduł napięciem 12 V i umieścić go do 5 metrów od wejścia."
+    ]
+  ],
+  "closeTitle": "Mniej obowiązków na głowie. Więcej przestrzeni dla Twojej siłowni.",
+  "closeBody": "Jedna inwestycja 297 € może zastąpić lata miesięcznych opłat licencyjnych.",
+  "call": "Mam pytanie techniczne — chcę się skonsultować",
+  "sticky": "Jednorazowa opłata 297 €",
+  "back": "Fitliner dla klientów (EN)",
+  "privacy": "Polityka prywatności (EN)",
+  "terms": "Regulamin (EN)",
+  "consent": "Czy zezwalasz na opcjonalny pomiar skuteczności reklam? Pomaga nam sprawdzić, które reklamy działają. Nie wysyłamy Twoich danych osobowych do Meta.",
+  "accept": "Zezwól na pomiar",
+  "reject": "Odrzuć",
+  "settings": "Ustawienia pomiaru"
+}

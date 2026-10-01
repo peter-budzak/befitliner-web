@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import JsonLd from "@/components/seo/json-ld";
-import { HOME_SEO, LEGAL_NAME, LOCALES, SITE_NAME, SITE_URL, SUPPORT_EMAIL } from "@/lib/seo";
+import { HOME_SEO, LEGAL_NAME, GYM_LOCALES, SITE_NAME, SITE_URL, SUPPORT_EMAIL } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   },
 };
 
-const HTML_LANGS = new Set(["en", "sk", "de", "es", "fr", "zh-Hans"]);
+const HTML_LANGS = new Set<string>(GYM_LOCALES);
 
 export default async function RootLayout({
   children,
@@ -109,7 +109,7 @@ export default async function RootLayout({
     name: SITE_NAME,
     url: SITE_URL,
     publisher: { "@id": `${SITE_URL}/#organization` },
-    inLanguage: LOCALES,
+    inLanguage: GYM_LOCALES,
   };
 
   return (

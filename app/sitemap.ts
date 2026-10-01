@@ -53,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   ]);
 
-  return [...productPages, ...guides];
+  return [...productPages, {
+    url: absoluteUrl('/pl/gyms'),
+    lastModified: new Date('2026-10-01T00:00:00Z'),
+    changeFrequency: 'monthly',
+    priority: 0.85,
+    alternates: {languages: localizedAlternates('gyms')}
+  }, ...guides];
 }

@@ -7,7 +7,15 @@ export const SUPPORT_EMAIL = 'support@fitliner.eu';
 export const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
 export type SiteLocale = (typeof LOCALES)[number];
 
-export const LANGUAGE_TAGS: Record<SiteLocale, string> = {
+// Polish currently has a dedicated gym landing page only.
+export const GYM_LOCALES = [...LOCALES, 'pl'] as const;
+export type GymLocale = (typeof GYM_LOCALES)[number];
+export function isGymLocale(value: string): value is GymLocale {
+  return GYM_LOCALES.includes(value as GymLocale);
+}
+
+export const LANGUAGE_TAGS: Record<GymLocale, string> = {
+  pl: 'pl',
   en: 'en',
   sk: 'sk',
   de: 'de',
@@ -16,7 +24,8 @@ export const LANGUAGE_TAGS: Record<SiteLocale, string> = {
   'zh-Hans': 'zh-Hans'
 };
 
-export const OPEN_GRAPH_LOCALES: Record<SiteLocale, string> = {
+export const OPEN_GRAPH_LOCALES: Record<GymLocale, string> = {
+  pl: 'pl_PL',
   en: 'en_US',
   sk: 'sk_SK',
   de: 'de_DE',
@@ -127,7 +136,7 @@ export function absoluteUrl(path = '/') {
 export function localizedAlternates(path = '') {
   const suffix = path ? `/${path.replace(/^\//, '')}` : '';
   return Object.fromEntries([
-    ...LOCALES.map((locale) => [LANGUAGE_TAGS[locale], absoluteUrl(`/${locale}${suffix}`)]),
+    ...(path === 'gyms' ? GYM_LOCALES : LOCALES).map((locale) => [LANGUAGE_TAGS[locale], absoluteUrl(`/${locale}${suffix}`)]),
     ['x-default', absoluteUrl(`/en${suffix}`)]
   ]);
 }
@@ -141,7 +150,7 @@ export function pageMetadata({
   index = true,
   languages = localizedAlternates(path)
 }: {
-  locale: SiteLocale;
+  locale: GymLocale;
   path?: string;
   title: string;
   description: string;
@@ -175,7 +184,7 @@ export function pageMetadata({
       title,
       description,
       locale: OPEN_GRAPH_LOCALES[locale],
-      alternateLocale: LOCALES.filter((item) => item !== locale).map((item) => OPEN_GRAPH_LOCALES[item]),
+      alternateLocale: (path === 'gyms' ? GYM_LOCALES : LOCALES).filter((item) => item !== locale).map((item) => OPEN_GRAPH_LOCALES[item]),
       images: [{url: imageUrl, width: 1200, height: 630, alt: title}]
     },
     twitter: {

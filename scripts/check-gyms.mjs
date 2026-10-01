@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import vm from 'node:vm';
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
-const locales = ['sk', 'en', 'de', 'es', 'fr', 'zh-Hans'];
+const locales = ['sk', 'en', 'de', 'es', 'fr', 'zh-Hans', 'pl'];
 const copies = locales.map((locale) =>
   JSON.parse(readFileSync(`messages/gyms/${locale}.json`, 'utf8')),
 );
@@ -138,7 +138,7 @@ assert.equal(pixelExports.ensureMetaPixel(), false);
 assert.equal(scripts.length, 1);
 assert.equal(pixelWindow.fbq.queue.filter((e) => e[0] === 'init').length, 1);
 console.log(
-  'PASS: six locale dictionaries; automatic measurement and existing opt-out; one CTA/order event per click; deduplicated VSL milestones; FAQ opens; single shared pixel initialization.',
+  'PASS: seven locale dictionaries; automatic measurement and existing opt-out; one CTA/order event per click; deduplicated VSL milestones; FAQ opens; single shared pixel initialization.',
 );
 
 // Walk the optional flow against a fake Supabase transport. No production lead is created.

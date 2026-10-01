@@ -1,13 +1,15 @@
+import pl from '@/messages/gyms/pl.json';
 import sk from '@/messages/gyms/sk.json';
 import en from '@/messages/gyms/en.json';
 import de from '@/messages/gyms/de.json';
 import es from '@/messages/gyms/es.json';
 import fr from '@/messages/gyms/fr.json';
 import zh from '@/messages/gyms/zh-Hans.json';
-import type {SiteLocale} from './seo';
+import type {GymLocale} from './seo';
 
 export type GymsCopy = typeof sk;
-export const GYMS_COPY: Record<SiteLocale, GymsCopy> = {
+export const GYMS_COPY: Record<GymLocale, GymsCopy> = {
+  pl,
   sk,
   en,
   de,
@@ -36,10 +38,14 @@ export const SK_HERO_VARIANTS = [
 export const GYMS_PACKAGE_IMAGE: string | undefined = undefined;
 
 // Fill a locale slot when its translated portrait video is approved.
-export const GYMS_VIDEOS: Record<SiteLocale, {src: string; language: SiteLocale} | null> = {
+export const GYMS_VIDEOS: Record<GymLocale, {src: string; language: GymLocale} | null> = {
   sk: {
     src: 'https://www.veed.io/embed/4aa6517b-23b5-4f35-8463-44844014563e?watermark=0&color=&sharing=0&title=0',
     language: 'sk',
+  },
+  pl: {
+    src: 'https://www.veed.io/embed/0d03f363-8294-4720-95a2-36981966d8db?watermark=0&color=&sharing=0&title=0',
+    language: 'pl',
   },
   en: null,
   de: null,
@@ -48,6 +54,6 @@ export const GYMS_VIDEOS: Record<SiteLocale, {src: string; language: SiteLocale}
   'zh-Hans': null,
 };
 
-export function getGymVideo(locale: SiteLocale) {
+export function getGymVideo(locale: GymLocale) {
   return GYMS_VIDEOS[locale] ?? GYMS_VIDEOS.sk!;
 }
