@@ -81,6 +81,6 @@ Create migrations under `supabase/migrations` after reviewing existing tables an
 
 ## Founder email alerts (2026-10-31)
 - After an application is **successfully saved** into `partner_applications`, the API attempts a founder notification to `peter@peterbudzak.com` with country, applicant details, experience and application ID. A failed notification does not undo the saved application; the sender logs an error without exposing applicant details.
-- Current code uses a **conditional Resend adapter**, only if server-side `RESEND_API_KEY` and `PARTNER_NOTIFICATION_FROM` are configured. Never expose these through `NEXT_PUBLIC_`. No working mail transport has been verified yet.
-- Founder indicated that existing website/app notifications may already use a system called “Sandy” (possibly Sendy); identify and preferably reuse the actual verified existing provider before configuring duplicate mailing infrastructure.
+- The application endpoint now uses the **existing MailerSend provider** (`MAILERSEND_API_KEY`, `MAILERSEND_FROM_EMAIL`), matching `supabase/functions/run-health-funnel-email-campaign/index.ts`. This is conditional on the same variables being configured in **Vercel**, not merely Supabase Edge Functions. Sender defaults to `no-reply@mail.befitliner.com`; verify the domain and actual delivery before release. Do not expose these through `NEXT_PUBLIC_`.
+- Source-code verification: the existing health email campaign uses MailerSend, not Sendy. Email delivery from the new Next.js endpoint is not yet confirmed.
 - Before releasing, verify sender-domain authentication, delivery to the founder mailbox, failure handling, and add server-side bot protection and rate limiting to the public application endpoint.
