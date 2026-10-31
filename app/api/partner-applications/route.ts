@@ -17,19 +17,19 @@ export async function POST(req:NextRequest){
  const {data:application,error}=await db.from('partner_applications').insert({country_code:country,contact_name:name,company,email,phone,experience,message,privacy_accepted_at:new Date().toISOString()}).select('id').single();
  if(error)return NextResponse.json({error:'temporarily_unavailable'},{status:503});
  // Notification is best-effort; a failed email must not lose a saved application.
- const resendKey=process.env.RESEND_API_KEY;
- const sender=process.env.PARTNER_NOTIFICATION_FROM;
- if(resendKey&&sender){
+ const mailKey=process.env.MAILERSEND_API_KEY;
+ const sender=process.env.MAILERSEND_FROM_EMAIL || 'no-reply@mail.befitliner.com';
+ if(mailKey){
    const subject='Fitliner: Nová partnerská prihláška – '+country;
-   const body=['Nová žiadosť o národné partnerstvo Fitliner','ID: '+application.id,'Krajina: '+country,'Meno: '+name,'Firma: '+company,'E-mail: '+email,'Telefón: '+phone,'Skúsenosti: '+experience,'Správa: '+message].join('\\n\\n');
+   const body=['Nová žiadosť o národné partnerstvo Fitliner','ID: '+application.id,'Krajina: '+country,'Meno: '+name,'Firma: '+company,'E-mail: '+email,'Telefón: '+phone,'Skúsenosti: '+experience,'Správa: '+message].join('\n\n');
    try{
-     const response=await fetch('https://api.resend.com/emails',{
-       method:'POST',headers:{Authorization:'Bearer '+resendKey,'Content-Type':'application/json'},
-       body:JSON.stringify({from:sender,to:['peter@peterbudzak.com'],reply_to:email,subject,text:body}),
+     const response=await fetch('https://api.mailersend.com/v1/email',{
+       method:'POST',headers:{Authorization:'Bearer '+mailKey,'Content-Type':'application/json'},
+       body:JSON.stringify({from:{email:sender,name:'Fitliner'},to:[{email:'peter@peterbudzak.com'}],reply_to:{email},subject,text:body,tags:['country-partner-application']}),
        signal:AbortSignal.timeout(6500)
      });
-     if(!response.ok)console.error('Partner notification failed, HTTP',response.status,'application id',application.id);
-   }catch{console.error('Partner notification could not be sent, application id',application.id);}
- }else{console.warn('Partner notification not configured, application id',application.id);}
+     if(!response.ok)console.error('Partner email failed, HTTP',response.status,'application id',application.id);
+   }catch{console.error('Partner email request failed, application id',application.id);}
+ }else{console.warn('Partner email provider not configured, application id',application.id);}
  return NextResponse.json({ok:true},{status:201});
 }
