@@ -78,3 +78,9 @@ Create migrations under `supabase/migrations` after reviewing existing tables an
 - Technical installation and local support ownership.
 - Commission costs, payout timing, taxation, exchange rates, clawback and termination transition.
 - Data retention and privacy language.
+
+## Founder email alerts (2026-10-31)
+- After an application is **successfully saved** into `partner_applications`, the API attempts a founder notification to `peter@peterbudzak.com` with country, applicant details, experience and application ID. A failed notification does not undo the saved application; the sender logs an error without exposing applicant details.
+- Current code uses a **conditional Resend adapter**, only if server-side `RESEND_API_KEY` and `PARTNER_NOTIFICATION_FROM` are configured. Never expose these through `NEXT_PUBLIC_`. No working mail transport has been verified yet.
+- Founder indicated that existing website/app notifications may already use a system called “Sandy” (possibly Sendy); identify and preferably reuse the actual verified existing provider before configuring duplicate mailing infrastructure.
+- Before releasing, verify sender-domain authentication, delivery to the founder mailbox, failure handling, and add server-side bot protection and rate limiting to the public application endpoint.
