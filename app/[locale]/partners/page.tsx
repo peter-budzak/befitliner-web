@@ -8,7 +8,7 @@ import './partners.css';
 export async function generateMetadata({params}: {params: Promise<{locale:string}>}): Promise<Metadata> {
   const {locale}=await params;
   if(!['sk','en'].includes(locale)) return {};
-  return pageMetadata({locale,path:'partners',title:locale==='sk'?'Staňte sa národným partnerom Fitliner':'Become a Fitliner Country Partner',description:locale==='sk'?'Budujte sieť fitness centier vo svojej krajine a získajte podiel z výnosov Fitliner.':'Build the Fitliner gym network in your country and participate in its revenue.'});
+  return pageMetadata({locale:locale as 'sk'|'en',path:'partners',title:locale==='sk'?'Staňte sa národným partnerom Fitliner':'Become a Fitliner Country Partner',description:locale==='sk'?'Budujte sieť fitness centier vo svojej krajine a získajte podiel z výnosov Fitliner.':'Build the Fitliner gym network in your country and participate in its revenue.'});
 }
 export default async function Partners({params}:{params:Promise<{locale:string}>}) {
   const {locale}=await params; if(!['sk','en'].includes(locale)) notFound();
