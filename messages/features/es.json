@@ -6,9 +6,9 @@
   "home": "Inicio",
   "language": "Idioma",
   "all": "Todas las funciones",
-  "personal": "Para ti",
-  "community": "Personas y comunidad",
-  "business": "Para profesionales",
+  "personal": "Tu progreso y tus herramientas diarias",
+  "community": "Gimnasio y comunidad",
+  "business": "Entrenadores y propietarios",
   "availabilityTitle": "Disponibilidad de funciones",
   "availability": "Depende de la versión de la app, la cuenta y el gimnasio participante. La tarjeta de salud requiere acceso activo; la entrada con el móvil requiere equipos compatibles y autorización válida.",
   "rolloutTitle": "Qué seguimos incorporando",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Entrenamientos y diario",
-      "summary": "Del plan a la última serie.",
+      "summary": "Registra series, pesos y repeticiones. Observa cómo mejoras.",
       "items": [
         "Planes, días de entrenamiento, ejercicios y demostraciones visuales.",
         "Ejercicios propios, series, pesos, repeticiones, temporizador de descanso y repetición de entrenamientos.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Nutrición y objetivos",
-      "summary": "Entiende lo que comes.",
+      "summary": "Registra una comida y descubre cómo encaja en tus objetivos diarios.",
       "items": [
         "Registra comidas por texto con estimaciones de IA de porciones y nutrientes que puedes revisar.",
         "Diario alimentario, calorías, macronutrientes y otros datos nutricionales.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Coach personal con IA",
-      "summary": "Pregunta y encuentra tu siguiente paso.",
+      "summary": "Pregunta sobre entrenamiento y nutrición con el contexto de los datos que compartas.",
       "items": [
         "Chat sobre entrenamiento, nutrición y tus objetivos.",
         "Sugerencias con contexto de los datos disponibles de tu perfil.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Tus gimnasios y entradas",
-      "summary": "Conecta con el lugar donde entrenas.",
+      "summary": "Ten tu membresía a mano y entra con el móvil en gimnasios compatibles.",
       "items": [
         "Busca gimnasios, perfiles, contactos, horarios y normas.",
         "Membresías, vigencia y pagos según el sistema del gimnasio; regala entradas donde se admita.",
@@ -139,5 +139,8 @@
         "Gestión de cuenta y contraseña, incluida la eliminación de la cuenta."
       ]
     }
-  ]
+  ],
+  "highlights": "Empieza por lo que necesitas",
+  "details": "Ver los detalles",
+  "illustration": "Ilustración del funcionamiento"
 }

@@ -6,9 +6,9 @@
   "home": "Home",
   "language": "Language",
   "all": "All features",
-  "personal": "For you",
-  "community": "People & community",
-  "business": "For professionals",
+  "personal": "Your progress & everyday tools",
+  "community": "Gym & community",
+  "business": "Trainers & gym owners",
   "availabilityTitle": "Feature availability",
   "availability": "Availability varies by app version, account and participating gym. The Health Card requires access; phone entry requires compatible equipment and valid access rights.",
   "rolloutTitle": "What is still rolling out",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Workouts & training diary",
-      "summary": "From the plan to your last set.",
+      "summary": "Log sets, weights and repetitions. See how you improve.",
       "items": [
         "Training plans, workout days, exercises and visual movement guides.",
         "Custom exercises, sets, weights, repetitions, rest timers and repeat workouts.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Nutrition & dietary goals",
-      "summary": "Understand what you eat.",
+      "summary": "Log a meal and see how it fits your daily targets.",
       "items": [
         "Log meals in text with an AI estimate of portions and nutrients for you to review.",
         "Food diary, calories, macros and additional nutritional information.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Personal AI coach",
-      "summary": "Ask questions and find your next step.",
+      "summary": "Ask about training and nutrition, with context from the information you share.",
       "items": [
         "Chat about training, nutrition and your goals.",
         "Suggestions informed by available profile information.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Your gyms & entry",
-      "summary": "Stay connected to where you train.",
+      "summary": "Keep your membership handy and enter supported gyms with your phone.",
       "items": [
         "Find gyms and view profiles, contacts, opening hours and rules.",
         "Membership status, validity and payments depend on the participating gym’s system; gift entry where supported.",
@@ -139,5 +139,8 @@
         "Manage your account and password, including account deletion."
       ]
     }
-  ]
+  ],
+  "highlights": "Start with what matters to you",
+  "details": "Explore the details",
+  "illustration": "Illustration of how the feature works"
 }

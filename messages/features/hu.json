@@ -6,9 +6,9 @@
   "home": "Kezdőlap",
   "language": "Nyelv",
   "all": "Összes funkció",
-  "personal": "Neked",
-  "community": "Emberek és közösség",
-  "business": "Szakembereknek",
+  "personal": "Fejlődésed és mindennapi eszközeid",
+  "community": "Edzőterem és közösség",
+  "business": "Edzők és teremtulajdonosok",
   "availabilityTitle": "A funkciók elérhetősége",
   "availability": "Az elérhetőség az alkalmazás verziójától, a fióktól és az edzőteremtől függ. Az egészségkártyához hozzáférés, a telefonos belépéshez kompatibilis eszköz és érvényes jogosultság szükséges.",
   "rolloutTitle": "Amit még bevezetünk",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Edzések és edzésnapló",
-      "summary": "A tervtől az utolsó sorozatig.",
+      "summary": "Rögzítsd a sorozatokat, súlyokat és ismétléseket. Kövesd a fejlődésed.",
       "items": [
         "Edzéstervek, edzésnapok, gyakorlatok és szemléletes mozgásbemutatók.",
         "Saját gyakorlatok, sorozatok, súlyok, ismétlések, pihenőidőzítő és korábbi edzések ismétlése.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Táplálkozás és célok",
-      "summary": "Tudd, mit eszel.",
+      "summary": "Rögzíts egy étkezést, és nézd meg, hogyan illik a napi céljaidhoz.",
       "items": [
         "Ételek szöveges rögzítése ellenőrizhető AI-adag- és tápanyagbecsléssel.",
         "Étkezési napló, kalóriák, makrotápanyagok és további tápértékek.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Személyes AI-coach",
-      "summary": "Kérdezz, és tervezd meg a következő lépést.",
+      "summary": "Kérdezz az edzésről és táplálkozásról az általad megosztott adatok alapján.",
       "items": [
         "Beszélgetés edzésről, táplálkozásról és a céljaidról.",
         "Javaslatok az elérhető profiladatok figyelembevételével.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Edzőtermeid és belépés",
-      "summary": "Kapcsolat az edzésed helyszínével.",
+      "summary": "Tartsd kéznél a bérleted, és lépj be telefonoddal a támogatott termekbe.",
       "items": [
         "Teremkeresés, profilok, elérhetőségek, nyitvatartás és szabályok.",
         "Tagság, érvényesség és fizetések a terem rendszerétől függően; belépő ajándékozása, ahol támogatott.",
@@ -139,5 +139,8 @@
         "Fiók- és jelszókezelés, beleértve a fiók törlését."
       ]
     }
-  ]
+  ],
+  "highlights": "Kezdd azzal, amire szükséged van",
+  "details": "Részletek megtekintése",
+  "illustration": "A funkció működésének szemléltetése"
 }
