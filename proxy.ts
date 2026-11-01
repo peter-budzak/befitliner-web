@@ -49,7 +49,7 @@ function localeRequestHeaders(request: NextRequest, locale: string | null) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set(
     "x-fitliner-locale",
-    locale && (LOCALES.has(locale) || locale === "pl") ? locale : "en",
+    locale && (LOCALES.has(locale) || locale === "pl" || locale === "hu") ? locale : "en",
   );
   return requestHeaders;
 }

@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   },
 };
 
-const HTML_LANGS = new Set<string>(GYM_LOCALES);
+const HTML_LANGS = new Set<string>([...GYM_LOCALES, "hu"]);
 
 export default async function RootLayout({
   children,
