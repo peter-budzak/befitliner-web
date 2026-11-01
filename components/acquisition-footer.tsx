@@ -110,7 +110,7 @@ export default function AcquisitionFooter({
             )}
           </div>
         </nav>
-        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#20182e] to-[#101013] p-6 sm:col-span-2 lg:col-span-1">
+        <div className="sm:col-span-2 lg:col-span-1">
           <h2 className="mb-5 text-xs font-semibold uppercase tracking-[.15em] text-white/80">
             {labels.app_title}
           </h2>
