@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
 type PageProps = {
-  params: Promise<{ slug: string }> | { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function PublicGymRedirectPage({ params }: PageProps) {

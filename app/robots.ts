@@ -6,9 +6,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/admin/", "/api/", "/*/health/success"],
+      disallow: ["/app/", "/login", "/admin", "/admin/", "/api/", "/*/health/success"],
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: process.env.FITLINER_PUBLIC_PROFILES_ENABLED==='true' ? [`${SITE_URL}/sitemap.xml`,`${SITE_URL}/profiles-sitemap.xml`] : `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,
   };
 }

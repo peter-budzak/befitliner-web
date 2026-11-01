@@ -6,7 +6,7 @@ import {HEALTH_SEO, isSiteLocale, pageMetadata, SITE_URL} from '@/lib/seo';
 
 const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
 
-export async function generateMetadata({params}: {params: Promise<{locale: string}> | {locale: string}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const resolved = params instanceof Promise ? await params : params;
   if (!isSiteLocale(resolved.locale)) return {};
   return pageMetadata({
@@ -17,7 +17,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
   });
 }
 
-export default async function HealthPage({params}: {params: Promise<{locale: string}> | {locale: string}}) {
+export default async function HealthPage({params}: {params: Promise<{locale: string}>}) {
   const resolved = params instanceof Promise ? await params : params;
   if (!LOCALES.includes(resolved.locale as (typeof LOCALES)[number])) notFound();
   const locale = resolved.locale as (typeof LOCALES)[number];

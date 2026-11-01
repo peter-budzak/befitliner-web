@@ -24,7 +24,7 @@ import {
 } from '@/lib/seo';
 import './gyms.css';
 
-type PageProps = {params: Promise<{locale: string}> | {locale: string}};
+type PageProps = {params: Promise<{locale: string}>};
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
   if (!isGymLocale(locale)) return {};

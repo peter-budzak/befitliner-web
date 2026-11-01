@@ -12,7 +12,7 @@ export type LegalLocale = (typeof LEGAL_LOCALES)[number];
 export type LegalDocument = 'privacy' | 'terms';
 
 export type LegalPageProps = {
-  params: Promise<{locale: string}> | {locale: string};
+  params: Promise<{locale: string}>;
 };
 
 const LANGUAGE_TAGS: Record<LegalLocale, string> = {

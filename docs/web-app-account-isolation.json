@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-19T18:16:09.076Z",
+  "project": "jkjncktexqqkrmezdjui",
+  "scope": "profiles metadata only; not a complete RLS/RPC audit",
+  "releaseBlocked": true,
+  "finding": "Authenticated clients can SELECT sensitive columns of other profiles.",
+  "evidence": {
+    "rls_enabled": true,
+    "authenticated_table_select": true,
+    "email_select": true,
+    "health_issues_select": true,
+    "payout_account_select": true,
+    "policies": [
+      {
+        "name": "profiles_insert_own",
+        "check": "(id = auth.uid())",
+        "roles": [
+          "authenticated"
+        ],
+        "command": "INSERT",
+        "predicate": null
+      },
+      {
+        "name": "profiles_select_authenticated",
+        "check": null,
+        "roles": [
+          "authenticated"
+        ],
+        "command": "SELECT",
+        "predicate": "true"
+      },
+      {
+        "name": "profiles_update_own",
+        "check": "(id = auth.uid())",
+        "roles": [
+          "authenticated"
+        ],
+        "command": "UPDATE",
+        "predicate": "(id = auth.uid())"
+      }
+    ]
+  },
+  "requiredNextCheck": "Two-account authorization tests across private tables, RPCs, storage and realtime, plus mobile compatibility."
+}

@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
+import PartnersPanel from "./partners-panel";
 import type { Session } from "@supabase/supabase-js";
 import { ADMIN_EMAIL, adminClient } from "@/lib/admin/client";
 import {
@@ -23,7 +24,7 @@ import {
 } from "@/lib/admin/metrics";
 import type { Dashboard, Gym, ModuleOrder } from "@/lib/admin/types";
 
-type Tab = "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
+type Tab = "partners" | "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
 const NAV: [Tab, string, string][] = [
   ["overview", "Prehľad", "grid"],
   ["gyms", "Gymy", "gym"],
@@ -31,6 +32,7 @@ const NAV: [Tab, string, string][] = [
   ["finance", "Financie", "chart"],
   ["leads", "Záujemcovia", "users"],
   ["activity", "História zmien", "clock"],
+  ["partners", "Partners", "users"],
 ];
 function Icon({ name }: { name: string }) {
   const paths: Record<string, ReactNode> = {
@@ -688,6 +690,7 @@ export default function AdminConsole() {
                 />
               ) : (
                 <>
+                  {tab === "partners" && <PartnersPanel />}
                   {tab === "overview" && (
                     <>
                       <div className="ad-stats">

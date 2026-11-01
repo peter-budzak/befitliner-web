@@ -18,7 +18,7 @@ const LOCALE_LABELS: Record<(typeof LOCALES)[number], string> = {
 type Locale = (typeof LOCALES)[number];
 
 type PageProps = {
-  params: Promise<{ slug: string; locale: string }> | { slug: string; locale: string };
+  params: Promise<{ slug: string; locale: string }>;
 };
 
 type PublicGym = {
@@ -445,13 +445,14 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
 
   const copy = getCopy(locale);
 
-  const [{ data, error }, { data: statsData, error: statsError }] = await Promise.all([
+  const [{ data, error }, { data: statsData, error: statsError }, { data: promotions }] = await Promise.all([
     supabase
       .rpc('get_public_gym_by_slug', { input_slug: slug })
       .maybeSingle<PublicGym>(),
     supabase
       .rpc('get_public_gym_stats_by_slug', { input_slug: slug })
       .maybeSingle<PublicGymStats>(),
+    supabase.rpc('get_public_gym_promotion', { input_slug: slug }),
   ]);
 
   if (error) {
@@ -479,6 +480,7 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
   const facebookUrl = cleanUrl(gym.facebook);
   const instagramUrl = cleanUrl(gym.instagram);
   const tiktokUrl = cleanUrl(gym.tiktok);
+  const promotion = promotions?.[0];
   const videoEmbedUrl = youtubeEmbedUrl(gym.public_video_url);
   const gymUrl = `https://${gym.slug}.befitliner.com/${locale}`;
   const sameAs = [websiteUrl, facebookUrl, instagramUrl, tiktokUrl].filter((value): value is string => Boolean(value));
@@ -655,7 +657,12 @@ export default async function PublicGymLocalePage({ params }: PageProps) {
           </p>
         </div>
 
-        {videoEmbedUrl ? (
+        {promotion && <section style={{padding:'24px',margin:'24px 0',border:'1px solid #00e5ff',borderRadius:16}}>
+              <h2>{promotion.title}</h2>
+              <p style={{whiteSpace:'pre-wrap'}}>{promotion.description.slice(0,240)}</p>
+              <a href={`https://${gym.slug}.befitliner.com/akcia`}>{locale === 'sk' ? 'Pozrieť akciu →' : 'View promotion →'}</a>
+            </section>}
+            {videoEmbedUrl ? (
           <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20">
             <div className="aspect-video w-full bg-black">
               <iframe

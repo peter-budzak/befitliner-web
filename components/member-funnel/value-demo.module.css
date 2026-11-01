@@ -1,0 +1,569 @@
+.photo {
+  margin: 24px 0 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #211b2b;
+}
+.photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.photo figcaption {
+  font-size: 9px;
+  line-height: 1.5;
+  color: #afa1c0;
+  padding: 10px 14px;
+  background: #211b2b;
+}
+.dayGrid {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.dayGrid article {
+  padding: 20px;
+  border: 1px solid #3a2e4c;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #251c34, #19151f);
+}
+.dayGrid small,
+.checkoutIntro > small {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  color: #be9ef2;
+  text-transform: uppercase;
+}
+.dayGrid p {
+  color: #a99cb9;
+  font-size: 13px;
+  margin: 9px 0;
+}
+.dayGrid strong {
+  font-size: 15px;
+  line-height: 1.5;
+  display: block;
+}
+.note {
+  font-size: 10px;
+  line-height: 1.65;
+  color: #9e90ae;
+  text-align: center;
+  margin: 18px 0 0;
+}
+.demo {
+  margin-top: 24px;
+}
+.context {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  color: #bba4d9;
+  margin-bottom: 16px;
+}
+.context span {
+  font-size: 9px;
+  color: #8f819f;
+  letter-spacing: 0;
+}
+.toggle {
+  display: flex;
+  background: #211b2a;
+  border: 1px solid #3c304d;
+  border-radius: 12px;
+  padding: 5px;
+  gap: 5px;
+}
+.toggle button,
+.metricTabs button {
+  border: 0;
+  color: #b6a7c7;
+  background: transparent;
+  padding: 13px;
+  flex: 1;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.toggle button[aria-pressed="true"] {
+  background: #8050d5;
+  color: white;
+}
+.stage {
+  background:
+    radial-gradient(ellipse at top right, #56317a55, transparent 70%), #19151f;
+  border: 1px solid #413152;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 14px;
+  min-height: 350px;
+  animation: appear 0.3s ease;
+}
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 9px;
+  color: #b99ed9;
+  letter-spacing: 0.8px;
+}
+.appBar span {
+  font-size: 10px;
+  letter-spacing: 0;
+  color: #b3a6c0;
+}
+.stage h3 {
+  font-size: 23px;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  margin: 24px 0;
+}
+.previous {
+  background: #282030;
+  border-left: 2px solid #a879fb;
+  padding: 16px;
+  border-radius: 0 9px 9px 0;
+}
+.previous > small {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #b19acb;
+}
+.previous strong {
+  font-size: 22px;
+  display: block;
+  margin-top: 10px;
+}
+.previous strong span {
+  color: #897499;
+  font-weight: 400;
+}
+.previous p,
+.nutrition p {
+  font-size: 11px;
+  color: #b7a8c7;
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+.exercise {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 0;
+  font-size: 12px;
+  color: #d7c8e8;
+}
+.demoAction {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  background: #38274f;
+  color: #dbc0ff;
+  border: 1px solid #79519e;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+.feedback {
+  color: #bcaccd;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 14px 0 0;
+  min-height: 18px;
+}
+.before {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 300px;
+}
+.largeSymbol {
+  font-size: 44px;
+  color: #776c80;
+  align-self: center;
+  margin-bottom: 15px;
+}
+.before p {
+  border-bottom: 1px dashed #44374d;
+  padding: 12px 0;
+  margin: 0;
+  color: #b5a8bf;
+  font-size: 15px;
+}
+.before small {
+  font-size: 10px;
+  color: #918397;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+.bubble {
+  font-size: 14px;
+  line-height: 1.7;
+  border-radius: 14px 14px 2px 14px;
+  background: #372349;
+  padding: 20px;
+  margin: 0 0 20px;
+}
+.nutrition {
+  margin-top: 20px;
+  animation: appear 0.35s ease;
+}
+.nutrition > small {
+  font-size: 8px;
+  color: #ac91c8;
+  letter-spacing: 0.7px;
+}
+.nutrition > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+.nutrition strong {
+  font-size: 26px;
+}
+.nutrition strong small {
+  display: block;
+  font-size: 9px;
+  color: #b09ac4;
+  font-weight: 400;
+  margin-top: 7px;
+}
+.metricTabs {
+  display: flex;
+  gap: 10px;
+}
+.metricTabs button {
+  padding: 9px;
+  border: 1px solid #40324f;
+}
+.metricTabs button[aria-pressed="true"] {
+  color: #dfc5ff;
+  border-color: #9668d0;
+  background: #392548;
+}
+.bars {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  height: 150px;
+  margin: 25px 0;
+}
+.bars > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.bars span {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8px;
+  background: linear-gradient(#b78af5, #7049ab);
+  width: 100%;
+  border-radius: 7px 7px 0 0;
+  font-size: 12px;
+  animation: bar 0.5s ease;
+  transform-origin: bottom;
+}
+.bars small {
+  color: #9b88af;
+  font-size: 9px;
+}
+.checkoutValue {
+  margin-top: 25px;
+}
+.checkoutIntro {
+  padding: 24px;
+  background: #261b34;
+  border-radius: 0 0 18px 18px;
+  margin-top: -1px;
+}
+.checkoutIntro h2 {
+  font-size: 25px;
+  letter-spacing: -0.5px;
+  margin: 10px 0;
+}
+.checkoutIntro p {
+  color: #bfadcf;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}
+.valueRows {
+  margin: 25px 0;
+}
+.valueRows article {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid #3b2d48;
+}
+.valueRows article > span {
+  color: #b78aec;
+  border-radius: 10px;
+  background: #2a1f38;
+  padding: 12px;
+  font-size: 12px;
+}
+.valueRows small {
+  color: #a58abf;
+  font-size: 10px;
+}
+.valueRows h3 {
+  font-size: 16px;
+  margin: 6px 0;
+}
+.valueRows p {
+  color: #a89bb6;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}
+.faq {
+  border: 1px solid #3b2e49;
+  border-radius: 14px;
+  padding: 0 18px;
+  margin: 25px 0;
+}
+.faq details {
+  padding: 17px 0;
+}
+.faq details + details {
+  border-top: 1px solid #3b2e49;
+}
+.faq summary {
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: pointer;
+  color: #d7c4eb;
+}
+.faq p {
+  font-size: 12px;
+  color: #b7a6c7;
+  line-height: 1.7;
+}
+.demo button:focus-visible,
+.faq summary:focus-visible {
+  outline: 3px solid #d2b7ff;
+  outline-offset: 4px;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bar {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@media (max-width: 480px) {
+  .stage {
+    padding: 19px;
+  }
+  .stage h3 {
+    font-size: 21px;
+  }
+  .context {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  .appBar {
+    font-size: 8px;
+  }
+  .nutrition strong {
+    font-size: 23px;
+  }
+  .bars {
+    gap: 14px;
+  }
+  .exercise {
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo * {
+    animation: none !important;
+  }
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0;
+}
+.chips span {
+  padding: 8px 10px;
+  background: #31213f;
+  border: 1px solid #604476;
+  border-radius: 30px;
+  font-size: 11px;
+  color: #d8c4ed;
+}
+.explain {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #c9b6dd;
+}
+.explain summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.pipeline {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+}
+.pipeline button {
+  flex: 1;
+  border: 1px solid #523866;
+  border-radius: 10px;
+  background: #251c30;
+  color: #c8b3dd;
+  padding: 12px 5px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.pipeline button[aria-pressed="true"] {
+  background: #684098;
+  color: white;
+  border-color: #bc87f5;
+}
+.pipeline span {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.healthPanel {
+  min-height: 230px;
+  animation: appear 0.3s ease;
+}
+.healthPanel p,
+.comparison p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #baa9cb;
+}
+.paper {
+  max-width: 280px;
+  background: #eee8f5;
+  color: #40324f;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 7px 0 #64498044;
+  margin: 25px auto;
+  font-size: 25px;
+  transform: rotate(-2deg);
+}
+.paper strong,
+.paper span {
+  display: block;
+  font-size: 12px;
+  margin: 8px 0;
+}
+.paper span {
+  font-size: 10px;
+}
+.paper i {
+  display: block;
+  width: 90%;
+  height: 4px;
+  background: #c9bbd8;
+  margin-top: 10px;
+}
+.historyChart {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+  font-size: 12px;
+}
+.comparison {
+  background: #1c1525;
+  border: 1px solid #4d355f;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 25px 0;
+}
+.comparison summary {
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.comparisonRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 0;
+  border-bottom: 1px solid #3d2d4d;
+  font-size: 13px;
+}
+.comparisonRow a {
+  color: #d5b4ff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.comparisonRow small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: #ae9bbc;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.comparisonRow strong {
+  white-space: nowrap;
+  text-align: right;
+}
+@media (prefers-reduced-motion: reduce) {
+  .healthPanel {
+    animation: none;
+  }
+}
+.analyticsConsent {
+  max-width: 850px;
+  margin: 0 auto 20px;
+  padding: 12px 20px;
+  color: #c1b2cd;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.analyticsConsent div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.analyticsConsent button {
+  background: #30223e;
+  color: #dcc6ee;
+  border: 1px solid #795b90;
+  border-radius: 8px;
+  padding: 8px 13px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.analyticsConsent[data-collapsed="true"] {
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+  margin: 0;
+  padding: 0;
+  z-index: 20;
+  opacity: 0.85;
+}

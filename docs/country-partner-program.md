@@ -1,0 +1,122 @@
+# Fitliner Country Partner Program
+
+Last updated: 2026-11-01 (Europe/Bratislava). Implementation and database are verified; final Vercel preview/production release is pending at this revision. See the release record below for actual evidence; a successful build alone does not prove persistence or email delivery.
+
+## Scope and business rules
+
+This extends `peter-budzak/befitliner-web`, Vercel project `befitliner-web`, existing PR #8 / branch `feature/country-partners`. Public routes are `/sk/partners` and `/en/partners`. There is no separate partner application or admin site.
+
+- One strategic partner per country; an accepted application does not grant exclusivity or create a contract.
+- Qualification lasts 90 days without exclusivity. Ten activated **paying** gyms qualify a partner for consideration for 12 months of exclusivity.
+- Renewal depends on the country's contractual annual target. Seeded targets are proposals (`target_approved=false`), not approved commitments.
+- Partner share is 50% of agreed net distributable revenue. For the current €297 one-off sale, subtract attributable costs before splitting. The calculator lets the visitor change these costs.
+- A 2% transaction fee is illustrated as 1% Fitliner / 1% partner only if the entire fee is distributable; actual costs and the final contract can reduce it.
+- Commissions/exclusivity are not automatically lifelong. Attribution, activation, refunds, support, termination and settlement terms must be agreed in the contract.
+
+## Architecture and source files
+
+1. `app/[locale]/partners/page.tsx` loads only public country settings using the anon client. It serves SK/EN metadata and reuses the existing dark/purple/Geist gym visual language.
+2. `app/[locale]/partners/partner-interactive.tsx` implements country selection, calculator and accessible form success/error feedback. `partners.css` supplies responsive styles. Country targets and availability come from the database; Slovak labels are local translations.
+3. `app/api/partner-applications/route.ts` validates the streamed request, consent and bot fields, then invokes the service-only transactional `submit_partner_application` RPC. It calls the notification function only after a durable save.
+4. `supabase/functions/partner-application-notify/index.ts` uses the **existing MailerSend** credentials in Supabase. It checks the exact service-role bearer token in code (deployment uses `--no-verify-jwt`; this does not make the handler public). No Resend integration or MailerSend secret copying is required.
+5. `components/admin/partners-panel.tsx` is the Partners tab inside `components/admin/admin-console.tsx`. It reuses the existing admin session, `fitliner-admin-session`, and existing `is_gym_console_admin()` authorization.
+6. `app/api/admin/partners/route.ts` verifies the bearer token with Supabase Auth, then calls that existing admin predicate before changing a status, retrying an eligible notification or checking delivery. Reads go directly through RLS; all mutations remain server-only.
+
+## Database and migrations
+
+Production Supabase: `jkjncktexqqkrmezdjui` (`befitliner`). Existing staging: `xguwwicyqhuutcgkpsyh` (`fitliner-staging`). Both migrations are applied and recorded in `supabase_migrations.schema_migrations` in both projects:
+
+- `supabase/migrations/20261031150000_country_partner_program.sql`
+- `supabase/migrations/20261101090000_partner_application_operations.sql`
+
+The pre-existing `partners` table belongs to `diamond_rewards`; it is untouched and is not a national distributor registry.
+
+| Table | Purpose / relationships |
+| --- | --- |
+| `partner_countries` | ISO code primary key, name, availability, qualification rules, annual target and approval flag; 19 seeded countries. |
+| `partner_applications` | Applicant contacts, experience, message, consent timestamp and processing status; country FK. Includes request UUID/hash, HMAC IP hash, notification state, attempts, provider message ID, safe error code and notification timestamp. |
+| `country_partners` | Approved legal entity and contract/qualification/exclusivity dates; country and optional application FKs. A partial unique index permits only one `exclusive` partner per country. |
+
+Gym attribution and an append-only commission ledger remain future work, not part of this release. Application status changes do not silently create partner contracts.
+
+### Security and request controls
+
+All three tables have RLS enabled. Anonymous users can read only country configuration. Authenticated users can select applications **only** when `is_gym_console_admin()` is true; they cannot insert or update through the data API. `country_partners` has no public/user grants. The submission RPC can be executed only by `service_role` (plus database owners). Credentials never enter client props or public environment variables.
+
+Server validation rejects invalid types/lengths rather than silently truncating. It enforces email format, required name/phone/experience, explicit consent, a v4 request UUID, an empty honeypot and 2-second to 24-hour form age. Body size is limited to 12,000 streamed bytes, including when Content-Length is missing. Cross-origin browser requests are rejected.
+
+The submission transaction serializes its short quota check and insert using an advisory transaction lock: 5 applications/IP/hour, 3/email/day, 100 total/hour. Vercel's trusted `x-vercel-forwarded-for` is HMAC-hashed with the server key; raw IPs are not stored. Local testing shares the `local` bucket. This is layered basic anti-spam, not a CAPTCHA service; review quotas if abuse or legitimate volume grows.
+
+The request UUID is unique. Repeating identical normalized content returns the same application ID, while changed content with the same UUID returns 409. The form rotates the UUID after acknowledged success. If a request has an ambiguous outcome, retry unchanged details first; refresh before making a genuinely new application. Application payloads and provider bodies are not logged.
+
+## Email delivery and safe recovery
+
+Recipient is fixed to `peter@peterbudzak.com`. The message includes country, name, company, email, phone, experience, optional message and application ID. The ID is also in the subject for reconciliation. Reply-to uses the applicant's validated email.
+
+The application row is the durable notification record. An atomic conditional update claims `pending`/`failed` work as `sending`, preventing concurrent sends. HTTP 202 plus `x-message-id` records `accepted`, which means provider acceptance, **not** delivery. Admin “Overiť doručenie” queries MailerSend's message endpoint and records `delivered` or `rejected` when observed.
+
+| State | Operator action |
+| --- | --- |
+| `pending` | Saved but not yet claimed; use “Odoslať upozornenie”. |
+| `failed` | Missing configuration or explicit 4xx rejection; fix the cause, then retry from Partners. |
+| `accepted` | Do not resend. Check delivery using the saved provider message ID. |
+| `delivered` | Provider confirms delivery; no further sending. |
+| `rejected` | Investigate recipient/provider activity before deciding whether to send again. |
+| `sending` / `unknown` | A crash, timeout or ambiguous provider response may already have sent the email. Never automatically reset/retry. Search MailerSend using the application ID and reconcile first. |
+
+There is no automatic cron retry in this release. Each saved application immediately attempts delivery; recovery is available in the existing admin console. An operator may reset an ambiguous row to `failed` **only after confirming no email was accepted**, documenting the investigation. If the provider did accept it, record its message ID and `accepted` instead. The design deliberately avoids promising exactly-once delivery across independent database and email transactions. A failed notification never removes an application.
+
+Provider references: [sending email](https://developers.mailersend.com/api/v1/email), [message status](https://developers.mailersend.com/api/v1/email/messages). IP header reference: [Vercel request headers](https://vercel.com/docs/headers/request-headers).
+
+## Environment configuration (names only)
+
+Vercel Production and Preview:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` — sensitive, server-only, configured for this release.
+
+Supabase Edge Function runtime:
+
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — platform-provided.
+- `MAILERSEND_API_KEY`, `MAILERSEND_FROM_EMAIL`, `MAILERSEND_FROM_NAME` — existing production configuration, reused unchanged.
+
+`.env.local` is ignored by Git. Never print keys or put them in PR descriptions, test evidence or screenshots. Preview currently uses the same Supabase project as production: use clearly marked synthetic test applications, not real prospect data.
+
+## Repeatable testing
+
+- `npx tsc --noEmit`
+- `npm run build`
+- `npm run check:admin`
+- `node scripts/partners/check-notification.mjs` — mocked provider/database tests of concurrent claims, accepted-message deduplication, explicit rejection retries, missing config and ambiguous failure holds; sends no email.
+- `PARTNER_TEST_URL=http://localhost:3015 node scripts/partners/check-api.mjs` — invalid payload, body size, origin, consent/honeypot/time validation and unauthenticated admin denial; inserts no records.
+- `scripts/partners/check-database.sql` — execute through an authorized SQL connection. All fixtures are inside a rolled-back transaction. Tests idempotency/conflict, quota, public RPC restrictions, anon country read, non-admin isolation and existing founder access. Requires an existing configured admin; staging currently has none, so its admin-specific assertion must be skipped explicitly (do not invent a user).
+- Browser: both languages, country targets, calculator (10 gyms × €1,000 × 1% + 2 sales × (€297−€97) × 50% = €300), 390px mobile overflow, success/error states, duplicate request ID, Partners list and status mutation on a test record.
+- Real delivery: send an explicitly labeled synthetic application, verify the row, then query MailerSend until `delivered`. Do not equate a build, HTTP 201 or provider 202 with inbox delivery.
+
+## Preserved production baseline
+
+The live deployment `dpl_A1pZVbV8MMZT6z42oPnVitfgCFGv` was uploaded through CLI and contained newer member, trainer, public-profile and routing features absent from Git main. Before release, its 298 relevant source files were recovered and SHA-1-verified against Vercel’s source manifest. They are retained in this branch, with the small Partners tab addition applied on top of the deployed admin console. `docs/country-partner-production-baseline.json` records the source hashes. The original dirty checkout was not modified. This reconciliation is essential: deploying the original PR directly would have removed existing live routes.
+
+## Deployment and rollback
+
+1. Inspect branch, PR head, latest production deployment and migration history. Preserve unrelated local work.
+2. Apply reviewed additive migrations to staging; run transactional RLS tests. Apply to production only after successful staging checks, with migration history recorded.
+3. Deploy only `partner-application-notify` to the confirmed Supabase project. Other Edge Functions are not redeployed.
+4. Configure Vercel server credential, run checks, push the existing PR branch and verify its preview, including a real save/email and admin denial.
+5. Merge PR #8 only at the tested head; confirm Git-triggered production deployment is READY and serves the expected commit. Verify both public URLs, calculator, form and existing admin integration on the live deployment.
+6. Rollback web code through Vercel if necessary. Keep additive tables and application records; do not drop tables or delete data to roll back the UI. Existing unrelated functions remain independent.
+
+Operationally review failed/pending/unknown notifications and applications regularly. Agree a retention period with the business owner, restrict contact exports, and remove expired IP/request hashes through a separately reviewed retention job. No automatic deletion of existing data is introduced here. Backup and audit practices of the existing Supabase project remain applicable.
+
+## Release evidence (2026-11-01)
+
+- Initial PR head: `97c3345d81a20fe3cb94fbbf2e97f7527352fc66`; original preview `dpl_B56zT3dDwtRr7beAHSJDtbE6d6xb` was build-only evidence.
+- Staging: additive schema and transaction tests passed; no configured staging admin, explicitly excluded from its admin assertion.
+- Production: both migrations applied; rollback test passed for idempotency, quotas, anon/non-admin isolation and existing founder RLS access.
+- Local production build and TypeScript passed; targeted lint and existing admin regression suite passed.
+- Browser SK/EN, country selection, calculator, desktop/mobile overflow, successful feedback and duplicate ID passed with no browser runtime errors.
+- Existing admin session: Partners list and status update passed on synthetic application only; the temporary test session was revoked.
+- Test `db87a4da-44ad-418b-9018-e15bcdc9e24c`: persisted; MailerSend message `6ae77640954541e35794cea1` confirmed `delivered`.
+- Second synthetic test `fcf8664e-e89d-410a-b786-d3bddadedb08`: saved; duplicate requests returned this same ID. Synthetic records are intentionally retained as audit evidence and clearly labeled TEST.
+- Final preview and production IDs/commit: pending release verification; update this section after deployment.

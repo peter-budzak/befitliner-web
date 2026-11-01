@@ -4,7 +4,7 @@ import {notFound} from 'next/navigation';
 import {isSiteLocale, type SiteLocale, SUPPORT_EMAIL} from '@/lib/seo';
 import '../gyms.css';
 
-type PageProps = {params: Promise<{locale: string}> | {locale: string}};
+type PageProps = {params: Promise<{locale: string}>};
 export const metadata: Metadata = {
   title: {absolute: 'Fitliner — next steps'},
   robots: {index: false, follow: false},
