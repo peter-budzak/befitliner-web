@@ -48,3 +48,7 @@ TypeScript, targeted ESLint, production build; dictionary shape/section parity; 
 - All 12 features and 36 original detail bullets remain server-rendered inside native `details` elements, usable without JavaScript and by keyboard. Four summaries now state the practical benefit directly in all eight languages; schema reads the same content.
 - Each feature has a distinct line icon. Text contrast and body size increased. Diagrams animate once on entering the viewport; reduced-motion preferences disable them. Text is never hidden for animation.
 - Verification: build/TypeScript/targeted ESLint; browser coverage of all locales at 320/390/768px, all disclosures with keyboard, no-JS access, reduced motion, and desktop/mobile visual review. Store links and localized social metadata remain intact.
+
+### Repeating motion follow-up
+
+At the user's request, feature illustrations now loop on a gentle five-second cycle with a hold between transitions. Animation playback pauses below 35% viewport visibility or in a hidden tab, and resumes when visible. Reduced motion is respected on load and when changed during the session. Without JavaScript or IntersectionObserver the illustrations remain fully drawn and static. Page content, disclosures and metadata are unchanged.
