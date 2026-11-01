@@ -129,3 +129,13 @@ Operationally review failed/pending/unknown notifications and applications regul
 - Preview and initial production error/fatal runtime-log queries returned no groups during the test window. This is a release-window check, not a claim of continuous monitoring.
 - Four explicitly labeled synthetic test applications are retained as audit evidence and marked `rejected` so they are not active candidates. No existing application or user data was deleted.
 - This documentation-only follow-up records the verified initial production release above; subsequent builds of the same application code may have newer deployment IDs.
+
+## Partner-page presentation refresh (2026-11-01)
+
+The SK/EN landing page now explains the commercial opportunity and product before qualification requirements. `partner-story.tsx` renders the hero, existing illustrative gym image, real application-interface visual (`/gym.png`), product benefits, division of responsibilities, qualification path and native expandable FAQ. The image is explicitly illustrative, not a customer endorsement. No invented usage statistics, references, support commitments or investment terms are presented.
+
+The calculator starts with 5 gyms, €5,000 monthly payment volume per gym, one new sale and €120 direct cost per sale. Presets for 5/10/25 gyms set 1/2/3 new sales respectively and clearly state that these are illustrative scenarios, not forecasts. All original inputs remain editable. The form explains what follows submission and preserves its existing API contract, consent, idempotency and notification pipeline.
+
+`partner-motion.tsx` adds one-time viewport reveals, complemented by short CSS entrance, hover and result transitions. There are no perpetual animations or autoplay media. `prefers-reduced-motion` disables motion and keeps all content visible; without JavaScript, the static narrative remains visible. Images use Next Image, with only the hero prioritized and the product screenshot lazy-loaded. FAQ is keyboard-operable native `details`/`summary`.
+
+Validation: TypeScript, targeted ESLint and production build passed. Browser checks passed in SK/EN for image loading, all three presets, a custom €300 calculation, synchronized country selectors, keyboard FAQ, 320/390/768px overflow, reduced motion, and request payload/error/success feedback. Form responses were mocked for this presentation-only regression; no new application or email was created. The API, database and MailerSend implementation are unchanged from the verified production release above. Preview and production checks follow before publishing this refresh.
