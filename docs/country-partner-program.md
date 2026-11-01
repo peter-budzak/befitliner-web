@@ -1,6 +1,6 @@
 # Fitliner Country Partner Program
 
-Last updated: 2026-11-01 (Europe/Bratislava). Implementation and database are verified; final Vercel preview/production release is pending at this revision. See the release record below for actual evidence; a successful build alone does not prove persistence or email delivery.
+Last updated: 2026-11-01 (Europe/Bratislava). **Live in production.** PR #8 is merged; the database, MailerSend, public pages and existing admin integration have been verified. See the release record below for actual evidence; a successful build alone does not prove persistence or email delivery.
 
 ## Scope and business rules
 
@@ -118,5 +118,14 @@ Operationally review failed/pending/unknown notifications and applications regul
 - Browser SK/EN, country selection, calculator, desktop/mobile overflow, successful feedback and duplicate ID passed with no browser runtime errors.
 - Existing admin session: Partners list and status update passed on synthetic application only; the temporary test session was revoked.
 - Test `db87a4da-44ad-418b-9018-e15bcdc9e24c`: persisted; MailerSend message `6ae77640954541e35794cea1` confirmed `delivered`.
-- Second synthetic test `fcf8664e-e89d-410a-b786-d3bddadedb08`: saved; duplicate requests returned this same ID. Synthetic records are intentionally retained as audit evidence and clearly labeled TEST.
-- Final preview and production IDs/commit: pending release verification; update this section after deployment.
+- Second synthetic test `fcf8664e-e89d-410a-b786-d3bddadedb08`: saved and delivery confirmed; duplicate requests returned this same ID. Synthetic records are intentionally retained as audit evidence and clearly labeled TEST.
+- Preserved production source: all 298 manifest files match the previous live deployment byte-for-byte, except the intentional Partners tab addition to `components/admin/admin-console.tsx`. Original working checkout content hashes remained unchanged.
+- Preview `dpl_417UroKRmg8gbde6DPwqz6K5qjCN`, commit `0cb3bfa6a226acb07ed7158fe95365770cd75974`: READY; SK/EN metadata, mobile, calculator, error/success feedback, real save, duplicate ID, admin list/status and existing member/trainer routes passed. Application `e10ca513-9bf9-40ae-bc79-741f94d464b8` confirmed delivered by MailerSend.
+- PR #8 merged into main as `2b2ee475a2f1c2bdde15083f124a9242d60f79e1`.
+- Production release `dpl_3ESZhYpKQWoKXpoW4M5PgmiYeUHY` (`befitliner-4rbwa1b1t-peter-budzaks-projects.vercel.app`), that merge commit: READY and assigned to the live domains. The public `/sk/partners` and `/en/partners` URLs on `befitliner.com` preserve the existing 308 redirect to `www.befitliner.com` and load successfully.
+- Production browser test passed for both languages, SEO alternates, country selection, €300 calculator case, 390px mobile layout, simulated error feedback, real successful submission/acknowledgement, identical-request retry, anonymous admin denial and existing member/trainer routes. Production admin list and status updates also passed. Browser runtime errors: none.
+- Production application `d7654847-59f6-4032-a9a2-6ba614c396bf`: persisted, acknowledged in the browser and confirmed **delivered** by MailerSend.
+- Real anonymous HTTP access: application/contract table reads returned 401; calling the notification function with the anon key returned 403.
+- Preview and initial production error/fatal runtime-log queries returned no groups during the test window. This is a release-window check, not a claim of continuous monitoring.
+- Four explicitly labeled synthetic test applications are retained as audit evidence and marked `rejected` so they are not active candidates. No existing application or user data was deleted.
+- This documentation-only follow-up records the verified initial production release above; subsequent builds of the same application code may have newer deployment IDs.
