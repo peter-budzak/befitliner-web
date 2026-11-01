@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {isPartnerLocale,PARTNER_FOOTER_LABELS} from '@/lib/partners/locales';
 import {joinCopy} from '@/lib/trainer-join-copy';
 
 type Props = {
@@ -37,6 +38,7 @@ export default function AcquisitionFooter({locale,labels,supportLabel,iosUrl,and
      <Link className={linkStyle} href={`/${locale}/trainers`}>{audiences.trainer}</Link>
      <Link className={linkStyle} href={`/${locale}/gyms`}>{labels.for_gyms}</Link>
      <Link className={linkStyle} href={`/${locale}/health`}>{health}</Link>
+     <Link className={linkStyle} href={`/${isPartnerLocale(locale)?locale:'en'}/partners`}>{PARTNER_FOOTER_LABELS[isPartnerLocale(locale)?locale:'en']}</Link>
      {(locale==='sk'||locale==='en')&&<Link className={linkStyle} href={`/${locale}/guides`}>{guides}</Link>}
     </div>
    </nav>

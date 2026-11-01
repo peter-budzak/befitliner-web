@@ -1,4 +1,7 @@
 "use client";
+import type { PartnerCopy } from "@/lib/partners/copy";
+import type { PartnerLocale } from "@/lib/partners/locales";
+
 import {
   useMemo,
   useState,
@@ -7,33 +10,6 @@ import {
   type ReactNode,
   type FormEvent,
 } from "react";
-const countryLabels = [
-  ["PL", "Poland", "Poľsko", 120],
-  ["CZ", "Czech Republic", "Česko", 70],
-  ["SK", "Slovakia", "Slovensko", 40],
-  ["HU", "Hungary", "Maďarsko", 70],
-  ["RO", "Romania", "Rumunsko", 100],
-  ["DE", "Germany", "Nemecko", 200],
-  ["AT", "Austria", "Rakúsko", 60],
-  ["GB", "United Kingdom", "Spojené kráľovstvo", 180],
-  ["FR", "France", "Francúzsko", 170],
-  ["ES", "Spain", "Španielsko", 130],
-  ["IT", "Italy", "Taliansko", 150],
-  ["NL", "Netherlands", "Holandsko", 90],
-  ["BE", "Belgium", "Belgicko", 65],
-  ["PT", "Portugal", "Portugalsko", 60],
-  ["HR", "Croatia", "Chorvátsko", 40],
-  ["SI", "Slovenia", "Slovinsko", 30],
-  ["BG", "Bulgaria", "Bulharsko", 50],
-  ["SE", "Sweden", "Švédsko", 70],
-  ["IE", "Ireland", "Írsko", 40],
-] as const;
-const euro = (n: number) =>
-  new Intl.NumberFormat("en-IE", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(n);
 export type PartnerCountry = {
   code: string;
   name: string;
@@ -45,17 +21,26 @@ export default function PartnerInteractive({
   locale,
   countrySettings,
   children,
+  copy,
 }: {
+  copy: PartnerCopy;
   children?: ReactNode;
-  locale: "sk" | "en";
+  locale: PartnerLocale;
   countrySettings: PartnerCountry[];
 }) {
+  const t = (key: keyof PartnerCopy) => copy[key];
+  const euro = (n: number) =>
+    new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    }).format(n);
   const countries = countrySettings.map(
     (c) =>
       [
         c.code,
         c.name,
-        countryLabels.find((l) => l[0] === c.code)?.[2] || c.name,
+        c.name,
         c.annual_new_gyms_target,
         c.target_approved,
         c.public_status,
@@ -67,7 +52,6 @@ export default function PartnerInteractive({
     requestId.current = crypto.randomUUID();
     startedAt.current = Date.now();
   }, []);
-  const sk = locale === "sk";
   const [country, setCountry] = useState(countrySettings[0]?.code || "");
   const [gyms, setGyms] = useState(10),
     [volume, setVolume] = useState(15000),
@@ -112,69 +96,46 @@ export default function PartnerInteractive({
   return (
     <>
       <section className="partner-container partner-section" id="countries">
-        <p className="partner-kicker">{sk ? "VÁŠ TRH" : "YOUR MARKET"}</p>
-        <h2>
-          {sk
-            ? "Kde chcete zastupovať Fitliner?"
-            : "Where do you want to represent Fitliner?"}
-        </h2>
+        <p className="partner-kicker">{t("YOUR MARKET")}</p>
+        <h2>{t("Where do you want to represent Fitliner?")}</h2>
         <label className="partner-field">
-          {sk ? "Krajina" : "Country"}
+          {t("Country")}
           <select value={country} onChange={(e) => setCountry(e.target.value)}>
             {countries.map((c) => (
               <option value={c[0]} key={c[0]}>
-                {sk ? c[2] : c[1]}
+                {c[1]}
               </option>
             ))}
           </select>
         </label>
         <div className="partner-country-note">
           <strong>
-            {row
-              ? sk
-                ? row[2]
-                : row[1]
-              : sk
-                ? "Krajiny momentálne nie sú dostupné."
-                : "Countries are temporarily unavailable."}
+            {row ? row[1] : t("Countries are temporarily unavailable.")}
           </strong>
           <span>
-            {row?.[4]
-              ? sk
-                ? "Ročný cieľ"
-                : "Annual target"
-              : sk
-                ? "Návrh ročného cieľa"
-                : "Proposed annual target"}
-            : {row?.[3] ?? "—"}{" "}
-            {sk ? "nových aktivovaných fitiek" : "new activated gyms"}
+            {row?.[4] ? t("Annual target") : t("Proposed annual target")}:{" "}
+            {row?.[3] ?? "—"} {t("new activated gyms")}
           </span>
           <small>
-            {sk
-              ? "Ciele sú orientačné, nie schválené. Dostupnosť exkluzivity overujeme individuálne."
-              : "Targets are illustrative and not approved. Exclusivity availability is verified individually."}
+            {t(
+              "Targets are illustrative and not approved. Exclusivity availability is verified individually.",
+            )}
           </small>
         </div>
       </section>
       <section className="partner-calculator" id="calculator">
         <div className="partner-container partner-section">
-          <p className="partner-kicker">
-            {sk ? "KALKULAČKA PRÍJMOV" : "EARNINGS CALCULATOR"}
-          </p>
-          <h2>
-            {sk
-              ? "Aký príjem môže váš trh vytvárať?"
-              : "What could your market generate?"}
-          </h2>
+          <p className="partner-kicker">{t("EARNINGS CALCULATOR")}</p>
+          <h2>{t("What could your market generate?")}</h2>
           <p className="partner-muted">
-            {sk
-              ? "Model pri 50 % podiele z dohodnutého čistého základu. Predpokladá, že uvedené 2 % platformového poplatku sú disponibilné na delenie; skutočné náklady môžu výsledok znížiť."
-              : "Illustration assuming 50% of agreed net distributable revenue. The 2% platform fee is assumed distributable; actual costs may reduce the result."}
+            {t(
+              "Illustration assuming 50% of agreed net distributable revenue. The 2% platform fee is assumed distributable; actual costs may reduce the result.",
+            )}
           </p>
           <div
             className="partner-scenarios"
             role="group"
-            aria-label={sk ? "Modelové scenáre" : "Illustrative scenarios"}
+            aria-label={t("Illustrative scenarios")}
           >
             {[10, 50, 100].map((n, i) => (
               <button
@@ -194,57 +155,39 @@ export default function PartnerInteractive({
                 }}
               >
                 <span>
-                  {sk
-                    ? ["Prvé fitká", "Rozvoj siete", "Väčšia sieť"][i]
-                    : ["First gyms", "Growing network", "Larger network"][i]}
+                  {
+                    [
+                      t("First gyms"),
+                      t("Growing network"),
+                      t("Larger network"),
+                    ][i]
+                  }
                 </span>
                 <strong>
-                  {n} {sk ? "fitiek" : "gyms"}
+                  {n} {t("gyms")}
                 </strong>
               </button>
             ))}
           </div>
           <p className="partner-scenario-note">
-            {sk
-              ? "Scenáre počítajú s modelovou priemernou mesačnou tržbou 15 000 € na fitko, nie s overeným priemerom konkrétneho regiónu. Výpočet predpokladá, že uvedené platby prechádzajú cez Fitliner. Všetky vstupy môžete upraviť."
-              : "Scenarios use an illustrative average monthly revenue of €15,000 per gym, not a verified regional average. The calculation assumes these payments are processed through Fitliner. You can change every input."}
+            {t(
+              "Scenarios use an illustrative average monthly revenue of €15,000 per gym, not a verified regional average. The calculation assumes these payments are processed through Fitliner. You can change every input.",
+            )}
           </p>
           <div className="partner-calc-grid">
             <div className="partner-inputs">
               {(
                 [
+                  [t("Active gyms"), gyms, setGyms, 0, 10000],
                   [
-                    sk ? "Aktívne fitness centrá" : "Active gyms",
-                    gyms,
-                    setGyms,
-                    0,
-                    10000,
-                  ],
-                  [
-                    sk
-                      ? "Modelová priemerná mesačná tržba na fitko (€)"
-                      : "Illustrative average monthly gym revenue (€)",
+                    t("Illustrative average monthly gym revenue (€)"),
                     volume,
                     setVolume,
                     0,
                     100000,
                   ],
-                  [
-                    sk ? "Nové predaje za mesiac" : "New gym sales per month",
-                    newGyms,
-                    setNewGyms,
-                    0,
-                    1000,
-                  ],
-                  [
-                    sk
-                      ? "Priame náklady na jeden predaj (€)"
-                      : "Direct cost per sale (€)",
-                    cost,
-                    setCost,
-                    0,
-                    297,
-                  ],
+                  [t("New gym sales per month"), newGyms, setNewGyms, 0, 1000],
+                  [t("Direct cost per sale (€)"), cost, setCost, 0, 297],
                 ] as const
               ).map(([label, value, setter, min, max]) => (
                 <label key={label} className="partner-field">
@@ -267,26 +210,20 @@ export default function PartnerInteractive({
               ))}
             </div>
             <div className="partner-result">
-              <small>
-                {sk
-                  ? "Modelový príjem partnera za mesiac"
-                  : "Illustrative partner income per month"}
-              </small>
+              <small>{t("Illustrative partner income per month")}</small>
               <strong key={calc.total} className="partner-total">
                 {euro(calc.total)}
               </strong>
               <p>
-                {sk ? "Z transakcií" : "From transaction fees"}:{" "}
-                {euro(calc.monthly)}
+                {t("From transaction fees")}: {euro(calc.monthly)}
               </p>
               <p>
-                {sk ? "Z jednorazových predajov" : "From one-time sales"}:{" "}
-                {euro(calc.oneoff)}
+                {t("From one-time sales")}: {euro(calc.oneoff)}
               </p>
               <small>
-                {sk
-                  ? "Nejde o garanciu výnosu. Kalkulačka nepočíta dane, ďalšie poplatky a zmluvné úpravy."
-                  : "Not guaranteed earnings. Taxes, other costs and contractual adjustments excluded."}
+                {t(
+                  "Not guaranteed earnings. Taxes, other costs and contractual adjustments excluded.",
+                )}
               </small>
             </div>
           </div>
@@ -294,20 +231,16 @@ export default function PartnerInteractive({
       </section>
       {children}
       <section className="partner-container partner-section" id="apply">
-        <p className="partner-kicker">{sk ? "PRIHLÁŠKA" : "APPLICATION"}</p>
-        <h2>
-          {sk
-            ? "Začnime rozhovorom o vašej krajine."
-            : "Let’s talk about your country."}
-        </h2>
+        <p className="partner-kicker">{t("APPLICATION")}</p>
+        <h2>{t("Let’s talk about your country.")}</h2>
         <p className="partner-muted partner-apply-intro">
-          {sk
-            ? "Povedzte nám, aký trh poznáte a aké skúsenosti prinášate. Prihlášku posúdime a ozveme sa s ďalším postupom. Odoslanie nie je záväzkom uzavrieť zmluvu."
-            : "Tell us which market you know and what experience you bring. We’ll review your application and contact you about next steps. Submitting does not commit you to an agreement."}
+          {t(
+            "Tell us which market you know and what experience you bring. We’ll review your application and contact you about next steps. Submitting does not commit you to an agreement.",
+          )}
         </p>
         <form onSubmit={submit} className="partner-form">
           <label className="partner-field partner-wide">
-            {sk ? "Krajina prihlášky" : "Application country"}
+            {t("Application country")}
             <select
               name="country_code"
               value={country}
@@ -320,7 +253,7 @@ export default function PartnerInteractive({
                   value={c[0]}
                   disabled={!["open", "qualifying"].includes(c[5])}
                 >
-                  {sk ? c[2] : c[1]}
+                  {c[1]}
                 </option>
               ))}
             </select>
@@ -335,19 +268,19 @@ export default function PartnerInteractive({
             </label>
           </div>
           <label className="partner-field">
-            {sk ? "Meno a priezvisko" : "Full name"}
+            {t("Full name")}
             <input name="contact_name" minLength={2} required maxLength={120} />
           </label>
           <label className="partner-field">
-            {sk ? "Spoločnosť" : "Company"}
+            {t("Company")}
             <input name="company" maxLength={160} />
           </label>
           <label className="partner-field">
-            Email
+            {t("Email")}
             <input name="email" type="email" required maxLength={254} />
           </label>
           <label className="partner-field">
-            {sk ? "Telefón" : "Phone"}
+            {t("Phone")}
             <input
               name="phone"
               type="tel"
@@ -357,9 +290,7 @@ export default function PartnerInteractive({
             />
           </label>
           <label className="partner-field partner-wide">
-            {sk
-              ? "Vaše skúsenosti s predajom / fitness"
-              : "Your sales / fitness experience"}
+            {t("Your sales / fitness experience")}
             <textarea
               name="experience"
               minLength={10}
@@ -369,7 +300,7 @@ export default function PartnerInteractive({
             />
           </label>
           <label className="partner-field partner-wide">
-            {sk ? "Správa (nepovinné)" : "Message (optional)"}
+            {t("Message (optional)")}
             <textarea name="message" maxLength={2000} rows={3} />
           </label>
           <label className="partner-check partner-wide">
@@ -380,15 +311,18 @@ export default function PartnerInteractive({
               required
             />
             <span>
-              {sk
-                ? "Súhlasím so spracovaním poskytnutých údajov na účel vybavenia žiadosti."
-                : "I agree to the processing of submitted information for handling my application."}{" "}
+              {t(
+                "I agree to the processing of submitted information for handling my application.",
+              )}{" "}
               <a
-                href={`/${locale}/privacy`}
+                href={`/${locale === "pl" || locale === "hu" ? "en" : locale}/privacy`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {sk ? "Ochrana osobných údajov" : "Privacy policy"}
+                {t("Privacy policy")}
+                {(locale === "pl" || locale === "hu") && (
+                  <> ({t("In English")})</>
+                )}
               </a>
             </span>
           </label>
@@ -397,39 +331,31 @@ export default function PartnerInteractive({
               className="partner-cta"
               disabled={status === "loading" || !available}
             >
-              {status === "loading"
-                ? sk
-                  ? "Odosielam…"
-                  : "Sending…"
-                : sk
-                  ? "Odoslať prihlášku"
-                  : "Submit application"}{" "}
+              {status === "loading" ? t("Sending…") : t("Submit application")}{" "}
               ↗
             </button>
             {status === "success" && (
               <p role="status">
-                {sk
-                  ? "Ďakujeme, prihláška je uložená. Posúdime ju a ozveme sa na uvedený e-mail."
-                  : "Thank you — your application is saved. We’ll review it and contact you at the email provided."}
+                {t(
+                  "Thank you — your application is saved. We’ll review it and contact you at the email provided.",
+                )}
               </p>
             )}
             {status === "error" && (
               <p role="alert">
                 {errorCode === "rate_limited"
-                  ? sk
-                    ? "Príliš veľa prihlášok. Skúste to neskôr alebo nás kontaktujte."
-                    : "Too many applications. Please try later or contact us."
+                  ? t("Too many applications. Please try later or contact us.")
                   : errorCode === "country_unavailable"
-                    ? sk
-                      ? "Táto krajina momentálne neprijíma prihlášky. Vyberte inú krajinu."
-                      : "This country is not accepting applications. Please choose another country."
+                    ? t(
+                        "This country is not accepting applications. Please choose another country.",
+                      )
                     : errorCode === "invalid_fields"
-                      ? sk
-                        ? "Skontrolujte polia a súhlas, potom skúste odoslanie znova."
-                        : "Please check your details and consent, then try again."
-                      : sk
-                        ? "Prihlášku sa nepodarilo odoslať. Skúste to neskôr."
-                        : "Application could not be submitted. Please try again later."}
+                      ? t(
+                          "Please check your details and consent, then try again.",
+                        )
+                      : t(
+                          "Application could not be submitted. Please try again later.",
+                        )}
               </p>
             )}
           </div>

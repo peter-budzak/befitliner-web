@@ -867,3 +867,40 @@
     transform: none;
   }
 }
+
+.partner-language-menu {
+  position: relative;
+  z-index: 20;
+  font-size: 0.85rem;
+}
+.partner-language-menu summary {
+  cursor: pointer;
+  padding: 0.65rem;
+}
+.partner-language-menu > div {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 180px;
+  display: grid;
+  padding: 0.5rem;
+  background: #191420;
+  border: 1px solid #42334f;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px #0008;
+}
+.partner-language-menu a {
+  padding: 0.65rem 0.8rem;
+  border-radius: 6px;
+  color: #eee;
+}
+.partner-language-menu a:hover,
+.partner-language-menu a[aria-current="page"] {
+  background: #37264d;
+  color: #c7a7ff;
+}
+.partner-language-menu a:focus-visible,
+.partner-language-menu summary:focus-visible {
+  outline: 2px solid #b18aff;
+  outline-offset: 2px;
+}

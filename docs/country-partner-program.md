@@ -145,3 +145,11 @@ Presentation release evidence: PR #9 merged as `46721cc4dd512a344fd4aa9a151f50d8
 ## Calculator assumptions update (2026-11-01)
 
 At the owner’s request, the calculator now defaults to 10 active gyms and €15,000 monthly volume per gym, with presets for 10/50/100 gyms. The presets retain 1/2/3 new sales and €120 direct cost per sale. Revenue is labeled an illustrative average, not an independently verified regional statistic; the explanatory text clarifies that the calculation assumes this volume is processed through Fitliner. Both SK and EN use the same assumptions.
+
+### Partner-page localization (2026-11-01)
+
+- `/[locale]/partners` now supports EN, SK, DE, ES, FR, zh-Hans, PL and HU. Complete dictionaries live in `messages/partners/`; server-side loading passes only the selected dictionary to the interactive calculator/form.
+- Translations include product sections, FAQ, calculator, privacy consent, success/error feedback, metadata and image descriptions. Country names and EUR amounts use the selected locale's Intl formatting. Presets remain 10/50/100 gyms with €15,000 illustrative monthly volume.
+- The page includes an eight-language switcher, canonical URLs, reciprocal hreflang (plus English x-default), localized Open Graph metadata and sitemap entries.
+- Every existing homepage (EN/SK/DE/ES/FR/zh-Hans) links to its matching partner page from the shared acquisition footer. This does not create PL/HU homepages. PL/HU logo links use the English homepage; privacy links and HU gym-product links explicitly mark their English fallback.
+- Validation: TypeScript, targeted ESLint and production build. Browser regression covers all eight languages, 320/390/768px layouts, preset/custom calculations, localized country selection, keyboard FAQ, homepage footer links, language links/HTML language/hreflang, and intercepted form success/error responses (no real applications sent).
