@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+const base=process.env.PARTNER_TEST_URL||'http://localhost:3015';
+const post=(body,headers={})=>fetch(`${base}/api/partner-applications`,{method:'POST',headers:{'Content-Type':'application/json',...headers},body:typeof body==='string'?body:JSON.stringify(body)});
+assert.equal((await post('{}')).status,400);
+assert.equal((await post('{')).status,400);
+assert.equal((await post('x'.repeat(12001))).status,413);
+assert.equal((await post('{}',{Origin:'https://untrusted.example'})).status,403);
+assert.equal((await fetch(`${base}/api/admin/partners`,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})).status,403);
+const fixture={country_code:'SK',contact_name:'TEST',company:'',email:'test@example.com',phone:'+421000000000',experience:'Synthetic validation test',message:'',privacy_consent:'yes',request_id:crypto.randomUUID(),started_at:Date.now()-5000};
+for(const change of [{website:'spam'},{privacy_consent:'no'},{experience:'short'},{email:'invalid'},{country_code:'Slovakia'},{contact_name:'x'.repeat(121)},{request_id:'bad'},{started_at:Date.now()+10000}])assert.equal((await post({...fixture,...change})).status,400);
+console.log('PASS: actual body size, malformed JSON, server field validation, consent, honeypot, timestamp, origin, admin authorization. No applications created.');

@@ -1,35 +1,46 @@
-import {NextRequest,NextResponse} from 'next/server';
-import {createClient} from '@supabase/supabase-js';
-export const runtime='nodejs';
-const clean=(v:unknown,max:number)=>typeof v==='string'?v.trim().slice(0,max):'';
-const emailValid=(s:string)=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-export async function POST(req:NextRequest){
- const length=Number(req.headers.get('content-length')||0);
- if(length>12000)return NextResponse.json({error:'payload_too_large'},{status:413});
- let input:Record<string,unknown>;
- try{input=await req.json();if(!input||typeof input!=='object'||Array.isArray(input))throw Error('bad');}catch{return NextResponse.json({error:'invalid_json'},{status:400});}
- const country=clean(input.country_code,2).toUpperCase(),name=clean(input.contact_name,120),company=clean(input.company,160),email=clean(input.email,254).toLowerCase(),phone=clean(input.phone,40),experience=clean(input.experience,2000),message=clean(input.message,2000);
- const validCountries=new Set(['PL','CZ','SK','HU','RO','DE','AT','GB','FR','ES','IT','NL','BE','PT','HR','SI','BG','SE','IE']);
- if(!validCountries.has(country)||name.length<2||!emailValid(email)||phone.length<5||experience.length<10||input.privacy_consent!=='yes')return NextResponse.json({error:'invalid_fields'},{status:400});
- const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;
- if(!url||!key)return NextResponse.json({error:'temporarily_unavailable'},{status:503});
- const db=createClient(url,key,{auth:{autoRefreshToken:false,persistSession:false}});
- const {data:application,error}=await db.from('partner_applications').insert({country_code:country,contact_name:name,company,email,phone,experience,message,privacy_accepted_at:new Date().toISOString()}).select('id').single();
- if(error)return NextResponse.json({error:'temporarily_unavailable'},{status:503});
- // Notification is best-effort; a failed email must not lose a saved application.
- const mailKey=process.env.MAILERSEND_API_KEY;
- const sender=process.env.MAILERSEND_FROM_EMAIL || 'no-reply@mail.befitliner.com';
- if(mailKey){
-   const subject='Fitliner: Nová partnerská prihláška – '+country;
-   const body=['Nová žiadosť o národné partnerstvo Fitliner','ID: '+application.id,'Krajina: '+country,'Meno: '+name,'Firma: '+company,'E-mail: '+email,'Telefón: '+phone,'Skúsenosti: '+experience,'Správa: '+message].join('\n\n');
-   try{
-     const response=await fetch('https://api.mailersend.com/v1/email',{
-       method:'POST',headers:{Authorization:'Bearer '+mailKey,'Content-Type':'application/json'},
-       body:JSON.stringify({from:{email:sender,name:'Fitliner'},to:[{email:'peter@peterbudzak.com'}],reply_to:{email},subject,text:body,tags:['country-partner-application']}),
-       signal:AbortSignal.timeout(6500)
-     });
-     if(!response.ok)console.error('Partner email failed, HTTP',response.status,'application id',application.id);
-   }catch{console.error('Partner email request failed, application id',application.id);}
- }else{console.warn('Partner email provider not configured, application id',application.id);}
- return NextResponse.json({ok:true},{status:201});
+import { createHmac } from 'node:crypto';
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+export const runtime = 'nodejs';
+const reply = (error: string, status: number) => NextResponse.json({ error }, { status, headers: { 'Cache-Control': 'no-store', ...(status === 429 ? { 'Retry-After': '3600' } : {}) } });
+export async function POST(req: NextRequest) {
+  if (req.headers.get('origin') && req.headers.get('origin') !== req.nextUrl.origin) return reply('invalid_origin', 403);
+  if (!req.headers.get('content-type')?.includes('application/json')) return reply('invalid_json', 415);
+  // Enforce the actual streamed byte count, even without a Content-Length header.
+  let input: Record<string, unknown>;
+  try {
+    const reader = req.body?.getReader(); if (!reader) return reply('invalid_json', 400);
+    const chunks: Uint8Array[] = []; let size = 0;
+    for (;;) { const { done, value } = await reader.read(); if (done) break; size += value.length; if (size > 12000) { await reader.cancel(); return reply('payload_too_large', 413); } chunks.push(value); }
+    input = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+    if (!input || typeof input !== 'object' || Array.isArray(input)) return reply('invalid_json', 400);
+  } catch { return reply('invalid_json', 400); }
+  const limits: Record<string, [number, number]> = { country_code: [2, 2], contact_name: [2, 120], company: [0, 160], email: [3, 254], phone: [5, 40], experience: [10, 2000], message: [0, 2000] };
+  const data: Record<string, string> = {};
+  for (const [field, [min, max]] of Object.entries(limits)) {
+    const raw = input[field] ?? ''; if (typeof raw !== 'string') return reply('invalid_fields', 400);
+    const value = raw.trim(); if (value.length < min || value.length > max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value)) return reply('invalid_fields', 400);
+    data[field] = value;
+  }
+  data.email = data.email.toLowerCase(); data.country_code = data.country_code.toUpperCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || !/^[A-Z]{2}$/.test(data.country_code) || input.privacy_consent !== 'yes' || input.website || typeof input.request_id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(input.request_id)) return reply('invalid_fields', 400);
+  const started = Number(input.started_at);
+  if (!Number.isFinite(started) || Date.now() - started < 2000 || Date.now() - started > 86400000) return reply('invalid_fields', 400);
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return reply('temporarily_unavailable', 503);
+  const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  const hash = (value: string) => createHmac('sha256', key).update(value).digest('hex');
+  // Vercel overwrites x-vercel-forwarded-for; do not trust a client-supplied generic XFF.
+  const ip = process.env.VERCEL ? req.headers.get('x-vercel-forwarded-for')?.split(',')[0].trim() || 'unknown' : 'local';
+  const { data: result, error } = await db.rpc('submit_partner_application', { p_data: data, p_request_id: input.request_id, p_hash: hash(JSON.stringify(data)), p_ip: hash(ip) });
+  if (error) {
+    if (error.message.includes('rate_limited')) return reply('rate_limited', 429);
+    if (error.message.includes('idempotency_conflict')) return reply('idempotency_conflict', 409);
+    if (error.message.includes('country_unavailable')) return reply('country_unavailable', 400);
+    return reply('temporarily_unavailable', 503);
+  }
+  try {
+    await fetch(`${url}/functions/v1/partner-application-notify`, { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ id: result.id }), signal: AbortSignal.timeout(12000) });
+  } catch { /* Durable pending/sending state is visible in the admin console. Never undo the application. */ }
+  return NextResponse.json({ ok: true, id: result.id }, { status: 201, headers: { 'Cache-Control': 'no-store' } });
 }
