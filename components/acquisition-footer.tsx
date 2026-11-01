@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { featureCopy } from "@/lib/features";
 import { isPartnerLocale, PARTNER_FOOTER_LABELS } from "@/lib/partners/locales";
 import { joinCopy } from "@/lib/trainer-join-copy";
 
@@ -88,6 +89,9 @@ export default function AcquisitionFooter({
             {labels.links_title}
           </h2>
           <div className="flex flex-col gap-1">
+            <Link className={linkStyle} href={`/${locale}/features`}>
+              {featureCopy(locale).all}
+            </Link>
             <Link className={linkStyle} href={`/${locale}/trainers`}>
               {audiences.trainer}
             </Link>

@@ -1,0 +1,143 @@
+{
+  "title": "Que peut faire Fitliner ?",
+  "intro": "Entraînement, nutrition, santé et salle de sport. Découvrez les outils réunis dans une application.",
+  "browse": "Explorer les fonctionnalités",
+  "download": "Télécharger l’application",
+  "home": "Accueil",
+  "language": "Langue",
+  "all": "Toutes les fonctionnalités",
+  "personal": "Pour vous",
+  "community": "Communauté",
+  "business": "Pour les professionnels",
+  "availabilityTitle": "Disponibilité des fonctionnalités",
+  "availability": "La disponibilité dépend de la version, du compte et de la salle participante. La carte santé nécessite un accès actif ; l’entrée par téléphone nécessite un équipement compatible et une autorisation valide.",
+  "rolloutTitle": "Déploiements en cours",
+  "rollout": "Le nouvel achat d’abonnements, la facturation étendue, les réservations de coachs et l’accès hors ligne général sont déployés séparément. Ils ne sont pas disponibles pour toutes les salles ou tous les comptes. Les réductions liées aux diamants ne sont pas encore actives.",
+  "imageNote": "Illustration d’une salle de sport",
+  "footer": "Votre prochaine étape commence dans Fitliner.",
+  "teaser": "Découvrez Fitliner",
+  "teaserBody": "Explorez les outils pour votre entraînement, votre nutrition, vos progrès et votre salle.",
+  "link": "Voir toutes les fonctionnalités",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Votre journée en bref",
+      "summary": "L’essentiel au même endroit.",
+      "items": [
+        "Vue quotidienne de votre alimentation et de vos progrès.",
+        "Accès rapide aux entraînements, messages et à votre salle.",
+        "Entrée épinglée pour les salles compatibles et solde de diamants."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Entraînements et carnet",
+      "summary": "Du programme à la dernière série.",
+      "items": [
+        "Programmes, journées d’entraînement, exercices et démonstrations visuelles.",
+        "Exercices personnels, séries, charges, répétitions, minuteur de repos et reprise d’un entraînement précédent.",
+        "Historique, records, graphiques et partage avec autorisations ; vos séances personnelles en cours sont enregistrées hors ligne puis synchronisées."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrition et objectifs",
+      "summary": "Comprenez ce que vous mangez.",
+      "items": [
+        "Saisie des repas par texte avec estimation IA des portions et nutriments à vérifier.",
+        "Journal alimentaire, calories, macronutriments et autres données nutritionnelles.",
+        "Objectifs quotidiens personnels, apports restants et bilans alimentaires par IA."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Objectifs et progrès",
+      "summary": "Suivez votre évolution.",
+      "items": [
+        "Objectifs personnels de poids et autres performances mesurables.",
+        "Saisies, historique, graphiques et suivi des objectifs atteints.",
+        "Partage des progrès accomplis et contrôle de la visibilité des données."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Coach IA personnel",
+      "summary": "Des questions et une prochaine étape.",
+      "items": [
+        "Discussion sur l’entraînement, la nutrition et vos objectifs.",
+        "Suggestions tenant compte des informations disponibles dans votre profil.",
+        "Le carnet est utilisé avec votre autorisation ; les réponses IA ne sont ni un diagnostic ni une garantie de résultat."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Carte santé",
+      "summary": "Résultats et contexte réunis.",
+      "items": [
+        "Import depuis un PDF, une photo ou l’appareil photo, puis vérification des valeurs et dates.",
+        "Historique des mesures, graphiques, score de santé et aperçu des indicateurs suivis.",
+        "Explications et recommandations sourcées, sans remplacer les soins médicaux. Accès actif requis."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Vos salles et vos entrées",
+      "summary": "Restez proche de votre lieu d’entraînement.",
+      "items": [
+        "Recherche de salles, profils, contacts, horaires et règlement.",
+        "Abonnements, validité et paiements selon le système de la salle ; offrir une entrée lorsque cette option est prise en charge.",
+        "Entrée par téléphone, historique des visites, fréquentation et avis selon les services de la salle."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Personnes, messages et fil",
+      "summary": "Gardez le contact et partagez vos progrès.",
+      "items": [
+        "Recherche de profils, messages privés et invitations d’amis.",
+        "Partage des entraînements et objectifs atteints dans le fil ou hors de l’application.",
+        "Réactions, commentaires, masquage ou signalement de publications et annonces de la salle."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Pour les coachs",
+      "summary": "Profil et collaboration avec les clients.",
+      "items": [
+        "Création du profil de coach, présentation des spécialités et services.",
+        "Page de profil publique et communication avec les clients.",
+        "Carnets partagés, commentaires et propositions de modifications selon les autorisations accordées."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Pour les gérants",
+      "summary": "Votre activité au quotidien.",
+      "items": [
+        "Gestion du profil, du site public, du règlement et des coordonnées de la salle.",
+        "Abonnements, clients, paiements enregistrés, recettes et calendrier selon le système actif.",
+        "Gestion des accès compatibles, historique des visites, annonces aux membres et réponses aux avis."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Club Diamant",
+      "summary": "Votre activité a son historique.",
+      "items": [
+        "Gagnez des diamants pour les activités prises en charge.",
+        "Consultez le solde et l’historique des diamants.",
+        "Découvrez comment en gagner ; les réductions prévues ne sont pas des récompenses déjà disponibles."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profil et réglages",
+      "summary": "Une application à votre image.",
+      "items": [
+        "Profil, galerie photo, bio, informations personnelles, objectifs et préférences alimentaires.",
+        "Langue, unités, notifications et confidentialité de certaines informations.",
+        "Gestion du compte et du mot de passe, avec possibilité de supprimer le compte."
+      ]
+    }
+  ]
+}

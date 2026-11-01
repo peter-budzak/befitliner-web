@@ -1,0 +1,143 @@
+{
+  "title": "Co potrafi Fitliner?",
+  "intro": "Trening, odżywianie, zdrowie i Twoja siłownia. Poznaj narzędzia połączone w jednej aplikacji.",
+  "browse": "Poznaj funkcje",
+  "download": "Pobierz aplikację",
+  "home": "Strona główna",
+  "language": "Język",
+  "all": "Wszystkie funkcje",
+  "personal": "Dla Ciebie",
+  "community": "Ludzie i społeczność",
+  "business": "Dla profesjonalistów",
+  "availabilityTitle": "Dostępność funkcji",
+  "availability": "Dostępność zależy od wersji aplikacji, konta i klubu. Karta zdrowia wymaga dostępu; wejście telefonem wymaga zgodnego sprzętu i ważnych uprawnień.",
+  "rolloutTitle": "Co jeszcze wdrażamy",
+  "rollout": "Nowy zakup karnetów, rozszerzone fakturowanie, rezerwacje trenerów i ogólny dostęp offline wdrażamy osobno. Nie są dostępne w każdym klubie ani na każdym koncie. Zniżki za diamenty nie są jeszcze aktywne.",
+  "imageNote": "Ilustracyjna scena z siłowni",
+  "footer": "Twój kolejny krok zaczyna się w Fitliner.",
+  "teaser": "Poznaj Fitliner",
+  "teaserBody": "Sprawdź narzędzia do treningu, odżywiania, śledzenia postępów i korzystania z siłowni.",
+  "link": "Zobacz wszystkie funkcje",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Twój dzień w skrócie",
+      "summary": "Najważniejsze rzeczy w jednym miejscu.",
+      "items": [
+        "Dzienny przegląd odżywiania i własnych postępów.",
+        "Szybki dostęp do treningów, wiadomości i siłowni.",
+        "Przypięte wejście do obsługiwanej siłowni i saldo diamentów."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Treningi i dziennik",
+      "summary": "Od planu do ostatniej serii.",
+      "items": [
+        "Plany, dni treningowe, ćwiczenia i wizualne instrukcje ruchu.",
+        "Własne ćwiczenia, serie, ciężary, powtórzenia, czas przerwy i powtarzanie treningów.",
+        "Historia, rekordy, wykresy i udostępnianie z uprawnieniami; własny rozpoczęty trening zapisuje się offline i synchronizuje później."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Odżywianie i cele",
+      "summary": "Wiedz, co jesz.",
+      "items": [
+        "Wpisywanie posiłków tekstem z szacunkami AI dotyczącymi porcji i składników, które możesz sprawdzić.",
+        "Dziennik żywieniowy, kalorie, makroskładniki i pozostałe wartości odżywcze.",
+        "Osobiste cele dzienne, pozostałe zapotrzebowanie i podsumowania AI."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Cele i postępy",
+      "summary": "Obserwuj swoją drogę w czasie.",
+      "items": [
+        "Własne cele dotyczące masy ciała i innych mierzalnych wyników.",
+        "Wpisy, historia, wykresy i śledzenie realizacji celu.",
+        "Udostępnianie osiągniętych postępów i kontrola widoczności danych."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Osobisty coach AI",
+      "summary": "Zadawaj pytania i planuj kolejny krok.",
+      "items": [
+        "Rozmowy o treningu, odżywianiu i celach.",
+        "Sugestie uwzględniające dostępne informacje z profilu.",
+        "Dziennik treningowy jest wykorzystywany za zgodą; odpowiedzi AI to wskazówki, nie diagnoza ani gwarancja wyników."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Karta zdrowia",
+      "summary": "Wyniki i kontekst w jednym miejscu.",
+      "items": [
+        "Import wyników z PDF, zdjęcia lub aparatu, a następnie sprawdzenie wartości i daty.",
+        "Historia pomiarów, wykresy, ocena zdrowia i przegląd śledzonych wskaźników.",
+        "Wyjaśnienia i zalecenia ze źródłami; nie zastępują opieki medycznej. Wymagają aktywnego dostępu."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Twoje siłownie i wejścia",
+      "summary": "Kontakt z miejscem, w którym trenujesz.",
+      "items": [
+        "Wyszukiwanie klubów, profile, kontakt, godziny otwarcia i regulaminy.",
+        "Karnety, ważność i płatności zgodnie z systemem klubu; podarowanie wejścia tam, gdzie jest obsługiwane.",
+        "Wejście telefonem, historia wizyt, frekwencja i opinie zależnie od oferty klubu."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Ludzie, wiadomości i tablica",
+      "summary": "Bądź w kontakcie i dziel się postępami.",
+      "items": [
+        "Wyszukiwanie profili, prywatne wiadomości i zapraszanie znajomych.",
+        "Udostępnianie treningów i zrealizowanych celów na tablicy lub poza aplikacją.",
+        "Reakcje, komentarze, ukrywanie i zgłaszanie wpisów oraz ogłoszenia klubu."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Dla trenerów",
+      "summary": "Profil i współpraca z klientami.",
+      "items": [
+        "Tworzenie profilu trenera oraz prezentacja specjalizacji i usług.",
+        "Publiczna strona profilu i kontakt z klientami.",
+        "Współdzielone dzienniki, komentarze i propozycje zmian w ramach przyznanych uprawnień."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Dla właścicieli klubów",
+      "summary": "Codzienny przegląd działalności.",
+      "items": [
+        "Zarządzanie profilem, publiczną stroną, regulaminem i danymi kontaktowymi klubu.",
+        "Karnety, klienci, ewidencja płatności, przychody i kalendarz zgodnie z aktywnym systemem.",
+        "Obsługiwane wejścia, historia wizyt, ogłoszenia dla członków i odpowiedzi na opinie."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Klub Diamentowy",
+      "summary": "Twoja aktywność w liczbach.",
+      "items": [
+        "Zdobywanie diamentów za obsługiwane aktywności.",
+        "Aktualne saldo i historia diamentów.",
+        "Przegląd sposobów zdobywania; planowane zniżki nie oznaczają nagród dostępnych już teraz."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profil i ustawienia",
+      "summary": "Aplikacja dopasowana do Ciebie.",
+      "items": [
+        "Profil, galeria zdjęć, bio, dane osobowe, cele i preferencje żywieniowe.",
+        "Język, jednostki, powiadomienia i prywatność wybranych informacji.",
+        "Zarządzanie kontem i hasłem, w tym usuwanie konta."
+      ]
+    }
+  ]
+}

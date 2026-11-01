@@ -1,0 +1,143 @@
+{
+  "title": "Mire képes a Fitliner?",
+  "intro": "Edzés, táplálkozás, egészség és az edzőtermed. Ismerd meg az egyetlen alkalmazásban elérhető eszközöket.",
+  "browse": "Funkciók felfedezése",
+  "download": "Alkalmazás letöltése",
+  "home": "Kezdőlap",
+  "language": "Nyelv",
+  "all": "Összes funkció",
+  "personal": "Neked",
+  "community": "Emberek és közösség",
+  "business": "Szakembereknek",
+  "availabilityTitle": "A funkciók elérhetősége",
+  "availability": "Az elérhetőség az alkalmazás verziójától, a fióktól és az edzőteremtől függ. Az egészségkártyához hozzáférés, a telefonos belépéshez kompatibilis eszköz és érvényes jogosultság szükséges.",
+  "rolloutTitle": "Amit még bevezetünk",
+  "rollout": "Az új bérletvásárlás, a bővített számlázás, az edzői időpontfoglalás és az általános offline belépés külön kerül bevezetésre. Nem érhető el minden teremben vagy fiókban. A gyémántkedvezmények még nem aktívak.",
+  "imageNote": "Szemléltető edzőtermi kép",
+  "footer": "A következő lépésed a Fitlinerben kezdődik.",
+  "teaser": "Ismerd meg a Fitlinert",
+  "teaserBody": "Fedezd fel az edzést, táplálkozást, fejlődést és edzőtermi mindennapokat támogató eszközöket.",
+  "link": "Összes funkció megtekintése",
+  "sections": [
+    {
+      "id": "today",
+      "title": "A napod áttekintése",
+      "summary": "A lényeg egy helyen.",
+      "items": [
+        "Napi táplálkozási és személyes fejlődési áttekintés.",
+        "Gyors hozzáférés az edzésekhez, üzenetekhez és a teremhez.",
+        "Rögzített belépés a támogatott termekhez és gyémántegyenleg."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Edzések és edzésnapló",
+      "summary": "A tervtől az utolsó sorozatig.",
+      "items": [
+        "Edzéstervek, edzésnapok, gyakorlatok és szemléletes mozgásbemutatók.",
+        "Saját gyakorlatok, sorozatok, súlyok, ismétlések, pihenőidőzítő és korábbi edzések ismétlése.",
+        "Előzmények, rekordok, grafikonok és jogosultsághoz kötött naplómegosztás; a saját folyamatban lévő edzés offline is menthető, később szinkronizálódik."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Táplálkozás és célok",
+      "summary": "Tudd, mit eszel.",
+      "items": [
+        "Ételek szöveges rögzítése ellenőrizhető AI-adag- és tápanyagbecsléssel.",
+        "Étkezési napló, kalóriák, makrotápanyagok és további tápértékek.",
+        "Személyes napi célok, fennmaradó bevitel és AI-összefoglalók."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Célok és fejlődés",
+      "summary": "Kövesd a saját utadat.",
+      "items": [
+        "Személyes testsúlycélok és más mérhető teljesítménycélok.",
+        "Bejegyzések, előzmények, grafikonok és a célok teljesítésének követése.",
+        "Elért eredmények megosztása és az adatok láthatóságának szabályozása."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Személyes AI-coach",
+      "summary": "Kérdezz, és tervezd meg a következő lépést.",
+      "items": [
+        "Beszélgetés edzésről, táplálkozásról és a céljaidról.",
+        "Javaslatok az elérhető profiladatok figyelembevételével.",
+        "Az edzésnapló felhasználásához engedély szükséges; az AI válaszai útmutatók, nem diagnózisok vagy eredménygaranciák."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Egészségkártya",
+      "summary": "Eredmények és összefüggések együtt.",
+      "items": [
+        "Eredmények importálása PDF-ből, képből vagy kamerával, az értékek és dátumok ellenőrzésével.",
+        "Mérési előzmények, grafikonok, egészségpontszám és a követett mutatók áttekintése.",
+        "Forrásokkal ellátott magyarázatok és ajánlások; nem helyettesítik az egészségügyi ellátást. Aktív hozzáférés szükséges."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Edzőtermeid és belépés",
+      "summary": "Kapcsolat az edzésed helyszínével.",
+      "items": [
+        "Teremkeresés, profilok, elérhetőségek, nyitvatartás és szabályok.",
+        "Tagság, érvényesség és fizetések a terem rendszerétől függően; belépő ajándékozása, ahol támogatott.",
+        "Telefonos belépés, látogatási előzmények, forgalom és értékelések a terem kínálata szerint."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Emberek, üzenetek és hírfolyam",
+      "summary": "Tartsd a kapcsolatot, és oszd meg fejlődésed.",
+      "items": [
+        "Profilkeresés, privát üzenetek és barátok meghívása.",
+        "Edzések és teljesített célok megosztása a hírfolyamban vagy az alkalmazáson kívül.",
+        "Reakciók, hozzászólások, bejegyzések elrejtése vagy jelentése és teremközlemények."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Edzőknek",
+      "summary": "Profil és együttműködés az ügyfelekkel.",
+      "items": [
+        "Edzői profil létrehozása, szakterületek és szolgáltatások bemutatása.",
+        "Nyilvános profiloldal és kapcsolattartás az ügyfelekkel.",
+        "Megosztott edzésnaplók, hozzászólások és módosítási javaslatok a megadott jogosultságok szerint."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Teremtulajdonosoknak",
+      "summary": "A működés napi áttekintése.",
+      "items": [
+        "A terem profiljának, nyilvános weboldalának, szabályainak és elérhetőségeinek kezelése.",
+        "Tagságok, ügyfelek, fizetési nyilvántartás, bevételek és naptár az aktív rendszertől függően.",
+        "Támogatott beléptetés, látogatási előzmények, tagi közlemények és válaszok az értékelésekre."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Gyémántklub",
+      "summary": "Aktivitásod áttekinthetően.",
+      "items": [
+        "Gyémántgyűjtés a támogatott tevékenységekért.",
+        "Aktuális egyenleg és gyémántelőzmények.",
+        "Gyűjtési lehetőségek; a tervezett kedvezmények nem jelentenek már elérhető jutalmat."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profil és beállítások",
+      "summary": "Az alkalmazás rád szabva.",
+      "items": [
+        "Profil, fotógaléria, bemutatkozás, személyes adatok, célok és étkezési preferenciák.",
+        "Nyelv, mértékegységek, értesítések és egyes adatok adatvédelmi beállításai.",
+        "Fiók- és jelszókezelés, beleértve a fiók törlését."
+      ]
+    }
+  ]
+}

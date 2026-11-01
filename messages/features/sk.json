@@ -1,0 +1,143 @@
+{
+  "title": "Čo dokáže Fitliner",
+  "intro": "Tréning, strava, zdravie a tvoje fitko. Spoznaj nástroje, ktoré máš v jednej aplikácii.",
+  "browse": "Preskúmať funkcie",
+  "download": "Stiahnuť aplikáciu",
+  "home": "Domov",
+  "language": "Jazyk",
+  "all": "Všetky funkcie",
+  "personal": "Pre teba",
+  "community": "Ľudia a komunita",
+  "business": "Pre profesionálov",
+  "availabilityTitle": "Dostupnosť funkcií",
+  "availability": "Ponuka sa môže líšiť podľa verzie aplikácie, účtu a zapojeného fitka. Zdravotná karta vyžaduje príslušný prístup; vstup mobilom kompatibilné zariadenie a platné oprávnenie.",
+  "rolloutTitle": "Čo ešte zavádzame",
+  "rollout": "Nový nákup permanentiek, rozšírená fakturácia, trénerské rezervácie a všeobecný offline vstup sa zavádzajú samostatne. Nepovažuj ich za dostupné vo všetkých fitkách a účtoch. Diamantové zľavy zatiaľ nie sú aktívnou výhodou.",
+  "imageNote": "Ilustračné prostredie fitness centra",
+  "footer": "Tvoj ďalší krok začína vo Fitlineri.",
+  "teaser": "Spoznaj Fitliner",
+  "teaserBody": "Pozri si, ako ti aplikácia pomôže s tréningom, stravou, progresom aj fitkom.",
+  "link": "Pozrieť všetky funkcie",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Tvoj deň v prehľade",
+      "summary": "To podstatné na jednom mieste.",
+      "items": [
+        "Denný prehľad stravy a osobného progresu.",
+        "Rýchly prístup k tréningu, správam a fitku.",
+        "Pripnutý vstup do podporovaného fitka a prehľad diamantov."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Tréningy a tréningový denník",
+      "summary": "Od plánu až po poslednú sériu.",
+      "items": [
+        "Tréningové plány, dni, cviky a názorné ukážky pohybu.",
+        "Vlastné cviky, série, váhy, opakovania, prestávky a opakovanie minulého tréningu.",
+        "História, rekordy, grafy a zdieľanie denníka s oprávneniami; vlastný rozpracovaný tréning sa uloží aj offline a neskôr synchronizuje."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Strava a výživové ciele",
+      "summary": "Maj prehľad o tom, čo zješ.",
+      "items": [
+        "Zápis jedla textom s AI odhadom porcie a živín, ktorý môžeš skontrolovať.",
+        "Potravinový denník, kalórie, makroživiny a ďalšie výživové údaje.",
+        "Osobné denné ciele, zostávajúci príjem a AI zhrnutie stravy."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Ciele a progres",
+      "summary": "Sleduj vlastnú cestu v čase.",
+      "items": [
+        "Osobné ciele pre hmotnosť aj ďalšie merané výkony.",
+        "Záznamy, história, grafy a sledovanie splnenia cieľa.",
+        "Zdieľanie dosiahnutého progresu a nastavenie viditeľnosti údajov."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Osobný AI kouč",
+      "summary": "Priestor na otázky a ďalší krok.",
+      "items": [
+        "Chat o tréningu, strave a tvojich cieľoch.",
+        "Odporúčania s kontextom dostupných údajov z profilu.",
+        "Tréningový denník sa použije pri povolenom prístupe; AI odpovede sú orientačné, nie diagnóza ani záruka výsledku."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Zdravotná karta",
+      "summary": "Výsledky a súvislosti na jednom mieste.",
+      "items": [
+        "Import výsledkov z PDF, fotografie alebo fotoaparátu s kontrolou hodnôt a dátumu.",
+        "História meraní, grafy, zdravotné skóre a prehľad sledovaných ukazovateľov.",
+        "Vysvetlenia a odporúčania so zdrojmi; nenahrádzajú zdravotnú starostlivosť. Dostupné s aktívnym prístupom."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Tvoje fitká a vstupy",
+      "summary": "Spojenie s miestom, kde trénuješ.",
+      "items": [
+        "Vyhľadávanie fitiek, profily, kontakty, otváracie hodiny a pravidlá.",
+        "Prehľad členstva, platnosti a platieb podľa systému zapojeného fitka; darovanie vstupu tam, kde ho fitko podporuje.",
+        "Vstup mobilom, história vstupov, návštevnosť a recenzie podľa dostupnosti konkrétneho fitka."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Ľudia, správy a nástenka",
+      "summary": "Zostaň v kontakte a podeľ sa o pokrok.",
+      "items": [
+        "Vyhľadávanie profilov, súkromné správy a pozývanie priateľov.",
+        "Zdieľanie tréningov a dosiahnutých cieľov na nástenke alebo mimo aplikácie.",
+        "Reakcie, komentáre, skrytie či nahlásenie príspevku a oznamy od fitka."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Pre trénerov",
+      "summary": "Profil a spolupráca s klientmi.",
+      "items": [
+        "Vytvorenie trénerského profilu a prezentácia zamerania a služieb.",
+        "Verejná profilová stránka a komunikácia s klientmi.",
+        "Zdieľané tréningové denníky, komentáre a návrhy úprav podľa udelených oprávnení."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Pre majiteľov fitiek",
+      "summary": "Každodenný prehľad o prevádzke.",
+      "items": [
+        "Správa profilu a verejnej stránky fitka, pravidiel a kontaktných údajov.",
+        "Členstvá, zákazníci, evidencia platieb, tržby a kalendár podľa aktívneho systému fitka.",
+        "Správa podporovaných vstupov, história návštev, oznamy členom a odpovede na recenzie."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Diamantový klub",
+      "summary": "Tvoja aktivita má svoj prehľad.",
+      "items": [
+        "Zbieranie diamantov za podporované aktivity.",
+        "Aktuálny zostatok a história získaných diamantov.",
+        "Prehľad spôsobov získavania; pripravované zľavy nie sú sľubom aktuálne dostupnej odmeny."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profil a nastavenia",
+      "summary": "Aplikácia nastavená pre teba.",
+      "items": [
+        "Profil, fotogaléria, bio, osobné údaje, ciele a stravovacie preferencie.",
+        "Jazyk, jednotky, nastavenia upozornení a súkromie vybraných údajov.",
+        "Správa účtu, hesla a možnosť odstránenia účtu."
+      ]
+    }
+  ]
+}

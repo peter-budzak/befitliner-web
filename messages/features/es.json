@@ -1,0 +1,143 @@
+{
+  "title": "¿Qué puedes hacer con Fitliner?",
+  "intro": "Entrenamiento, nutrición, salud y tu gimnasio. Descubre las herramientas reunidas en una aplicación.",
+  "browse": "Explorar funciones",
+  "download": "Descargar la app",
+  "home": "Inicio",
+  "language": "Idioma",
+  "all": "Todas las funciones",
+  "personal": "Para ti",
+  "community": "Personas y comunidad",
+  "business": "Para profesionales",
+  "availabilityTitle": "Disponibilidad de funciones",
+  "availability": "Depende de la versión de la app, la cuenta y el gimnasio participante. La tarjeta de salud requiere acceso activo; la entrada con el móvil requiere equipos compatibles y autorización válida.",
+  "rolloutTitle": "Qué seguimos incorporando",
+  "rollout": "La nueva compra de membresías, la facturación ampliada, las reservas de entrenadores y el acceso general sin conexión se incorporan por separado. No están disponibles para todos los gimnasios o cuentas. Los descuentos por diamantes aún no están activos.",
+  "imageNote": "Imagen ilustrativa de un gimnasio",
+  "footer": "Tu siguiente paso empieza en Fitliner.",
+  "teaser": "Descubre Fitliner",
+  "teaserBody": "Conoce las herramientas para tu entrenamiento, nutrición, progreso y gimnasio.",
+  "link": "Ver todas las funciones",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Tu día de un vistazo",
+      "summary": "Lo esencial en un solo lugar.",
+      "items": [
+        "Resumen diario de alimentación y progreso personal.",
+        "Acceso rápido a entrenamientos, mensajes y gimnasio.",
+        "Entrada fijada para gimnasios compatibles y saldo de diamantes."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Entrenamientos y diario",
+      "summary": "Del plan a la última serie.",
+      "items": [
+        "Planes, días de entrenamiento, ejercicios y demostraciones visuales.",
+        "Ejercicios propios, series, pesos, repeticiones, temporizador de descanso y repetición de entrenamientos.",
+        "Historial, récords, gráficos y diario compartido con permisos; tu entrenamiento personal en curso se guarda sin conexión y se sincroniza después."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrición y objetivos",
+      "summary": "Entiende lo que comes.",
+      "items": [
+        "Registra comidas por texto con estimaciones de IA de porciones y nutrientes que puedes revisar.",
+        "Diario alimentario, calorías, macronutrientes y otros datos nutricionales.",
+        "Objetivos diarios personales, ingesta restante y resúmenes con IA."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Objetivos y progreso",
+      "summary": "Sigue tu evolución.",
+      "items": [
+        "Objetivos personales de peso y otros logros medibles.",
+        "Registros, historial, gráficos y seguimiento de objetivos cumplidos.",
+        "Comparte el progreso conseguido y controla la visibilidad de tus datos."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Coach personal con IA",
+      "summary": "Pregunta y encuentra tu siguiente paso.",
+      "items": [
+        "Chat sobre entrenamiento, nutrición y tus objetivos.",
+        "Sugerencias con contexto de los datos disponibles de tu perfil.",
+        "El diario se utiliza con permiso; las respuestas de IA son orientación, no un diagnóstico ni una garantía de resultados."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Tarjeta de salud",
+      "summary": "Resultados y contexto juntos.",
+      "items": [
+        "Importa resultados desde PDF, fotos o la cámara y revisa valores y fechas.",
+        "Historial de mediciones, gráficos, puntuación de salud e indicadores registrados.",
+        "Explicaciones y recomendaciones con fuentes; no sustituyen la atención médica. Requiere acceso activo."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Tus gimnasios y entradas",
+      "summary": "Conecta con el lugar donde entrenas.",
+      "items": [
+        "Busca gimnasios, perfiles, contactos, horarios y normas.",
+        "Membresías, vigencia y pagos según el sistema del gimnasio; regala entradas donde se admita.",
+        "Entrada con el móvil, historial de visitas, afluencia y reseñas según el gimnasio."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Personas, mensajes y publicaciones",
+      "summary": "Mantén el contacto y comparte avances.",
+      "items": [
+        "Busca perfiles, envía mensajes privados e invita a amigos.",
+        "Comparte entrenamientos y objetivos cumplidos en el tablón o fuera de la app.",
+        "Reacciones, comentarios, ocultar o denunciar publicaciones y avisos del gimnasio."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Para entrenadores",
+      "summary": "Tu perfil y la colaboración con clientes.",
+      "items": [
+        "Crea un perfil y presenta tus especialidades y servicios.",
+        "Página de perfil pública y comunicación con clientes.",
+        "Diarios compartidos, comentarios y propuestas de cambios según los permisos concedidos."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Para propietarios",
+      "summary": "Tu negocio en el día a día.",
+      "items": [
+        "Gestiona el perfil, la web pública, las normas y los contactos del gimnasio.",
+        "Membresías, clientes, pagos registrados, ingresos y calendario según el sistema activo.",
+        "Gestiona accesos compatibles, historial de visitas, avisos a socios y respuestas a reseñas."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Club Diamante",
+      "summary": "El registro de tu actividad.",
+      "items": [
+        "Gana diamantes por actividades compatibles.",
+        "Consulta el saldo y el historial de diamantes.",
+        "Descubre cómo ganarlos; los descuentos previstos no son recompensas ya disponibles."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Perfil y ajustes",
+      "summary": "La app a tu medida.",
+      "items": [
+        "Perfil, galería de fotos, biografía, datos personales, objetivos y preferencias alimentarias.",
+        "Idioma, unidades, notificaciones y privacidad de datos seleccionados.",
+        "Gestión de cuenta y contraseña, incluida la eliminación de la cuenta."
+      ]
+    }
+  ]
+}
