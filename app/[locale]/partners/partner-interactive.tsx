@@ -69,8 +69,8 @@ export default function PartnerInteractive({
   }, []);
   const sk = locale === "sk";
   const [country, setCountry] = useState(countrySettings[0]?.code || "");
-  const [gyms, setGyms] = useState(5),
-    [volume, setVolume] = useState(5000),
+  const [gyms, setGyms] = useState(10),
+    [volume, setVolume] = useState(15000),
     [newGyms, setNewGyms] = useState(1),
     [cost, setCost] = useState(120);
   const [errorCode, setErrorCode] = useState("");
@@ -176,19 +176,19 @@ export default function PartnerInteractive({
             role="group"
             aria-label={sk ? "Modelové scenáre" : "Illustrative scenarios"}
           >
-            {[5, 10, 25].map((n, i) => (
+            {[10, 50, 100].map((n, i) => (
               <button
                 key={n}
                 type="button"
                 aria-pressed={
                   gyms === n &&
-                  volume === 5000 &&
+                  volume === 15000 &&
                   newGyms === [1, 2, 3][i] &&
                   cost === 120
                 }
                 onClick={() => {
                   setGyms(n);
-                  setVolume(5000);
+                  setVolume(15000);
                   setNewGyms([1, 2, 3][i]);
                   setCost(120);
                 }}
@@ -206,8 +206,8 @@ export default function PartnerInteractive({
           </div>
           <p className="partner-scenario-note">
             {sk
-              ? "Scenáre sú príklady výpočtu, nie prognóza predaja. Predpokladajú 5 000 € mesačných platieb na fitko; všetky vstupy môžete upraviť."
-              : "These scenarios illustrate the calculation, not a sales forecast. They assume €5,000 in monthly payments per gym; you can change every input."}
+              ? "Scenáre počítajú s modelovou priemernou mesačnou tržbou 15 000 € na fitko, nie s overeným priemerom konkrétneho regiónu. Výpočet predpokladá, že uvedené platby prechádzajú cez Fitliner. Všetky vstupy môžete upraviť."
+              : "Scenarios use an illustrative average monthly revenue of €15,000 per gym, not a verified regional average. The calculation assumes these payments are processed through Fitliner. You can change every input."}
           </p>
           <div className="partner-calc-grid">
             <div className="partner-inputs">
@@ -222,8 +222,8 @@ export default function PartnerInteractive({
                   ],
                   [
                     sk
-                      ? "Mesačný objem platieb na fitko (€)"
-                      : "Monthly payments per gym (€)",
+                      ? "Modelová priemerná mesačná tržba na fitko (€)"
+                      : "Illustrative average monthly gym revenue (€)",
                     volume,
                     setVolume,
                     0,
