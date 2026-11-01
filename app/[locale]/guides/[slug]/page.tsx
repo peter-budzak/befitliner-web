@@ -5,7 +5,7 @@ import JsonLd from '@/components/seo/json-ld';
 import {GUIDES, GUIDE_LOCALES, GUIDE_SLUGS, isGuideLocale, isGuideSlug} from '@/lib/guides';
 import {absoluteUrl, pageMetadata, SITE_URL} from '@/lib/seo';
 
-type PageProps = {params: Promise<{locale: string; slug: string}> | {locale: string; slug: string}};
+type PageProps = {params: Promise<{locale: string; slug: string}>};
 
 export function generateStaticParams() {
   return GUIDE_LOCALES.flatMap((locale) => GUIDE_SLUGS.map((slug) => ({locale, slug})));

@@ -277,7 +277,7 @@ function getCopy(locale: string): CompetitionCopy {
   return copyByLocale[(normalized as Locale)] ?? copyByLocale.en;
 }
 
-export async function generateMetadata({params}: {params: Promise<{locale: string}> | {locale: string}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const resolved = params instanceof Promise ? await params : params;
   if (!isSiteLocale(resolved.locale)) return {};
   const copy = getCopy(resolved.locale);

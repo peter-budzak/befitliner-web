@@ -9,7 +9,7 @@ const LOCALES = ['en', 'sk', 'de', 'es', 'fr', 'zh-Hans'] as const;
 type Locale = (typeof LOCALES)[number];
 
 type PageProps = {
-  params: Promise<{ slug: string; locale: string }> | { slug: string; locale: string };
+  params: Promise<{ slug: string; locale: string }>;
 };
 
 type PublicGym = {

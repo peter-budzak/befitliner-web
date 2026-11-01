@@ -5,7 +5,7 @@ import JsonLd from '@/components/seo/json-ld';
 import {GUIDES, GUIDE_LOCALES, isGuideLocale} from '@/lib/guides';
 import {absoluteUrl, pageMetadata, SITE_URL} from '@/lib/seo';
 
-type PageProps = {params: Promise<{locale: string}> | {locale: string}};
+type PageProps = {params: Promise<{locale: string}>};
 
 export function generateStaticParams() {
   return GUIDE_LOCALES.map((locale) => ({locale}));

@@ -12,7 +12,7 @@ const copy: Record<string, {eyebrow: string; title: string; body: string; cta: s
   de: {eyebrow: 'Zahlung erfolgreich', title: 'Deine Gesundheitskarte ist bereit.', body: 'Öffne Fitliner und melde dich mit derselben E-Mail-Adresse an, die du bei der Zahlung verwendet hast.', cta: 'Fitliner laden', note: 'Du hast die App bereits? Öffne sie und aktualisiere deine Gesundheitskarte.'},
 };
 
-export default async function HealthSuccessPage({params}: {params: Promise<{locale: string}> | {locale: string}}) {
+export default async function HealthSuccessPage({params}: {params: Promise<{locale: string}>}) {
   const resolved = params instanceof Promise ? await params : params;
   const t = copy[resolved.locale] ?? copy.en;
   const appStore = process.env.NEXT_PUBLIC_APPSTORE_URL || 'https://apps.apple.com/app/id6760855966';

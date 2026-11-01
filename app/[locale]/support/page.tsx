@@ -199,7 +199,7 @@ function getCopy(locale: string): SupportCopy {
   return copyByLocale[(normalized as Locale)] ?? copyByLocale.en;
 }
 
-export async function generateMetadata({params}: {params: Promise<{locale: string}> | {locale: string}}): Promise<Metadata> {
+export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const resolved = params instanceof Promise ? await params : params;
   if (!isSiteLocale(resolved.locale)) return {};
   return pageMetadata({locale: resolved.locale, path: 'support', ...SUPPORT_SEO[resolved.locale]});

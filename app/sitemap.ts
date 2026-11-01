@@ -6,6 +6,7 @@ const guideSlugs = ['phone-gym-access', 'gym-management-software-checklist', 'he
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const productPages = LOCALES.flatMap((locale) => [
+    ...['members', 'trainers'].map(path => ({url:absoluteUrl(`/${locale}/${path}`),lastModified:new Date('2026-10-17T00:00:00Z'),changeFrequency:'monthly' as const,priority:0.9,alternates:{languages:localizedAlternates(path)}})),
     {
       url: absoluteUrl(`/${locale}`),
       lastModified: LAST_PRODUCT_UPDATE,
