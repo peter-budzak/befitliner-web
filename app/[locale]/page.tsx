@@ -487,21 +487,6 @@ export default async function Page({
   const t = await loadMessages(locale);
   const supportLabel = getSupportLabel(locale);
   const hero = getHeroCopy(locale);
-  const androidComingSoon = true;
-  const androidSoonLabel =
-    locale === 'sk'
-      ? 'Google Play už čoskoro'
-      : locale === 'de'
-        ? 'Google Play bald verfügbar'
-        : locale === 'es'
-          ? 'Google Play muy pronto'
-          : locale === 'fr'
-            ? 'Google Play bientôt'
-            : locale === 'zh-Hans'
-              ? 'Google Play 即将推出'
-              : 'Google Play coming soon';
-
-  // TODO: keď budeš mať linky, dáme ich sem alebo do env:
   const iosUrl =
     process.env.NEXT_PUBLIC_APPSTORE_URL ||
     'https://apps.apple.com/app/id6760855966';
@@ -547,7 +532,7 @@ export default async function Page({
 
         <RoleGateway locale={locale} />
 
-        <AcquisitionFooter locale={locale} labels={t.footer} supportLabel={supportLabel} iosUrl={iosUrl} androidUrl={androidUrl} androidComingSoon={androidComingSoon} androidSoonLabel={androidSoonLabel} />
+        <AcquisitionFooter locale={locale} labels={t.footer} supportLabel={supportLabel} iosUrl={iosUrl} androidUrl={androidUrl} />
       </div>
     </main>
     </>
