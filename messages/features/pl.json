@@ -6,9 +6,9 @@
   "home": "Strona główna",
   "language": "Język",
   "all": "Wszystkie funkcje",
-  "personal": "Dla Ciebie",
-  "community": "Ludzie i społeczność",
-  "business": "Dla profesjonalistów",
+  "personal": "Twoje postępy i codzienne narzędzia",
+  "community": "Siłownia i społeczność",
+  "business": "Trenerzy i właściciele klubów",
   "availabilityTitle": "Dostępność funkcji",
   "availability": "Dostępność zależy od wersji aplikacji, konta i klubu. Karta zdrowia wymaga dostępu; wejście telefonem wymaga zgodnego sprzętu i ważnych uprawnień.",
   "rolloutTitle": "Co jeszcze wdrażamy",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Treningi i dziennik",
-      "summary": "Od planu do ostatniej serii.",
+      "summary": "Zapisuj serie, ciężary i powtórzenia. Zobacz, jak się rozwijasz.",
       "items": [
         "Plany, dni treningowe, ćwiczenia i wizualne instrukcje ruchu.",
         "Własne ćwiczenia, serie, ciężary, powtórzenia, czas przerwy i powtarzanie treningów.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Odżywianie i cele",
-      "summary": "Wiedz, co jesz.",
+      "summary": "Zapisz posiłek i sprawdź, jak wpisuje się w Twoje dzienne cele.",
       "items": [
         "Wpisywanie posiłków tekstem z szacunkami AI dotyczącymi porcji i składników, które możesz sprawdzić.",
         "Dziennik żywieniowy, kalorie, makroskładniki i pozostałe wartości odżywcze.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Osobisty coach AI",
-      "summary": "Zadawaj pytania i planuj kolejny krok.",
+      "summary": "Pytaj o trening i odżywianie z uwzględnieniem udostępnionych danych.",
       "items": [
         "Rozmowy o treningu, odżywianiu i celach.",
         "Sugestie uwzględniające dostępne informacje z profilu.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Twoje siłownie i wejścia",
-      "summary": "Kontakt z miejscem, w którym trenujesz.",
+      "summary": "Miej karnet pod ręką i wchodź telefonem do obsługiwanych klubów.",
       "items": [
         "Wyszukiwanie klubów, profile, kontakt, godziny otwarcia i regulaminy.",
         "Karnety, ważność i płatności zgodnie z systemem klubu; podarowanie wejścia tam, gdzie jest obsługiwane.",
@@ -139,5 +139,8 @@
         "Zarządzanie kontem i hasłem, w tym usuwanie konta."
       ]
     }
-  ]
+  ],
+  "highlights": "Zacznij od tego, czego potrzebujesz",
+  "details": "Zobacz szczegóły",
+  "illustration": "Ilustracja działania funkcji"
 }

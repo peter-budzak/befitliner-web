@@ -6,9 +6,9 @@
   "home": "Domov",
   "language": "Jazyk",
   "all": "Všetky funkcie",
-  "personal": "Pre teba",
-  "community": "Ľudia a komunita",
-  "business": "Pre profesionálov",
+  "personal": "Tvoj progres a každodenný prehľad",
+  "community": "Fitko a komunita",
+  "business": "Tréneri a majitelia fitiek",
   "availabilityTitle": "Dostupnosť funkcií",
   "availability": "Ponuka sa môže líšiť podľa verzie aplikácie, účtu a zapojeného fitka. Zdravotná karta vyžaduje príslušný prístup; vstup mobilom kompatibilné zariadenie a platné oprávnenie.",
   "rolloutTitle": "Čo ešte zavádzame",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Tréningy a tréningový denník",
-      "summary": "Od plánu až po poslednú sériu.",
+      "summary": "Zapisuj série, váhy a opakovania. Sleduj, ako sa zlepšuješ.",
       "items": [
         "Tréningové plány, dni, cviky a názorné ukážky pohybu.",
         "Vlastné cviky, série, váhy, opakovania, prestávky a opakovanie minulého tréningu.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Strava a výživové ciele",
-      "summary": "Maj prehľad o tom, čo zješ.",
+      "summary": "Zapíš jedlo a zisti, ako zapadá do tvojich denných cieľov.",
       "items": [
         "Zápis jedla textom s AI odhadom porcie a živín, ktorý môžeš skontrolovať.",
         "Potravinový denník, kalórie, makroživiny a ďalšie výživové údaje.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Osobný AI kouč",
-      "summary": "Priestor na otázky a ďalší krok.",
+      "summary": "Pýtaj sa na tréning a stravu s kontextom údajov, ktoré sprístupníš.",
       "items": [
         "Chat o tréningu, strave a tvojich cieľoch.",
         "Odporúčania s kontextom dostupných údajov z profilu.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Tvoje fitká a vstupy",
-      "summary": "Spojenie s miestom, kde trénuješ.",
+      "summary": "Maj členstvo poruke a do podporovaných fitiek vstupuj telefónom.",
       "items": [
         "Vyhľadávanie fitiek, profily, kontakty, otváracie hodiny a pravidlá.",
         "Prehľad členstva, platnosti a platieb podľa systému zapojeného fitka; darovanie vstupu tam, kde ho fitko podporuje.",
@@ -139,5 +139,8 @@
         "Správa účtu, hesla a možnosť odstránenia účtu."
       ]
     }
-  ]
+  ],
+  "highlights": "Začni tým, čo potrebuješ",
+  "details": "Pozrieť podrobnosti",
+  "illustration": "Názorná ilustrácia funkcie"
 }

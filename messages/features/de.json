@@ -6,9 +6,9 @@
   "home": "Startseite",
   "language": "Sprache",
   "all": "Alle Funktionen",
-  "personal": "Für dich",
-  "community": "Menschen & Community",
-  "business": "Für Profis",
+  "personal": "Dein Fortschritt & tägliche Übersicht",
+  "community": "Studio & Community",
+  "business": "Trainer & Studiobetreiber",
   "availabilityTitle": "Verfügbarkeit",
   "availability": "Die Verfügbarkeit hängt von App-Version, Konto und teilnehmendem Studio ab. Die Gesundheitskarte erfordert eine Freischaltung; der Zugang per Smartphone kompatible Geräte und eine gültige Berechtigung.",
   "rolloutTitle": "Was noch eingeführt wird",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Training & Trainingstagebuch",
-      "summary": "Vom Plan bis zum letzten Satz.",
+      "summary": "Erfasse Sätze, Gewichte und Wiederholungen. Sieh, wie du dich verbesserst.",
       "items": [
         "Trainingspläne, Trainingstage, Übungen und visuelle Bewegungsanleitungen.",
         "Eigene Übungen, Sätze, Gewichte, Wiederholungen, Pausentimer und Training wiederholen.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Ernährung & Ernährungsziele",
-      "summary": "Verstehe, was du isst.",
+      "summary": "Erfasse eine Mahlzeit und sieh, wie sie zu deinen Tageszielen passt.",
       "items": [
         "Mahlzeiten als Text erfassen; KI-Schätzungen zu Portionen und Nährstoffen selbst prüfen.",
         "Ernährungstagebuch, Kalorien, Makronährstoffe und weitere Nährwerte.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Persönlicher KI-Coach",
-      "summary": "Fragen stellen und weiterkommen.",
+      "summary": "Frage zu Training und Ernährung – im Kontext der Informationen, die du freigibst.",
       "items": [
         "Chat über Training, Ernährung und deine Ziele.",
         "Vorschläge unter Berücksichtigung verfügbarer Profildaten.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Deine Studios & Zugang",
-      "summary": "Verbunden mit deinem Trainingsort.",
+      "summary": "Behalte deine Mitgliedschaft im Blick und betrete unterstützte Studios per Smartphone.",
       "items": [
         "Studios suchen und Profile, Kontakte, Öffnungszeiten und Regeln ansehen.",
         "Mitgliedschaft, Gültigkeit und Zahlungen je nach Studiosystem; Eintritte verschenken, wo unterstützt.",
@@ -139,5 +139,8 @@
         "Konto und Passwort verwalten, einschließlich Kontolöschung."
       ]
     }
-  ]
+  ],
+  "highlights": "Starte mit dem, was dir wichtig ist",
+  "details": "Details entdecken",
+  "illustration": "Illustration der Funktionsweise"
 }

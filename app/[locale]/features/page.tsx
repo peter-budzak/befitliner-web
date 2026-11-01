@@ -1,3 +1,5 @@
+import { FeatureArt, FeatureIcon } from "./feature-art";
+import FeatureMotion from "./feature-motion";
 import JsonLd from "@/components/seo/json-ld";
 import { discoveryMetadata, discoverySchema } from "@/lib/page-discovery";
 import type { Metadata } from "next";
@@ -17,27 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const groups = [
-  {
-    id: "personal",
-    items: ["today", "training", "nutrition", "progress", "coach", "health"],
-  },
-  { id: "community", items: ["gyms", "community", "diamonds", "account"] },
+  { id: "highlights", items: ["training", "nutrition", "coach", "gyms"] },
+  { id: "personal", items: ["progress", "health", "today", "account"] },
+  { id: "community", items: ["community", "diamonds"] },
   { id: "business", items: ["trainers", "owners"] },
 ] as const;
-const symbols: Record<string, string> = {
-  today: "◷",
-  training: "↗",
-  nutrition: "◉",
-  progress: "↗",
-  coach: "✦",
-  health: "+",
-  gyms: "⌂",
-  community: "◎",
-  trainers: "↗",
-  owners: "⌂",
-  diamonds: "◇",
-  account: "◎",
-};
 export default async function Features({ params }: Props) {
   const { locale } = await params;
   if (!isFeatureLocale(locale)) notFound();
@@ -52,6 +38,7 @@ export default async function Features({ params }: Props) {
   return (
     <main className="features-page">
       <JsonLd data={discoverySchema("features", locale)} />
+      <FeatureMotion />
       <nav className="features-nav features-container" aria-label={t.home}>
         <Link
           className="features-logo"
@@ -86,7 +73,7 @@ export default async function Features({ params }: Props) {
           <h1>{t.title}</h1>
           <p className="features-lead">{t.intro}</p>
           <div className="features-actions">
-            <a className="features-button" href="#personal">
+            <a className="features-button" href="#highlights">
               {t.browse}
               <span aria-hidden="true">↓</span>
             </a>
@@ -151,30 +138,47 @@ export default async function Features({ params }: Props) {
                     : "en";
                 return (
                   <article
-                    className="feature-card"
+                    className={`feature-card ${g.id === "highlights" ? "feature-card-highlight" : ""}`}
                     id={`feature-${id}`}
                     key={id}
                   >
+                    {g.id === "highlights" && (
+                      <div className="feature-art-container">
+                        <FeatureArt id={id} />
+                        <p className="feature-art-note">{t.illustration}</p>
+                      </div>
+                    )}
                     <div className="feature-icon" aria-hidden="true">
-                      {symbols[id]}
+                      <FeatureIcon id={id} />
                     </div>
                     <h3>{item.title}</h3>
                     <p className="feature-summary">{item.summary}</p>
-                    <ul>
-                      {item.items.map((text) => (
-                        <li key={text}>{text}</li>
-                      ))}
-                    </ul>
-                    {related && (
-                      <Link
-                        className="features-text-link feature-related"
-                        href={`/${relatedLocale}/${related}`}
-                      >
-                        {item.title}
-                        {relatedLocale !== locale ? " (EN)" : ""}
-                        <span aria-hidden="true"> ↗</span>
-                      </Link>
-                    )}
+                    <details className="feature-details">
+                      <summary>
+                        <span>{t.details}</span>
+                        <span
+                          className="feature-details-plus"
+                          aria-hidden="true"
+                        >
+                          +
+                        </span>
+                      </summary>
+                      <ul>
+                        {item.items.map((text) => (
+                          <li key={text}>{text}</li>
+                        ))}
+                      </ul>
+                      {related && (
+                        <Link
+                          className="features-text-link feature-related"
+                          href={`/${relatedLocale}/${related}`}
+                        >
+                          {item.title}
+                          {relatedLocale !== locale ? " (EN)" : ""}
+                          <span aria-hidden="true"> ↗</span>
+                        </Link>
+                      )}
+                    </details>
                   </article>
                 );
               })}

@@ -6,9 +6,9 @@
   "home": "Accueil",
   "language": "Langue",
   "all": "Toutes les fonctionnalités",
-  "personal": "Pour vous",
-  "community": "Communauté",
-  "business": "Pour les professionnels",
+  "personal": "Vos progrès et votre quotidien",
+  "community": "Salle et communauté",
+  "business": "Coachs et gérants de salles",
   "availabilityTitle": "Disponibilité des fonctionnalités",
   "availability": "La disponibilité dépend de la version, du compte et de la salle participante. La carte santé nécessite un accès actif ; l’entrée par téléphone nécessite un équipement compatible et une autorisation valide.",
   "rolloutTitle": "Déploiements en cours",
@@ -32,7 +32,7 @@
     {
       "id": "training",
       "title": "Entraînements et carnet",
-      "summary": "Du programme à la dernière série.",
+      "summary": "Notez séries, charges et répétitions. Suivez votre amélioration.",
       "items": [
         "Programmes, journées d’entraînement, exercices et démonstrations visuelles.",
         "Exercices personnels, séries, charges, répétitions, minuteur de repos et reprise d’un entraînement précédent.",
@@ -42,7 +42,7 @@
     {
       "id": "nutrition",
       "title": "Nutrition et objectifs",
-      "summary": "Comprenez ce que vous mangez.",
+      "summary": "Notez un repas et voyez comment il s’intègre à vos objectifs quotidiens.",
       "items": [
         "Saisie des repas par texte avec estimation IA des portions et nutriments à vérifier.",
         "Journal alimentaire, calories, macronutriments et autres données nutritionnelles.",
@@ -62,7 +62,7 @@
     {
       "id": "coach",
       "title": "Coach IA personnel",
-      "summary": "Des questions et une prochaine étape.",
+      "summary": "Posez vos questions sur l’entraînement et la nutrition, avec le contexte des données partagées.",
       "items": [
         "Discussion sur l’entraînement, la nutrition et vos objectifs.",
         "Suggestions tenant compte des informations disponibles dans votre profil.",
@@ -82,7 +82,7 @@
     {
       "id": "gyms",
       "title": "Vos salles et vos entrées",
-      "summary": "Restez proche de votre lieu d’entraînement.",
+      "summary": "Gardez votre abonnement à portée de main et entrez par téléphone dans les salles compatibles.",
       "items": [
         "Recherche de salles, profils, contacts, horaires et règlement.",
         "Abonnements, validité et paiements selon le système de la salle ; offrir une entrée lorsque cette option est prise en charge.",
@@ -139,5 +139,8 @@
         "Gestion du compte et du mot de passe, avec possibilité de supprimer le compte."
       ]
     }
-  ]
+  ],
+  "highlights": "Commencez par ce qui vous importe",
+  "details": "Voir les détails",
+  "illustration": "Illustration du fonctionnement"
 }

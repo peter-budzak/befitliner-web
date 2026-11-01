@@ -40,3 +40,11 @@ The page uses an existing illustrative fitness photograph, explicitly captioned.
 ## Verification
 
 TypeScript, targeted ESLint, production build; dictionary shape/section parity; browser checks for 8 routes, language metadata, navigation anchors, all 12 cards, 36 bullets, availability disclosures, related links, store destinations, mobile widths, and homepage teaser/footer links. No form submissions, payments or physical entry actions are required for this content change.
+
+## Visual hierarchy update — 2026-11-01
+
+- Four illustrated priority cards lead the page: training diary, nutrition, AI coach and supported gym entry. SVG diagrams show the principle, not a claimed app screenshot or real user measurements.
+- Progress, health, daily overview and account settings are grouped together; community/diamonds and professional tools follow. Profile/settings no longer sit under community.
+- All 12 features and 36 original detail bullets remain server-rendered inside native `details` elements, usable without JavaScript and by keyboard. Four summaries now state the practical benefit directly in all eight languages; schema reads the same content.
+- Each feature has a distinct line icon. Text contrast and body size increased. Diagrams animate once on entering the viewport; reduced-motion preferences disable them. Text is never hidden for animation.
+- Verification: build/TypeScript/targeted ESLint; browser coverage of all locales at 320/390/768px, all disclosures with keyboard, no-JS access, reduced motion, and desktop/mobile visual review. Store links and localized social metadata remain intact.
