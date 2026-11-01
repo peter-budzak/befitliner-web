@@ -1,3 +1,4 @@
+import {socialImage} from '@/lib/page-discovery';
 import {FEATURE_LOCALES,featureAlternates} from '@/lib/features';
 import {PARTNER_LOCALES,partnerAlternates} from '@/lib/partners/locales';
 import type {MetadataRoute} from 'next';
@@ -56,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   ]);
 
-  return [...FEATURE_LOCALES.map(locale=>({url:absoluteUrl(`/${locale}/features`),lastModified:new Date('2026-11-01T00:00:00Z'),changeFrequency:'monthly' as const,priority:0.85,alternates:{languages:featureAlternates()}})), ...PARTNER_LOCALES.map(locale=>({url:absoluteUrl(`/${locale}/partners`),lastModified:new Date('2026-11-01T00:00:00Z'),changeFrequency:'monthly' as const,priority:0.8,alternates:{languages:partnerAlternates()}})), ...productPages, {
+  return [...FEATURE_LOCALES.map(locale=>({url:absoluteUrl(`/${locale}/features`),lastModified:new Date('2026-11-01T00:00:00Z'),changeFrequency:'monthly' as const,priority:0.85,alternates:{languages:featureAlternates()},images:[socialImage("features",locale)]})), ...PARTNER_LOCALES.map(locale=>({url:absoluteUrl(`/${locale}/partners`),lastModified:new Date('2026-11-01T00:00:00Z'),changeFrequency:'monthly' as const,priority:0.8,alternates:{languages:partnerAlternates()},images:[socialImage("partners",locale)]})), ...productPages, {
     url: absoluteUrl('/pl/gyms'),
     lastModified: new Date('2026-10-01T00:00:00Z'),
     changeFrequency: 'monthly',

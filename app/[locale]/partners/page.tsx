@@ -1,15 +1,15 @@
+import JsonLd from "@/components/seo/json-ld";
+import { discoveryMetadata, discoverySchema } from "@/lib/page-discovery";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
-import { pageMetadata, isSiteLocale } from "@/lib/seo";
+import { isSiteLocale } from "@/lib/seo";
 import { getPartnerCopy } from "@/lib/partners/copy";
 import {
   isPartnerLocale,
   PARTNER_LOCALES,
   PARTNER_LANGUAGE_NAMES,
-  PARTNER_OG_LOCALES,
-  partnerAlternates,
 } from "@/lib/partners/locales";
 import PartnerInteractive from "./partner-interactive";
 import { PartnerIntro, PartnerQuestions } from "./partner-story";
@@ -23,28 +23,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isPartnerLocale(locale)) return {};
-  const copy = getPartnerCopy(locale);
-  const metadata = pageMetadata({
-    locale: locale === "hu" ? "en" : locale,
-    path: "partners",
-    title: copy["Become a Fitliner Country Partner"],
-    description:
-      copy[
-        "Build the Fitliner gym network in your country and participate in its revenue."
-      ],
-    languages: partnerAlternates(),
-  });
-  const canonical = partnerAlternates()[locale];
-  metadata.alternates = { canonical, languages: partnerAlternates() };
-  if (metadata.openGraph) {
-    metadata.openGraph.url = canonical;
-    metadata.openGraph.locale = PARTNER_OG_LOCALES[locale];
-    metadata.openGraph.alternateLocale = PARTNER_LOCALES.filter(
-      (l) => l !== locale,
-    ).map((l) => PARTNER_OG_LOCALES[l]);
-  }
-  return metadata;
+  return discoveryMetadata("partners", locale);
 }
+
 export default async function Partners({
   params,
 }: {
@@ -70,6 +51,7 @@ export default async function Partners({
     .sort((a, b) => a.name.localeCompare(b.name, locale));
   return (
     <main className="partner-page">
+      <JsonLd data={discoverySchema("partners", locale)} />
       <nav className="partner-nav partner-container">
         <Link
           className="partner-logo"

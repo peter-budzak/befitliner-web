@@ -1,51 +1,21 @@
+import JsonLd from "@/components/seo/json-ld";
+import { discoveryMetadata, discoverySchema } from "@/lib/page-discovery";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { absoluteUrl, isSiteLocale } from "@/lib/seo";
-import {
-  FEATURE_LOCALES,
-  featureCopy,
-  featureAlternates,
-  isFeatureLocale,
-} from "@/lib/features";
-import {
-  PARTNER_LANGUAGE_NAMES,
-  PARTNER_OG_LOCALES,
-} from "@/lib/partners/locales";
+import { isSiteLocale } from "@/lib/seo";
+import { FEATURE_LOCALES, featureCopy, isFeatureLocale } from "@/lib/features";
+import { PARTNER_LANGUAGE_NAMES } from "@/lib/partners/locales";
 import "./features.css";
 
 type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isFeatureLocale(locale)) return {};
-  const t = featureCopy(locale);
-  const url = absoluteUrl(`/${locale}/features`);
-  return {
-    title: `${t.title} | Fitliner`,
-    description: t.intro,
-    alternates: { canonical: url, languages: featureAlternates() },
-    openGraph: {
-      title: t.title,
-      description: t.intro,
-      url,
-      type: "website",
-      siteName: "Fitliner",
-      locale: PARTNER_OG_LOCALES[locale],
-      alternateLocale: FEATURE_LOCALES.filter((l) => l !== locale).map(
-        (l) => PARTNER_OG_LOCALES[l],
-      ),
-      images: [
-        {
-          url: absoluteUrl("/images/audiences/member-couple.webp"),
-          width: 1536,
-          height: 1024,
-          alt: t.imageNote,
-        },
-      ],
-    },
-  };
+  return discoveryMetadata("features", locale);
 }
+
 const groups = [
   {
     id: "personal",
@@ -81,6 +51,7 @@ export default async function Features({ params }: Props) {
     "https://play.google.com/store/apps/details?id=com.fitliner.app";
   return (
     <main className="features-page">
+      <JsonLd data={discoverySchema("features", locale)} />
       <nav className="features-nav features-container" aria-label={t.home}>
         <Link
           className="features-logo"
@@ -210,7 +181,7 @@ export default async function Features({ params }: Props) {
             </div>
           </section>
         ))}
-        <aside className="features-availability">
+        <aside className="features-availability" id="availability">
           <h2>{t.availabilityTitle}</h2>
           <p>{t.availability}</p>
           <details>

@@ -109,7 +109,7 @@ export default async function RootLayout({
     name: SITE_NAME,
     url: SITE_URL,
     publisher: { "@id": `${SITE_URL}/#organization` },
-    inLanguage: GYM_LOCALES,
+    inLanguage: [...GYM_LOCALES, "hu"],
   };
 
   return (
