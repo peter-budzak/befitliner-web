@@ -1,0 +1,143 @@
+{
+  "title": "What can Fitliner do?",
+  "intro": "Training, nutrition, health and your gym. Explore the tools that come together in one app.",
+  "browse": "Explore features",
+  "download": "Get the app",
+  "home": "Home",
+  "language": "Language",
+  "all": "All features",
+  "personal": "For you",
+  "community": "People & community",
+  "business": "For professionals",
+  "availabilityTitle": "Feature availability",
+  "availability": "Availability varies by app version, account and participating gym. The Health Card requires access; phone entry requires compatible equipment and valid access rights.",
+  "rolloutTitle": "What is still rolling out",
+  "rollout": "New membership checkout, extended invoicing, trainer bookings and general offline entry are being rolled out separately. They are not available at every gym or for every account. Diamond discounts are not an active benefit yet.",
+  "imageNote": "Illustrative fitness setting",
+  "footer": "Your next step starts in Fitliner.",
+  "teaser": "Discover Fitliner",
+  "teaserBody": "See how the app supports your training, nutrition, progress and gym life.",
+  "link": "Explore all features",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Your day at a glance",
+      "summary": "The essentials in one place.",
+      "items": [
+        "Daily nutrition and personal progress overview.",
+        "Quick access to workouts, messages and your gym.",
+        "Pinned entry for supported gyms and your diamond balance."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Workouts & training diary",
+      "summary": "From the plan to your last set.",
+      "items": [
+        "Training plans, workout days, exercises and visual movement guides.",
+        "Custom exercises, sets, weights, repetitions, rest timers and repeat workouts.",
+        "History, records, charts and permission-based diary sharing; your own unfinished workout saves offline and syncs later."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrition & dietary goals",
+      "summary": "Understand what you eat.",
+      "items": [
+        "Log meals in text with an AI estimate of portions and nutrients for you to review.",
+        "Food diary, calories, macros and additional nutritional information.",
+        "Personal daily targets, remaining intake and AI nutrition summaries."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Goals & progress",
+      "summary": "Follow your own journey over time.",
+      "items": [
+        "Personal targets for body weight and other measurable achievements.",
+        "Entries, history, charts and goal completion tracking.",
+        "Share completed progress and control the visibility of your data."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Personal AI coach",
+      "summary": "Ask questions and find your next step.",
+      "items": [
+        "Chat about training, nutrition and your goals.",
+        "Suggestions informed by available profile information.",
+        "Training diary context is used with permission; AI responses are guidance, not a diagnosis or a guarantee of results."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Health Card",
+      "summary": "Keep results and context together.",
+      "items": [
+        "Import results from PDFs, photos or the camera, then review values and dates.",
+        "Measurement history, charts, health score and an overview of tracked indicators.",
+        "Explanations and recommendations with sources; not a replacement for healthcare. Requires active access."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Your gyms & entry",
+      "summary": "Stay connected to where you train.",
+      "items": [
+        "Find gyms and view profiles, contacts, opening hours and rules.",
+        "Membership status, validity and payments depend on the participating gym’s system; gift entry where supported.",
+        "Phone entry, visit history, gym traffic and reviews where offered by your gym."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "People, messages & feed",
+      "summary": "Keep in touch and share progress.",
+      "items": [
+        "Find profiles, exchange private messages and invite friends.",
+        "Share workouts and completed goals on the feed or outside the app.",
+        "Reactions, comments, hiding or reporting posts and gym announcements."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "For trainers",
+      "summary": "Your profile and client collaboration.",
+      "items": [
+        "Create a trainer profile and present your specialities and services.",
+        "Public profile page and client communication.",
+        "Shared training diaries, comments and proposed changes within granted permissions."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "For gym owners",
+      "summary": "An everyday view of your business.",
+      "items": [
+        "Manage the gym profile, public website, rules and contact details.",
+        "Memberships, customers, payment records, revenue and calendar depend on the gym’s active system.",
+        "Manage supported entry systems, visit history, member announcements and review replies."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Diamond Club",
+      "summary": "Keep track of your activity rewards.",
+      "items": [
+        "Earn diamonds for supported activities.",
+        "View your current balance and diamond history.",
+        "See ways to earn; planned discounts are not a promise of rewards available today."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profile & settings",
+      "summary": "Make the app your own.",
+      "items": [
+        "Profile, photo gallery, bio, personal details, goals and food preferences.",
+        "Language, units, notification settings and privacy for selected information.",
+        "Manage your account and password, including account deletion."
+      ]
+    }
+  ]
+}

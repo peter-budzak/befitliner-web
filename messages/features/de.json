@@ -1,0 +1,143 @@
+{
+  "title": "Was kann Fitliner?",
+  "intro": "Training, Ernährung, Gesundheit und dein Fitnessstudio. Entdecke die Werkzeuge in einer App.",
+  "browse": "Funktionen entdecken",
+  "download": "App herunterladen",
+  "home": "Startseite",
+  "language": "Sprache",
+  "all": "Alle Funktionen",
+  "personal": "Für dich",
+  "community": "Menschen & Community",
+  "business": "Für Profis",
+  "availabilityTitle": "Verfügbarkeit",
+  "availability": "Die Verfügbarkeit hängt von App-Version, Konto und teilnehmendem Studio ab. Die Gesundheitskarte erfordert eine Freischaltung; der Zugang per Smartphone kompatible Geräte und eine gültige Berechtigung.",
+  "rolloutTitle": "Was noch eingeführt wird",
+  "rollout": "Der neue Mitgliedschaftskauf, erweiterte Rechnungsfunktionen, Trainerbuchungen und allgemeiner Offline-Zugang werden separat eingeführt. Sie sind nicht für jedes Studio oder Konto verfügbar. Diamantenrabatte sind noch kein aktiver Vorteil.",
+  "imageNote": "Illustrative Fitnessstudio-Szene",
+  "footer": "Dein nächster Schritt beginnt mit Fitliner.",
+  "teaser": "Fitliner kennenlernen",
+  "teaserBody": "Entdecke Unterstützung für Training, Ernährung, Fortschritt und deinen Studioalltag.",
+  "link": "Alle Funktionen entdecken",
+  "sections": [
+    {
+      "id": "today",
+      "title": "Dein Tag im Überblick",
+      "summary": "Das Wichtigste an einem Ort.",
+      "items": [
+        "Täglicher Überblick über Ernährung und persönlichen Fortschritt.",
+        "Schneller Zugriff auf Training, Nachrichten und Studio.",
+        "Angehefteter Zugang für unterstützte Studios und Diamantenstand."
+      ]
+    },
+    {
+      "id": "training",
+      "title": "Training & Trainingstagebuch",
+      "summary": "Vom Plan bis zum letzten Satz.",
+      "items": [
+        "Trainingspläne, Trainingstage, Übungen und visuelle Bewegungsanleitungen.",
+        "Eigene Übungen, Sätze, Gewichte, Wiederholungen, Pausentimer und Training wiederholen.",
+        "Verlauf, Rekorde, Diagramme und Freigaben mit Berechtigungen; eigene laufende Trainings werden offline gespeichert und später synchronisiert."
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Ernährung & Ernährungsziele",
+      "summary": "Verstehe, was du isst.",
+      "items": [
+        "Mahlzeiten als Text erfassen; KI-Schätzungen zu Portionen und Nährstoffen selbst prüfen.",
+        "Ernährungstagebuch, Kalorien, Makronährstoffe und weitere Nährwerte.",
+        "Persönliche Tagesziele, verbleibender Bedarf und KI-Zusammenfassungen."
+      ]
+    },
+    {
+      "id": "progress",
+      "title": "Ziele & Fortschritt",
+      "summary": "Deine Entwicklung im Zeitverlauf.",
+      "items": [
+        "Persönliche Ziele für Körpergewicht und andere messbare Leistungen.",
+        "Einträge, Verlauf, Diagramme und erreichte Ziele verfolgen.",
+        "Erreichte Fortschritte teilen und die Sichtbarkeit deiner Daten steuern."
+      ]
+    },
+    {
+      "id": "coach",
+      "title": "Persönlicher KI-Coach",
+      "summary": "Fragen stellen und weiterkommen.",
+      "items": [
+        "Chat über Training, Ernährung und deine Ziele.",
+        "Vorschläge unter Berücksichtigung verfügbarer Profildaten.",
+        "Das Trainingstagebuch wird mit Erlaubnis einbezogen; KI-Antworten sind Orientierung, keine Diagnose oder Erfolgsgarantie."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Gesundheitskarte",
+      "summary": "Ergebnisse und Zusammenhänge zusammenhalten.",
+      "items": [
+        "Ergebnisse aus PDF, Foto oder Kamera importieren, Werte und Datum anschließend prüfen.",
+        "Messverlauf, Diagramme, Gesundheitsscore und Übersicht der erfassten Werte.",
+        "Erklärungen und Empfehlungen mit Quellen; kein Ersatz für medizinische Versorgung. Aktiver Zugang erforderlich."
+      ]
+    },
+    {
+      "id": "gyms",
+      "title": "Deine Studios & Zugang",
+      "summary": "Verbunden mit deinem Trainingsort.",
+      "items": [
+        "Studios suchen und Profile, Kontakte, Öffnungszeiten und Regeln ansehen.",
+        "Mitgliedschaft, Gültigkeit und Zahlungen je nach Studiosystem; Eintritte verschenken, wo unterstützt.",
+        "Smartphone-Zugang, Besuchsverlauf, Auslastung und Bewertungen je nach Angebot des Studios."
+      ]
+    },
+    {
+      "id": "community",
+      "title": "Menschen, Nachrichten & Feed",
+      "summary": "In Kontakt bleiben und Fortschritte teilen.",
+      "items": [
+        "Profile finden, private Nachrichten austauschen und Freunde einladen.",
+        "Trainings und erreichte Ziele im Feed oder außerhalb der App teilen.",
+        "Reaktionen, Kommentare, Beiträge ausblenden oder melden und Studio-Mitteilungen."
+      ]
+    },
+    {
+      "id": "trainers",
+      "title": "Für Trainer",
+      "summary": "Profil und Zusammenarbeit mit Kunden.",
+      "items": [
+        "Trainerprofil erstellen und Schwerpunkte sowie Leistungen vorstellen.",
+        "Öffentliche Profilseite und Kommunikation mit Kunden.",
+        "Geteilte Trainingstagebücher, Kommentare und Änderungsvorschläge entsprechend erteilter Rechte."
+      ]
+    },
+    {
+      "id": "owners",
+      "title": "Für Studiobetreiber",
+      "summary": "Dein Betrieb im täglichen Überblick.",
+      "items": [
+        "Studioprofil, öffentliche Website, Regeln und Kontaktdaten verwalten.",
+        "Mitgliedschaften, Kunden, Zahlungseinträge, Umsätze und Kalender je nach aktivem Studiosystem.",
+        "Unterstützte Zugangssysteme, Besuchsverlauf, Mitgliedermitteilungen und Antworten auf Bewertungen verwalten."
+      ]
+    },
+    {
+      "id": "diamonds",
+      "title": "Diamantenclub",
+      "summary": "Deine Aktivität im Blick.",
+      "items": [
+        "Diamanten für unterstützte Aktivitäten sammeln.",
+        "Aktuellen Stand und Diamantenverlauf ansehen.",
+        "Möglichkeiten zum Sammeln entdecken; geplante Rabatte sind keine bereits verfügbaren Prämien."
+      ]
+    },
+    {
+      "id": "account",
+      "title": "Profil & Einstellungen",
+      "summary": "Die App passend für dich.",
+      "items": [
+        "Profil, Fotogalerie, Bio, persönliche Angaben, Ziele und Essensvorlieben.",
+        "Sprache, Einheiten, Benachrichtigungen und Privatsphäre ausgewählter Angaben.",
+        "Konto und Passwort verwalten, einschließlich Kontolöschung."
+      ]
+    }
+  ]
+}
