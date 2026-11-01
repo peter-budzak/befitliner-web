@@ -1,0 +1,82 @@
+{
+  "en": {
+    "features": {
+      "title": "Fitliner App Features: Training, Nutrition & Gym Access",
+      "description": "Explore Fitliner: workouts, training diary, nutrition, progress, AI coach, Health Card and gym tools. See feature availability for members and professionals."
+    },
+    "partners": {
+      "title": "Fitliner Country Partner Program | Grow Your Local Market",
+      "description": "Build the Fitliner gym network in your country. Explore the partner role, revenue model, qualification and exclusivity terms, then apply to discuss your market."
+    }
+  },
+  "sk": {
+    "features": {
+      "title": "Funkcie Fitliner: tréning, strava a vstup do fitka",
+      "description": "Spoznaj Fitliner: tréningy, denník, strava, progres, AI kouč, zdravotná karta a nástroje pre fitká. Prehľad funkcií a ich dostupnosti pre členov aj profesionálov."
+    },
+    "partners": {
+      "title": "Partnerstvo s Fitliner | Zastúpenie vo vašej krajine",
+      "description": "Budujte sieť fitiek Fitliner vo svojej krajine. Spoznajte úlohu partnera, model príjmov a podmienky získania exkluzivity. Pošlite prihlášku a predstavte svoj trh."
+    }
+  },
+  "de": {
+    "features": {
+      "title": "Fitliner Funktionen: Training, Ernährung & Studiozugang",
+      "description": "Entdecke Trainingspläne, Tagebuch, Ernährung, Fortschritt, KI-Coach, Gesundheitskarte und Studio-Werkzeuge. Funktionen und Verfügbarkeit für Mitglieder und Profis."
+    },
+    "partners": {
+      "title": "Fitliner Landespartner | Entwickeln Sie Ihren lokalen Markt",
+      "description": "Bauen Sie das Fitliner-Studionetzwerk in Ihrem Land auf. Erfahren Sie mehr über Aufgaben, Erlösmodell und Exklusivität und bewerben Sie sich als Landespartner."
+    }
+  },
+  "es": {
+    "features": {
+      "title": "Funciones de Fitliner: entrenamiento, nutrición y gimnasio",
+      "description": "Descubre entrenamientos, diario, nutrición, progreso, coach IA, tarjeta de salud y herramientas para gimnasios. Consulta las funciones y su disponibilidad."
+    },
+    "partners": {
+      "title": "Socios nacionales de Fitliner | Desarrolla tu mercado",
+      "description": "Desarrolla la red de gimnasios Fitliner en tu país. Conoce el papel del socio, el modelo de ingresos y las condiciones de exclusividad, y envía tu solicitud."
+    }
+  },
+  "fr": {
+    "features": {
+      "title": "Fitliner : entraînement, nutrition et accès aux salles",
+      "description": "Découvrez entraînements, carnet, nutrition, progrès, coach IA, carte santé et outils pour salles. Consultez les fonctionnalités et leurs conditions d’accès."
+    },
+    "partners": {
+      "title": "Partenaire national Fitliner | Développez votre marché",
+      "description": "Développez le réseau de salles Fitliner dans votre pays. Découvrez le rôle du partenaire, les revenus et les conditions d’exclusivité, puis présentez votre projet."
+    }
+  },
+  "zh-Hans": {
+    "features": {
+      "title": "Fitliner 应用功能：训练、营养记录与健身房入场",
+      "description": "探索 Fitliner 的训练计划、训练日志、饮食记录、进展追踪、AI 教练、健康档案与健身房工具，了解适用于个人、教练及经营者的功能和使用条件。"
+    },
+    "partners": {
+      "title": "Fitliner 国家合作伙伴计划｜拓展本地健身市场",
+      "description": "在你的国家建立 Fitliner 健身房网络。了解合作伙伴职责、收入模式、资格要求及独家代理条件，提交申请并介绍你的本地市场。"
+    }
+  },
+  "pl": {
+    "features": {
+      "title": "Funkcje Fitliner: trening, odżywianie i wejście na siłownię",
+      "description": "Poznaj treningi, dziennik, odżywianie, postępy, coacha AI, kartę zdrowia i narzędzia dla klubów. Sprawdź funkcje i ich dostępność dla użytkowników oraz specjalistów."
+    },
+    "partners": {
+      "title": "Partner krajowy Fitliner | Rozwijaj swój lokalny rynek",
+      "description": "Buduj sieć klubów Fitliner w swoim kraju. Poznaj rolę partnera, model przychodów i warunki wyłączności. Wyślij zgłoszenie i przedstaw swój lokalny rynek."
+    }
+  },
+  "hu": {
+    "features": {
+      "title": "Fitliner funkciók: edzés, táplálkozás és edzőtermi belépés",
+      "description": "Ismerd meg az edzéseket, naplót, táplálkozást, fejlődést, AI-coachot, egészségkártyát és teremkezelő eszközöket. Nézd meg a funkciókat és elérhetőségüket."
+    },
+    "partners": {
+      "title": "Fitliner országos partnerprogram | Építsd a helyi piacot",
+      "description": "Építsd a Fitliner edzőtermi hálózatát országodban. Ismerd meg a partner feladatait, a bevételi modellt és a kizárólagosság feltételeit, majd küldd el jelentkezésed."
+    }
+  }
+}
