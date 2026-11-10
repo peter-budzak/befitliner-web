@@ -1,5 +1,6 @@
 'use client';
 import {useEffect,useMemo,useRef,useState} from 'react';
+import {bookingCallback} from '../booking-intent';
 import handoffCopy from '../handoff-copy.json';
 import {supabase} from '@/lib/supabase';
 import {trainerCopy,serviceText,type TrainerLocale,type PublicSlot,type PublicOffer} from '../trainer-locale';
@@ -27,6 +28,11 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
     const saved=slots?.find(s=>s.id===intent.get('slot') && s.remaining>0);
     if(saved){
       setDay(dayLabel(saved,locale));setSelected(saved.id);
+    }
+    if(intent.get('verified')==='1') {
+      void supabase.auth.getSession().then(({data})=>{
+        if(data.session)setMessage(handoffCopy[locale].verifiedContinue);
+      });
     }
     document.getElementById('service-'+offer.id)?.scrollIntoView({block:'start'});
   },[slots,offer.id,locale,checkout]);
@@ -106,7 +112,7 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
     {checkout && scheduled && slots===null && <button className="refresh" disabled={busy} onClick={()=>{setBusy(true);window.location.reload();}}>{t.refresh}</button>}
     {login && <form onSubmit={e=>{e.preventDefault();void run(async()=>{
       try {localStorage.setItem('fitliner.trainer.return',slug);}catch{}
-      const {error}=await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin+'/trainers/account'}});
+      const {error}=await supabase.auth.signInWithOtp({email:email.trim(),options:{emailRedirectTo:bookingCallback(window.location.origin,{slug,locale,offer:offer.id,slot:slot?.id??''}),data:{language:locale}}});
       if(error)throw error;
       try {
         localStorage.setItem('fitliner.booking.resume',JSON.stringify({slug,locale,offer:offer.id,slot:slot?.id??'',email:email.trim().toLowerCase(),until:Date.now()+30*60*1000}));

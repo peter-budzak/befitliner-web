@@ -1,4 +1,5 @@
 'use client';
+import {parseBookingIntent,bookingDestination} from '../booking-intent';
 import Link from 'next/link';
 import {isTrainerLocale,trainerPath} from '../trainer-locale';
 import BookingCalendar from './booking-calendar';
@@ -54,6 +55,9 @@ export default function TrainerStorefront({ profile, offers, accountOnly=false, 
     let active=true;
     void supabase.auth.getSession().then(({data})=>{
       if(!active || data.session?.user.id!==userId)return;
+      const params=new URLSearchParams(location.search);
+      const intent=parseBookingIntent(params.get('booking'),params.get('lang'));
+      if(intent) {location.replace(bookingDestination(intent));return;}
       try {
         const purchaseRaw=localStorage.getItem('fitliner.purchase.resume');
         if(purchaseRaw) {

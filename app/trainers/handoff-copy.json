@@ -25,7 +25,8 @@
     "signout": "Odhlásiť sa",
     "emailPlaceholder": "Zadaj svoj e-mail",
     "accountHint": "Ak ešte nemáš účet vo Fitlineri, vytvoríme ti ho zdarma. Bez hesla — prihlásiš sa odkazom v e-maile.",
-    "verifyContinue": "Overiť e-mail a pokračovať"
+    "verifyContinue": "Overiť e-mail a pokračovať",
+    "verifiedContinue": "E-mail je overený. Pokračuj k platbe za vybraný tréning."
   },
   "en": {
     "confirmed": "Your training is booked",
@@ -53,7 +54,8 @@
     "signout": "Sign out",
     "emailPlaceholder": "Enter your email",
     "accountHint": "If you don’t have a Fitliner account yet, we’ll create one for free. No password — sign in using a link in your email.",
-    "verifyContinue": "Verify email and continue"
+    "verifyContinue": "Verify email and continue",
+    "verifiedContinue": "Your email is verified. Continue to payment for your selected training."
   },
   "de": {
     "confirmed": "Dein Training ist gebucht",
@@ -81,7 +83,8 @@
     "signout": "Abmelden",
     "emailPlaceholder": "Gib deine E-Mail-Adresse ein",
     "accountHint": "Wenn du noch kein Fitliner-Konto hast, erstellen wir kostenlos eines für dich. Ohne Passwort — du meldest dich über einen Link in deiner E-Mail an.",
-    "verifyContinue": "E-Mail bestätigen und weiter"
+    "verifyContinue": "E-Mail bestätigen und weiter",
+    "verifiedContinue": "Deine E-Mail ist bestätigt. Fahre mit der Zahlung für dein ausgewähltes Training fort."
   },
   "pl": {
     "confirmed": "Twój trening jest zarezerwowany",
@@ -109,7 +112,8 @@
     "signout": "Wyloguj się",
     "emailPlaceholder": "Wpisz swój e-mail",
     "accountHint": "Jeśli nie masz jeszcze konta w Fitliner, utworzymy je bezpłatnie. Bez hasła — zalogujesz się linkiem w e-mailu.",
-    "verifyContinue": "Potwierdź e-mail i kontynuuj"
+    "verifyContinue": "Potwierdź e-mail i kontynuuj",
+    "verifiedContinue": "Twój e-mail został potwierdzony. Przejdź do płatności za wybrany trening."
   },
   "hu": {
     "confirmed": "Az edzésed lefoglalva",
@@ -137,7 +141,8 @@
     "signout": "Kijelentkezés",
     "emailPlaceholder": "Add meg az e-mail-címed",
     "accountHint": "Ha még nincs Fitliner-fiókod, ingyen létrehozunk neked egyet. Jelszó nélkül — az e-mailben kapott linkkel jelentkezhetsz be.",
-    "verifyContinue": "E-mail megerősítése és folytatás"
+    "verifyContinue": "E-mail megerősítése és folytatás",
+    "verifiedContinue": "Az e-mail-címed megerősítve. Folytasd a kiválasztott edzés kifizetésével."
   },
   "fr": {
     "confirmed": "Ton entraînement est réservé",
@@ -165,7 +170,8 @@
     "signout": "Se déconnecter",
     "emailPlaceholder": "Saisis ton adresse e-mail",
     "accountHint": "Si tu n’as pas encore de compte Fitliner, nous en créerons un gratuitement. Sans mot de passe — connecte-toi avec le lien reçu par e-mail.",
-    "verifyContinue": "Vérifier l’e-mail et continuer"
+    "verifyContinue": "Vérifier l’e-mail et continuer",
+    "verifiedContinue": "Ton e-mail est vérifié. Passe au paiement de l’entraînement choisi."
   },
   "es": {
     "confirmed": "Tu entrenamiento está reservado",
@@ -193,7 +199,8 @@
     "signout": "Cerrar sesión",
     "emailPlaceholder": "Introduce tu correo electrónico",
     "accountHint": "Si aún no tienes una cuenta en Fitliner, te crearemos una gratis. Sin contraseña: iniciarás sesión con un enlace enviado a tu correo.",
-    "verifyContinue": "Verificar correo y continuar"
+    "verifyContinue": "Verificar correo y continuar",
+    "verifiedContinue": "Tu correo está verificado. Continúa con el pago del entrenamiento elegido."
   },
   "it": {
     "confirmed": "Il tuo allenamento è prenotato",
@@ -221,7 +228,8 @@
     "signout": "Esci",
     "emailPlaceholder": "Inserisci la tua e-mail",
     "accountHint": "Se non hai ancora un account Fitliner, ne creeremo uno gratuitamente. Senza password — accedi tramite il link ricevuto via e-mail.",
-    "verifyContinue": "Verifica e-mail e continua"
+    "verifyContinue": "Verifica e-mail e continua",
+    "verifiedContinue": "La tua e-mail è verificata. Procedi al pagamento dell’allenamento scelto."
   },
   "ro": {
     "confirmed": "Antrenamentul tău este rezervat",
@@ -249,7 +257,8 @@
     "signout": "Deconectare",
     "emailPlaceholder": "Introdu adresa ta de e-mail",
     "accountHint": "Dacă nu ai încă un cont Fitliner, îți vom crea unul gratuit. Fără parolă — te autentifici prin linkul primit pe e-mail.",
-    "verifyContinue": "Verifică e-mailul și continuă"
+    "verifyContinue": "Verifică e-mailul și continuă",
+    "verifiedContinue": "E-mailul tău este verificat. Continuă cu plata antrenamentului ales."
   },
   "sl": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -277,7 +286,8 @@
     "signout": "Odjava",
     "emailPlaceholder": "Vnesi svoj e-poštni naslov",
     "accountHint": "Če še nimaš računa Fitliner, ti ga ustvarimo brezplačno. Brez gesla — prijaviš se s povezavo v e-pošti.",
-    "verifyContinue": "Potrdi e-pošto in nadaljuj"
+    "verifyContinue": "Potrdi e-pošto in nadaljuj",
+    "verifiedContinue": "Tvoj e-poštni naslov je potrjen. Nadaljuj s plačilom izbranega treninga."
   },
   "hr": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -305,7 +315,8 @@
     "signout": "Odjava",
     "emailPlaceholder": "Unesi svoju adresu e-pošte",
     "accountHint": "Ako još nemaš Fitliner račun, izradit ćemo ti ga besplatno. Bez lozinke — prijaviš se poveznicom iz e-pošte.",
-    "verifyContinue": "Potvrdi e-poštu i nastavi"
+    "verifyContinue": "Potvrdi e-poštu i nastavi",
+    "verifiedContinue": "Tvoja e-pošta je potvrđena. Nastavi s plaćanjem odabranog treninga."
   },
   "bg": {
     "confirmed": "Тренировката ти е резервирана",
@@ -333,7 +344,8 @@
     "signout": "Изход",
     "emailPlaceholder": "Въведи своя имейл",
     "accountHint": "Ако още нямаш профил във Fitliner, ще ти създадем безплатно. Без парола — влизаш чрез връзка в имейла.",
-    "verifyContinue": "Потвърди имейла и продължи"
+    "verifyContinue": "Потвърди имейла и продължи",
+    "verifiedContinue": "Имейлът ти е потвърден. Продължи с плащането за избраната тренировка."
   },
   "el": {
     "confirmed": "Η προπόνησή σου έχει κρατηθεί",
@@ -361,7 +373,8 @@
     "signout": "Αποσύνδεση",
     "emailPlaceholder": "Πληκτρολόγησε το email σου",
     "accountHint": "Αν δεν έχεις ακόμη λογαριασμό Fitliner, θα σου δημιουργήσουμε έναν δωρεάν. Χωρίς κωδικό — συνδέεσαι μέσω συνδέσμου στο email σου.",
-    "verifyContinue": "Επαλήθευση email και συνέχεια"
+    "verifyContinue": "Επαλήθευση email και συνέχεια",
+    "verifiedContinue": "Το email σου επαληθεύτηκε. Συνέχισε στην πληρωμή της επιλεγμένης προπόνησης."
   },
   "zh-Hans": {
     "confirmed": "你的训练已预约",
@@ -389,6 +402,7 @@
     "signout": "退出登录",
     "emailPlaceholder": "输入你的电子邮箱",
     "accountHint": "如果你还没有 Fitliner 账户，我们会免费为你创建。无需密码，通过邮件中的链接即可登录。",
-    "verifyContinue": "验证邮箱并继续"
+    "verifyContinue": "验证邮箱并继续",
+    "verifiedContinue": "你的邮箱已验证。请继续支付所选训练。"
   }
 }
