@@ -7,31 +7,43 @@ const cta =
 const card =
   "rounded-3xl border border-white/10 bg-gradient-to-br from-[#292137] to-[#19151f] p-6";
 
-const featurePaths = [
-  "M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2m4 11 2 2 4-4",
-  "M3 5h18v14H3zM3 9h18M7 7h.01M10 7h.01m-1 6-2 2 2 2m6-4 2 2-2 2",
-  "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m18 0v-2a4 4 0 0 0-3-4M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8m8-8a4 4 0 0 1 0 8",
-  "M6 3v6m-3-6v4a3 3 0 0 0 6 0V3M6 10v11M17 3v18m0-18c-5 3-5 9 0 9m3 2v5",
-  "m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3m8-2v4m-2-2h4",
+const bookingSteps = ["Tvoj profil", "Výber termínu", "Potvrdená rezervácia"];
+
+const trainerBenefits = [
+  {
+    title: "Faktúry sa pošlú po platbe",
+    description:
+      "Fitliner vystaví faktúru v tvojom mene a pošle ju klientovi e-mailom. Doklady za vybrané obdobie si stiahneš pre účtovníčku.",
+  },
+  {
+    title: "Koučing s mesačnou platbou",
+    description:
+      "Nastav mesačnú cenu za spoluprácu. Po úvodnom nákupe sa ďalšie platby vyberajú automaticky podľa predplatného.",
+  },
+  {
+    title: "Tréningový denník, na ktorý môžeš nadviazať",
+    description:
+      "Keď ti klient sprístupní svoj denník, vidíš, čo odcvičil. Podľa udeleného prístupu môžeš pridať spätnú väzbu alebo navrhnúť úpravy.",
+  },
 ];
 
 export function TrainerIntro({ onNext }: { onNext: () => void }) {
-  const features = [
-    [
-      "Rezervačný systém + online platby",
-      "Termíny a platby prehľadne na jednom mieste.",
-    ],
-    ["Vlastná webstránka trénera", "befitliner.com/tvojemeno"],
-    ["Neobmedzený počet klientov", "Priestor pre každého, koho trénuješ."],
-    [
-      "Jedálničky a tréningy pre tvojich klientov",
-      "Všetko dôležité pre ich cestu k výsledkom.",
-    ],
-    [
-      "AI podpora pre nových klientov",
-      "Pomocník aj medzi osobnými tréningami.",
-    ],
-  ];
+  function startProfile() {
+    onNext();
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  const startButton = (
+    <button
+      type="button"
+      className={`${cta} flex items-center justify-between gap-3 text-left shadow-[0_8px_40px_-12px_#7947ff]`}
+      onClick={startProfile}
+    >
+      Vytvoriť trénerský profil zadarmo
+      <span aria-hidden="true">↗</span>
+    </button>
+  );
+
   return (
     <div className="relative isolate">
       <div
@@ -39,110 +51,87 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
         className="pointer-events-none absolute -top-12 right-0 -z-10 h-64 w-64 rounded-full bg-[#7947ff]/15 blur-3xl"
       />
       <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#ad86ff]/25 bg-[#7947ff]/10 px-4 py-2 text-xs font-bold uppercase tracking-[.14em] text-[#c8adff]">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#b58cff]" />
-        Ak si osobný tréner
+        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#b58cff]" />
+        Pre trénerov a koučov
       </p>
-      <h1 className="text-[2.5rem] font-extrabold leading-[1.12] tracking-tight sm:text-5xl">
-        Vyskúšaj prácu s klientmi cez{" "}
-        <span className="bg-gradient-to-r from-[#c5aaff] to-[#9171ff] bg-clip-text text-transparent">
-          Fitliner.
+      <h1 className="text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl">
+        Pošli jeden odkaz.{" "}
+        <span className="bg-gradient-to-r from-[#c5aaff] to-[#a487ff] bg-clip-text text-transparent">
+          Klient si vyberie termín a zaplatí online.
         </span>
       </h1>
-      <p className="mb-8 mt-5 text-xl font-medium leading-8 text-[#e3d6ff]">
-        Bez akýchkoľvek mesačných poplatkov.
+      <p className="mt-5 text-base leading-7 text-[#e3d6ff] sm:text-lg">
+        Na vlastnej stránke vo Fitlineri ukážeš služby, ceny aj voľné termíny.
+        V kalendári vidíš, kto má potvrdenú rezerváciu, a Fitliner pošle
+        klientovi faktúru.
       </p>
-      <div
-        aria-hidden="true"
-        className="relative mb-8 overflow-hidden rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 sm:p-6"
+      {startButton}
+      <a
+        href="#ako-to-funguje"
+        className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#c8adff] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >
-        <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
-          <span className="text-xs tracking-widest text-white/60">
-            TVOJ PRIESTOR PRE KLIENTOV
-          </span>
-          <span className="rounded-full bg-[#86e8cd]/10 px-3 py-1 text-xs text-[#86e8cd]">
-            FITLINER
-          </span>
-        </div>
-        <div className="mt-5 flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#9568ff]/20 text-[#c4a5ff]">
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            >
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 22v-2a8 8 0 0 1 16 0v2" />
+        Pozrieť, ako to funguje <span aria-hidden="true">↓</span>
+      </a>
+
+      <section
+        id="ako-to-funguje"
+        aria-labelledby="ako-to-funguje-nadpis"
+        className="mt-8 scroll-mt-6"
+      >
+        <h2 id="ako-to-funguje-nadpis" className="text-2xl font-bold">
+          Ako to funguje
+        </h2>
+        <div className="mt-4 flex aspect-video flex-col items-center justify-center gap-3 rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 text-center">
+          <span
+            aria-hidden="true"
+            className="grid size-12 place-items-center rounded-2xl bg-[#9568ff]/20 text-[#c8adff]"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="3" />
+              <path d="m10 9 5 3-5 3z" />
             </svg>
-          </div>
-          <div>
-            <p className="text-lg font-bold">Tvoje meno. Tvoja značka.</p>
-            <p className="mt-1 text-sm text-[#c3a9ff]">
-              befitliner.com/tvojemeno
-            </p>
-          </div>
+          </span>
+          <p className="font-bold">Video ukážku pripravujeme</p>
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {["Rezervácie", "Klienti", "Plány"].map((label, i) => (
-            <div
-              key={label}
-              className="rounded-xl border border-white/5 bg-white/5 px-2 py-3 text-center text-xs text-white/75"
-            >
-              <span className="mb-2 block text-lg text-[#ba99ff]">
-                {["◷", "∞", "✓"][i]}
+        <ol className="mt-4 grid gap-2 sm:grid-cols-3">
+          {bookingSteps.map((step, index) => (
+            <li key={step} className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm">
+              <span aria-hidden="true" className="font-bold text-[#c8adff]">
+                {index + 1}.
               </span>
-              {label}
-            </div>
+              {step}
+            </li>
           ))}
-        </div>
-        <p className="mt-3 text-right text-[10px] uppercase tracking-wider text-white/35">
-          Ilustračný náhľad
-        </p>
-      </div>
-      <ul className="space-y-5">
-        {features.map(([title, description], i) => (
-          <li key={title} className="flex items-start gap-4">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#aa80ff]/15 bg-[#9a70ff]/10 text-[#b892ff]">
-              <svg
-                aria-hidden="true"
-                width="23"
-                height="23"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d={featurePaths[i]} />
-              </svg>
-            </span>
-            <div className="pt-0.5">
-              <p className="font-semibold leading-6">{title}</p>
-              <p className="mt-1 text-sm leading-5 text-white/50">
+        </ol>
+      </section>
+
+      <section aria-labelledby="trainer-benefits" className="mt-9">
+        <h2 id="trainer-benefits" className="text-2xl font-bold">
+          Menej administratívy, viac času na klientov
+        </h2>
+        <ul className="mt-4 divide-y divide-white/10">
+          {trainerBenefits.map(({ title, description }) => (
+            <li key={title} className="py-4">
+              <h3 className="font-semibold text-[#e3d6ff]">{title}</h3>
+              <p className="mt-1 text-sm leading-6 text-white/70">
                 {description}
               </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5 text-sm text-[#bca2ee]">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#9a70ff]/10 text-lg">
-          +
-        </span>
-        Nové funkcie pribúdajú
-      </p>
-      <button
-        className={`${cta} flex items-center justify-between gap-3 shadow-[0_8px_40px_-12px_#7947ff]`}
-        onClick={onNext}
-      >
-        <span>
-          Nastaviť profil <strong>ZADARMO</strong>
-        </span>
-        <span aria-hidden="true">↗</span>
-      </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="trainer-price" className={`${card} mt-5`}>
+        <h2 id="trainer-price" className="text-2xl font-bold">
+          Profil zadarmo, bez mesačného paušálu
+        </h2>
+        <p className="mt-3 text-sm leading-6 text-white/75">
+          Fitliner si účtuje <strong>5 % z úspešných platieb</strong> za tvoje
+          služby. Poplatky Stripe platíš samostatne. Pri refundácii sa provízia
+          Fitlineru nevracia.
+        </p>
+        {startButton}
+      </section>
     </div>
   );
 }
