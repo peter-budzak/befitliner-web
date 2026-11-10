@@ -112,7 +112,7 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
         localStorage.setItem('fitliner.booking.resume',JSON.stringify({slug,locale,offer:offer.id,slot:slot?.id??'',email:email.trim().toLowerCase(),until:Date.now()+30*60*1000}));
       } catch { /* Email sign-in also works without storage. */ }
       setMessage(t.sent);
-    });}}><label>{handoffCopy[locale].emailTitle}<input type="email" autoComplete="email" value={email} required onChange={e=>setEmail(e.target.value)}/></label><button disabled={busy}>{handoffCopy[locale].verify}</button></form>}
+    });}}><label>{handoffCopy[locale].emailTitle}<input type="email" autoComplete="email" placeholder={handoffCopy[locale].emailPlaceholder} aria-describedby={`account-hint-${offer.id}`} value={email} required onChange={e=>setEmail(e.target.value)}/></label><p id={`account-hint-${offer.id}`} className="account-hint">{handoffCopy[locale].accountHint}</p><button disabled={busy}>{handoffCopy[locale].verifyContinue}</button></form>}
     {message && <p role="status">{message}</p>}
   </article>;
 }

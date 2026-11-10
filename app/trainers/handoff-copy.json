@@ -22,7 +22,10 @@
     "progressBenefit": "Záznamy tréningov a sledovanie pokroku",
     "gymBenefit": "Kontakt s trénerom a prístup do zapojených fitnesscentier",
     "freeNote": "Aplikácia je zadarmo. Trénerské služby a vstupy do fitnesscentier sa platia samostatne.",
-    "signout": "Odhlásiť sa"
+    "signout": "Odhlásiť sa",
+    "emailPlaceholder": "Zadaj svoj e-mail",
+    "accountHint": "Ak ešte nemáš účet vo Fitlineri, vytvoríme ti ho zdarma. Bez hesla — prihlásiš sa odkazom v e-maile.",
+    "verifyContinue": "Overiť e-mail a pokračovať"
   },
   "en": {
     "confirmed": "Your training is booked",
@@ -47,7 +50,10 @@
     "progressBenefit": "Training logs and progress tracking",
     "gymBenefit": "Contact your trainer and access participating gyms",
     "freeNote": "The app is free. Trainer services and gym admission are charged separately.",
-    "signout": "Sign out"
+    "signout": "Sign out",
+    "emailPlaceholder": "Enter your email",
+    "accountHint": "If you don’t have a Fitliner account yet, we’ll create one for free. No password — sign in using a link in your email.",
+    "verifyContinue": "Verify email and continue"
   },
   "de": {
     "confirmed": "Dein Training ist gebucht",
@@ -72,7 +78,10 @@
     "progressBenefit": "Trainingsprotokolle und Fortschrittsverfolgung",
     "gymBenefit": "Kontakt zum Trainer und Zugang zu teilnehmenden Fitnessstudios",
     "freeNote": "Die App ist kostenlos. Trainerleistungen und Studioeintritte werden separat bezahlt.",
-    "signout": "Abmelden"
+    "signout": "Abmelden",
+    "emailPlaceholder": "Gib deine E-Mail-Adresse ein",
+    "accountHint": "Wenn du noch kein Fitliner-Konto hast, erstellen wir kostenlos eines für dich. Ohne Passwort — du meldest dich über einen Link in deiner E-Mail an.",
+    "verifyContinue": "E-Mail bestätigen und weiter"
   },
   "pl": {
     "confirmed": "Twój trening jest zarezerwowany",
@@ -97,7 +106,10 @@
     "progressBenefit": "Dziennik treningów i śledzenie postępów",
     "gymBenefit": "Kontakt z trenerem i dostęp do uczestniczących siłowni",
     "freeNote": "Aplikacja jest bezpłatna. Usługi trenerów i wejścia na siłownię są płatne osobno.",
-    "signout": "Wyloguj się"
+    "signout": "Wyloguj się",
+    "emailPlaceholder": "Wpisz swój e-mail",
+    "accountHint": "Jeśli nie masz jeszcze konta w Fitliner, utworzymy je bezpłatnie. Bez hasła — zalogujesz się linkiem w e-mailu.",
+    "verifyContinue": "Potwierdź e-mail i kontynuuj"
   },
   "hu": {
     "confirmed": "Az edzésed lefoglalva",
@@ -122,7 +134,10 @@
     "progressBenefit": "Edzésnapló és fejlődéskövetés",
     "gymBenefit": "Kapcsolat az edződdel és belépés a csatlakozott edzőtermekbe",
     "freeNote": "Az alkalmazás ingyenes. Az edzői szolgáltatások és a terembelépők külön fizetendők.",
-    "signout": "Kijelentkezés"
+    "signout": "Kijelentkezés",
+    "emailPlaceholder": "Add meg az e-mail-címed",
+    "accountHint": "Ha még nincs Fitliner-fiókod, ingyen létrehozunk neked egyet. Jelszó nélkül — az e-mailben kapott linkkel jelentkezhetsz be.",
+    "verifyContinue": "E-mail megerősítése és folytatás"
   },
   "fr": {
     "confirmed": "Ton entraînement est réservé",
@@ -147,7 +162,10 @@
     "progressBenefit": "Journal d’entraînement et suivi des progrès",
     "gymBenefit": "Contact avec ton coach et accès aux salles participantes",
     "freeNote": "L’application est gratuite. Les services des coachs et les entrées en salle sont payants séparément.",
-    "signout": "Se déconnecter"
+    "signout": "Se déconnecter",
+    "emailPlaceholder": "Saisis ton adresse e-mail",
+    "accountHint": "Si tu n’as pas encore de compte Fitliner, nous en créerons un gratuitement. Sans mot de passe — connecte-toi avec le lien reçu par e-mail.",
+    "verifyContinue": "Vérifier l’e-mail et continuer"
   },
   "es": {
     "confirmed": "Tu entrenamiento está reservado",
@@ -172,7 +190,10 @@
     "progressBenefit": "Registro de entrenamientos y seguimiento del progreso",
     "gymBenefit": "Contacto con tu entrenador y acceso a gimnasios participantes",
     "freeNote": "La aplicación es gratuita. Los servicios de entrenadores y las entradas a gimnasios se pagan por separado.",
-    "signout": "Cerrar sesión"
+    "signout": "Cerrar sesión",
+    "emailPlaceholder": "Introduce tu correo electrónico",
+    "accountHint": "Si aún no tienes una cuenta en Fitliner, te crearemos una gratis. Sin contraseña: iniciarás sesión con un enlace enviado a tu correo.",
+    "verifyContinue": "Verificar correo y continuar"
   },
   "it": {
     "confirmed": "Il tuo allenamento è prenotato",
@@ -197,7 +218,10 @@
     "progressBenefit": "Diario degli allenamenti e monitoraggio dei progressi",
     "gymBenefit": "Contatto con il trainer e accesso alle palestre aderenti",
     "freeNote": "L’app è gratuita. I servizi dei trainer e gli ingressi in palestra si pagano separatamente.",
-    "signout": "Esci"
+    "signout": "Esci",
+    "emailPlaceholder": "Inserisci la tua e-mail",
+    "accountHint": "Se non hai ancora un account Fitliner, ne creeremo uno gratuitamente. Senza password — accedi tramite il link ricevuto via e-mail.",
+    "verifyContinue": "Verifica e-mail e continua"
   },
   "ro": {
     "confirmed": "Antrenamentul tău este rezervat",
@@ -222,7 +246,10 @@
     "progressBenefit": "Jurnal de antrenament și urmărirea progresului",
     "gymBenefit": "Contact cu antrenorul și acces la sălile participante",
     "freeNote": "Aplicația este gratuită. Serviciile antrenorilor și accesul la săli se plătesc separat.",
-    "signout": "Deconectare"
+    "signout": "Deconectare",
+    "emailPlaceholder": "Introdu adresa ta de e-mail",
+    "accountHint": "Dacă nu ai încă un cont Fitliner, îți vom crea unul gratuit. Fără parolă — te autentifici prin linkul primit pe e-mail.",
+    "verifyContinue": "Verifică e-mailul și continuă"
   },
   "sl": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -247,7 +274,10 @@
     "progressBenefit": "Dnevnik treningov in spremljanje napredka",
     "gymBenefit": "Stik s trenerjem in dostop do sodelujočih fitnesov",
     "freeNote": "Aplikacija je brezplačna. Trenerske storitve in vstopi v fitnes se plačujejo posebej.",
-    "signout": "Odjava"
+    "signout": "Odjava",
+    "emailPlaceholder": "Vnesi svoj e-poštni naslov",
+    "accountHint": "Če še nimaš računa Fitliner, ti ga ustvarimo brezplačno. Brez gesla — prijaviš se s povezavo v e-pošti.",
+    "verifyContinue": "Potrdi e-pošto in nadaljuj"
   },
   "hr": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -272,7 +302,10 @@
     "progressBenefit": "Dnevnik treninga i praćenje napretka",
     "gymBenefit": "Kontakt s trenerom i pristup uključenim teretanama",
     "freeNote": "Aplikacija je besplatna. Trenerske usluge i ulazi u teretane plaćaju se zasebno.",
-    "signout": "Odjava"
+    "signout": "Odjava",
+    "emailPlaceholder": "Unesi svoju adresu e-pošte",
+    "accountHint": "Ako još nemaš Fitliner račun, izradit ćemo ti ga besplatno. Bez lozinke — prijaviš se poveznicom iz e-pošte.",
+    "verifyContinue": "Potvrdi e-poštu i nastavi"
   },
   "bg": {
     "confirmed": "Тренировката ти е резервирана",
@@ -297,7 +330,10 @@
     "progressBenefit": "Дневник на тренировките и проследяване на напредъка",
     "gymBenefit": "Контакт с треньора и достъп до участващи фитнеси",
     "freeNote": "Приложението е безплатно. Услугите на треньорите и входовете за фитнес се заплащат отделно.",
-    "signout": "Изход"
+    "signout": "Изход",
+    "emailPlaceholder": "Въведи своя имейл",
+    "accountHint": "Ако още нямаш профил във Fitliner, ще ти създадем безплатно. Без парола — влизаш чрез връзка в имейла.",
+    "verifyContinue": "Потвърди имейла и продължи"
   },
   "el": {
     "confirmed": "Η προπόνησή σου έχει κρατηθεί",
@@ -322,7 +358,10 @@
     "progressBenefit": "Ημερολόγιο προπονήσεων και παρακολούθηση προόδου",
     "gymBenefit": "Επικοινωνία με τον προπονητή και πρόσβαση σε συνεργαζόμενα γυμναστήρια",
     "freeNote": "Η εφαρμογή είναι δωρεάν. Οι υπηρεσίες προπονητών και η είσοδος στα γυμναστήρια χρεώνονται ξεχωριστά.",
-    "signout": "Αποσύνδεση"
+    "signout": "Αποσύνδεση",
+    "emailPlaceholder": "Πληκτρολόγησε το email σου",
+    "accountHint": "Αν δεν έχεις ακόμη λογαριασμό Fitliner, θα σου δημιουργήσουμε έναν δωρεάν. Χωρίς κωδικό — συνδέεσαι μέσω συνδέσμου στο email σου.",
+    "verifyContinue": "Επαλήθευση email και συνέχεια"
   },
   "zh-Hans": {
     "confirmed": "你的训练已预约",
@@ -347,6 +386,9 @@
     "progressBenefit": "训练记录与进度追踪",
     "gymBenefit": "联系教练并使用合作健身房",
     "freeNote": "应用免费。教练服务和健身房入场需单独付费。",
-    "signout": "退出登录"
+    "signout": "退出登录",
+    "emailPlaceholder": "输入你的电子邮箱",
+    "accountHint": "如果你还没有 Fitliner 账户，我们会免费为你创建。无需密码，通过邮件中的链接即可登录。",
+    "verifyContinue": "验证邮箱并继续"
   }
 }
