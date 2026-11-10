@@ -1,3 +1,4 @@
+import {isTrainerLocale} from './app/trainers/trainer-locale';
 import {reserved,validSlug} from './lib/public-profiles/model';
 import { NextRequest, NextResponse } from "next/server";
 
@@ -49,7 +50,7 @@ function localeRequestHeaders(request: NextRequest, locale: string | null) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set(
     "x-fitliner-locale",
-    locale && (LOCALES.has(locale) || locale === "pl" || locale === "hu") ? locale : "en",
+    locale && isTrainerLocale(locale) ? locale : "en",
   );
   return requestHeaders;
 }
@@ -109,6 +110,10 @@ export async function proxy(request: NextRequest) {
   const pathLocale =
     request.nextUrl.pathname.split("/").filter(Boolean)[0] ?? null;
 
+  const trainerRoute = request.nextUrl.pathname.match(/^\/trainers\/[a-z][a-z0-9-]{2,63}(?:\/([^/]+))?\/?$/);
+  if (!slug && trainerRoute) {
+    return NextResponse.next({request:{headers:localeRequestHeaders(request, trainerRoute[1] || 'sk')}});
+  }
   // Preserve published legacy trainer storefronts at their existing short URLs.
   const shortSlug=request.nextUrl.pathname.match(/^\/([a-z0-9]+(?:-[a-z0-9]+)*)\/?$/)?.[1];
   if (!slug && shortSlug && !reserved.has(shortSlug) && process.env.TRAINER_STOREFRONT_ENABLED==='true') {
