@@ -26,7 +26,12 @@
     "emailPlaceholder": "Zadaj svoj e-mail",
     "accountHint": "Ak ešte nemáš účet vo Fitlineri, vytvoríme ti ho zdarma. Bez hesla — prihlásiš sa odkazom v e-maile.",
     "verifyContinue": "Overiť e-mail a pokračovať",
-    "verifiedContinue": "E-mail je overený. Pokračuj k platbe za vybraný tréning."
+    "verifiedContinue": "E-mail je overený. Pokračuj k platbe za vybraný tréning.",
+    "openingPayment": "Otvárame platbu…",
+    "bookingLabel": "Rezervácie a platby",
+    "planLabel": "Plány na mieru",
+    "progressLabel": "Tvoj pokrok",
+    "gymLabel": "Tréner a fitnesscentrum"
   },
   "en": {
     "confirmed": "Your training is booked",
@@ -55,7 +60,12 @@
     "emailPlaceholder": "Enter your email",
     "accountHint": "If you don’t have a Fitliner account yet, we’ll create one for free. No password — sign in using a link in your email.",
     "verifyContinue": "Verify email and continue",
-    "verifiedContinue": "Your email is verified. Continue to payment for your selected training."
+    "verifiedContinue": "Your email is verified. Continue to payment for your selected training.",
+    "openingPayment": "Opening payment…",
+    "bookingLabel": "Bookings and payments",
+    "planLabel": "Personalized plans",
+    "progressLabel": "Your progress",
+    "gymLabel": "Trainer and gym"
   },
   "de": {
     "confirmed": "Dein Training ist gebucht",
@@ -84,7 +94,12 @@
     "emailPlaceholder": "Gib deine E-Mail-Adresse ein",
     "accountHint": "Wenn du noch kein Fitliner-Konto hast, erstellen wir kostenlos eines für dich. Ohne Passwort — du meldest dich über einen Link in deiner E-Mail an.",
     "verifyContinue": "E-Mail bestätigen und weiter",
-    "verifiedContinue": "Deine E-Mail ist bestätigt. Fahre mit der Zahlung für dein ausgewähltes Training fort."
+    "verifiedContinue": "Deine E-Mail ist bestätigt. Fahre mit der Zahlung für dein ausgewähltes Training fort.",
+    "openingPayment": "Zahlung wird geöffnet…",
+    "bookingLabel": "Buchungen und Zahlungen",
+    "planLabel": "Persönliche Pläne",
+    "progressLabel": "Dein Fortschritt",
+    "gymLabel": "Trainer und Fitnessstudio"
   },
   "pl": {
     "confirmed": "Twój trening jest zarezerwowany",
@@ -113,7 +128,12 @@
     "emailPlaceholder": "Wpisz swój e-mail",
     "accountHint": "Jeśli nie masz jeszcze konta w Fitliner, utworzymy je bezpłatnie. Bez hasła — zalogujesz się linkiem w e-mailu.",
     "verifyContinue": "Potwierdź e-mail i kontynuuj",
-    "verifiedContinue": "Twój e-mail został potwierdzony. Przejdź do płatności za wybrany trening."
+    "verifiedContinue": "Twój e-mail został potwierdzony. Przejdź do płatności za wybrany trening.",
+    "openingPayment": "Otwieramy płatność…",
+    "bookingLabel": "Rezerwacje i płatności",
+    "planLabel": "Plany dla Ciebie",
+    "progressLabel": "Twoje postępy",
+    "gymLabel": "Trener i siłownia"
   },
   "hu": {
     "confirmed": "Az edzésed lefoglalva",
@@ -142,7 +162,12 @@
     "emailPlaceholder": "Add meg az e-mail-címed",
     "accountHint": "Ha még nincs Fitliner-fiókod, ingyen létrehozunk neked egyet. Jelszó nélkül — az e-mailben kapott linkkel jelentkezhetsz be.",
     "verifyContinue": "E-mail megerősítése és folytatás",
-    "verifiedContinue": "Az e-mail-címed megerősítve. Folytasd a kiválasztott edzés kifizetésével."
+    "verifiedContinue": "Az e-mail-címed megerősítve. Folytasd a kiválasztott edzés kifizetésével.",
+    "openingPayment": "Fizetés megnyitása…",
+    "bookingLabel": "Foglalások és fizetések",
+    "planLabel": "Személyre szabott tervek",
+    "progressLabel": "Fejlődésed",
+    "gymLabel": "Edző és edzőterem"
   },
   "fr": {
     "confirmed": "Ton entraînement est réservé",
@@ -171,7 +196,12 @@
     "emailPlaceholder": "Saisis ton adresse e-mail",
     "accountHint": "Si tu n’as pas encore de compte Fitliner, nous en créerons un gratuitement. Sans mot de passe — connecte-toi avec le lien reçu par e-mail.",
     "verifyContinue": "Vérifier l’e-mail et continuer",
-    "verifiedContinue": "Ton e-mail est vérifié. Passe au paiement de l’entraînement choisi."
+    "verifiedContinue": "Ton e-mail est vérifié. Passe au paiement de l’entraînement choisi.",
+    "openingPayment": "Ouverture du paiement…",
+    "bookingLabel": "Réservations et paiements",
+    "planLabel": "Plans personnalisés",
+    "progressLabel": "Tes progrès",
+    "gymLabel": "Coach et salle de sport"
   },
   "es": {
     "confirmed": "Tu entrenamiento está reservado",
@@ -200,7 +230,12 @@
     "emailPlaceholder": "Introduce tu correo electrónico",
     "accountHint": "Si aún no tienes una cuenta en Fitliner, te crearemos una gratis. Sin contraseña: iniciarás sesión con un enlace enviado a tu correo.",
     "verifyContinue": "Verificar correo y continuar",
-    "verifiedContinue": "Tu correo está verificado. Continúa con el pago del entrenamiento elegido."
+    "verifiedContinue": "Tu correo está verificado. Continúa con el pago del entrenamiento elegido.",
+    "openingPayment": "Abriendo el pago…",
+    "bookingLabel": "Reservas y pagos",
+    "planLabel": "Planes personalizados",
+    "progressLabel": "Tu progreso",
+    "gymLabel": "Entrenador y gimnasio"
   },
   "it": {
     "confirmed": "Il tuo allenamento è prenotato",
@@ -229,7 +264,12 @@
     "emailPlaceholder": "Inserisci la tua e-mail",
     "accountHint": "Se non hai ancora un account Fitliner, ne creeremo uno gratuitamente. Senza password — accedi tramite il link ricevuto via e-mail.",
     "verifyContinue": "Verifica e-mail e continua",
-    "verifiedContinue": "La tua e-mail è verificata. Procedi al pagamento dell’allenamento scelto."
+    "verifiedContinue": "La tua e-mail è verificata. Procedi al pagamento dell’allenamento scelto.",
+    "openingPayment": "Apertura del pagamento…",
+    "bookingLabel": "Prenotazioni e pagamenti",
+    "planLabel": "Piani personalizzati",
+    "progressLabel": "I tuoi progressi",
+    "gymLabel": "Trainer e palestra"
   },
   "ro": {
     "confirmed": "Antrenamentul tău este rezervat",
@@ -258,7 +298,12 @@
     "emailPlaceholder": "Introdu adresa ta de e-mail",
     "accountHint": "Dacă nu ai încă un cont Fitliner, îți vom crea unul gratuit. Fără parolă — te autentifici prin linkul primit pe e-mail.",
     "verifyContinue": "Verifică e-mailul și continuă",
-    "verifiedContinue": "E-mailul tău este verificat. Continuă cu plata antrenamentului ales."
+    "verifiedContinue": "E-mailul tău este verificat. Continuă cu plata antrenamentului ales.",
+    "openingPayment": "Deschidem plata…",
+    "bookingLabel": "Rezervări și plăți",
+    "planLabel": "Planuri personalizate",
+    "progressLabel": "Progresul tău",
+    "gymLabel": "Antrenor și sală"
   },
   "sl": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -287,7 +332,12 @@
     "emailPlaceholder": "Vnesi svoj e-poštni naslov",
     "accountHint": "Če še nimaš računa Fitliner, ti ga ustvarimo brezplačno. Brez gesla — prijaviš se s povezavo v e-pošti.",
     "verifyContinue": "Potrdi e-pošto in nadaljuj",
-    "verifiedContinue": "Tvoj e-poštni naslov je potrjen. Nadaljuj s plačilom izbranega treninga."
+    "verifiedContinue": "Tvoj e-poštni naslov je potrjen. Nadaljuj s plačilom izbranega treninga.",
+    "openingPayment": "Odpiramo plačilo…",
+    "bookingLabel": "Rezervacije in plačila",
+    "planLabel": "Prilagojeni načrti",
+    "progressLabel": "Tvoj napredek",
+    "gymLabel": "Trener in fitnes"
   },
   "hr": {
     "confirmed": "Tvoj trening je rezerviran",
@@ -316,7 +366,12 @@
     "emailPlaceholder": "Unesi svoju adresu e-pošte",
     "accountHint": "Ako još nemaš Fitliner račun, izradit ćemo ti ga besplatno. Bez lozinke — prijaviš se poveznicom iz e-pošte.",
     "verifyContinue": "Potvrdi e-poštu i nastavi",
-    "verifiedContinue": "Tvoja e-pošta je potvrđena. Nastavi s plaćanjem odabranog treninga."
+    "verifiedContinue": "Tvoja e-pošta je potvrđena. Nastavi s plaćanjem odabranog treninga.",
+    "openingPayment": "Otvaramo plaćanje…",
+    "bookingLabel": "Rezervacije i plaćanja",
+    "planLabel": "Prilagođeni planovi",
+    "progressLabel": "Tvoj napredak",
+    "gymLabel": "Trener i teretana"
   },
   "bg": {
     "confirmed": "Тренировката ти е резервирана",
@@ -345,7 +400,12 @@
     "emailPlaceholder": "Въведи своя имейл",
     "accountHint": "Ако още нямаш профил във Fitliner, ще ти създадем безплатно. Без парола — влизаш чрез връзка в имейла.",
     "verifyContinue": "Потвърди имейла и продължи",
-    "verifiedContinue": "Имейлът ти е потвърден. Продължи с плащането за избраната тренировка."
+    "verifiedContinue": "Имейлът ти е потвърден. Продължи с плащането за избраната тренировка.",
+    "openingPayment": "Отваряме плащането…",
+    "bookingLabel": "Резервации и плащания",
+    "planLabel": "Персонални планове",
+    "progressLabel": "Твоят напредък",
+    "gymLabel": "Треньор и фитнес"
   },
   "el": {
     "confirmed": "Η προπόνησή σου έχει κρατηθεί",
@@ -374,7 +434,12 @@
     "emailPlaceholder": "Πληκτρολόγησε το email σου",
     "accountHint": "Αν δεν έχεις ακόμη λογαριασμό Fitliner, θα σου δημιουργήσουμε έναν δωρεάν. Χωρίς κωδικό — συνδέεσαι μέσω συνδέσμου στο email σου.",
     "verifyContinue": "Επαλήθευση email και συνέχεια",
-    "verifiedContinue": "Το email σου επαληθεύτηκε. Συνέχισε στην πληρωμή της επιλεγμένης προπόνησης."
+    "verifiedContinue": "Το email σου επαληθεύτηκε. Συνέχισε στην πληρωμή της επιλεγμένης προπόνησης.",
+    "openingPayment": "Άνοιγμα πληρωμής…",
+    "bookingLabel": "Κρατήσεις και πληρωμές",
+    "planLabel": "Εξατομικευμένα πλάνα",
+    "progressLabel": "Η πρόοδός σου",
+    "gymLabel": "Προπονητής και γυμναστήριο"
   },
   "zh-Hans": {
     "confirmed": "你的训练已预约",
@@ -403,6 +468,11 @@
     "emailPlaceholder": "输入你的电子邮箱",
     "accountHint": "如果你还没有 Fitliner 账户，我们会免费为你创建。无需密码，通过邮件中的链接即可登录。",
     "verifyContinue": "验证邮箱并继续",
-    "verifiedContinue": "你的邮箱已验证。请继续支付所选训练。"
+    "verifiedContinue": "你的邮箱已验证。请继续支付所选训练。",
+    "openingPayment": "正在打开付款页面…",
+    "bookingLabel": "预约与付款",
+    "planLabel": "个性化计划",
+    "progressLabel": "你的进度",
+    "gymLabel": "教练与健身房"
   }
 }

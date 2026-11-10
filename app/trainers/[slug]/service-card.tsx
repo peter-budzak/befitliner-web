@@ -14,6 +14,8 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
   const [selected,setSelected]=useState('');
   const [day,setDay]=useState('');
   const [busy,setBusy]=useState(false);
+  const [paying,setPaying]=useState(false);
+  const redirecting=useRef(false);
   const [login,setLogin]=useState(false);
   const [message,setMessage]=useState('');
   const [email,setEmail]=useState('');
@@ -36,24 +38,33 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
     }
     document.getElementById('service-'+offer.id)?.scrollIntoView({block:'start'});
   },[slots,offer.id,locale,checkout]);
+  useEffect(()=>{
+    function restored(event:PageTransitionEvent){
+      if(event.persisted){redirecting.current=false;inFlight.current=false;setBusy(false);setPaying(false);}
+    }
+    window.addEventListener('pageshow',restored);
+    return()=>window.removeEventListener('pageshow',restored);
+  },[]);
   async function run(task:()=>Promise<void>){
     if(inFlight.current)return;
     inFlight.current=true;setBusy(true);setMessage('');
-    try{await task();}catch{setMessage(t.error);}finally{inFlight.current=false;setBusy(false);}
+    try{await task();}catch{setMessage(t.error);}finally{if(!redirecting.current){inFlight.current=false;setBusy(false);setPaying(false);}}
   }
   async function pay(){
     if(!checkout || (scheduled && !slot))return;
+    setPaying(true);
     const {data:{session}}=await supabase.auth.getSession();
     if(!session){setLogin(true);return;}
 
     const key=[session.user.id,offer.id,slot?.id].join('/');
     const requestId=retries.current.get(key) ?? crypto.randomUUID();
     retries.current.set(key,requestId);
-    const {data,error}=await supabase.functions.invoke('trainer-commerce',{body:{action:'checkout',offer_id:offer.id,request_id:requestId,...(slot?{slot_id:slot.id}:{})}});
+    const {data,error}=await supabase.functions.invoke('trainer-commerce',{body:{action:'checkout',offer_id:offer.id,request_id:requestId,locale,...(slot?{slot_id:slot.id}:{})}});
     if(error || !data?.url || (await supabase.auth.getSession()).data.session?.user.id!==session.user.id)throw Error();
     const url=new URL(data.url);
     if(url.protocol!=='https:' || !(url.hostname==='stripe.com'||url.hostname.endsWith('.stripe.com')))throw Error();
-    window.location.assign(url.href);
+    redirecting.current=true;
+    try{window.location.assign(url.href);}catch(error){redirecting.current=false;throw error;}
   }
   const date=(s:PublicSlot)=>new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short',timeZone:s.timezone}).format(new Date(s.starts_at));
   const price=new Intl.NumberFormat(locale,{style:'currency',currency:offer.currency||'EUR'}).format(offer.price_minor/100);
@@ -106,8 +117,8 @@ export default function ServiceCard({offer,slots,locale,checkout,slug,showEmpty,
       <strong>{date(slot)} · {price}</strong><p>{t.remaining}: {slot.remaining}</p>
       <details><summary>{t.terms}</summary><p>{t.change.replace('{n}',String(slot.cancellation_hours))} {t.refund}</p></details>
     </div>}
-    {checkout && !login && (!scheduled || !!free?.length) && <button className="book-action" disabled={busy || (scheduled && !slot)} onClick={()=>void run(pay)}>
-      {scheduled ? (slot ? t.bookPay+' · '+price : t.choose) : t.buy+' · '+price}
+    {checkout && !login && (!scheduled || !!free?.length) && <button className="book-action" aria-busy={paying} disabled={busy || (scheduled && !slot)} onClick={()=>void run(pay)}>
+      {paying ? <><span className="payment-spinner" aria-hidden="true"/><span role="status">{handoffCopy[locale].openingPayment}</span></> : scheduled ? (slot ? t.bookPay+' · '+price : t.choose) : t.buy+' · '+price}
     </button>}
     {checkout && scheduled && slots===null && <button className="refresh" disabled={busy} onClick={()=>{setBusy(true);window.location.reload();}}>{t.refresh}</button>}
     {login && <form onSubmit={e=>{e.preventDefault();void run(async()=>{

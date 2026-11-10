@@ -19,6 +19,7 @@ const validId=(id:string)=>/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-
 export default function CustomerHandoff({orderId,initialLocale}:{orderId:string;initialLocale:string}) {
   const [locale,setLocale]=useState<Locale>(Object.hasOwn(copy,initialLocale)?initialLocale as Locale:'en');
   const t=copy[locale];
+  const languageChosen=useRef(false);
   const [identity,setIdentity]=useState<{id:string;email:string}|null>(null);
   const [ready,setReady]=useState(false);
   const [email,setEmail]=useState('');
@@ -41,15 +42,15 @@ export default function CustomerHandoff({orderId,initialLocale}:{orderId:string;
     return()=>{active=false;data.subscription.unsubscribe();};
   },[]);
   useEffect(()=>{
-    if(!identity)return;
+    if(!identity || Object.hasOwn(copy,initialLocale))return;
     let active=true;
     const uid=identity.id;
-    // The saved app language wins over a browser-language guess.
+    // An explicit checkout language wins; profile is only a fallback.
     void supabase.from('profiles').select('language').eq('id',uid).maybeSingle().then(({data})=>{
-      if(active && currentUser.current===uid && data?.language && Object.hasOwn(copy,data.language))setLocale(data.language as Locale);
+      if(active && !languageChosen.current && currentUser.current===uid && data?.language && Object.hasOwn(copy,data.language))setLocale(data.language as Locale);
     });
     return()=>{active=false;};
-  },[identity?.id]);
+  },[identity?.id,initialLocale]);
   useEffect(()=>{
     if(!identity)return;
     let active=true;
@@ -93,7 +94,7 @@ export default function CustomerHandoff({orderId,initialLocale}:{orderId:string;
   }
   const slot=result?.booking?.slot_snapshot;
   return <main className="customer-handoff" lang={locale}>
-    <header><a href={`/${locale}`}>FITLINER</a><select aria-label="Language" value={locale} onChange={e=>setLocale(e.target.value as Locale)}>{Object.keys(copy).map(lang=><option key={lang} value={lang}>{new Intl.DisplayNames([lang],{type:'language'}).of(lang)}</option>)}</select></header>
+    <header><a href={`/${locale}`}>FITLINER</a><select aria-label="Language" value={locale} onChange={e=>{languageChosen.current=true;setLocale(e.target.value as Locale);}}>{Object.keys(copy).map(lang=><option key={lang} value={lang}>{new Intl.DisplayNames([lang],{type:'language'}).of(lang)}</option>)}</select></header>
     {!ready?<p role="status">{t.pending}</p>:!identity?<section>
       <h1>{t.sameEmail}</h1><p>{t.error}</p>
       <form onSubmit={login}><label htmlFor="handoff-email">E-mail</label><input id="handoff-email" type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)}/><button disabled={busy}>{t.verify}</button></form>
@@ -106,7 +107,12 @@ export default function CustomerHandoff({orderId,initialLocale}:{orderId:string;
       <section className="app-invitation"><h2>{t.title}</h2><p>{t.intro}</p><div className="download-links"><a onClick={()=>track("download_click","ios")} href="https://apps.apple.com/app/id6760855966">{t.download} · iPhone</a><a onClick={()=>track("download_click","android")} href="https://play.google.com/store/apps/details?id=com.fitliner.app">{t.download} · Android</a></div>
         <p><a className="open-app" onClick={()=>track("open_click","app")} href={`befitliner://bookings/${encodeURIComponent(orderId)}`}>{t.open} ↗</a></p>
         <p className="same-account">{t.sameEmail}<br/><strong>{identity.email}</strong></p>
-        <h3>{t.benefits}</h3><ul>{[t.bookingBenefit,t.planBenefit,t.progressBenefit,t.gymBenefit].map(benefit=><li key={benefit}>{benefit}</li>)}</ul><small>{t.freeNote}</small>
+        <h3>{t.benefits}</h3><ul className="benefit-grid">{[
+          [t.bookingLabel,t.bookingBenefit,'M4 6h16v14H4z M8 3v6 M16 3v6 M4 11h16'],
+          [t.planLabel,t.planBenefit,'M5 4h14v17H5z M8 8h8 M8 12h8 M8 16h5'],
+          [t.progressLabel,t.progressBenefit,'M4 4v16h17 M7 15l4-5 4 2 5-7'],
+          [t.gymLabel,t.gymBenefit,'M4 5h16v12H9l-5 4z M8 9h8 M8 13h5'],
+        ].map(([label,description,path])=><li key={label}><span className="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d={path}/></svg></span><div><h4>{label}</h4><p>{description}</p></div></li>)}</ul><small className="free-note">{t.freeNote}</small>
       </section><p><a href="/trainers/account">{t.web} →</a></p>
     </>}
   </main>;

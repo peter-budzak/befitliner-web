@@ -6,3 +6,8 @@
 .schedule-panel{margin-top:16px;border-top:1px solid #463d50;padding-top:14px}.schedule-panel h4{font-size:1rem;font-weight:650}.slot-group small{display:block;color:var(--muted);margin-top:2px}.slot-times{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px;font-variant-numeric:tabular-nums}.slot-times time{font-weight:650}.slot-times time+time::before{content:'·';margin-right:8px;color:var(--muted)}.service-card .slot-times button{margin:0;background:transparent;color:var(--ink);min-width:72px}.service-card .slot-times button[aria-pressed=true]{background:var(--accent);color:#201529;border-color:var(--accent)}.booking-review{margin-top:16px;border-top:1px solid #463d50;padding-top:14px}.booking-review details{margin-top:8px}.booking-review summary{cursor:pointer;color:var(--muted)}.service-card .book-action{width:100%;font-weight:700}.slot-group+.slot-group{margin-top:14px}
 
 .service-card .account-hint{font-size:.9rem;line-height:1.5;color:var(--muted,#c8bfd0);margin:10px 0 16px}
+
+.service-card .book-action[aria-busy="true"]{display:flex;align-items:center;justify-content:center;gap:10px;opacity:1;cursor:wait}
+.payment-spinner{display:inline-block;width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:payment-spin .8s linear infinite;flex-shrink:0}
+@keyframes payment-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.payment-spinner{animation:none}}
