@@ -11,3 +11,10 @@
 .customer-handoff .same-account{font-size:14px;line-height:1.5;margin-top:18px}
 .customer-handoff .same-account strong{display:inline-block;margin-top:4px;font-size:15px}
 @media(max-width:560px){.customer-handoff .benefit-grid{grid-template-columns:1fr}.customer-handoff .app-invitation h2{font-size:24px}.customer-handoff .app-invitation>p{font-size:15px}.customer-handoff .open-app{font-size:14px}.customer-handoff .download-links a{font-size:15px}}
+
+.customer-handoff .download-links a{display:flex;align-items:center;justify-content:flex-start;gap:14px;flex:0 1 250px;width:250px;max-width:100%;min-width:0;min-height:76px;padding:12px 18px;background:#000;color:#fff;border:1px solid #707070;border-radius:12px;text-align:left;font-weight:400}
+.customer-handoff .download-links a:hover{background:#101013;border-color:#cbb6ff}
+.customer-handoff .download-links img{width:36px;height:40px;object-fit:contain;flex-shrink:0}
+.customer-handoff .download-links span{min-width:0}
+.customer-handoff .download-links small{display:block;color:#fff;font-size:12px;line-height:1.4}
+.customer-handoff .download-links strong{display:block;color:#fff;font-size:26px;line-height:1.15;letter-spacing:-.6px;font-weight:500;white-space:nowrap}

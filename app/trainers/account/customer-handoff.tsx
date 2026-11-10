@@ -1,5 +1,6 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
+import Image from 'next/image';
 import {supabase} from '@/lib/supabase';
 import copy from '../handoff-copy.json';
 import './handoff.css';
@@ -104,7 +105,7 @@ export default function CustomerHandoff({orderId,initialLocale}:{orderId:string;
         {slot&&<><p>{new Intl.DateTimeFormat(locale,{dateStyle:'full',timeStyle:'short',timeZone:slot.timezone}).format(new Date(slot.starts_at))}</p><p>{slot.location}</p><small>{slot.timezone}</small></>}
         <p className="purchase-price">{new Intl.NumberFormat(locale,{style:'currency',currency:result.order.offer_snapshot.currency||'EUR'}).format(result.order.offer_snapshot.price_minor/100)}</p>
       </section>
-      <section className="app-invitation"><h2>{t.title}</h2><p>{t.intro}</p><div className="download-links"><a onClick={()=>track("download_click","ios")} href="https://apps.apple.com/app/id6760855966">{t.download} · iPhone</a><a onClick={()=>track("download_click","android")} href="https://play.google.com/store/apps/details?id=com.fitliner.app">{t.download} · Android</a></div>
+      <section className="app-invitation"><h2>{t.title}</h2><p>{t.intro}</p><div className="download-links"><a onClick={()=>track("download_click","ios")} href="https://apps.apple.com/app/id6760855966"><Image src="/badge/appstore.png" alt="" width={36} height={40} loading="eager" unoptimized/><span><small>{t.download}</small><strong>App Store</strong></span></a><a onClick={()=>track("download_click","android")} href="https://play.google.com/store/apps/details?id=com.fitliner.app"><Image src="/badge/googleplay.png" alt="" width={36} height={40} loading="eager" unoptimized/><span><small>{t.download}</small><strong>Google Play</strong></span></a></div>
         <p><a className="open-app" onClick={()=>track("open_click","app")} href={`befitliner://bookings/${encodeURIComponent(orderId)}`}>{t.open} ↗</a></p>
         <p className="same-account">{t.sameEmail}<br/><strong>{identity.email}</strong></p>
         <h3>{t.benefits}</h3><ul className="benefit-grid">{[
