@@ -11,19 +11,28 @@ const bookingSteps = ["Tvoj profil", "Výber termínu", "Potvrdená rezervácia"
 
 const trainerBenefits = [
   {
-    title: "Faktúry sa pošlú po platbe",
+    title: "Jednorazové tréningy",
     description:
-      "Fitliner vystaví faktúru v tvojom mene a pošle ju klientovi e-mailom. Doklady za vybrané obdobie si stiahneš pre účtovníčku.",
+      "Predávaj osobné, skupinové aj online tréningy. Klient zaplatí za konkrétny tréning.",
+    icon: "M8 3v4m8-4v4M4 10h16m-9 5 2 2 3-4M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z",
   },
   {
-    title: "Koučing s mesačnou platbou",
+    title: "Mesačné predplatné",
     description:
-      "Nastav mesačnú cenu za spoluprácu. Po úvodnom nákupe sa ďalšie platby vyberajú automaticky podľa predplatného.",
+      "Ponúkni dlhodobejší koučing s mesačnou cenou. Po prvom nákupe sa platby vyberajú automaticky.",
+    icon: "M20 7v4h-4M4 17v-4h4M5 9a7.5 7.5 0 0 1 12-3l3 5M4 13l3 5a7.5 7.5 0 0 0 12-3",
   },
   {
-    title: "Tréningový denník, na ktorý môžeš nadviazať",
+    title: "Faktúry po platbe",
     description:
-      "Keď ti klient sprístupní svoj denník, vidíš, čo odcvičil. Podľa udeleného prístupu môžeš pridať spätnú väzbu alebo navrhnúť úpravy.",
+      "Fitliner pošle klientovi faktúru v tvojom mene. Doklady si stiahneš pre účtovníčku.",
+    icon: "M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 3h3",
+  },
+  {
+    title: "Zdieľaný tréningový denník",
+    description:
+      "Keď ti klient sprístupní denník, vidíš, čo odcvičil. Podľa oprávnení mu môžeš dať spätnú väzbu.",
+    icon: "M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14M6 9h3m6 0h3M6 13h3m6 0h3",
   },
 ];
 
@@ -109,11 +118,29 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
         <h2 id="trainer-benefits" className="text-2xl font-bold">
           Menej administratívy, viac času na klientov
         </h2>
-        <ul className="mt-4 divide-y divide-white/10">
-          {trainerBenefits.map(({ title, description }) => (
-            <li key={title} className="py-4">
-              <h3 className="font-semibold text-[#e3d6ff]">{title}</h3>
-              <p className="mt-1 text-sm leading-6 text-white/70">
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {trainerBenefits.map(({ title, description, icon }) => (
+            <li
+              key={title}
+              className="rounded-2xl border border-[#ac83ff]/20 bg-[#9568ff]/5 p-4"
+            >
+              <span className="grid size-10 place-items-center rounded-xl bg-[#9568ff]/15 text-[#c8adff]">
+                <svg
+                  aria-hidden="true"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d={icon} />
+                </svg>
+              </span>
+              <h3 className="mt-3 font-semibold text-[#e3d6ff]">{title}</h3>
+              <p className="mt-1 text-sm leading-6 text-white/75">
                 {description}
               </p>
             </li>
@@ -121,17 +148,7 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
         </ul>
       </section>
 
-      <section aria-labelledby="trainer-price" className={`${card} mt-5`}>
-        <h2 id="trainer-price" className="text-2xl font-bold">
-          Profil zadarmo, bez mesačného paušálu
-        </h2>
-        <p className="mt-3 text-sm leading-6 text-white/75">
-          Fitliner si účtuje <strong>5 % z úspešných platieb</strong> za tvoje
-          služby. Poplatky Stripe platíš samostatne. Pri refundácii sa provízia
-          Fitlineru nevracia.
-        </p>
-        {startButton}
-      </section>
+      {startButton}
     </div>
   );
 }
