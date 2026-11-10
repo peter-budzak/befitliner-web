@@ -1,42 +1,24 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { trainerIntroCopy } from "@/lib/trainer-intro-copy";
+import { locales } from "@/lib/trainer-join-copy";
 
 const cta =
   "mt-7 w-full rounded-2xl bg-[#7947ff] p-5 font-bold text-white transition hover:bg-[#956eff] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
 const card =
   "rounded-3xl border border-white/10 bg-gradient-to-br from-[#292137] to-[#19151f] p-6";
 
-const bookingSteps = ["Tvoj profil", "Výber termínu", "Potvrdená rezervácia"];
-
-const trainerBenefits = [
-  {
-    title: "Jednorazové tréningy",
-    description:
-      "Predávaj osobné, skupinové aj online tréningy. Klient zaplatí za konkrétny tréning.",
-    icon: "M8 3v4m8-4v4M4 10h16m-9 5 2 2 3-4M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z",
-  },
-  {
-    title: "Mesačné predplatné",
-    description:
-      "Ponúkni dlhodobejší koučing s mesačnou cenou. Po prvom nákupe sa platby vyberajú automaticky.",
-    icon: "M20 7v4h-4M4 17v-4h4M5 9a7.5 7.5 0 0 1 12-3l3 5M4 13l3 5a7.5 7.5 0 0 0 12-3",
-  },
-  {
-    title: "Faktúry po platbe",
-    description:
-      "Fitliner pošle klientovi faktúru v tvojom mene. Doklady si stiahneš pre účtovníčku.",
-    icon: "M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 3h3",
-  },
-  {
-    title: "Zdieľaný tréningový denník",
-    description:
-      "Keď ti klient sprístupní denník, vidíš, čo odcvičil. Podľa oprávnení mu môžeš dať spätnú väzbu.",
-    icon: "M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14M6 9h3m6 0h3M6 13h3m6 0h3",
-  },
+const benefitIcons = [
+  "M8 3v4m8-4v4M4 10h16m-9 5 2 2 3-4M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z",
+  "M20 7v4h-4M4 17v-4h4M5 9a7.5 7.5 0 0 1 12-3l3 5M4 13l3 5a7.5 7.5 0 0 0 12-3",
+  "M6 3h9l3 3v15H6V3Zm8 0v4h4M9 11h6m-6 4h6m-6 3h3",
+  "M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14M6 9h3m6 0h3M6 13h3m6 0h3",
 ];
 
-export function TrainerIntro({ onNext }: { onNext: () => void }) {
+export function TrainerIntro({ locale, onNext }: { locale: string; onNext: () => void }) {
+  const copy = trainerIntroCopy[locales.find((item) => item === locale) ?? "en"];
+
   function startProfile() {
     onNext();
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -48,7 +30,7 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
       className={`${cta} flex items-center justify-between gap-3 text-left shadow-[0_8px_40px_-12px_#7947ff]`}
       onClick={startProfile}
     >
-      Vytvoriť trénerský profil zadarmo
+      {copy.start}
       <span aria-hidden="true">↗</span>
     </button>
   );
@@ -61,25 +43,23 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
       />
       <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#ad86ff]/25 bg-[#7947ff]/10 px-4 py-2 text-xs font-bold uppercase tracking-[.14em] text-[#c8adff]">
         <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#b58cff]" />
-        Pre trénerov a koučov
+        {copy.audience}
       </p>
       <h1 className="text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl">
-        Pošli jeden odkaz.{" "}
+        {copy.headline}{" "}
         <span className="bg-gradient-to-r from-[#c5aaff] to-[#a487ff] bg-clip-text text-transparent">
-          Klient si vyberie termín a zaplatí online.
+          {copy.highlight}
         </span>
       </h1>
       <p className="mt-5 text-base leading-7 text-[#e3d6ff] sm:text-lg">
-        Na vlastnej stránke vo Fitlineri ukážeš služby, ceny aj voľné termíny.
-        V kalendári vidíš, kto má potvrdenú rezerváciu, a Fitliner pošle
-        klientovi faktúru.
+        {copy.description}
       </p>
       {startButton}
       <a
         href="#ako-to-funguje"
         className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#c8adff] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >
-        Pozrieť, ako to funguje <span aria-hidden="true">↓</span>
+        {copy.seeHow} <span aria-hidden="true">↓</span>
       </a>
 
       <section
@@ -88,7 +68,7 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
         className="mt-8 scroll-mt-6"
       >
         <h2 id="ako-to-funguje-nadpis" className="text-2xl font-bold">
-          Ako to funguje
+          {copy.how}
         </h2>
         <div className="mt-4 flex aspect-video flex-col items-center justify-center gap-3 rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 text-center">
           <span
@@ -100,10 +80,10 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
               <path d="m10 9 5 3-5 3z" />
             </svg>
           </span>
-          <p className="font-bold">Video ukážku pripravujeme</p>
+          <p className="font-bold">{copy.videoPlaceholder}</p>
         </div>
         <ol className="mt-4 grid gap-2 sm:grid-cols-3">
-          {bookingSteps.map((step, index) => (
+          {copy.bookingSteps.map((step, index) => (
             <li key={step} className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm">
               <span aria-hidden="true" className="font-bold text-[#c8adff]">
                 {index + 1}.
@@ -116,10 +96,10 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
 
       <section aria-labelledby="trainer-benefits" className="mt-9">
         <h2 id="trainer-benefits" className="text-2xl font-bold">
-          Menej administratívy, viac času na klientov
+          {copy.benefitsTitle}
         </h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {trainerBenefits.map(({ title, description, icon }) => (
+          {copy.benefits.map(({ title, description }, index) => (
             <li
               key={title}
               className="rounded-2xl border border-[#ac83ff]/20 bg-[#9568ff]/5 p-4"
@@ -136,7 +116,7 @@ export function TrainerIntro({ onNext }: { onNext: () => void }) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d={icon} />
+                  <path d={benefitIcons[index]} />
                 </svg>
               </span>
               <h3 className="mt-3 font-semibold text-[#e3d6ff]">{title}</h3>

@@ -522,23 +522,13 @@ export default function TrainerJoin({
                 setDemo(null);
               }}
             />
-          ) : draft.step < 0 && l === "sk" ? (
-            <TrainerIntro onNext={() => setDemo("booking")} />
           ) : draft.step < 0 ? (
-            <>
-              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#7c4dff]/20 text-3xl text-[#bc9cff]">
-                ✦
-              </div>
-              <h1 className="text-4xl font-extrabold leading-tight">
-                {t.intro}
-              </h1>
-              <p className="my-7 text-lg leading-8 text-white/65">
-                {t.introBody}
-              </p>
-              <button className={button} onClick={() => update({ step: 0 })}>
-                {t.start} →
-              </button>
-            </>
+            <TrainerIntro
+              locale={l}
+              onNext={() =>
+                l === "sk" ? setDemo("booking") : update({ step: 0 })
+              }
+            />
           ) : addressStep ? (
             <form
               autoComplete="on"
