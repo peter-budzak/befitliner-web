@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { FitlinerWordmark } from '../fitliner-wordmark';
 import { useEffect, useRef, useState } from 'react';
 import { artwork, benefits, goals, locations, steps, times, workoutPreview, type Goal, type Location, type Minutes, type Step, type Venue } from './content';
 import { startPlans, type PlanId } from './offer';
@@ -15,7 +16,7 @@ function Illustration({ step, venue }: { step: Step; venue: Venue }) {
   const image = ((step === 'time' || step === 'preview') && artwork[`${step}-${venue}`]) || artwork[step];
   if (image) return <div className={styles.art}><Image src={image.src} alt={image.alt} fill sizes="(max-width: 760px) 100vw, 47vw" /></div>;
 
-  return <div className={styles.art} data-step={step} data-venue={venue} aria-hidden="true"><div className={styles.track} /><div className={styles.track} /><div className={styles.track} /><div className={styles.track} /><span className={styles.artMark}>F<span>.</span></span></div>;
+  return <div className={styles.art} data-step={step} data-venue={venue} aria-hidden="true"><div className={styles.track} /><div className={styles.track} /><div className={styles.track} /><div className={styles.track} /></div>;
 }
 
 function Choices({ label, choices, onChoose, selected }: {
@@ -84,7 +85,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
 
   return <div className={styles.shell} lang="sk">
     <header className={styles.header}>
-      <Link className={styles.logo} href="/sk" aria-label="Fitliner – domov">FITLINER<span>.</span></Link>
+      <Link className={styles.logo} href="/sk" aria-label="Fitliner – domov"><FitlinerWordmark /></Link>
       {step !== 'intro' && <div className={styles.progress} aria-label={`Krok ${position} z ${steps.length - 1}`}>
         <span>{position} / {steps.length - 1}</span>
         <progress value={position} max={steps.length - 1} />
