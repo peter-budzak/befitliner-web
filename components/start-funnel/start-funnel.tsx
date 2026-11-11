@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FitlinerWordmark } from '../fitliner-wordmark';
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { artwork, benefits, goals, locations, steps, times, workoutPreview, type Goal, type Location, type Minutes, type Step, type Venue } from './content';
 import { startPlans, type PlanId } from './offer';
 import { ProCheckout } from './pro-checkout';
@@ -32,50 +32,13 @@ function Choices({ label, choices, onChoose, selected }: {
   </div>;
 }
 
-function BenefitTabs() {
-  const [active, setActive] = useState(0);
-  const tabs = useRef<Array<HTMLButtonElement | null>>([]);
-
-  function move(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    const last = benefits.length - 1;
-    const targets: Record<string, number> = {
-      ArrowRight: (index + 1) % benefits.length,
-      ArrowLeft: (index + last) % benefits.length,
-      Home: 0,
-      End: last,
-    };
-    const target = targets[event.key];
-    if (target === undefined) return;
-    event.preventDefault();
-    setActive(target);
-    tabs.current[target]?.focus();
-  }
-
-  return <div className={styles.benefitTabs}>
-    <div role="tablist" aria-labelledby="start-title" className={styles.tabList}>
-      {benefits.map(([title], index) => <button
-        key={title}
-        ref={(element) => { tabs.current[index] = element; }}
-        id={'benefit-tab-' + index}
-        aria-controls={'benefit-panel-' + index}
-        aria-selected={active === index}
-        tabIndex={active === index ? 0 : -1}
-        type="button"
-        role="tab"
-        onClick={() => setActive(index)}
-        onKeyDown={(event) => move(event, index)}
-      >{title}</button>)}
-    </div>
-    {benefits.map(([title, detail], index) => <div
-      key={title}
-      id={'benefit-panel-' + index}
-      aria-labelledby={'benefit-tab-' + index}
-      role="tabpanel"
-      hidden={active !== index}
-      tabIndex={0}
-      className={styles.tabPanel}
-    ><p>{detail}</p></div>)}
-  </div>;
+function BenefitCards() {
+  return <dl className={styles.benefitCards}>
+    {benefits.map(([title, detail]) => <div key={title}>
+      <dt>{title}</dt>
+      <dd>{detail}</dd>
+    </div>)}
+  </dl>;
 }
 
 function ContinueButton({ label = 'Pokračovať', onClick, disabled }: {
@@ -129,8 +92,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
     setVenue(choice.id === 'gym' ? 'gym' : 'home');
   }
 
-  const titles: Record<Step, string> = {
-    intro: 'Dostaň sa do formy 3x rýchlejšie',
+  const titles: Record<Exclude<Step, 'intro'>, string> = {
     benefits: 'Čo získaš vo Fitlineri',
     goal: 'Čo chceš dosiahnuť?',
     location: 'Kde chceš začať?',
@@ -148,16 +110,16 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
       </div>}
     </header>
     <main className={styles.main}>
-      <section className={styles.stage} aria-labelledby="start-title" key={step}>
+      <section className={step === 'benefits' ? `${styles.stage} ${styles.benefitsStage}` : styles.stage} aria-labelledby="start-title" key={step}>
         <div className={styles.copy}>
           {step !== 'intro' && <button type="button" className={styles.back} onClick={() => go(step === 'offer' && !preview ? 'intro' : steps[position - 1])}>← Späť</button>}
-          <h1 id="start-title" ref={heading} tabIndex={-1}>{titles[step]}</h1>
+          <h1 id="start-title" ref={heading} tabIndex={-1}>{step === 'intro' ? <>Dostaň sa do formy <span className={styles.headlineHighlight}>3x rýchlejšie</span></> : titles[step]}</h1>
           {step === 'intro' && <>
             <p className={styles.lead}>bez nakladov na 3 rôzne aplikácie!</p>
             <ContinueButton label="ZAČAŤ" onClick={() => go('benefits')} />
           </>}
           {step === 'benefits' && <>
-            <BenefitTabs />
+            <BenefitCards />
             <ContinueButton onClick={() => go('goal')} />
           </>}
           {step === 'goal' && <>
@@ -227,7 +189,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
             </div>}
           </>}
         </div>
-        <Illustration step={step} venue={venue} />
+        {step !== 'benefits' && <Illustration step={step} venue={venue} />}
       </section>
     </main>
   </div>;
