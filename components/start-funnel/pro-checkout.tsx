@@ -68,9 +68,11 @@ export function ProCheckout({ plan }: { plan: PlanId }) {
       E-mail k účtu Fitliner
       <input type="email" autoComplete="email" required maxLength={254} value={email} onChange={(event) => setEmail(event.target.value)} />
     </label>}
-    <button className={styles.primary} type="submit" disabled={busy}>
-      {signedIn ? 'Pokračovať k platbe' : 'Poslať prihlasovací odkaz'}
-    </button>
+    <div className={styles.actionBar}>
+      <button className={styles.primary} type="submit" disabled={busy}>
+        {signedIn ? 'Pokračovať k platbe' : 'Poslať prihlasovací odkaz'}
+      </button>
+    </div>
     {message && <p className={styles.note} role="status">{message}</p>}
   </form>;
 }

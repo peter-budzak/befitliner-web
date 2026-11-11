@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FitlinerWordmark } from '../fitliner-wordmark';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { artwork, benefits, goals, locations, steps, times, workoutPreview, type Goal, type Location, type Minutes, type Step, type Venue } from './content';
 import { startPlans, type PlanId } from './offer';
 import { ProCheckout } from './pro-checkout';
@@ -27,8 +27,64 @@ function Choices({ label, choices, onChoose, selected }: {
 }) {
   return <div className={styles.choices} role="group" aria-label={label}>
     {choices.map(({ id, title, detail }) => <button key={id} type="button" className={styles.choice} aria-pressed={selected === id} onClick={() => onChoose(id)}>
-      <span><strong>{title}</strong><small>{detail}</small></span><span aria-hidden="true">→</span>
+      <span><strong>{title}</strong><small>{detail}</small></span><span className={styles.choiceIndicator} aria-hidden="true" />
     </button>)}
+  </div>;
+}
+
+function BenefitTabs() {
+  const [active, setActive] = useState(0);
+  const tabs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  function move(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const last = benefits.length - 1;
+    const targets: Record<string, number> = {
+      ArrowRight: (index + 1) % benefits.length,
+      ArrowLeft: (index + last) % benefits.length,
+      Home: 0,
+      End: last,
+    };
+    const target = targets[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    setActive(target);
+    tabs.current[target]?.focus();
+  }
+
+  return <div className={styles.benefitTabs}>
+    <div role="tablist" aria-labelledby="start-title" className={styles.tabList}>
+      {benefits.map(([title], index) => <button
+        key={title}
+        ref={(element) => { tabs.current[index] = element; }}
+        id={'benefit-tab-' + index}
+        aria-controls={'benefit-panel-' + index}
+        aria-selected={active === index}
+        tabIndex={active === index ? 0 : -1}
+        type="button"
+        role="tab"
+        onClick={() => setActive(index)}
+        onKeyDown={(event) => move(event, index)}
+      >{title}</button>)}
+    </div>
+    {benefits.map(([title, detail], index) => <div
+      key={title}
+      id={'benefit-panel-' + index}
+      aria-labelledby={'benefit-tab-' + index}
+      role="tabpanel"
+      hidden={active !== index}
+      tabIndex={0}
+      className={styles.tabPanel}
+    ><p>{detail}</p></div>)}
+  </div>;
+}
+
+function ContinueButton({ label = 'Pokračovať', onClick, disabled }: {
+  label?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+}) {
+  return <div className={styles.actionBar}>
+    <button className={styles.primary} type="button" onClick={onClick} disabled={disabled}>{label}</button>
   </div>;
 }
 
@@ -71,11 +127,11 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
     if (!choice) return;
     setLocation(choice.id);
     setVenue(choice.id === 'gym' ? 'gym' : 'home');
-    go('time');
   }
 
   const titles: Record<Step, string> = {
-    intro: 'Začni trénovať po svojom.',
+    intro: 'Dostaň sa do formy 3x rýchlejšie',
+    benefits: 'Čo získaš vo Fitlineri',
     goal: 'Čo chceš dosiahnuť?',
     location: 'Kde chceš začať?',
     time: 'Koľko času máš na tréning?',
@@ -97,24 +153,32 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
           {step !== 'intro' && <button type="button" className={styles.back} onClick={() => go(step === 'offer' && !preview ? 'intro' : steps[position - 1])}>← Späť</button>}
           <h1 id="start-title" ref={heading} tabIndex={-1}>{titles[step]}</h1>
           {step === 'intro' && <>
-            <p className={styles.lead}>Pozri si prvý tréning podľa svojho cieľa. Doma aj vo fitku, v čase, ktorý máš. Fitliner ti pomôže s plánom, stravou a sledovaním progresu.</p>
-            <button className={styles.primary} type="button" onClick={() => go('goal')}>Ukázať môj štart <span aria-hidden="true">↗</span></button>
-            <p className={styles.note}>Tri otázky a hneď uvidíš ukážku tréningu.</p>
+            <p className={styles.lead}>bez nakladov na 3 rôzne aplikácie!</p>
+            <ContinueButton label="ZAČAŤ" onClick={() => go('benefits')} />
           </>}
-          {step === 'goal' && <Choices label={titles.goal} choices={goals} selected={goal} onChoose={(id) => {
-            const choice = goals.find((item) => item.id === id);
-            if (choice) { setGoal(choice.id); go('location'); }
-          }} />}
+          {step === 'benefits' && <>
+            <BenefitTabs />
+            <ContinueButton onClick={() => go('goal')} />
+          </>}
+          {step === 'goal' && <>
+            <Choices label={titles.goal} choices={goals} selected={goal} onChoose={(id) => {
+              const choice = goals.find((item) => item.id === id);
+              if (choice) setGoal(choice.id);
+            }} />
+            <ContinueButton disabled={!goal} onClick={() => go('location')} />
+          </>}
           {step === 'location' && <>
             <p className={styles.lead}>Ak chceš {goalLabel}, vyber miesto, kde sa ti najľahšie začne.</p>
             <Choices label={titles.location} choices={locations} selected={location} onChoose={selectLocation} />
+            <ContinueButton disabled={!location} onClick={() => go('time')} />
           </>}
           {step === 'time' && <>
             <p className={styles.lead}>{location === 'both' ? 'Ukážeme ti dve verzie tréningu. Čas si zvoľ podľa svojho bežného dňa.' : venue === 'home' ? 'Doma môžeš začať cvikmi s vlastnou váhou.' : 'Vo fitku ti ukážeme cviky aj zápis tréningu, aby si nabudúce videl svoj posledný výkon.'}</p>
             <Choices label={titles.time} choices={times.map((time) => ({ id: String(time.minutes), title: `${time.minutes} minút`, detail: time.detail }))} selected={minutes?.toString()} onChoose={(id) => {
               const choice = times.find((time) => String(time.minutes) === id);
-              if (choice) { setMinutes(choice.minutes); go('preview'); }
+              if (choice) setMinutes(choice.minutes);
             }} />
+            <ContinueButton disabled={!minutes} onClick={() => go('preview')} />
           </>}
           {step === 'preview' && preview && <>
             {location === 'both' && <div className={styles.switcher} role="group" aria-label="Miesto ukážkového tréningu">
@@ -128,7 +192,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
               <p className={styles.note}>Ukážka podľa tvojich odpovedí.</p>
             </div>
             <p className={styles.lead}>{venue === 'home' ? 'V aplikácii máš ukážky cvikov. Keď budeš mať nabudúce menej času, AI tréner ti pomôže tréning skrátiť.' : 'V aplikácii si zapíšeš série, opakovania a váhy. Pri ďalšom tréningu uvidíš, kde si naposledy skončil.'}</p>
-            <button className={styles.primary} type="button" onClick={() => go('offer')}>Pozrieť ponuku <span aria-hidden="true">↗</span></button>
+            <ContinueButton label="Pozrieť ponuku" onClick={() => go('offer')} />
           </>}
           {step === 'offer' && <>
             <p className={styles.lead}>AI tréner, Zdravotná karta a celý prístup k sekciám Tréning a Strava.</p>
@@ -156,17 +220,15 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
               </p>
               {checkoutEnabled
                 ? <ProCheckout plan={plan.id} />
-                : <p className={styles.note} role="status">Online nákup zatiaľ nie je dostupný.</p>}
+                : <>
+                  <p className={styles.note} role="status">Online nákup zatiaľ nie je dostupný.</p>
+                  <ContinueButton label="Pokračovať k platbe" disabled />
+                </>}
             </div>}
           </>}
         </div>
         <Illustration step={step} venue={venue} />
       </section>
-      {step === 'intro' && <section className={styles.benefits} aria-labelledby="benefits-title">
-        <h2 id="benefits-title">Čo získaš vo Fitlineri</h2>
-        <dl>{benefits.map(([title, detail]) => <div key={title}><dt>{title}</dt><dd>{detail}</dd></div>)}</dl>
-        <button className={styles.primary} type="button" onClick={() => go('goal')}>Ukázať môj štart <span aria-hidden="true">↗</span></button>
-      </section>}
     </main>
   </div>;
 }
