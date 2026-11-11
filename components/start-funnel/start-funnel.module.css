@@ -16,7 +16,10 @@
 .header { display: flex; justify-content: space-between; align-items: center; min-height: 84px; border-bottom: 1px solid var(--edge); }
 .logo { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
 .progress { display: flex; align-items: center; gap: 12px; color: var(--soft); font-size: 13px; font-variant-numeric: tabular-nums; }
-.progress progress { width: 84px; height: 6px; accent-color: var(--accent); }
+.progress progress { appearance: none; width: 84px; height: 6px; border: 0; border-radius: 99px; background: var(--edge); color: var(--accent); overflow: hidden; }
+.progress progress::-webkit-progress-bar { background: transparent; }
+.progress progress::-webkit-progress-value { border-radius: inherit; background: var(--accent); }
+.progress progress::-moz-progress-bar { border-radius: inherit; background: var(--accent); }
 .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 90px); align-items: center; min-height: min(690px, calc(100svh - 85px)); padding-block: 36px; }
 .copy h1 { font-size: clamp(42px, 6vw, 92px); line-height: .99; letter-spacing: -.065em; font-weight: 820; margin: 0 0 24px; text-wrap: balance; }
 .copy h1:focus { outline: none; }
