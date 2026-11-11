@@ -93,25 +93,25 @@
   border-radius: .1em;
   background: var(--action);
   transform-origin: left center;
-  animation: highlightSweep .8s cubic-bezier(.2, .7, .3, 1) .18s both;
+  animation: highlightSweep 3.2s ease-out .18s infinite both;
 }
 @keyframes highlightSweep {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  0% { transform: scaleX(0); opacity: 1; }
+  26%, 80% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .headlineHighlight::before { animation: none; }
 }
 
-.benefitsStage { grid-template-columns: minmax(0, 1fr); align-items: start; min-height: auto; }
 .benefitsStage .copy h1 { font-size: clamp(34px, 6vw, 70px); }
-.benefitCards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0; }
+.benefitCards { display: grid; gap: 10px; margin: 0; }
 .benefitCards > div { border: 1px solid var(--edge); border-radius: 16px; background: var(--surface); padding: 20px; }
 .benefitCards dt { margin-bottom: 6px; color: var(--accent); font-size: 18px; font-weight: 750; line-height: 1.25; }
 .benefitCards dd { margin: 0; color: var(--ink); line-height: 1.5; }
 
 @media (max-width: 760px) {
-  .benefitCards { grid-template-columns: 1fr; gap: 8px; }
+  .benefitCards { gap: 8px; }
   .benefitCards > div { padding: 12px 14px; }
   .benefitCards dt { margin-bottom: 4px; font-size: 16px; }
   .benefitCards dd { font-size: 14px; }
@@ -121,10 +121,10 @@
     z-index: 5;
     inset: auto 0 0;
     margin: 0;
-    padding: 10px 18px calc(12px + env(safe-area-inset-bottom));
+    padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     border-top: 1px solid var(--edge);
     background: #0b0b0d;
   }
-  .actionBar .primary { margin: 0; justify-content: center; }
+  .actionBar .primary { width: 100%; min-height: 58px; margin: 0; border-radius: 0; justify-content: center; }
   .checkoutForm input { scroll-margin-bottom: 96px; }
 }
