@@ -1,3 +1,4 @@
+import { FitlinerWordmark } from '@/components/fitliner-wordmark';
 import AcquisitionFooter from '@/components/acquisition-footer';
 import RoleGateway from '@/components/role-gateway';
 import {promises as fs} from 'fs';
@@ -515,14 +516,7 @@ export default async function Page({
       <div className="mx-auto max-w-6xl px-6 py-8">
         <div className="flex items-start justify-between gap-4">
           <div className="pt-1">
-            <div className="inline-flex items-start text-white">
-              <span className="text-[18px] font-extrabold leading-none tracking-[0.22em]">
-                F I T L I N E R
-              </span>
-              <span className="ml-[3px] -translate-y-[4px] text-[8px] font-extrabold leading-none tracking-[0.04em] text-white/70">
-                TM
-              </span>
-            </div>
+            <FitlinerWordmark />
           </div>
           <div className="flex items-center gap-2 pt-1">
             <LanguageSwitcherMobile current={locale} />
