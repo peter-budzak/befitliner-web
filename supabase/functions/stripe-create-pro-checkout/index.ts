@@ -23,8 +23,23 @@ type StripePrice = {
 type Session = { id: string; url: string | null; status: string; livemode: boolean };
 
 serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
-  if (req.method !== "POST") return jsonResponse({ error: "Method not allowed" }, 405);
+  const allowedOrigin = Deno.env.get("FITLINER_PRO_WEB_ORIGIN")?.trim();
+  const origin = req.headers.get("origin");
+  const headers = new Headers(corsHeaders);
+  headers.delete("Access-Control-Allow-Origin");
+  headers.set("Vary", "Origin");
+  if (origin && origin === allowedOrigin) headers.set("Access-Control-Allow-Origin", origin);
+  if (origin && origin !== allowedOrigin) return new Response(null, { status: 403, headers });
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
+
+  function reply(body: unknown, status = 200) {
+    const response = jsonResponse(body, status);
+    response.headers.delete("Access-Control-Allow-Origin");
+    headers.forEach((value, key) => response.headers.set(key, value));
+    return response;
+  }
+
+  if (req.method !== "POST") return reply({ error: "Method not allowed" }, 405);
   try {
     const config = proStripeConfig(requireEnv("SUPABASE_URL"));
     const site = new URL(requireEnv("FITLINER_PRO_WEB_ORIGIN"));
@@ -50,7 +65,7 @@ serve(async (req) => {
         .eq("email", caller.userEmail.toLowerCase()).not("verified_at", "is", null).maybeSingle();
       if (lead.error) throw lead.error;
       if (!lead.data) throw new HttpError(403, "Verified profile required");
-      if (lead.data.purchased_at) return jsonResponse({ already_active: true });
+      if (lead.data.purchased_at) return reply({ already_active: true });
       if (body.offer_token != null) {
         if (typeof body.offer_token !== "string" || !uuid.test(body.offer_token)) throw new HttpError(400, "Invalid offer");
         const offer = await caller.admin.from("fitliner_pro_funnel_mail")
@@ -84,7 +99,7 @@ serve(async (req) => {
       : caller.admin.rpc("reserve_fitliner_pro_checkout", { p_user_id: caller.userId, p_plan_id: plan.id });
     const { data: attempt, error: reserveError } = await reservation.maybeSingle();
     if (reserveError) throw reserveError;
-    if (!attempt) return jsonResponse({ already_active: true });
+    if (!attempt) return reply({ already_active: true });
     if (attempt.plan_id !== plan.id || (attempt.fitliner_pro_discount ?? 0) !== discount) throw new HttpError(409, "Another plan already has an open checkout");
 
     let session: Session;
@@ -138,12 +153,12 @@ serve(async (req) => {
         .eq("id", flowId).eq("user_id", caller.userId).lt("step", 9);
       if (error) throw error;
     }
-    return jsonResponse({ checkout_url: session.url });
+    return reply({ checkout_url: session.url });
   } catch (error) {
     if (error instanceof HttpError) {
-      return jsonResponse({ error: error.status === 409 ? "checkout_conflict" : "checkout_unavailable" }, error.status);
+      return reply({ error: error.status === 409 ? "checkout_conflict" : "checkout_unavailable" }, error.status);
     }
     console.error("Fitliner PRO checkout failed", error instanceof Error ? error.name : "Database error");
-    return jsonResponse({ error: "checkout_unavailable" }, 500);
+    return reply({ error: "checkout_unavailable" }, 500);
   }
 });
