@@ -10,6 +10,7 @@ import {
 } from "react";
 import Link from "next/link";
 import PartnersPanel from "./partners-panel";
+import ProFunnelPanel from "./pro-funnel-panel";
 import type { Session } from "@supabase/supabase-js";
 import { ADMIN_EMAIL, adminClient } from "@/lib/admin/client";
 import {
@@ -24,13 +25,14 @@ import {
 } from "@/lib/admin/metrics";
 import type { Dashboard, Gym, ModuleOrder } from "@/lib/admin/types";
 
-type Tab = "partners" | "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
+type Tab = "pro" | "partners" | "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
 const NAV: [Tab, string, string][] = [
   ["overview", "Prehľad", "grid"],
   ["gyms", "Gymy", "gym"],
   ["orders", "Objednávky", "box"],
   ["finance", "Financie", "chart"],
   ["leads", "Záujemcovia", "users"],
+  ["pro", "Fitliner PRO", "chart"],
   ["activity", "História zmien", "clock"],
   ["partners", "Partners", "users"],
 ];
@@ -691,6 +693,7 @@ export default function AdminConsole() {
               ) : (
                 <>
                   {tab === "partners" && <PartnersPanel />}
+                  {tab === "pro" && <ProFunnelPanel />}
                   {tab === "overview" && (
                     <>
                       <div className="ad-stats">

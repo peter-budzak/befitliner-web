@@ -2,9 +2,9 @@ export type Goal = 'weight' | 'strength' | 'fitness' | 'restart';
 export type Venue = 'home' | 'gym';
 export type Location = Venue | 'both';
 export type Minutes = 15 | 25 | 40;
-export type Step = 'intro' | 'benefits' | 'goal' | 'location' | 'time' | 'preview' | 'offer';
+export type Step = 'intro' | 'benefits' | 'goal' | 'location' | 'time' | 'preview' | 'profile' | 'offer';
 
-export const steps: Step[] = ['intro', 'benefits', 'goal', 'location', 'time', 'preview', 'offer'];
+export const steps: Step[] = ['intro', 'benefits', 'goal', 'location', 'time', 'preview', 'profile', 'offer'];
 
 export const goals = [
   { id: 'weight', title: 'Schudnúť', detail: 'Viac pohybu a lepší prehľad o jedle' },
