@@ -71,25 +71,31 @@ export function TrainerIntro({ locale, onNext }: { locale: string; onNext: () =>
           {copy.how}
         </h2>
         {locale === "sk" ? (
-          <figure className="mx-auto mt-4 w-full max-w-[21rem]">
-            <iframe
-              src="https://www.veed.io/embed/a4e84689-b71b-4801-9811-8510a08e41fe?watermark=0&color=&sharing=0&title=0"
-              title="Fitliner pre trénerov – video ukážka"
-              loading="lazy"
-              allowFullScreen
-              className="block aspect-[9/16] w-full rounded-3xl border border-[#ac83ff]/25 bg-black"
-            />
-            <figcaption className="mt-2 text-center text-xs text-white/60">
-              <a
-                href="https://www.veed.io/?utm_source=embed_link&utm_medium=referral"
-                target="_blank"
-                rel="noopener"
-                className="underline underline-offset-4"
-              >
-                Vytvorené vo VEED
-              </a>
-            </figcaption>
-          </figure>
+          <>
+            <figure className="mx-auto mt-4 w-full max-w-[21rem]">
+              <iframe
+                src="https://www.veed.io/embed/a4e84689-b71b-4801-9811-8510a08e41fe?watermark=0&color=&sharing=0&title=0"
+                title="Fitliner pre trénerov – video ukážka"
+                loading="lazy"
+                allowFullScreen
+                className="block aspect-[9/16] w-full rounded-3xl border border-[#ac83ff]/25 bg-black"
+              />
+              <figcaption className="mt-2 text-center text-xs text-white/60">
+                <a
+                  href="https://www.veed.io/?utm_source=embed_link&utm_medium=referral"
+                  target="_blank"
+                  rel="noopener"
+                  className="underline underline-offset-4"
+                >
+                  Vytvorené vo VEED
+                </a>
+              </figcaption>
+            </figure>
+            {startButton}
+            <p className="mt-2 text-sm leading-6 text-white/70">
+              Vytvorenie profilu je bezplatné a za jeho používanie neplatíš mesačný paušál.
+            </p>
+          </>
         ) : (
           <div className="mt-4 flex aspect-video flex-col items-center justify-center gap-3 rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 text-center">
             <span

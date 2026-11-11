@@ -17,11 +17,11 @@ type TrainerIntroCopy = {
 
 export const trainerIntroCopy: Record<Locale, TrainerIntroCopy> = {
   sk: {
-    audience: "Pre trénerov a koučov",
-    headline: "Pošli jeden odkaz.",
-    highlight: "Klient si vyberie termín a zaplatí online.",
+    audience: "Pre osobných trénerov, koučov a lektorov skupinových tréningov",
+    headline: "Menej dohadovania termínov.",
+    highlight: "Viac času na tréning.",
     description:
-      "Na vlastnej stránke vo Fitlineri ukážeš služby, ceny aj voľné termíny. V kalendári vidíš, kto má potvrdenú rezerváciu, a Fitliner pošle klientovi faktúru.",
+      "Pošli klientom jeden odkaz. Na tvojej stránke vo Fitlineri si pozrú služby a ceny, vyberú si termín a zaplatia online. Ty vidíš potvrdené rezervácie v kalendári a Fitliner pošle faktúru v tvojom mene.",
     start: "Vytvoriť trénerský profil zadarmo",
     seeHow: "Pozrieť, ako to funguje",
     how: "Ako to funguje",
@@ -30,8 +30,8 @@ export const trainerIntroCopy: Record<Locale, TrainerIntroCopy> = {
     benefitsTitle: "Menej administratívy, viac času na klientov",
     benefits: [
       {
-        title: "Jednorazové tréningy",
-        description: "Predávaj osobné, skupinové aj online tréningy. Klient zaplatí za konkrétny tréning.",
+        title: "Jednorazové tréningy a koučing",
+        description: "Ponúkaj individuálne tréningy, skupinové lekcie aj online koučing. Cenu si určíš pre každú službu.",
       },
       {
         title: "Mesačné predplatné",
@@ -43,7 +43,7 @@ export const trainerIntroCopy: Record<Locale, TrainerIntroCopy> = {
       },
       {
         title: "Zdieľaný tréningový denník",
-        description: "Keď ti klient sprístupní denník, vidíš, čo odcvičil. Podľa oprávnení mu môžeš dať spätnú väzbu.",
+        description: "Keď ti klient sprístupní tréningový denník, vidíš jeho zaznamenané tréningy a výkony. Podľa oprávnení môžeš pridať spätnú väzbu alebo upraviť záznamy.",
       },
     ],
   },
