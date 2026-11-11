@@ -604,14 +604,16 @@ export default function AdminConsole() {
                         ? "Vaše fitnesscentrá, ich členovia a aktívne moduly."
                         : tab === "leads"
                           ? "Kontakty z formulára kompatibility na webe."
-                          : "Kto, kedy a čo zmenil v administrácii."}
+                          : tab === "pro"
+                            ? "Registrácie, posledný krok nákupu a stav pripomienok."
+                            : "Kto, kedy a čo zmenil v administrácii."}
               </p>
             </div>
             <div className="ad-heading-actions">
-              <button className="ad-button" onClick={load} disabled={loading}>
+              {tab !== "pro" && <button className="ad-button" onClick={load} disabled={loading}>
                 <Icon name="refresh" />
                 {loading ? "Načítavam…" : "Obnoviť"}
-              </button>
+              </button>}
               {["overview", "finance"].includes(tab) && (
                 <>
                   <label className="ad-sr-only" htmlFor="ad-month">
@@ -657,7 +659,7 @@ export default function AdminConsole() {
               a výnosy z modulov zatiaľ nie sú úplné.
             </div>
           )}
-          {!data ? (
+          {tab === "pro" ? <ProFunnelPanel /> : !data ? (
             <div className="ad-panel">
               <Empty>
                 {loading
@@ -693,7 +695,6 @@ export default function AdminConsole() {
               ) : (
                 <>
                   {tab === "partners" && <PartnersPanel />}
-                  {tab === "pro" && <ProFunnelPanel />}
                   {tab === "overview" && (
                     <>
                       <div className="ad-stats">

@@ -18,6 +18,7 @@ type Report = {
 export default function ProFunnelPanel() {
   const [report, setReport] = useState<Report>();
   const [error, setError] = useState(false);
+  const [refresh, setRefresh] = useState(0);
   useEffect(() => {
     let mounted = true;
     void adminClient().rpc('admin_fitliner_pro_funnel').then(({ data, error }) => {
@@ -26,12 +27,17 @@ export default function ProFunnelPanel() {
       else setReport(data as Report);
     });
     return () => { mounted = false; };
-  }, []);
+  }, [refresh]);
 
-  if (error) return <p role="alert">Prehľad sa nepodarilo načítať.</p>;
+  function reload() {
+    setError(false);
+    setReport(undefined);
+    setRefresh(value => value + 1);
+  }
+  if (error) return <p role="alert">Prehľad sa nepodarilo načítať. <button className="ad-button" onClick={reload}>Skúsiť znova</button></p>;
   if (!report) return <p role="status">Načítavam prehľad…</p>;
-  return <section>
-    <h2>Fitliner PRO</h2>
+  return <section className="ad-panel">
+    <button className="ad-button" onClick={reload}>Obnoviť prehľad</button>
     <h3>Posledný dosiahnutý krok za 30 dní</h3>
     <table>
       <thead><tr><th scope="col">Krok</th><th scope="col">Návštevy</th></tr></thead>

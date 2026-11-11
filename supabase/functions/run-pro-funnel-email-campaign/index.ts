@@ -69,8 +69,7 @@ Deno.serve(async (req) => {
     const { data, error } = await admin.rpc("claim_fitliner_pro_funnel_mail");
     if (error) throw error;
 
-    let failed = 0;
-    for (const mail of (data ?? []) as Mail[]) {
+    const results = await Promise.allSettled(((data ?? []) as Mail[]).map(async (mail) => {
       const lead = await admin.from("fitliner_pro_funnel")
         .select("purchased_at,unsubscribed_at,verified_at,consent_at,user_id").eq("id", mail.funnel_id).maybeSingle();
       let status: "sent" | "failed" | "skipped" = "skipped";
@@ -87,14 +86,13 @@ Deno.serve(async (req) => {
         }
       } catch {
         status = "failed";
-        failed++;
       }
       const result = await admin.from("fitliner_pro_funnel_mail").update({
         status, provider_id: providerId, sent_at: status === "sent" ? new Date().toISOString() : null,
       }).eq("funnel_id", mail.funnel_id).eq("sequence", mail.sequence).eq("status", "sending");
-      if (result.error) failed++;
-    }
-    return Response.json({ checked: data?.length ?? 0, failed });
+      if (result.error || status === "failed") throw new Error("Mail delivery failed");
+    }));
+    return Response.json({ checked: results.length, failed: results.filter(result => result.status === "rejected").length });
   } catch {
     return Response.json({ error: "Campaign unavailable" }, { status: 503 });
   }
