@@ -1,19 +1,23 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import MemberFunnel from "@/components/member-funnel/member-funnel";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { StartFunnel } from '@/components/start-funnel/start-funnel';
 
 export const metadata: Metadata = {
-  title: "Tvoja cesta k lepšej forme",
-  description:
-    "Objav tréning, stravu a progres s Fitlinerom. Interaktívna ukážka osobnej cesty.",
+  title: { absolute: 'Začni trénovať po svojom | Fitliner' },
+  description: 'Pozri si svoj prvý tréning doma alebo vo fitku a zisti, ako ti Fitliner pomôže s tréningom, stravou a sledovaním progresu.',
   robots: { index: false, follow: false },
 };
-export default async function StartPage({
-  params,
-}: {
+
+export const dynamic = 'force-dynamic';
+
+export default async function StartPage({ params, searchParams }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ pro?: string | string[] }>;
 }) {
-  const { locale } = await params;
-  if (locale !== "sk") notFound();
-  return <MemberFunnel />;
+  if ((await params).locale !== 'sk') notFound();
+  const { pro } = await searchParams;
+  const checkoutEnabled = process.env.FITLINER_PRO_CHECKOUT_ENABLED === 'true'
+    && Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  const resumePlan = pro === 'monthly' || pro === 'annual' ? pro : undefined;
+  return <StartFunnel checkoutEnabled={checkoutEnabled} resumePlan={resumePlan} checkoutReturn={pro === 'returned'} />;
 }
