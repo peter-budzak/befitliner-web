@@ -10,6 +10,7 @@ import {
 } from "react";
 import Link from "next/link";
 import PartnersPanel from "./partners-panel";
+import ProFunnelPanel from "./pro-funnel-panel";
 import type { Session } from "@supabase/supabase-js";
 import { ADMIN_EMAIL, adminClient } from "@/lib/admin/client";
 import {
@@ -24,13 +25,14 @@ import {
 } from "@/lib/admin/metrics";
 import type { Dashboard, Gym, ModuleOrder } from "@/lib/admin/types";
 
-type Tab = "partners" | "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
+type Tab = "pro" | "partners" | "overview" | "gyms" | "orders" | "finance" | "leads" | "activity";
 const NAV: [Tab, string, string][] = [
   ["overview", "Prehľad", "grid"],
   ["gyms", "Gymy", "gym"],
   ["orders", "Objednávky", "box"],
   ["finance", "Financie", "chart"],
   ["leads", "Záujemcovia", "users"],
+  ["pro", "Fitliner PRO", "chart"],
   ["activity", "História zmien", "clock"],
   ["partners", "Partners", "users"],
 ];
@@ -602,14 +604,16 @@ export default function AdminConsole() {
                         ? "Vaše fitnesscentrá, ich členovia a aktívne moduly."
                         : tab === "leads"
                           ? "Kontakty z formulára kompatibility na webe."
-                          : "Kto, kedy a čo zmenil v administrácii."}
+                          : tab === "pro"
+                            ? "Registrácie, posledný krok nákupu a stav pripomienok."
+                            : "Kto, kedy a čo zmenil v administrácii."}
               </p>
             </div>
             <div className="ad-heading-actions">
-              <button className="ad-button" onClick={load} disabled={loading}>
+              {tab !== "pro" && <button className="ad-button" onClick={load} disabled={loading}>
                 <Icon name="refresh" />
                 {loading ? "Načítavam…" : "Obnoviť"}
-              </button>
+              </button>}
               {["overview", "finance"].includes(tab) && (
                 <>
                   <label className="ad-sr-only" htmlFor="ad-month">
@@ -655,7 +659,7 @@ export default function AdminConsole() {
               a výnosy z modulov zatiaľ nie sú úplné.
             </div>
           )}
-          {!data ? (
+          {tab === "pro" ? <ProFunnelPanel /> : !data ? (
             <div className="ad-panel">
               <Empty>
                 {loading

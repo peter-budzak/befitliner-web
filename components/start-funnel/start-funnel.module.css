@@ -128,3 +128,8 @@
   .actionBar .primary { width: 100%; min-height: 58px; margin: 0; border-radius: 0; justify-content: center; }
   .checkoutForm input { scroll-margin-bottom: 96px; }
 }
+
+.checkoutForm label + label { margin-top: 12px; }
+.checkoutForm .consent { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 10px; font-size: 14px; color: var(--soft); }
+.checkoutForm .consent input { width: auto; margin-top: 4px; accent-color: var(--action); }
+.checkoutForm a { text-decoration: underline; }

@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from 'react';
 import { artwork, benefits, goals, locations, steps, times, workoutPreview, type Goal, type Location, type Minutes, type Step, type Venue } from './content';
 import { startPlans, type PlanId } from './offer';
 import { ProCheckout } from './pro-checkout';
+import { ProProfile, ResumeProProfile } from './pro-profile';
+import { proFunnelClient, recordProStep } from './pro-funnel-client';
 import styles from './start-funnel.module.css';
 
 const currency = new Intl.NumberFormat('sk-SK', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 });
@@ -51,12 +53,25 @@ function ContinueButton({ label = 'Pokračovať', onClick, disabled }: {
   </div>;
 }
 
-export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
+export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn, resumeFlow, offerToken, verify }: {
   checkoutEnabled: boolean;
   resumePlan?: PlanId;
   checkoutReturn: boolean;
+  resumeFlow?: string;
+  offerToken?: string;
+  verify: boolean;
 }) {
-  const [step, setStep] = useState<Step>(resumePlan || checkoutReturn ? 'offer' : 'intro');
+  const [step, setStep] = useState<Step>(resumeFlow || checkoutReturn ? 'offer' : resumePlan ? 'profile' : 'intro');
+  const flowRef = useRef<string | undefined>(resumeFlow);
+  const [email, setEmail] = useState('');
+  const [verificationPending, setVerificationPending] = useState(verify);
+  const [boundFlow, setBoundFlow] = useState<string>();
+  const [discount, setDiscount] = useState(0);
+  const [payment, setPayment] = useState<'waiting' | 'paid'>('waiting');
+
+  function flowId() {
+    return flowRef.current ??= crypto.randomUUID();
+  }
   const [goal, setGoal] = useState<Goal>();
   const [location, setLocation] = useState<Location>();
   const [venue, setVenue] = useState<Venue>('home');
@@ -80,6 +95,47 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [step]);
 
+  useEffect(() => {
+    if (checkoutReturn) return;
+    void recordProStep(flowId(), steps.indexOf(step) + 1);
+  }, [step, checkoutReturn]);
+
+  useEffect(() => {
+    if (step !== 'offer' || verificationPending && !verify) return;
+    const client = proFunnelClient();
+    if (!client) return;
+    let stopped = false;
+    let retry: ReturnType<typeof setTimeout> | undefined;
+    async function load() {
+      if (!client) return;
+      const { data } = await client.auth.getUser();
+      if (stopped || !data.user?.email_confirmed_at) return;
+      const id = flowRef.current;
+      if (id && !checkoutReturn) {
+        const bound = await client.rpc('bind_fitliner_pro_funnel', { p_id: id });
+        if (stopped || bound.data !== true) return;
+        setVerificationPending(false);
+      }
+      if (stopped) return;
+      const { data: status, error } = await client.rpc('get_fitliner_pro_funnel_status', {
+        p_id: id ?? null,
+        p_offer: offerToken ?? null,
+      });
+      if (stopped) return;
+      if (!error && status) {
+        setEmail(data.user.email ?? '');
+        setDiscount(status.discount ?? 0);
+        if (id && !checkoutReturn) setBoundFlow(id);
+      }
+      if (checkoutReturn) {
+        if (status?.purchased) setPayment('paid');
+        else retry = setTimeout(load, 4000);
+      }
+    }
+    void load();
+    return () => { stopped = true; clearTimeout(retry); };
+  }, [step, verify, verificationPending, checkoutReturn, offerToken]);
+
   function go(next: Step) {
     hasNavigated.current = true;
     setStep(next);
@@ -98,7 +154,8 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
     location: 'Kde chceš začať?',
     time: 'Koľko času máš na tréning?',
     preview: `Tvoj prvý tréning ${venueLabel}.`,
-    offer: 'Fitliner PRO',
+    profile: 'Vytvor si profil',
+    offer: checkoutReturn ? 'Tvoj Fitliner PRO' : 'Fitliner PRO',
   };
 
   return <div className={styles.shell} lang="sk">
@@ -112,7 +169,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
     <main className={styles.main}>
       <section className={step === 'benefits' ? `${styles.stage} ${styles.benefitsStage}` : styles.stage} aria-labelledby="start-title" key={step}>
         <div className={styles.copy}>
-          {step !== 'intro' && <button type="button" className={styles.back} onClick={() => go(step === 'offer' && !preview ? 'intro' : steps[position - 1])}>← Späť</button>}
+          {step !== 'intro' && !checkoutReturn && <button type="button" className={styles.back} onClick={() => go(step === 'offer' && !preview ? 'profile' : step === 'profile' && !preview ? 'intro' : steps[position - 1])}>← Späť</button>}
           <h1 id="start-title" ref={heading} tabIndex={-1}>{step === 'intro' ? <>Dostaň sa do formy <span className={styles.headlineHighlight}>3x rýchlejšie</span></> : titles[step]}</h1>
           {step === 'intro' && <>
             <p className={styles.lead}>bez nakladov na 3 rôzne aplikácie!</p>
@@ -154,11 +211,22 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
               <p className={styles.note}>Ukážka podľa tvojich odpovedí.</p>
             </div>
             <p className={styles.lead}>{venue === 'home' ? 'V aplikácii máš ukážky cvikov. Keď budeš mať nabudúce menej času, AI tréner ti pomôže tréning skrátiť.' : 'V aplikácii si zapíšeš série, opakovania a váhy. Pri ďalšom tréningu uvidíš, kde si naposledy skončil.'}</p>
-            <ContinueButton label="Pozrieť ponuku" onClick={() => go('offer')} />
+            <ContinueButton label="Vytvoriť profil" onClick={() => go('profile')} />
           </>}
-          {step === 'offer' && <>
+          {step === 'profile' && <ProProfile flowId={flowId} onSaved={(address, pending) => {
+            setEmail(address);
+            setVerificationPending(pending);
+            setBoundFlow(pending ? undefined : flowRef.current);
+            go('offer');
+          }} />}
+          {checkoutReturn && <div className={styles.purchase} role="status">
+            {payment === 'paid' ? <p><strong>Platba je potvrdená.</strong></p> : <p>Čakáme na potvrdenie platby.</p>}
+            <p>V aplikácii Fitliner sa prihlás {email ? <>e-mailom <strong>{email}</strong></> : 'rovnakým e-mailom, aký si použil pri platbe'}.</p>
+            <div className={styles.actionBar}><a className={styles.primary} href="befitliner://">Otvoriť Fitliner</a></div>
+          </div>}
+          {step === 'offer' && !checkoutReturn && <>
             <p className={styles.lead}>AI tréner, Zdravotná karta a celý prístup k sekciám Tréning a Strava.</p>
-            {checkoutReturn && <p className={styles.purchase} role="status">Po potvrdení platby sa PRO aktivuje v aplikácii. Prihlás sa rovnakým účtom.</p>}
+            {verificationPending && <p className={styles.purchase} role="status">Otvor overovací odkaz, ktorý sme poslali {email ? <>na <strong>{email}</strong></> : 'na tvoj e-mail'}. Potom môžeš pokračovať k platbe.</p>}
             <fieldset className={styles.plans}>
               <legend>Vyber si predplatné</legend>
               {plans.map((option) => <label key={option.id} className={styles.plan}>
@@ -176,14 +244,19 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
               </label>)}
             </fieldset>
             {plan && <div className={styles.purchase}>
-              <p><strong>Dnes zaplatíš {formatPrice(plan.priceMinor)}.</strong></p>
+              <p><strong>Dnes zaplatíš {formatPrice(Math.round(plan.priceMinor * (100 - discount) / 100))}.</strong></p>
+              {discount > 0 && <p className={styles.note}>{discount} % zľava na prvú platbu.</p>}
+              {boundFlow && offerToken && discount === 0 && <p className={styles.note}>Táto zľava už nie je dostupná. Zobrazuje sa bežná cena.</p>}
               <p className={styles.note}>
                 Predplatné sa automaticky obnovuje {plan.id === 'annual' ? 'každý rok' : 'každý mesiac'} za {formatPrice(plan.priceMinor)}, kým ho nezrušíš.
               </p>
-              {checkoutEnabled
-                ? <ProCheckout plan={plan.id} />
+              {checkoutEnabled && !boundFlow && resumeFlow
+                ? <ResumeProProfile flowId={resumeFlow} offerToken={offerToken} />
+                : checkoutEnabled && boundFlow
+                ? <ProCheckout plan={plan.id} flowId={boundFlow} offerToken={discount > 0 ? offerToken : undefined} />
                 : <>
-                  <p className={styles.note} role="status">Online nákup zatiaľ nie je dostupný.</p>
+                  {!checkoutEnabled && <p className={styles.note} role="status">Online nákup zatiaľ nie je dostupný.</p>}
+                  {checkoutEnabled && !verificationPending && <p className={styles.note}>Pred platbou si priprav profil a over e-mail.</p>}
                   <ContinueButton label="Pokračovať k platbe" disabled />
                 </>}
             </div>}
