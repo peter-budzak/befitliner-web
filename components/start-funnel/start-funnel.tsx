@@ -189,7 +189,7 @@ export function StartFunnel({ checkoutEnabled, resumePlan, checkoutReturn }: {
             </div>}
           </>}
         </div>
-        {step !== 'benefits' && <Illustration step={step} venue={venue} />}
+        <Illustration step={step} venue={venue} />
       </section>
     </main>
   </div>;
