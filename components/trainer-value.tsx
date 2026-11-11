@@ -70,18 +70,40 @@ export function TrainerIntro({ locale, onNext }: { locale: string; onNext: () =>
         <h2 id="ako-to-funguje-nadpis" className="text-2xl font-bold">
           {copy.how}
         </h2>
-        <div className="mt-4 flex aspect-video flex-col items-center justify-center gap-3 rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 text-center">
-          <span
-            aria-hidden="true"
-            className="grid size-12 place-items-center rounded-2xl bg-[#9568ff]/20 text-[#c8adff]"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
-              <rect x="3" y="5" width="18" height="14" rx="3" />
-              <path d="m10 9 5 3-5 3z" />
-            </svg>
-          </span>
-          <p className="font-bold">{copy.videoPlaceholder}</p>
-        </div>
+        {locale === "sk" ? (
+          <figure className="mx-auto mt-4 w-full max-w-[21rem]">
+            <iframe
+              src="https://www.veed.io/embed/a4e84689-b71b-4801-9811-8510a08e41fe?watermark=0&color=&sharing=0&title=0"
+              title="Fitliner pre trénerov – video ukážka"
+              loading="lazy"
+              allowFullScreen
+              className="block aspect-[9/16] w-full rounded-3xl border border-[#ac83ff]/25 bg-black"
+            />
+            <figcaption className="mt-2 text-center text-xs text-white/60">
+              <a
+                href="https://www.veed.io/?utm_source=embed_link&utm_medium=referral"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-4"
+              >
+                Vytvorené vo VEED
+              </a>
+            </figcaption>
+          </figure>
+        ) : (
+          <div className="mt-4 flex aspect-video flex-col items-center justify-center gap-3 rounded-3xl border border-[#ac83ff]/25 bg-gradient-to-br from-[#33244d] via-[#211a30] to-[#16131d] p-5 text-center">
+            <span
+              aria-hidden="true"
+              className="grid size-12 place-items-center rounded-2xl bg-[#9568ff]/20 text-[#c8adff]"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+                <rect x="3" y="5" width="18" height="14" rx="3" />
+                <path d="m10 9 5 3-5 3z" />
+              </svg>
+            </span>
+            <p className="font-bold">{copy.videoPlaceholder}</p>
+          </div>
+        )}
         <ol className="mt-4 grid gap-2 sm:grid-cols-3">
           {copy.bookingSteps.map((step, index) => (
             <li key={step} className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm">
